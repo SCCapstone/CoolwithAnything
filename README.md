@@ -93,4 +93,4 @@ Here is a simple schema for user information:
 - Nick Rubino - nrubino@email.sc.edu
 - Vu Nguyen - vu.nguyen@email.com
 - Kayly Tran - kayly.tran@email.com
-- Deep Patel - deep.patel@email.com
+- Deep Patel - deepkalpana1@aol.com
