@@ -87,6 +87,6 @@ Here is a simple schema for user information:
 
 * Ali Omer - ali.omer@email.com
 * Nick Rubino - nrubino@email.sc.edu
-* Vu Nguyen - vu.nguyen@email.com
+* Vu Nguyen - vn1@email.sc.com
 * Kayly Tran - kayly.tran@email.com
 * Deep Patel - deep.patel@email.com
