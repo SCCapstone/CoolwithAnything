@@ -1,4 +1,5 @@
 # CoolwithAnything
+
 # Fitness and Nutrition App
 
 This is an Android application aimed at helping users manage their fitness and nutrition goals. It's written in JavaScript using the React Native framework. The app allows users to manage workouts, meals, and track progress. It uses Firebase for cloud storage and user authentication.
@@ -7,20 +8,23 @@ This is an Android application aimed at helping users manage their fitness and n
 
 To get the app running on your local machine, you will need to install the following:
 
-* [Node.js](https://nodejs.org/en/)
-* [Android Studio](https://developer.android.com/studio)
-* [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [Node.js](https://nodejs.org/en/)
+- [Android Studio](https://developer.android.com/studio)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
 Here are the commands you can use for installation on a Unix-like system:
 
 \```bash
+
 # Install Node.js
+
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install Android Studio from its official website and set it up
 
 # Install Expo CLI
+
 npm install -g expo-cli
 \```
 
@@ -73,20 +77,20 @@ npm test
 
 Here is a simple schema for user information:
 
-* `user_id` (string): Unique identifier for the user.
-* `username` (string): User's username.
-* `email` (string): User's email address.
-* ...
+- `user_id` (string): Unique identifier for the user.
+- `username` (string): User's username.
+- `email` (string): User's email address.
+- ...
 
 ## Workload Distribution
 
-* Frontend: Ali Omer, Nick Rubino, Vu Nguyen
-* Backend: Kayly Tran, Deep Patel
+- Frontend: Ali Omer, Nick Rubino, Vu Nguyen
+- Backend: Kayly Tran, Deep Patel
 
 ## Authors
 
-* Ali Omer - ali.omer@email.com
-* Nick Rubino - nrubino@email.sc.edu
-* Vu Nguyen - vn1@email.sc.com
-* Kayly Tran - kayly.tran@email.com
-* Deep Patel - deep.patel@email.com
+- Ali Omer - omerar@email.sc.edu.com
+- Nick Rubino - nrubino@email.sc.edu
+- Vu Nguyen - vu.nguyen@email.com
+- Kayly Tran - kayly.tran@email.com
+- Deep Patel - deep.patel@email.com
