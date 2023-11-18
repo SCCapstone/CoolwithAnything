@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { format, parseISO } from 'date-fns';
+import styles from './dayScreenStyles';
 
 const DayScreen = ({ route }) => {
   const { selectedDate } = route.params;
@@ -8,8 +9,8 @@ const DayScreen = ({ route }) => {
   const formattedDate = format(parsedDate, 'MM/dd/yyyy');
 
   return (
-    <View>
-      <Text>{formattedDate}</Text>
+    <View style={styles.container}>
+      <Text style={styles.dateText}>{formattedDate}</Text>
       {/* Add your blocks for each hour here */}
     </View>
   );
