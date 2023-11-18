@@ -1,6 +1,6 @@
 # CoolwithAnything
 
-# Fitness and Nutrition App
+# Scheduler X App
 
 This is an Android application aimed at helping users manage their fitness and nutrition goals. It's written in JavaScript using the React Native framework. The app allows users to manage workouts, meals, and track progress. It uses Firebase for cloud storage and user authentication.
 
@@ -22,6 +22,8 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install Android Studio from its official website and set it up
+
+https://developer.android.com/studio
 
 # Install Expo CLI
 
@@ -59,6 +61,11 @@ expo build:android -t apk
 
 Follow the on-screen instructions to download the APK once it's generated.
 
+## Code Style Guide
+
+We follow the styling conventions enforced by [Prettier](https://prettier.io/). For more details on the specific rules, see the [Prettier Documentation](https://prettier.io/docs/en/index.html).
+
+
 ## Testing
 
 ### Testing Technology
@@ -91,6 +98,6 @@ Here is a simple schema for user information:
 
 - Ali Omer - omerar@email.sc.edu.com
 - Nick Rubino - nrubino@email.sc.edu
-- Vu Nguyen - vu.nguyen@email.com
-- Kayly Tran - kayly.tran@email.com
-- Deep Patel - deep.patel@email.com
+- Vu Nguyen - nguyenviethoangvu95@gmail.com
+- Kayly Tran - ktran7895@gmail.com
+- Deep Patel - deepkalpana1@aol.com
