@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { format, parseISO } from 'date-fns';
 
 const DayScreen = ({ route }) => {
   const { selectedDate } = route.params;
-
-  // Use the selected date to display the day of the week and list of blocks
+  const parsedDate = parseISO(selectedDate);
+  const formattedDate = format(parsedDate, 'MM/dd/yyyy');
 
   return (
     <View>
-      <Text>{selectedDate}</Text>
+      <Text>{formattedDate}</Text>
       {/* Add your blocks for each hour here */}
     </View>
   );

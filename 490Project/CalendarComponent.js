@@ -16,7 +16,9 @@ const CalendarComponent = () => {
     <View>
       <Calendar
         onDayPress={onDayPress}
-        markedDates={{ [selectedDate]: { selected: true, marked: true } }}
+        markedDates={{ [selectedDate]: { selected: true, marked: true },
+        'current': {dateFormat: 'MM/DD/YYYY', selected: true, marked: true} 
+        }}
       />
     </View>
   );
