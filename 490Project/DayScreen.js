@@ -1,19 +1,26 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import styles from './dayScreenStyles';
 
 const DayScreen = ({ route }) => {
   const { selectedDate } = route.params;
   const parsedDate = parseISO(selectedDate);
-  const formattedDate = format(parsedDate, 'MM/dd/yyyy');
+  const formattedDate = format(parsedDate, 'MMMM dd, yyyy');
 
   return (
     <View style={styles.container}>
-      <Text style={styles.dateText}>{formattedDate}</Text>
-      {/* Add your blocks for each hour here */}
+      {/* Date */}
+      <View style={styles.dateContainer}>
+        <Text style={styles.dateText}>{formattedDate}</Text>
+      </View>
+
+      {/* Heading */}
+      <View style={styles.headingContainer}>
+        <Text style={styles.headingText}>Tasks for The Day</Text>
+      </View>
     </View>
   );
-};
+  }
 
 export default DayScreen;
