@@ -1,40 +1,15 @@
-// Keep unused imports just in case, will delete unused at the end of the project
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView } from 'react-native';
 import CalendarComponent from './CalendarComponent.js';
 import DayScreen from './DayScreen.js';
+import WorkoutScreen from './WorkoutScreen';
+import CookbookScreen from './CookbookScreen';
 
-
-import { TouchableOpacity } from 'react-native';
-import WorkoutScreen from './WorkoutScreen.js';
-import CookbookScreen from './CookbookScreen.js';
-
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen name="Calendar" component={CalendarComponent} />
-      <Stack.Screen name="Today" component={DayScreen} />
-      </Stack.Navigator>
-
-
-      <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-        <Tab.Screen name="Workout" component={WorkoutScreen} />
-        <Tab.Screen name="Cookbook" component={CookbookScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function MyTabBar({ state, descriptors, navigation }) {
   return (
@@ -88,5 +63,33 @@ function MyTabBar({ state, descriptors, navigation }) {
   );
 }
 
+const Tab = createBottomTabNavigator();
 
+export function TabNavigator() {
+  return (
+      <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
+        <Tab.Screen name="Workouts" component={WorkoutScreen} />
+        <Tab.Screen name="Cookbook" component={CookbookScreen} />
+        <Tab.Screen name="Calendar" component={CalendarStack} />
+      </Tab.Navigator>
+  );
+}
 
+const Stack = createStackNavigator();
+
+const CalendarStack = () => {
+  return (
+      <Stack.Navigator initialRouteName='Calendar'>
+        <Stack.Screen name="Calendar" component={CalendarComponent} />
+        <Stack.Screen name="Today" component={DayScreen} />
+      </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+      <NavigationContainer>
+         <TabNavigator />
+       </NavigationContainer>
+  );
+}
