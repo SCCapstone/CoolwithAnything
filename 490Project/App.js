@@ -18,14 +18,7 @@ const Stack = createStackNavigator();
 export function TabNavigator() {
   return (
       <Tab.Navigator>
-        <Tab.Screen name=" "
-        component={CalendarStack} 
-        options={{tabBarIcon: ({size, color})=>(
-          <MaterialCommunityIcons name="home"
-          size={size} color={color} />
-        )
-        }}
-        />
+        <Tab.Screen name="Calendar" component={CalendarComponent}/>
         <Tab.Screen name="Workouts" component={WorkoutScreen} />
         <Tab.Screen name="Cookbook" component={CookbookScreen} />
       </Tab.Navigator>
