@@ -11,6 +11,7 @@ import CalendarComponent from './CalendarComponent.js';
 import DayScreen from './DayScreen.js';
 import WorkoutScreen from './WorkoutScreen';
 import CookbookScreen from './CookbookScreen';
+import AddScreen from './AddScreen.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -18,9 +19,16 @@ const Stack = createStackNavigator();
 export function TabNavigator() {
   return (
       <Tab.Navigator>
+<<<<<<< HEAD
         <Tab.Screen name="Calendar" component={CalendarComponent}/>
         <Tab.Screen name="Workouts" component={WorkoutScreen} />
         <Tab.Screen name="Cookbook" component={CookbookScreen} />
+=======
+        <Tab.Screen name="Calendar" component={CalendarStack} />
+        <Tab.Screen name="Create" component={AddScreen} options={{ tabBarLabel: 'Add' }}/>
+        <Tab.Screen name="Your Workouts" component={WorkoutScreen} options={{ tabBarLabel: 'Workout' }}/>
+        <Tab.Screen name="Your Cookbook" component={CookbookScreen} options={{ tabBarLabel: 'Cookbook' }}/>
+>>>>>>> kaylytran
       </Tab.Navigator>
   );
 }
