@@ -17,20 +17,44 @@ const Stack = createStackNavigator();
 
 export function TabNavigator() {
   return (
-      <Tab.Navigator>
-        <Tab.Screen name="Calendar" component={CalendarComponent}/>
-        <Tab.Screen name="Workouts" component={WorkoutScreen} />
-        <Tab.Screen name="Cookbook" component={CookbookScreen} />
-      </Tab.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Calendar"
+        component={CalendarStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calendar" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Workouts"
+        component={WorkoutScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cookbook"
+        component={CookbookScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="book-open" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
 const CalendarStack = () => {
   return (
-      <Stack.Navigator initialRouteName='Calendar'>
-        <Stack.Screen name=" " component={CalendarComponent} />
-        <Stack.Screen name="Today" component={DayScreen} />
-      </Stack.Navigator>
+    <Stack.Navigator initialRouteName=" " screenOptions={{ headerShown: false }}>
+      <Stack.Screen name=" " component={CalendarComponent} />
+      <Stack.Screen name="DayScreen" component={DayScreen} />
+    </Stack.Navigator>
   );
 }
 

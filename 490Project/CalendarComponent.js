@@ -8,7 +8,7 @@ const CalendarComponent = () => {
   const [selectedDate, setSelectedDate] = useState('');
 
   const onDayPress = (day) => {
-    navigation.navigate('Today', { selectedDate: day.dateString });
+    navigation.navigate('DayScreen', { selectedDate: day.dateString });
     setSelectedDate(day.dateString);
   };
 
