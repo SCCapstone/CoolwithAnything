@@ -22,7 +22,6 @@ const TabNavigator = () => {
         name="Calendar"
         component={CalendarStack}
         options={{
-          tabBarLabel: 'Calendar',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="calendar" color={color} size={size} />
           ),
