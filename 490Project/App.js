@@ -11,6 +11,7 @@ import DayScreen from './DayScreen.js';
 import WorkoutScreen from './WorkoutScreen';
 import CookbookScreen from './CookbookScreen';
 import AddScreen from './AddScreen.js';
+import SettingsScreen from './SettingsScreen.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -54,6 +55,16 @@ const TabNavigator = () => {
           tabBarLabel: 'Cookbook',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="food" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
         }}
       />
