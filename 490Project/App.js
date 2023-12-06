@@ -63,12 +63,13 @@ const TabNavigator = () => {
 
 const CalendarStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Calendar">
+    <Stack.Navigator initialRouteName=" ">
       <Stack.Screen name=" " component={CalendarComponent} />
-      <Stack.Screen name="Today" component={DayScreen} />
+      <Stack.Screen name="DayScreen" component={DayScreen} />
     </Stack.Navigator>
   );
 };
+
 
 export default function App() {
   return (
