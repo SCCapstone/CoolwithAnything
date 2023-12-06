@@ -17,7 +17,7 @@ const DayScreen = ({ route }) => {
 
       {/* Heading */}
       <View style={styles.headingContainer}>
-        <Text style={styles.headingText}>Tasks for The Day lol</Text>
+        <Text style={styles.headingText}>Tasks for The Day</Text>
       </View>
     </View>
   );
