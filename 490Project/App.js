@@ -32,7 +32,7 @@ const TabNavigator = () => {
         name="Create"
         component={AddScreen}
         options={{
-          tabBarLabel: 'Add',
+          tabBarLabel: 'Create',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="plus" color={color} size={size} />
           ),
@@ -54,7 +54,7 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Cookbook',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="food" color={color} size={size} />
+            <MaterialCommunityIcons name="food-fork-drink" color={color} size={size} />
           ),
         }}
       />
