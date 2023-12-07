@@ -29,22 +29,22 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Create"
-        component={AddScreen}
-        options={{
-          tabBarLabel: 'Create',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="plus" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Your Workouts"
         component={WorkoutScreen}
         options={{
           tabBarLabel: 'Workout',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Create"
+        component={AddScreen}
+        options={{
+          tabBarLabel: 'Create',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="plus" color={color} size={size} />
           ),
         }}
       />
