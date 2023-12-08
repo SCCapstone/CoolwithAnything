@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import axios from "axios";
-import { EXPOGET } from "./workoutService";
 
 const BrowseWorkout = () => {
   const [data, setData] = useState([]);
@@ -20,7 +19,7 @@ const BrowseWorkout = () => {
   const url = `http://api.api-ninjas.com/v1/exercises?muscle=chest`;
   const getData = async () => {
     setTest("called");
-    await EXPOGET();
+    // await EXPOGET();
 
     // fetch(url, {
     //   headers: { "x-api-key": "YI2p8KNjtpE/7cMNLJH7Vg==EwWwS5V84xFH9Ty3" },
