@@ -41,7 +41,9 @@ const mealStyles = StyleSheet.create({
 
 const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   const [cardMeal, setCardMeal] = useState(meal);
+
   const [editMode, setEditMode] = useState(false);
+
   const [name, setName] = useState(meal.name);
   const [calories, setCalories] = useState(meal.calories);
   const [servingSize, setServingSize] = useState(meal.servingSize);

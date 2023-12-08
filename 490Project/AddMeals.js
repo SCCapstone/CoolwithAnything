@@ -27,17 +27,17 @@ const AddMeal = ({ savedMeals, setSavedMeals }) => {
   const handleAdd = () => {
     const meal = {
       name,
-      calories: parseFloat(calories) || 0,
-      serving_size_g: parseFloat(servingSize) || 0,
-      fat_total_g: parseFloat(fatTotal) || 0,
-      fat_saturated_g: parseFloat(fatSaturated) || 0,
-      protein_g: parseFloat(protein) || 0,
-      sodium_mg: parseFloat(sodium) || 0,
-      potassium_mg: parseFloat(potassium) || 0,
-      cholesterol_mg: parseFloat(cholesterol) || 0,
-      carbohydrates_total_g: parseFloat(carbohydratesTotal) || 0,
-      fiber_g: parseFloat(fiber) || 0,
-      sugar_g: parseFloat(sugar) || 0,
+      calories,
+      servingSize,
+      fatTotal,
+      fatSaturated,
+      protein,
+      sodium,
+      potassium,
+      cholesterol,
+      carbohydratesTotal,
+      fiber,
+      sugar,
     };
 
     setSavedMeals((savedMeals) => [...savedMeals, meal]);
@@ -58,10 +58,7 @@ const AddMeal = ({ savedMeals, setSavedMeals }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+    <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Text style={styles.heading}>Add Meal</Text>
         <TextInput
