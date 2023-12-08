@@ -10,14 +10,56 @@ import {
 import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import axios from "axios";
+import { EXPOGET } from "./workoutService";
 
-function BrowseWorkout() {
+const BrowseWorkout = () => {
+  const [data, setData] = useState([]);
+  const [test, setTest] = useState("NOt called");
+
+  const url = `http://api.api-ninjas.com/v1/exercises?muscle=chest`;
+  const getData = async () => {
+    setTest("called");
+    await EXPOGET();
+
+    // fetch(url, {
+    //   headers: { "x-api-key": "YI2p8KNjtpE/7cMNLJH7Vg==EwWwS5V84xFH9Ty3" },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setData(data);
+    //   })
+    //   .catch((error) => console.log(error))
+    //   .finally(setTest("finally"));
+
+    axios
+      .get(url, {
+        headers: { "x-api-key": "YI2p8KNjtpE/7cMNLJH7Vg==EwWwS5V84xFH9Ty3" },
+      })
+      .then((response) => {
+        console.log(response);
+        setData(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Workout 1</Text>
+      <Text>
+        {test}Workout 1{JSON.stringify("data")}
+      </Text>
+      {data &&
+        data.map((item) => {
+          return <Text>WORKOUT: {item.name}</Text>;
+        })}
+      <Pressable onPress={getData}>
+        <Text>test</Text>
+      </Pressable>
     </View>
   );
-}
+};
 const workoutStyles = StyleSheet.create({
   card: {
     backgroundColor: "white",
