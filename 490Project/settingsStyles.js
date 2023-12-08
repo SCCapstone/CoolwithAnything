@@ -49,6 +49,56 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'white',
+  },
+  modalInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    width: '80%',
+  },
+  modalButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '80%',
+    marginTop: 20,
+  },
+  modalSaveButton : {
+    flex: 1,
+    padding: 20,
+    margin: 6,
+    backgroundColor: '#24A0ED',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  modalCancelButton: {
+    flex: 1,
+    padding: 20,
+    margin: 6,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  modalText: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 20,
+  },
 });
 
 export default styles;

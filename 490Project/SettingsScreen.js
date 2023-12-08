@@ -1,41 +1,89 @@
-import React from 'react';
-import { View, Text, Button, Alert, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Modal, Alert, Pressable, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import styles from './settingsStyles';
 
 function SelectProfile() {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [address, setAddress] = useState('123 Main Street\nColumbia, South Carolina\n29201');
+  const [mobile, setMobile] = useState('(123) 456-7890');
+  const [email, setEmail] = useState('nolammoore@email.com');
+  const [editedAddress, setEditedAddress] = useState('');
+  const [editedMobile, setEditedMobile] = useState('');
+  const [editedEmail, setEditedEmail] = useState('');
+
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
+
+  const handleSaveChanges = () => {
+    setAddress(editedAddress || address);
+    setMobile(editedMobile || mobile);
+    setEmail(editedEmail || email);
+    closeModal();
+  };
+
   return (
     <View style={{ flex: 1, flexDirection: 'column', padding: 20 }}>
       <Text style={styles.title}>Profile</Text>
       <Text style={styles.profileID}>User ID: U124350622456</Text>
+
       <View style={{ flexDirection: 'row' }}>
         <View style={{ width: 100, alignItems: 'flex-start' }}>
           <Text style={styles.label}>Address:</Text>
         </View>
-        <Text style={styles.text}>
-          123 Main Street
-          {'\n'}
-          Columbia, South Carolina
-          {'\n'}
-          29201
-        </Text>
+        <Text style={styles.text}>{address}</Text>
       </View>
+
       <View style={{ flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: 100, alignItems: 'flex-start' }}>
           <Text style={styles.label}>Mobile:</Text>
         </View>
-        <Text style={styles.text}>(123) 456-7890</Text>
+        <Text style={styles.text}>{mobile}</Text>
       </View>
+
       <View style={{ flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: 100, alignItems: 'flex-start' }}>
           <Text style={styles.label}>Email:</Text>
         </View>
-        <Text style={styles.text}>nolammoore@email.com</Text>
+        <Text style={styles.text}>{email}</Text>
       </View>
-      <Pressable style={styles.editButton} onPress={() => Alert.alert('Edit Button')}>
+
+      <Pressable style={styles.editButton} onPress={openModal}>
         <Text style={styles.buttonText}>Edit</Text>
       </Pressable>
+
+      <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Edit Profile Information</Text>
+          <TextInput
+            style={styles.modalInput}
+            placeholder={address}
+            placeholderTextColor={'black'}
+            onChangeText={(text) => setEditedAddress(text)}
+          />
+          <TextInput
+            style={styles.modalInput}
+            placeholder={mobile}
+            placeholderTextColor={'black'}
+            onChangeText={(text) => setEditedMobile(text)}
+          />
+          <TextInput
+            style={styles.modalInput}
+            placeholder={email}
+            placeholderTextColor={'black'}
+            onChangeText={(text) => setEditedEmail(text)}
+          />
+          <View style={styles.modalButtonContainer}>
+          <Pressable style={styles.modalSaveButton} onPress={handleSaveChanges} >
+            <Text style={styles.modalText}>Save</Text>
+          </Pressable>
+          <Pressable style={styles.modalCancelButton} onPress={handleSaveChanges} >
+            <Text style={styles.modalText}>Cancel</Text>
+          </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
