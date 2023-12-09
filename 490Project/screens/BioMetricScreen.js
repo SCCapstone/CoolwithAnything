@@ -25,31 +25,32 @@ const BioMetricScreen = ({ navigation, route }) => {
     setFitnessGoal(goal);
   };
 
-  const {username} = route.params;
+  const { userId } = route.params;
 
   const handleBio = async () => {
     try {
-      const { status, data } = await updateBiometrics(
-        username,
+      const response = await updateBiometrics(
+        userId,
         height,
         weight,
         fitness_level,
         fitness_goal
       );
-      if (status === 200) {
-        // Handle successful signup
-        Alert.alert("Update Successful", data.message || "Bio update successfully.");
-        console.log({ height, weight, fitness_level, fitness_goal });
+  
+      if (response.status === 'success') {
+        // Update successful
+        Alert.alert("Update Successful", "Your biometrics have been updated successfully.");
         navigation.navigate('Confirmation');
       } else {
-        // Handle errors
-        Alert.alert("Signup Failed", data.message || "An error occurred");
+        // Handle any other cases
+        Alert.alert("Update Unsuccessful", "Could not update biometrics. Please try again.");
       }
     } catch (error) {
+      // Handle errors from Firebase
       console.error(error);
       Alert.alert(
         "Update Failed",
-        "An error occurred during updating biometrics"
+        error.message || "An error occurred during updating biometrics"
       );
     }
   };

@@ -1,55 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
   TouchableOpacity,
   Text,
-  StyleSheet,
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import styles from '../styles/LoginScreenStyles';
-import { loginUser } from '../ApiService';
+import styles from "../styles/LoginScreenStyles";
+import { loginUser } from "../ApiService"; // Make sure this path is correct
 
 export default function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState("");
+
+  const [email, setEmail] = useState(""); // Changed from username to email
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    if (!username || !password) {
-      Alert.alert(
-        "Missing Fields",
-        "Please enter both username and password.",
-        [{ text: "OK" }]
-      );
+    if (!email || !password) {
+      Alert.alert("Missing Fields", "Please enter both email and password.", [
+        { text: "OK" },
+      ]);
       return;
     }
     try {
-      const userData = await loginUser(username, password);
-  
-      if (userData) {
+      const user = await loginUser(email, password);
+      if (user) {
         // Handle successful login
-        Alert.alert("Login Successful", userData.message || "Logged in successfully.");
-        navigation.navigate("Home");
-      } else {
-        // Handle login failure
-        Alert.alert("Login Failed", userData.message || "Invalid username or password.");
+        Alert.alert("Login Successful", "Logged in successfully.");
+        navigation.navigate("Home", { user: user }); // Pass user data to Home screen if needed
       }
     } catch (error) {
       console.error(error);
-      // The error message can be more specific based on the error details
-      Alert.alert("Login Error", "An error occurred during login.");
+      Alert.alert(
+        "Login Error",
+        error.message || "An error occurred during login."
+      );
     }
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
+        {/* Top Background Image */}
         <View style={styles.topBackground}>
           <Image
             source={require("../photos/top.png")}
@@ -57,6 +54,8 @@ export default function LoginScreen({ navigation }) {
             resizeMode="contain"
           />
         </View>
+
+        {/* Bottom Background Image */}
         <View style={styles.botBackground}>
           <Image
             source={require("../photos/bottom.png")}
@@ -64,11 +63,14 @@ export default function LoginScreen({ navigation }) {
             resizeMode="contain"
           />
         </View>
+
+        {/* Header Container */}
         <View style={styles.headerContainer}>
           <Text style={styles.welcomeText}>Welcome</Text>
           <Text style={styles.signInText}>Sign in to continue</Text>
         </View>
 
+        {/* Logo Container */}
         <View style={styles.logoContainer}>
           <Image
             source={require("../photos/logo2.png")}
@@ -76,15 +78,35 @@ export default function LoginScreen({ navigation }) {
             resizeMode="contain"
           />
         </View>
+
+        {/* Input Wrapper */}
         <View style={styles.inputWrapper}>
           <KeyboardAvoidingView
             behavior={Platform.OS === "android" ? "padding" : "height"}
             keyboardVerticalOffset={100}
           >
+            {/* Email Input */}
+            <View style={styles.usernameContainer}>
+              <Icon
+                name="envelope"
+                size={28}
+                color="#999"
+                style={styles.inputIcon}
+              />
+              <TextInput
+                placeholder="Email"
+                style={styles.input}
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+              />
+            </View>
+
+            {/* Password Input */}
             <View style={styles.passwordContainer}>
               <Icon
                 name="lock"
-                size={30}
+                size={40}
                 color="#999"
                 style={styles.inputIcon}
               />
@@ -97,21 +119,7 @@ export default function LoginScreen({ navigation }) {
               />
             </View>
 
-            <View style={styles.usernameContainer}>
-              <Icon
-                name="user"
-                size={30}
-                color="#999"
-                style={styles.inputIcon}
-              />
-              <TextInput
-                placeholder="Username"
-                style={styles.input}
-                value={username}
-                onChangeText={setUsername}
-              />
-            </View>
-
+            {/* Login Button */}
             <View>
               <TouchableOpacity onPress={handleLogin} style={styles.button}>
                 <Icon name="arrow-right" size={26} color="#fff" />
@@ -119,8 +127,12 @@ export default function LoginScreen({ navigation }) {
             </View>
           </KeyboardAvoidingView>
         </View>
+
+        {/* Register and Forgot Password Container */}
         <View style={styles.registerAndForgotPasswordContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
 
@@ -132,4 +144,3 @@ export default function LoginScreen({ navigation }) {
     </TouchableWithoutFeedback>
   );
 }
-

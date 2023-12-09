@@ -6,15 +6,15 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "scripts1": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "web": "expo start --web",
+    "server-start": "node server.js",
+    "server-dev": "nodemon server.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.2",
     "@react-native-community/blur": "^4.3.2",
+    "@react-native-firebase/auth": "^18.7.2",
+    "@react-native-google-signin/google-signin": "^10.1.1",
     "@react-native-community/datetimepicker": "^7.2.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/material-top-tabs": "^6.6.5",
@@ -29,11 +29,15 @@
     "date-fns": "^2.30.0",
     "ejs": "^3.1.9",
     "expo": "~49.0.15",
+    "expo-app-auth": "~11.1.0",
     "expo-blur": "~12.4.1",
+    "expo-google-app-auth": "~8.3.0",
+    "expo-google-sign-in": "^11.0.0",
     "expo-linear-gradient": "~12.3.0",
     "expo-status-bar": "~1.6.0",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "firebase": "^10.7.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
@@ -45,6 +49,7 @@
     "react": "18.2.0",
     "react-native": "0.72.6",
     "react-native-calendars": "^1.1302.0",
+    "react-native-google-signin": "^2.1.1",
     "react-native-tab-view": "^3.5.2"
   },
   "devDependencies": {
