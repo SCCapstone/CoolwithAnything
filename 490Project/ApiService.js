@@ -1,71 +1,86 @@
-import axios from "axios";
+import { initializeApp } from 'firebase/app';
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword 
+} from 'firebase/auth';
+import { getFirestore, doc, setDoc, updateDoc } from 'firebase/firestore';
 
-const BASE_URL = "http://10.0.2.2:3000"; // Replace with your server's address and port
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
-export const loginUser = async (username, password) => {
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCe-_ENL-QmW__8BrE4beO4BLuKV7XPYUM",
+  authDomain: "schedulerx-3bf1a.firebaseapp.com",
+  projectId: "schedulerx-3bf1a",
+  storageBucket: "schedulerx-3bf1a.appspot.com",
+  messagingSenderId: "1088673802858",
+  appId: "1:1088673802858:android:2cc8a514d360b74b103813"
+};
+
+// Initialize Firebase App
+const app = initializeApp(firebaseConfig);
+
+// Get auth instance
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});
+// Get Firestore instance
+const db = getFirestore(app);
+
+export const loginUser = async (email, password) => {
   try {
-    const response = await axios.post(`${BASE_URL}/login`, {
-      username,
-      password,
-    });
-    console.log(response.data);
-    return response;
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
   } catch (error) {
-    // Handle errors here
     console.error(error);
+    throw error;
   }
 };
 
 export const registerUser = async (
-  username,
-  password,
   email,
+  password,
   name,
   phone_number,
   date_of_birth
 ) => {
   try {
-    let response = await fetch(`${BASE_URL}/register`, {
-      // Use BASE_URL here
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-        email: email,
-        name: name,
-        phone_number: phone_number,
-        date_of_birth: date_of_birth,
-      }),
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    await setDoc(doc(db, 'users', user.uid), {
+      name,
+      phone_number,
+      date_of_birth
     });
-    let json = await response.json();
-    return { status: response.status, data: json };
+    return user;
   } catch (error) {
-    console.error("Something wrong",error);
-    throw error; // Re-throw the error for handling in the calling function
+    console.error("Something wrong", error);
+    throw error;
   }
 };
 
 export const updateBiometrics = async (
-  username,
+  userId,
   height,
   weight,
   fitnessLevel,
   fitnessGoal
 ) => {
   try {
-    const response = await axios.post(`${BASE_URL}/updateBiometrics`, {
-      username,
+    const userDocRef = doc(db, 'users', userId);
+    await updateDoc(userDocRef, {
       height,
       weight,
       fitnessLevel,
-      fitnessGoal,
+      fitnessGoal
     });
-    return response;
+    return { status: 'success' };
   } catch (error) {
-    console.error(error);
+    console.error("Something wrong", error);
     throw error;
   }
 };
+

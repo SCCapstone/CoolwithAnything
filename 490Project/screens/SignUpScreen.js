@@ -4,45 +4,47 @@ import styles from "../styles/SignUpScreenStyle";
 import { registerUser } from "../ApiService";
 
 const SignUpScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [date_of_birth, setdate_of_birth] = useState("");
+  const [date_of_birth, setDateOfBirth] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignup = async () => {
-    if (!username || !password || !email || !name || !phone || !date_of_birth) {
+    if (!email || !password || !name || !phone || !date_of_birth) {
       Alert.alert("Missing Fields", "Please enter all fields.", [
         { text: "OK" },
       ]);
       return;
     }
+
+    if (password !== confirmPassword) {
+      Alert.alert("Passwords do not match", "Please check your passwords.", [
+        { text: "OK" },
+      ]);
+      return;
+    }
+
     try {
-      const { status, data } = await registerUser(
-        username,
-        password,
+      const user = await registerUser(
         email,
+        password,
         name,
         phone,
         date_of_birth
       );
 
-      if (status === 201) {
-        // Handle successful signup
+      if (user) {
         Alert.alert(
           "Signup Successful",
-          data.message || "Signed up successfully."
+          "You have been signed up successfully."
         );
-        navigation.navigate("Biometric", { username: username });
-      } else {
-        // Handle errors
-        Alert.alert("Signup Failed", data.message || "An error occurred");
+        navigation.navigate("Biometric", { userId: user.uid });
       }
     } catch (error) {
       console.error(error);
-      Alert.alert("Signup Failed", "An error occurred during signup");
+      Alert.alert("Signup Failed", error.message || "An error occurred during signup");
     }
   };
 
@@ -52,12 +54,7 @@ const SignUpScreen = ({ navigation }) => {
       <Text style={styles.signUpText}>Sign up to continue</Text>
 
       <View style={styles.form}>
-        <TextInput
-          placeholder="Username"
-          style={styles.input}
-          value={username}
-          onChangeText={setUsername}
-        />
+        {/* The username field is removed since it's not used with Firebase authentication */}
         <TextInput
           placeholder="Name"
           style={styles.input}
@@ -82,7 +79,7 @@ const SignUpScreen = ({ navigation }) => {
           placeholder="Date of Birth"
           style={styles.input}
           value={date_of_birth}
-          onChangeText={setdate_of_birth}
+          onChangeText={setDateOfBirth}
         />
         <TextInput
           placeholder="Password"
