@@ -34,6 +34,21 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="Your Workouts"
+        component={() => (
+          <WorkoutScreen
+            savedWorkouts={savedWorkouts}
+            setSavedWorkouts={setSavedWorkouts}
+          />
+        )}
+        options={{
+          tabBarLabel: "Workout",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Create"
         component={() => (
           <AddScreen
@@ -47,21 +62,6 @@ const TabNavigator = () => {
           tabBarLabel: "Create",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="plus" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Your Workouts"
-        component={() => (
-          <WorkoutScreen
-            savedWorkouts={savedWorkouts}
-            setSavedWorkouts={setSavedWorkouts}
-          />
-        )}
-        options={{
-          tabBarLabel: "Workout",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
           ),
         }}
       />
