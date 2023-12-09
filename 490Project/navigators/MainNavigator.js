@@ -10,7 +10,7 @@ import ConfirmationScreen from "../screens/SignUpConfirm";
 import CodeVerification from "../screens/CodeVerification";
 import NewPassword from "../screens/NewPassword";
 import NewPassConfirm from "../screens/NewPassConfirm";
-import TabNavigator from "./TabNavigator"; // Make sure the import path is correct
+import TabNavigator from "./TabNavigator"; // Import your TabNavigator
 
 const Stack = createNativeStackNavigator();
 
@@ -60,7 +60,7 @@ function MainNavigator() {
         />
         <Stack.Screen
           name="Home"
-          component={TabNavigator}
+          component={TabNavigator} // This is your Tab Navigator
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

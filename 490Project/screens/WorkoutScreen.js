@@ -1,3 +1,5 @@
+// WorkoutScreen.js
+
 import React from "react";
 import {
   View,
@@ -6,18 +8,38 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  FlatList,
+  TouchableOpacity,
 } from "react-native";
+
+import styles from '../styles/style.js'
+import { SIZES } from '../theme.js';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
 import { useState, useEffect } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-function BrowseWorkout() {
+import WorkoutApi from "../WorkoutApi.js";
+
+const workoutType = ["Arms & Shoulders", "Glutes & Legs", "Abs & Core", "Endurance & Mobility"];
+
+const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
+  const [showApi, setShowApi] = useState(false);
+
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Workout 1</Text>
+    <View>
+      {/* Button to toggle displaying the API data */}
+      <TouchableOpacity onPress={() => setShowApi(!showApi)}>
+        <Text>{showApi ? 'Hide API Data' : 'Show API Data'}</Text>
+      </TouchableOpacity>
+
+      {/* Render WorkoutApi component conditionally based on showApi state */}
+      {showApi && <WorkoutApi />}
     </View>
   );
-}
+};
+
 const workoutStyles = StyleSheet.create({
   card: {
     backgroundColor: "white",
