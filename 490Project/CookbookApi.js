@@ -32,7 +32,6 @@ const CookbookApi = () => {
   renderItem={({ item }) => (
     <View>
       <Text>{item.title}</Text>
-      <Text>{item.title}</Text>
     </View>
   )}
 />
