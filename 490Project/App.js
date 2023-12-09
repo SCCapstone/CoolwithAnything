@@ -13,6 +13,7 @@ import WorkoutScreen from "./WorkoutScreen";
 import CookbookScreen from "./CookbookScreen";
 import AddScreen from "./AddScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
+import WorkoutNav from "./WorkoutNav.js";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -35,7 +36,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Your Workouts"
-        component={() => (
+        component={(WorkoutNav) => (
           <WorkoutScreen
             savedWorkouts={savedWorkouts}
             setSavedWorkouts={setSavedWorkouts}
