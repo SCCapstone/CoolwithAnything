@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
-const WorkoutApi = () => {
+const CookbookApi = () => {
   const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const WorkoutApi = () => {
       headers: { 'X-Api-Key': '272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o' }
     };
 
-    let url = 'https://api.api-ninjas.com/v1/exercises?muscle=biceps';
+    let url = 'https://api.api-ninjas.com/v1/recipe?query=sandwich';
 
     fetch(url, options)
       .then((res) => res.json()) // parse response as JSON
@@ -41,4 +41,4 @@ const WorkoutApi = () => {
   );
 };
 
-export default WorkoutApi;
+export default CookbookApi;

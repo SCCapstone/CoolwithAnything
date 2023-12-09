@@ -6,20 +6,30 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { useState, useEffect } from "react";
 import styles from "./browseStyle.js";
+import CookbookApi from "./CookbookApi.js";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-function BrowseMeals() {
+const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
+  const [showApi, setShowApi] = useState(false);
+
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Meal 1</Text>
+    <View>
+      {/* Button to toggle displaying the API data */}
+      <TouchableOpacity onPress={() => setShowApi(!showApi)}>
+        <Text>{showApi ? 'Hide API Data' : 'Show API Data'}</Text>
+      </TouchableOpacity>
+
+      {/* Render WorkoutApi component conditionally based on showApi state */}
+      {showApi && <CookbookApi />}
     </View>
   );
-}
+};
 const mealStyles = StyleSheet.create({
   card: {
     backgroundColor: "white",

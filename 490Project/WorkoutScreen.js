@@ -24,37 +24,22 @@ import WorkoutApi from "./WorkoutApi.js";
 
 const workoutType = ["Arms & Shoulders", "Glutes & Legs", "Abs & Core", "Endurance & Mobility"];
 
-function BrowseWorkout({ searchTerm, setSearchTerm }) {
-  const navigation = useNavigation();
-  const [currentWorkoutType, setCurrentWorkoutType] = useState('Meal')
-  
-  const handleClick = () => {
-    navigation.navigate('WorkoutApi');
-  };
+const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
+  const [showApi, setShowApi] = useState(false);
+
   return (
     <View>
+      {/* Button to toggle displaying the API data */}
+      <TouchableOpacity onPress={() => setShowApi(!showApi)}>
+        <Text>{showApi ? 'Hide API Data' : 'Show API Data'}</Text>
+      </TouchableOpacity>
 
-    <View style={styles.contentContainer}>
-    <FlatList
-        data={workoutType}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.tab(currentWorkoutType, item)}
-            onPress={() => {
-              setCurrentWorkoutType(item);
-              navigation.navigate("Search", { workoutType: item });
-            }}
-          >
-            <Text>{item}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item}
-        contentContainerStyle={{ rowGap: SIZES.small }}
-      />
-      </View>
+      {/* Render WorkoutApi component conditionally based on showApi state */}
+      {showApi && <WorkoutApi />}
     </View>
   );
-}
+};
+
 const workoutStyles = StyleSheet.create({
   card: {
     backgroundColor: "white",
