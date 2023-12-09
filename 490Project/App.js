@@ -1,19 +1,21 @@
-import { StatusBar } from "expo-status-bar";
-import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
-import { useState, useEffect } from "react";
+// App.js
+import React from "react";
+import { useState, useEffect } from 'react';
+import MainNavigator from "./navigators/MainNavigator";
 
-import CalendarComponent from "./CalendarComponent.js";
-import DayScreen from "./DayScreen.js";
-import WorkoutScreen from "./WorkoutScreen";
-import CookbookScreen from "./CookbookScreen";
-import AddScreen from "./AddScreen.js";
-import SettingsScreen from "./SettingsScreen.js";
-import WorkoutNav from "./WorkoutNav.js";
+import CalendarComponent from "./screens/CalendarComponent.js";
+import DayScreen from "./screens/DayScreen.js";
+import WorkoutScreen from "./screens/WorkoutScreen";
+import CookbookScreen from "./screens/CookbookScreen";
+import AddScreen from "./screens/AddScreen.js";
+import SettingsScreen from "./screens/SettingsScreen.js";
+import WorkoutNav from "./screens/WorkoutNav.js";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

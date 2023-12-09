@@ -31,8 +31,8 @@ const WorkoutApi = () => {
   keyExtractor={(item, index) => (item.id ? item.id.toString() : index.toString())}
   renderItem={({ item }) => (
     <View>
-      <Text>{item.title}</Text>
-      <Text>{item.title}</Text>
+      <Text>{item.name}</Text>
+      <Text>{item.name}</Text>
     </View>
   )}
 />

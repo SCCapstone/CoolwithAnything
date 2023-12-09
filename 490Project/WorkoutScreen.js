@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import styles from './style.js'
+import styles from './styles/style.js'
 import { SIZES } from './theme.js';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
