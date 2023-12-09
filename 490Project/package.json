@@ -13,9 +13,9 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/blur": "^4.3.2",
+    "@react-native-community/datetimepicker": "^7.2.0",
     "@react-native-firebase/auth": "^18.7.2",
     "@react-native-google-signin/google-signin": "^10.1.1",
-    "@react-native-community/datetimepicker": "^7.2.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/material-top-tabs": "^6.6.5",
     "@react-navigation/native": "^6.1.9",
@@ -29,7 +29,7 @@
     "date-fns": "^2.30.0",
     "ejs": "^3.1.9",
     "expo": "~49.0.15",
-    "expo-app-auth": "~11.1.0",
+    "expo-app-auth": "^12.0.0",
     "expo-blur": "~12.4.1",
     "expo-google-app-auth": "~8.3.0",
     "expo-google-sign-in": "^11.0.0",
@@ -47,7 +47,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "react": "18.2.0",
-    "react-native": "0.72.6",
+    "react-native": "^0.73.0",
     "react-native-calendars": "^1.1302.0",
     "react-native-google-signin": "^2.1.1",
     "react-native-tab-view": "^3.5.2"
