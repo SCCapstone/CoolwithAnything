@@ -32,7 +32,6 @@ const WorkoutApi = () => {
   renderItem={({ item }) => (
     <View>
       <Text>{item.name}</Text>
-      <Text>{item.name}</Text>
     </View>
   )}
 />
