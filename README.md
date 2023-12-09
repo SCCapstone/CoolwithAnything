@@ -35,19 +35,24 @@ npm install -g expo-cli
 1. Clone the repository.
 2. Install the required npm packages:
 
-\```bash
+```
 npm install
-\```
+```
 
-3. Make sure you set up Firebase and add your Firebase config in the appropriate file.
+In RNLoginBackend directory, start the server using
+```
+node server.js
+```
+to establish the server with mongoosedb database
+
 
 ## Running
 
 To run the app in a local development environment:
 
-\```bash
+```
 expo start
-\```
+```
 
 This will open a QR code that you can scan using the Expo Go app on your Android device, or it will give you an option to run it on an Android emulator.
 
@@ -55,9 +60,9 @@ This will open a QR code that you can scan using the Expo Go app on your Android
 
 The app will be released for testing via a downloadable APK. To generate the APK:
 
-\```bash
+```
 expo build:android -t apk
-\```
+```
 
 Follow the on-screen instructions to download the APK once it's generated.
 
@@ -76,9 +81,9 @@ We will be using Jest for automated testing.
 
 To run the unit tests, execute:
 
-\```bash
+```
 npm test
-\```
+```
 
 ## Database Schema
 
