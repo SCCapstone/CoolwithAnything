@@ -8,7 +8,7 @@ const ConfirmationScreen = ({ navigation }) => {
       <Text style={styles.subHeader}>You're a part of ours now!</Text>
 
       <Text style={styles.congratulation}>
-        Congratulations! You have successfully signed up. You can go back to login now! Welcome home!
+        Congratulations! You have successfully signed up. You can go back to login now!
       </Text>
 
       <TouchableOpacity
