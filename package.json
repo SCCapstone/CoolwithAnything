@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@expo/config-plugins": "~7.3.1",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/material-top-tabs": "^6.6.5",
     "@react-navigation/native": "^6.1.9",
@@ -8,7 +9,7 @@
     "date-fns": "^2.30.0",
     "expo-router": "^2.0.14",
     "react-native-calendars": "^1.1302.0",
-    "react-native-pager-view": "^6.2.3",
+    "react-native-pager-view": "6.2.0",
     "react-native-tab-view": "^3.5.2"
   }
 }

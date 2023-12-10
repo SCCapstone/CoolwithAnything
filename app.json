@@ -1,8 +1,11 @@
 {
   "expo": {
+    "android": {
+      "package": "com.d9asty.coolwithanything"
+    },
     "extra": {
       "eas": {
-        "projectId": "ad281682-316c-43fb-b5fb-1fc97188e1eb"
+        "projectId": "c8cc9f02-b459-4f07-ba12-4d84be6b1f6a"
       }
     }
   }

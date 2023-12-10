@@ -29,7 +29,8 @@
         "googleSignIn": {
           "apiKey": "1088673802858-ibjujsvdidp7otu6ngs88r4p1m1a4rq3.apps.googleusercontent.com"
         }
-      }
+      },
+      "package": "app.coolwithanything"
     },
     "web": {
       "favicon": "./assets/favicon.png"
