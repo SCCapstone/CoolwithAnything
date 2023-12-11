@@ -1,12 +1,37 @@
 {
   "expo": {
+    "name": "SchedulerX",
+    "slug": "SchedulerX",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
     "android": {
-      "package": "com.d9asty.coolwithanything"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.vuvnguyen.SchedulerX"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "c8cc9f02-b459-4f07-ba12-4d84be6b1f6a"
+        "projectId": "05974bcf-cd5f-4100-ac72-3b97c7ed7bf7"
       }
-    }
+    },
+    "owner": "vuvnguyen"
   }
 }
