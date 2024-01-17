@@ -8,12 +8,12 @@ import AddMeal from '../components/AddMeal';
 const Tab = createMaterialTopTabNavigator();
 
 const AddScreen = () => {
+  
   return (
     <Tab.Navigator>
       <Tab.Screen name="Create Task" component={AddTask} />
       <Tab.Screen name="Create Workout" component={AddWorkout} />
       <Tab.Screen name="Create Meal" component={AddMeal} />
-      {/* Add additional tabs as needed */}
     </Tab.Navigator>
   );
 };

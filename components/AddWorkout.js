@@ -1,12 +1,12 @@
 // CreateWorkoutScreen.js
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet } from 'react-native';
-import WorkoutHeader from './AddWorkoutComp/WorkoutHeader';
-import InputField from './AddTaskComp/InputField'; // Reused from Create Task
-import ExerciseItem from './AddWorkoutComp/ExerciseItem';
-import DaySelector from './AddTaskComp/DateTimePicker';
-import CommentBox from './AddTaskComp/CommentBox'; // Reused from Create Task
-import CreateButton from './AddTaskComp/CreateButton'; // Reused from Create Task
+import WorkoutHeader from './WorkoutHeader';
+import InputField from './InputField'; // Reused from Create Task
+import ExerciseItem from './ExerciseItem';
+import DaySelector from './DateTimePicker';
+import CommentBox from './CommentBox'; // Reused from Create Task
+import CreateButton from './CreateButton'; // Reused from Create Task
 
 const CreateWorkoutScreen = () => {
   const [selectedDays, setSelectedDays] = useState([]);

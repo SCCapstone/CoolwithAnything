@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-
 const AccountButton = ({navigation}) => {
   const onAccountPress = () => {
     navigation.navigate("Settings");
@@ -10,7 +9,7 @@ const AccountButton = ({navigation}) => {
   return (
     <View style={styles.dateTrackerContainer}>
       <TouchableOpacity onPress={onAccountPress} style={styles.accountButton}>
-        <Text style={styles.accountButtonText}>👤</Text>
+        <Text style={styles.accountButtonText} fontSize={30}>👤</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,12 +1,12 @@
 // CreateTaskScreen.js
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import Header from './AddTaskComp/Header';
-import InputField from './AddTaskComp/InputField';
-import DateTimePicker from './AddTaskComp/DateTimePicker';
-import TypeSelector from './AddTaskComp/TypeSelector';
-import CommentBox from './AddTaskComp/CommentBox';
-import CreateButton from './AddTaskComp/CreateButton';
+import Header from './Header';
+import InputField from './InputField';
+import DateTimePicker from './DateTimePicker';
+import TypeSelector from './TypeSelector';
+import CommentBox from './CommentBox';
+import CreateButton from './CreateButton';
 
 const CreateTaskScreen = () => {
   return (

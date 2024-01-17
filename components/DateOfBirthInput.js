@@ -7,7 +7,7 @@ const DateOfBirthInput = ({ value, onChangeText }) => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Date of Birth (YYYY-MM-DD)"
+        placeholder="Date of Birth (MM-DD-YYYY)"
         value={value}
         onChangeText={onChangeText}
       />

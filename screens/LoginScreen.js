@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
       if (user) {
         // Handle successful login
         Alert.alert("Login Successful", "Logged in successfully.");
-        navigation.navigate("Home", { user: user }); // Pass user data to Home screen if needed
+        navigation.navigate("Home"); // Pass user data to Home screen if needed
       }
     } catch (error) {
       console.error(error);
