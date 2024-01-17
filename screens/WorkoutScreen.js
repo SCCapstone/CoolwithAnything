@@ -10,6 +10,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Modal,
 } from "react-native";
 
 import { useState, useEffect } from "react";
@@ -20,21 +21,79 @@ import WorkoutApi from "../APIs/WorkoutAPI";
 const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
   const [showApi, setShowApi] = useState(false);
 
+  const [selectedQuery, setSelectedQuery] = useState("");
+
+  const handleQueryButtonClick = (query) => {
+    setSelectedQuery(query);
+    setModalVisible(true);
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View>
-      {/* Button to toggle displaying the API data */}
-      <TouchableOpacity onPress={() => setShowApi(!showApi)}>
-        <Text>{showApi ? 'Hide API Data' : 'Show API Data'}</Text>
+      {/* Example buttons with different queries */}
+      <TouchableOpacity onPress={() => handleQueryButtonClick("biceps")} style={workoutStyles.showAllButton}>
+        <Text>Biceps</Text>
       </TouchableOpacity>
 
-      {/* Render WorkoutApi component conditionally based on showApi state */}
-      {showApi && <WorkoutApi />}
+      <TouchableOpacity onPress={() => handleQueryButtonClick("glutes")} style={workoutStyles.showAllButton}>
+        <Text>Glutes</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => handleQueryButtonClick("abdominals")} style={workoutStyles.showAllButton}>
+        <Text>Abs</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => handleQueryButtonClick("cardio")} style={workoutStyles.showAllButton}>
+        <Text>Cardio</Text>
+      </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={closeModal}
+      >
+        <View>
+        <Text style={workoutStyles.modalHeader}>Workouts</Text>
+        <TouchableOpacity onPress={closeModal}>
+            <Text style={workoutStyles.closeButton}>Close</Text>
+          </TouchableOpacity>
+          {/* Render WorkoutApi component with the selected query */}
+         {selectedQuery && <WorkoutApi query={selectedQuery} />} 
+        </View>
+      </Modal>
+
+      
     </View>
   );
 };
 
 const workoutStyles = StyleSheet.create({
-  card: {
+  showAllButton: {
+    backgroundColor: "white",
+    borderColor: "black",
+    padding: 16,
+    borderRadius: 8,
+    margin: 8,
+    height: 100,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  header: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    padding: 8,
+  },
+  cardContainer: {
     backgroundColor: "white",
     borderColor: "black",
     padding: 16,
@@ -46,9 +105,27 @@ const workoutStyles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
   },
-  text: {
-    fontSize: 16,
-    marginBottom: 8,
+  cardContent: {
+    padding: 16,
+  },
+  label: {
+    fontWeight: 'bold',
+  },
+  modalHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 16,
+  },
+  modalContent: {
+    padding: 16,
+  },
+  closeButton: {
+    color: 'red',
+    fontSize: 20,
+    textAlign: 'center',
+    width: 70,
+    padding: 8,
+    marginLeft: 330,
   },
 });
 

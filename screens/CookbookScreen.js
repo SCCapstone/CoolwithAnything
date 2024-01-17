@@ -13,22 +13,34 @@ import CookbookApi from "../APIs/CookbookAPI";
 
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+
 const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
   const [showApi, setShowApi] = useState(false);
+
+  const handleShowApiToggle = () => {
+    setShowApi(!showApi);
+  };
 
   return (
     <View>
       {/* Button to toggle displaying the API data */}
-      <TouchableOpacity onPress={() => setShowApi(!showApi)}>
+      <TouchableOpacity onPress={handleShowApiToggle} style={mealStyles.showAllButton}>
         <Text>{showApi ? 'Hide API Data' : 'Show API Data'}</Text>
       </TouchableOpacity>
 
-      {/* Render WorkoutApi component conditionally based on showApi state */}
+      {/* Render CookbookApi component conditionally based on showApi state */}
       {showApi && <CookbookApi />}
     </View>
   );
 };
 const mealStyles = StyleSheet.create({
+  showAllButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
   card: {
     backgroundColor: "white",
     borderColor: "black",
