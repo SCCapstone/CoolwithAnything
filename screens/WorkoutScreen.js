@@ -37,20 +37,32 @@ const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
   return (
     <View>
       {/* Example buttons with different queries */}
-      <TouchableOpacity onPress={() => handleQueryButtonClick("biceps")} style={workoutStyles.showAllButton}>
+      <TouchableOpacity
+        onPress={() => handleQueryButtonClick("biceps")}
+        style={workoutStyles.showAllButton}
+      >
         <Text>Biceps</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => handleQueryButtonClick("glutes")} style={workoutStyles.showAllButton}>
+      <TouchableOpacity
+        onPress={() => handleQueryButtonClick("glutes")}
+        style={workoutStyles.showAllButton}
+      >
         <Text>Glutes</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => handleQueryButtonClick("abdominals")} style={workoutStyles.showAllButton}>
+      <TouchableOpacity
+        onPress={() => handleQueryButtonClick("abdominals")}
+        style={workoutStyles.showAllButton}
+      >
         <Text>Abs</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => handleQueryButtonClick("cardio")} style={workoutStyles.showAllButton}>
-        <Text>Cardio</Text>
+      <TouchableOpacity
+        onPress={() => handleQueryButtonClick("quadriceps")}
+        style={workoutStyles.showAllButton}
+      >
+        <Text>Legs</Text>
       </TouchableOpacity>
 
       <Modal
@@ -60,16 +72,14 @@ const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
         onRequestClose={closeModal}
       >
         <View>
-        <Text style={workoutStyles.modalHeader}>Workouts</Text>
-        <TouchableOpacity onPress={closeModal}>
+          <Text style={workoutStyles.modalHeader}>Workouts</Text>
+          <TouchableOpacity onPress={closeModal}>
             <Text style={workoutStyles.closeButton}>Close</Text>
           </TouchableOpacity>
           {/* Render WorkoutApi component with the selected query */}
-         {selectedQuery && <WorkoutApi query={selectedQuery} />} 
+          {selectedQuery && <WorkoutApi query={selectedQuery} />}
         </View>
       </Modal>
-
-      
     </View>
   );
 };
@@ -90,7 +100,7 @@ const workoutStyles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 8,
   },
   cardContainer: {
@@ -109,20 +119,20 @@ const workoutStyles = StyleSheet.create({
     padding: 16,
   },
   label: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   modalHeader: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 16,
   },
   modalContent: {
     padding: 16,
   },
   closeButton: {
-    color: 'red',
+    color: "red",
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     width: 70,
     padding: 8,
     marginLeft: 330,
@@ -275,7 +285,7 @@ const WorkoutScreen = ({ route, savedWorkouts, setSavedWorkouts }) => {
       />
       <Tab.Screen
         name="Saved Workouts"
-        component={SavedWorkouts}  // Pass the component directly
+        component={SavedWorkouts} // Pass the component directly
         initialParams={{ workouts: savedWorkouts, setSavedWorkouts }}
         options={{ tabBarLabel: "Saved" }}
       />

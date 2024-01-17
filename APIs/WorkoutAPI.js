@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 
 const WorkoutApi = ({ query }) => {
   const [apiData, setApiData] = useState([]);
@@ -8,11 +16,11 @@ const WorkoutApi = ({ query }) => {
 
   useEffect(() => {
     let options = {
-      method: 'GET',
-      headers: { 'X-Api-Key': '272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o' }
+      method: "GET",
+      headers: { "X-Api-Key": "272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o" },
     };
 
-    let url = 'https://api.api-ninjas.com/v1/exercises?muscle=' + query;
+    let url = "https://api.api-ninjas.com/v1/exercises?muscle=" + query;
 
     fetch(url, options)
       .then((res) => res.json()) // parse response as JSON
@@ -44,7 +52,9 @@ const WorkoutApi = ({ query }) => {
             onPress={() => handleCardPress(exercise)}
           >
             <View style={styles.cardContent}>
-              <Text><Text style={styles.label}>Name:</Text> {exercise.name}</Text>
+              <Text>
+                <Text style={styles.label}>Name:</Text> {exercise.name}
+              </Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -61,12 +71,24 @@ const WorkoutApi = ({ query }) => {
           <Text style={styles.modalHeader}>Exercise Details</Text>
           {selectedExercise && (
             <View style={styles.modalContent}>
-              <Text><Text style={styles.label}>Name:</Text> {selectedExercise.name}</Text>
-              <Text><Text style={styles.label}>Type:</Text> {selectedExercise.type}</Text>
-              <Text><Text style={styles.label}>Muscle:</Text> {selectedExercise.muscle}</Text>
-              <Text><Text style={styles.label}>Equipment:</Text> {selectedExercise.equipment}</Text>
-              <Text><Text style={styles.label}>Difficulty:</Text> {selectedExercise.difficulty}</Text>
-              <Text><Text style={styles.label}>Instruction:</Text> {selectedExercise.instructions}</Text>
+              <Text>
+                <Text style={styles.label}>Name:</Text> {selectedExercise.name}
+              </Text>
+              <Text>
+                <Text style={styles.label}>Type:</Text> {selectedExercise.type}
+              </Text>
+              <Text>
+                <Text style={styles.label}>Muscle:</Text> {selectedExercise.muscle}
+              </Text>
+              <Text>
+                <Text style={styles.label}>Equipment:</Text> {selectedExercise.equipment}
+              </Text>
+              <Text>
+                <Text style={styles.label}>Difficulty:</Text> {selectedExercise.difficulty}
+              </Text>
+              <Text>
+                <Text style={styles.label}>Instruction:</Text> {selectedExercise.instructions}
+              </Text>
             </View>
           )}
           <TouchableOpacity onPress={closeModal}>
@@ -75,14 +97,13 @@ const WorkoutApi = ({ query }) => {
         </View>
       </Modal>
     </ScrollView>
-    
   );
 };
 
 const styles = StyleSheet.create({
   header: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 8,
   },
   cardContainer: {
@@ -101,18 +122,18 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   label: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   modalHeader: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 16,
   },
   modalContent: {
     padding: 16,
   },
   closeButton: {
-    color: 'blue',
+    color: "blue",
     fontSize: 16,
     padding: 16,
   },
