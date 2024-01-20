@@ -9,6 +9,8 @@ import {
   Modal,
 } from "react-native";
 
+import styles from '../styles/WorkoutStyles';
+
 const WorkoutApi = ({ query }) => {
   const [apiData, setApiData] = useState([]);
   const [selectedExercise, setSelectedExercise] = useState(null);
@@ -40,6 +42,10 @@ const WorkoutApi = ({ query }) => {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const addMeal = () => {
+
   };
 
   return (
@@ -92,51 +98,15 @@ const WorkoutApi = ({ query }) => {
             </View>
           )}
           <TouchableOpacity onPress={closeModal}>
-            <Text style={styles.closeButton}>Close</Text>
+            <Text style={styles.closeButton1}>Close</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={addMeal}>
+            <Text style={styles.addButton}>Add</Text>
           </TouchableOpacity>
         </View>
       </Modal>
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 8,
-  },
-  cardContainer: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  label: {
-    fontWeight: "bold",
-  },
-  modalHeader: {
-    fontSize: 20,
-    fontWeight: "bold",
-    padding: 16,
-  },
-  modalContent: {
-    padding: 16,
-  },
-  closeButton: {
-    color: "blue",
-    fontSize: 16,
-    padding: 16,
-  },
-});
 
 export default WorkoutApi;

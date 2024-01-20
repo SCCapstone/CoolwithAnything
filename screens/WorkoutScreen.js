@@ -15,7 +15,7 @@ import {
 
 import { useState, useEffect } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
+import styles from '../styles/WorkoutStyles';
 import WorkoutApi from "../APIs/WorkoutAPI";
 
 const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
@@ -36,31 +36,31 @@ const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <View>
-      {/* Example buttons with different queries */}
+      {/* Different Buttons for the different types of exercises */}
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("biceps")}
-        style={workoutStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Biceps</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("glutes")}
-        style={workoutStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Glutes</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("abdominals")}
-        style={workoutStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Abs</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("quadriceps")}
-        style={workoutStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Legs</Text>
       </TouchableOpacity>
@@ -72,9 +72,9 @@ const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
         onRequestClose={closeModal}
       >
         <View>
-          <Text style={workoutStyles.modalHeader}>Workouts</Text>
+          <Text style={styles.modalHeader}>Workouts</Text>
           <TouchableOpacity onPress={closeModal}>
-            <Text style={workoutStyles.closeButton}>Close</Text>
+            <Text style={styles.closeButton2}>Close</Text>
           </TouchableOpacity>
           {/* Render WorkoutApi component with the selected query */}
           {selectedQuery && <WorkoutApi query={selectedQuery} />}
@@ -83,61 +83,6 @@ const BrowseWorkout = ({ searchTerm, setSearchTerm }) => {
     </View>
   );
 };
-
-const workoutStyles = StyleSheet.create({
-  showAllButton: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    height: 100,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 8,
-  },
-  cardContainer: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  label: {
-    fontWeight: "bold",
-  },
-  modalHeader: {
-    fontSize: 20,
-    fontWeight: "bold",
-    padding: 16,
-  },
-  modalContent: {
-    padding: 16,
-  },
-  closeButton: {
-    color: "red",
-    fontSize: 20,
-    textAlign: "center",
-    width: 70,
-    padding: 8,
-    marginLeft: 330,
-  },
-});
 
 const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
   const [cardWorkout, setCardWorkout] = useState(workout);

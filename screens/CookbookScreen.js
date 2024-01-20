@@ -8,10 +8,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
+  Image,
 } from "react-native";
 import { useState, useEffect } from "react";
 import CookbookApi from "../APIs/CookbookAPI";
-
+import styles from "../styles/CookbookStyle";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
@@ -32,31 +33,32 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <View>
-      {/* Example buttons with different queries */}
+      {/* Different Buttons for the different types of meals */}
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("meat")}
-        style={cookbookStyles.showAllButton}
+        style={styles.showAllButton}
       >
+        <Image source={('../assets/steak.png')}/>
         <Text>Meat</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("fish")}
-        style={cookbookStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Seafood</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("veggies")}
-        style={cookbookStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Veggitarian</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("healthy")}
-        style={cookbookStyles.showAllButton}
+        style={styles.showAllButton}
       >
         <Text>Healthy</Text>
       </TouchableOpacity>
@@ -68,9 +70,9 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
         onRequestClose={closeModal}
       >
         <View>
-          <Text style={cookbookStyles.modalHeader}>Recipes</Text>
+          <Text style={styles.modalHeader}>Recipes</Text>
           <TouchableOpacity onPress={closeModal}>
-            <Text style={cookbookStyles.closeButton}>Close</Text>
+            <Text style={styles.closeButton2}>Close</Text>
           </TouchableOpacity>
           {/* Render WorkoutApi component with the selected query */}
           {selectedQuery && <CookbookApi query={selectedQuery} />}
@@ -79,61 +81,6 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
     </View>
   );
 };
-
-const cookbookStyles = StyleSheet.create({
-  showAllButton: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    height: 100,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 8,
-  },
-  cardContainer: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  label: {
-    fontWeight: "bold",
-  },
-  modalHeader: {
-    fontSize: 20,
-    fontWeight: "bold",
-    padding: 16,
-  },
-  modalContent: {
-    padding: 16,
-  },
-  closeButton: {
-    color: "red",
-    fontSize: 20,
-    textAlign: "center",
-    width: 70,
-    padding: 8,
-    marginLeft: 330,
-  },
-});
 
 const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   const [cardMeal, setCardMeal] = useState(meal);
