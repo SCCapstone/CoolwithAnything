@@ -4,6 +4,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { getFirestore, doc, setDoc, updateDoc } from "firebase/firestore";
 
@@ -121,6 +122,17 @@ export const updateBiometrics = async (
     return { status: "success" };
   } catch (error) {
     console.error("Something wrong", error);
+    throw error;
+  }
+};
+
+export const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    // You can return a success message or handle it differently
+    return { status: "success", message: "Reset password email sent." };
+  } catch (error) {
+    console.error("Error sending reset password email", error);
     throw error;
   }
 };
