@@ -15,7 +15,8 @@ import CookbookScreen from "../screens/CookbookScreen";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigator = ({ route }) => {
+  const { userID } = route.params;
   const { showActionSheetWithOptions } = useActionSheet();
   const navigation = useNavigation();
 
@@ -87,7 +88,11 @@ const TabNavigator = () => {
         tabBarStyle: [{ display: "flex" }, null],
       })}
     >
-      <Tab.Screen name="Today" component={HomeScreen} />
+      <Tab.Screen
+        name="Today"
+        component={HomeScreen}
+        initialParams={{ userID: userID }}
+      />
       <Tab.Screen
         name="Add"
         component={View} // This is just a placeholder
@@ -114,16 +119,19 @@ const TabNavigator = () => {
         name="Task"
         component={AddTask}
         options={{ tabBarButton: () => null }}
+        initialParams={{ userID: userID }} // Pass the user id to the task screen
       />
       <Tab.Screen
         name="Workout"
         component={AddWorkout}
         options={{ tabBarButton: () => null }}
+        initialParams={{ userID: userID }} // Pass the user id to the workout screen
       />
       <Tab.Screen
         name="Meal"
         component={AddMeal}
         options={{ tabBarButton: () => null }}
+        initialParams={{ userID: userID }} // Pass the user id to the meal screen
       />
     </Tab.Navigator>
   );
@@ -131,19 +139,19 @@ const TabNavigator = () => {
 
 const styles = StyleSheet.create({
   addButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     // Adjust the following values as necessary to position the button correctly
     height: 70,
     width: 70,
     borderRadius: 35,
-    backgroundColor: 'white', // Use the color of your tab bar for the background
-    position: 'relative', // Position absolutely within the parent container
+    backgroundColor: "white", // Use the color of your tab bar for the background
+    position: "relative", // Position absolutely within the parent container
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { height: 0, width: 0 },
-    elevation: 10
+    elevation: 10,
   },
 });
 

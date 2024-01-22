@@ -7,7 +7,8 @@ import Calendar from '../components/Calendar';
 import AccountButton from '../components/AccountButton';
 import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = () => {
+const HomeScreen = ({ route }) => {
+  const { userID } = route.params;
   const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>

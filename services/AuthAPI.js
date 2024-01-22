@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, addDoc, collection  } from "firebase/firestore";
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -133,6 +133,17 @@ export const resetPassword = async (email) => {
     return { status: "success", message: "Reset password email sent." };
   } catch (error) {
     console.error("Error sending reset password email", error);
+    throw error;
+  }
+};
+
+export const saveDataToFirestore = async (collectionName, dataObject) => {
+  try {
+    const docRef = await addDoc(collection(db, collectionName), dataObject);
+    console.log("Document written with ID: ", docRef.id);
+    return { status: "success", docId: docRef.id };
+  } catch (error) {
+    console.error("Error adding document: ", error);
     throw error;
   }
 };
