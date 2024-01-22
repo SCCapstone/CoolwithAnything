@@ -137,16 +137,21 @@ export const resetPassword = async (email) => {
   }
 };
 
-export const saveDataToFirestore = async (collectionName, dataObject) => {
+export const saveTaskForUser = async (userId, taskData) => {
   try {
-    const docRef = await addDoc(collection(db, collectionName), dataObject);
-    console.log("Document written with ID: ", docRef.id);
+    // Create a reference to the user's tasks subcollection
+    const userTasksRef = collection(db, "users", userId, "tasks");
+
+    // Add the task data to the user's tasks subcollection
+    const docRef = await addDoc(userTasksRef, taskData);
+    console.log("Task document written with ID: ", docRef.id);
     return { status: "success", docId: docRef.id };
   } catch (error) {
-    console.error("Error adding document: ", error);
+    console.error("Error adding task document: ", error);
     throw error;
   }
 };
+
 
 // Export the AsyncStorage getData function if needed elsewhere
 export { getData };

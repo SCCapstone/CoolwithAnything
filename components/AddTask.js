@@ -8,7 +8,7 @@ import DateTimePicker from './DateTimePicker';
 import TypeSelector from './TypeSelector';
 import CommentBox from './CommentBox';
 import CreateButton from './CreateButton';
-import { saveDataToFirestore } from '../services/AuthAPI';
+import { saveTaskForUser } from '../services/AuthAPI';
 
 const CreateTaskScreen = ({route}) => {
   const { userID } = route.params;
@@ -19,19 +19,19 @@ const CreateTaskScreen = ({route}) => {
   const [date, setDate] = useState(new Date());
 
   const handleCreateTask = async () => {
-    // Get the user id from the auth service
-    const userId = userID;
 
+    const user = userID;
+  
     const taskData = {
       name: taskName,
-      date: date.toISOString(), // Convert date to a string format
-      location,
+      date: date.toISOString(),
+      location: location,
       type: taskType,
-      comment,
+      comment: comment,
     };
-
+  
     try {
-      await saveDataToFirestore('tasks', taskData);
+      await saveTaskForUser(user, taskData);
       Alert.alert('Task Created', 'Your task has been successfully created!');
       // Reset task creation form or navigate the user away
     } catch (error) {
