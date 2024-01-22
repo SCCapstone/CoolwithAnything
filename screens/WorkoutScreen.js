@@ -16,7 +16,8 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
       <Tab.Screen
         name="Browse Workouts"
         component={BrowseWorkouts}
-        options={{ tabBarLabel: "Browse" }}
+        options={{ tabBarLabel: "Browse", color: "red" }}
+        color={"red"}
       />
       <Tab.Screen
         name="Saved Workouts"
