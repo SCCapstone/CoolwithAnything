@@ -1,22 +1,39 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { FaSearch } from "react-icons/fa";
+import React from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  TextInput,
+  Image,
+} from "react-native";
+import SearchIcon from "../assets/search.png";
+import styles from "../styles/WorkoutStyles";
 
-const SearchBar = () => {
+const SearchBar = ({ searchTerm, setSearchTerm, handleClick }) => {
   return (
-      <div>SearchBar</div>
-  );
-}
+    <View>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchWrapper}>
+          <TextInput
+            style={styles.searchInput}
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
+            placeholder="What are you looking for?"
+          />
+        </View>
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20,
-    margin: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    minWidth: 200,
-  },
-});
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
+          <Image
+            source={SearchIcon}
+            resizeMode="contain"
+            style={styles.searchBtnImage}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+
 
 export default SearchBar;
