@@ -22,10 +22,7 @@ const BrowseWorkouts = () => {
   };
 
   return (
-    <View>
-      <View>
-        <SearchBar/>
-      </View>
+    <View> 
       {/* Different Buttons for the different types of exercises */}
       <TouchableOpacity
         onPress={() => handleQueryButtonClick("biceps")}

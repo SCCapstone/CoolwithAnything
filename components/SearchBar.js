@@ -9,6 +9,8 @@ import {
 import SearchIcon from "../assets/search.png";
 import styles from "../styles/WorkoutStyles";
 
+// TODO: fix and implement
+
 const SearchBar = ({ searchTerm, setSearchTerm, handleClick }) => {
   return (
     <View>
@@ -30,6 +32,8 @@ const SearchBar = ({ searchTerm, setSearchTerm, handleClick }) => {
           />
         </TouchableOpacity>
       </View>
+
+      // TODO: Link search with fetch 
     </View>
   );
 };

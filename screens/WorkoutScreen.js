@@ -8,6 +8,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   useEffect(() => {
+    // TODO: Save workouts
     // Code to run when savedWorkouts change, if necessary
   }, [savedWorkouts]);
 
