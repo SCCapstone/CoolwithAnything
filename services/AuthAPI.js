@@ -6,8 +6,17 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc, addDoc, collection  } from "firebase/firestore";
-
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  updateDoc,
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -152,6 +161,21 @@ export const saveTaskForUser = async (userId, taskData) => {
   }
 };
 
+export const fetchTasksForUser = async (userId, startDate, endDate) => {
+  try {
+    const userTasksRef = collection(db, "users", userId, "tasks");
+    const q = query(userTasksRef, where("date", ">=", startDate.toISOString()), where("date", "<=", endDate.toISOString()));
+    const querySnapshot = await getDocs(q);
+    let tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+    return tasks;
+  } catch (error) {
+    console.error("Error fetching tasks: ", error);
+    throw error;
+  }
+};
 
 // Export the AsyncStorage getData function if needed elsewhere
 export { getData };

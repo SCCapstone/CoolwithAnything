@@ -46,7 +46,7 @@ const CreateTaskScreen = ({route}) => {
       <DateTimePicker onConfirm={setDate} />
       <InputField placeholder="Location" onChangeText={setLocation} />
       <TypeSelector onSelect={setTaskType} />
-      <CommentBox onChangeText={setComment} />
+      <CommentBox onCommentChange={setComment} />
       <CreateButton onPress={handleCreateTask} />
     </ScrollView>
   );
