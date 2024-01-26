@@ -39,12 +39,6 @@ npm install -g expo-cli
 npm install
 ```
 
-In RNLoginBackend directory, start the server using
-```
-node server.js
-```
-to establish the server with mongoosedb database
-
 
 ## Running
 
@@ -58,10 +52,20 @@ This will open a QR code that you can scan using the Expo Go app on your Android
 
 ## Deployment
 
-The app will be released for testing via a downloadable APK. To generate the APK:
+The app will be released for testing via a downloadable aab. To generate the aab:
 
 ```
-expo build:android -t apk
+eas build -p android
+```
+
+convert aab file to apks
+```
+bundletool build-apks --bundle=~/path/<name>.aab --output=~/path/<name>.apks \ --mode=universal \
+```
+
+build apk
+```
+unzip -p ~/path/<name>.apks universal.apk > ~/path/<name>.apk    
 ```
 
 Follow the on-screen instructions to download the APK once it's generated.

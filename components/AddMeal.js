@@ -1,11 +1,11 @@
 // CreateMealScreen.js
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import MealHeader from './AddMealComp/MealHeader';
-import IngredientItem from './AddMealComp/IngredientItem';
-import DirectionsBox from './AddMealComp/DirectionsBox';
-import CreateButton from './AddTaskComp/CreateButton'; // Reused from previous examples
-import InputField from './AddTaskComp/InputField'; // Reused from previous examples
+import MealHeader from './MealHeader';
+import IngredientItem from './IngredientItem';
+import DirectionsBox from './DirectionsBox';
+import CreateButton from './CreateButton'; // Reused from previous examples
+import InputField from './InputField'; // Reused from previous examples
 
 const CreateMealScreen = () => {
   // You would manage your ingredients and their amounts/calories here

@@ -4,8 +4,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, addDoc, collection  } from "firebase/firestore";
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -124,6 +125,33 @@ export const updateBiometrics = async (
     throw error;
   }
 };
+
+export const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    // You can return a success message or handle it differently
+    return { status: "success", message: "Reset password email sent." };
+  } catch (error) {
+    console.error("Error sending reset password email", error);
+    throw error;
+  }
+};
+
+export const saveTaskForUser = async (userId, taskData) => {
+  try {
+    // Create a reference to the user's tasks subcollection
+    const userTasksRef = collection(db, "users", userId, "tasks");
+
+    // Add the task data to the user's tasks subcollection
+    const docRef = await addDoc(userTasksRef, taskData);
+    console.log("Task document written with ID: ", docRef.id);
+    return { status: "success", docId: docRef.id };
+  } catch (error) {
+    console.error("Error adding task document: ", error);
+    throw error;
+  }
+};
+
 
 // Export the AsyncStorage getData function if needed elsewhere
 export { getData };
