@@ -15,6 +15,7 @@ web-build/
 *.p12
 *.key
 *.mobileprovision
+*.log
 
 # Metro
 .metro-health-check*
@@ -33,3 +34,9 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
