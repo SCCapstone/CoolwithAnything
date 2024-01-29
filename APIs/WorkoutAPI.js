@@ -10,7 +10,7 @@ const WorkoutApi = ({ query }) => {
   useEffect(() => {
     let options = {
       method: "GET",
-      headers: { "X-Api-Key": "LoTwPc2646862p61sf+G2w==Uz3ffsJRY53dhgOi" },
+      headers: { "X-Api-Key": "272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o" },
     };
 
     let url = 'https://api.api-ninjas.com/v1/exercises?muscle=' + query;

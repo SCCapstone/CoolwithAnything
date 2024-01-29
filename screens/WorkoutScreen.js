@@ -8,7 +8,10 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   const [activeTab, setActiveTab] = useState('BrowseWorkouts');
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
     // TODO: Save workouts
+>>>>>>> kaylytran
     // Code to run when savedWorkouts change, if necessary
   }, [savedWorkouts]);
 

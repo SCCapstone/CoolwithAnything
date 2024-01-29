@@ -40,4 +40,7 @@ const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
 };
 
 export default CookbookScreen;
+<<<<<<< HEAD
+=======
 
+>>>>>>> kaylytran

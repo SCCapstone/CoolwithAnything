@@ -8,12 +8,19 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest"
+<<<<<<< HEAD
+  },
+  "dependencies": {
+    "@expo/react-native-action-sheet": "^4.0.1",
+    "@firebase/firestore": "^4.4.1",
+=======
   },
   "jest": {
     "testEnvironment": "jsdom"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.0.1",
+>>>>>>> kaylytran
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-navigation/bottom-tabs": "^6.5.11",

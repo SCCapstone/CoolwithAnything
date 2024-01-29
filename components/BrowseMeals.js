@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
+import { View, Text, TouchableOpacity } from 'react-native';
+=======
 import { View, Text, TouchableOpacity, Modal, Image } from 'react-native';
 import styles from "../styles/CookbookStyle";
+>>>>>>> kaylytran
 import CookbookApi from '../APIs/CookbookAPI';
 
 const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
   const [showApi, setShowApi] = useState(false);
 
+<<<<<<< HEAD
+  return (
+    <View>
+      {/* Button to toggle displaying the API data */}
+      <TouchableOpacity onPress={() => setShowApi(!showApi)}>
+        <Text>{showApi ? 'Hide API Data' : 'Show API Data'}</Text>
+      </TouchableOpacity>
+
+      {/* Render CookbookApi component conditionally based on showApi state */}
+      {showApi && <CookbookApi />}
+=======
   const [selectedQuery, setSelectedQuery] = useState("");
 
   const handleQueryButtonClick = (query) => {
@@ -66,6 +81,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
           {selectedQuery && <CookbookApi query={selectedQuery} />}
         </View>
       </Modal>
+>>>>>>> kaylytran
     </View>
   );
 };
