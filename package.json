@@ -20,6 +20,7 @@
     "@react-navigation/native-stack": "^6.9.17",
     "@react-navigation/stack": "^6.3.20",
     "date-fns": "^2.30.0",
+    "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.7.1",
