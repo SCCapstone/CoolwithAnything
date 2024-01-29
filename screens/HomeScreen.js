@@ -20,7 +20,7 @@ const HomeScreen = ({ route }) => {
         <CategoryCounter count={2} label="Personal" color="skyblue" />
         <CategoryCounter count={1} label="Gym" color="salmon" />
       </View>
-      <Calendar />
+      <Calendar userID={userID} />
     </ScrollView>
   );
 };
