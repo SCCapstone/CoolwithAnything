@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { ScrollView, Text } from 'react-native';
 import MealCard from './MealCard';
 
+<<<<<<< HEAD
+=======
+// TODO: fix and implement for beta release
+
+>>>>>>> kaylytran
 const SavedMeals = ({ meals, setSavedMeals }) => {
   useEffect(() => {
     // Code to run when meals change, if necessary

@@ -16,7 +16,8 @@ function MainNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
+        {/**
+         * <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -41,6 +42,7 @@ function MainNavigator() {
           component={ConfirmationScreen}
           options={{ headerShown: false }}
         />
+         */}
         <Stack.Screen
           name="Home"
           component={TabNavigator}

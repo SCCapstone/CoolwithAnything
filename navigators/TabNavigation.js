@@ -15,8 +15,12 @@ import CookbookScreen from "../screens/CookbookScreen";
 
 const Tab = createBottomTabNavigator();
 
+<<<<<<< HEAD
 const TabNavigator = ({ route }) => {
   const { userID } = route.params;
+=======
+const TabNavigator = () => {
+>>>>>>> kaylytran
   const { showActionSheetWithOptions } = useActionSheet();
   const navigation = useNavigation();
 
@@ -88,12 +92,17 @@ const TabNavigator = ({ route }) => {
         tabBarStyle: [{ display: "flex" }, null],
       })}
     >
+<<<<<<< HEAD
       <Tab.Screen
         name="Today"
         component={HomeScreen}
         initialParams={{ userID: userID }}
       />
       <Tab.Screen
+=======
+      <Tab.Screen name="Today" component={HomeScreen} />
+      <Tab.Screen
+>>>>>>> kaylytran
         name="Add"
         component={View} // This is just a placeholder
         options={{
@@ -119,19 +128,28 @@ const TabNavigator = ({ route }) => {
         name="Task"
         component={AddTask}
         options={{ tabBarButton: () => null }}
+<<<<<<< HEAD
         initialParams={{ userID: userID }} // Pass the user id to the task screen
+=======
+>>>>>>> kaylytran
       />
       <Tab.Screen
         name="Workout"
         component={AddWorkout}
         options={{ tabBarButton: () => null }}
+<<<<<<< HEAD
         initialParams={{ userID: userID }} // Pass the user id to the workout screen
+=======
+>>>>>>> kaylytran
       />
       <Tab.Screen
         name="Meal"
         component={AddMeal}
         options={{ tabBarButton: () => null }}
+<<<<<<< HEAD
         initialParams={{ userID: userID }} // Pass the user id to the meal screen
+=======
+>>>>>>> kaylytran
       />
     </Tab.Navigator>
   );
@@ -139,12 +157,18 @@ const TabNavigator = ({ route }) => {
 
 const styles = StyleSheet.create({
   addButton: {
+<<<<<<< HEAD
     justifyContent: "center",
     alignItems: "center",
+=======
+    justifyContent: 'center',
+    alignItems: 'center',
+>>>>>>> kaylytran
     // Adjust the following values as necessary to position the button correctly
     height: 70,
     width: 70,
     borderRadius: 35,
+<<<<<<< HEAD
     backgroundColor: "white", // Use the color of your tab bar for the background
     position: "relative", // Position absolutely within the parent container
     shadowOpacity: 0.3,
@@ -152,6 +176,15 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { height: 0, width: 0 },
     elevation: 10,
+=======
+    backgroundColor: 'white', // Use the color of your tab bar for the background
+    position: 'relative', // Position absolutely within the parent container
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    shadowColor: '#000',
+    shadowOffset: { height: 0, width: 0 },
+    elevation: 10
+>>>>>>> kaylytran
   },
 });
 

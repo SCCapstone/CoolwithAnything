@@ -8,6 +8,10 @@ const Tab = createMaterialTopTabNavigator();
 
 const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   useEffect(() => {
+<<<<<<< HEAD
+=======
+    // TODO: Save workouts
+>>>>>>> kaylytran
     // Code to run when savedWorkouts change, if necessary
   }, [savedWorkouts]);
 
@@ -16,7 +20,12 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
       <Tab.Screen
         name="Browse Workouts"
         component={BrowseWorkouts}
+<<<<<<< HEAD
         options={{ tabBarLabel: "Browse" }}
+=======
+        options={{ tabBarLabel: "Browse", color: "red" }}
+        color={"red"}
+>>>>>>> kaylytran
       />
       <Tab.Screen
         name="Saved Workouts"

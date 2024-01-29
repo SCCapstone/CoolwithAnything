@@ -1,14 +1,21 @@
 // CreateTaskScreen.js
 import React from 'react';
+<<<<<<< HEAD
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Alert  } from 'react-native';
+=======
+import { ScrollView, StyleSheet, View } from 'react-native';
+>>>>>>> kaylytran
 import Header from './Header';
 import InputField from './InputField';
 import DateTimePicker from './DateTimePicker';
 import TypeSelector from './TypeSelector';
 import CommentBox from './CommentBox';
 import CreateButton from './CreateButton';
+<<<<<<< HEAD
 import { saveTaskForUser } from '../services/AuthAPI';
+=======
+>>>>>>> kaylytran
 
 const CreateTaskScreen = ({route}) => {
   const { userID } = route.params;
