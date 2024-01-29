@@ -63,43 +63,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 16,
   },
-  searchContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    marginTop: 20,
-    height: 50,
-  },
-  searchWrapper: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: "white",
-    marginLeft: 12,
-    marginRight: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 16,
-    height: "100%",
-  },
-  searchInput: {
-    width: "100%",
-    height: "100%",
-    paddingHorizontal: 16,
-  },
-  searchBtn: {
-    width: 50,
-    height: "100%",
-    backgroundColor: "#FF7754",
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  searchBtnImage: {
-    width: "50%",
-    height: "50%",
-    tintColor: "#F3F4F8",
-  },
 });
 
 export default styles;

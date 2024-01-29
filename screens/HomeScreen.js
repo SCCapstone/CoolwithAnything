@@ -7,8 +7,7 @@ import Calendar from '../components/Calendar';
 import AccountButton from '../components/AccountButton';
 import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = ({ route }) => {
-  const { userID } = route.params;
+const HomeScreen = () => {
   const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
@@ -20,7 +19,7 @@ const HomeScreen = ({ route }) => {
         <CategoryCounter count={2} label="Personal" color="skyblue" />
         <CategoryCounter count={1} label="Gym" color="salmon" />
       </View>
-      <Calendar userID={userID} />
+      <Calendar />
     </ScrollView>
   );
 };

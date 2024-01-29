@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import {
   format,
@@ -10,28 +10,12 @@ import {
   endOfWeek,
   eachDayOfInterval,
 } from "date-fns";
-import { fetchTasksForUser } from "../services/AuthAPI";
 import styles from "../styles/CalendarStyle";
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const Calendar = ({ userID }) => {
+const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const start = startOfMonth(currentMonth);
-        const end = endOfMonth(currentMonth);
-        const fetchedTasks = await fetchTasksForUser(userID, start, end);
-        setTasks(fetchedTasks);
-      } catch (error) {
-        console.error("Error fetching tasks: ", error);
-      }
-    };
-    fetchTasks();
-  }, [currentMonth, userID]);
 
   // Handle next and previous month
   const nextMonth = () => {
@@ -50,34 +34,21 @@ const Calendar = ({ userID }) => {
     const startDate = startOfWeek(startOfMonth(currentMonth));
     const endDate = endOfWeek(endOfMonth(currentMonth));
     const daysArray = eachDayOfInterval({ start: startDate, end: endDate });
-  
-    return daysArray.map((day, index) => {
-      const formattedDate = format(day, "yyyy-MM-dd");
-      const dayTasks = tasks.filter(task =>
-        task.date && typeof task.date === 'string' && task.date.startsWith(formattedDate)
-      );
-  
-      return (
-        <TouchableOpacity
-          key={index}
-          style={[
-            styles.dayItem,
-            format(day, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd")
-              ? styles.selectedDay
-              : null,
-          ]}
-          onPress={() => onDateSelect(day)}
-        >
-          <Text style={styles.dayText}>{format(day, "d")}</Text>
-          {dayTasks.length > 0 && (
-            <View style={styles.taskIndicator}>
-              {/* Render a simple indicator or list tasks here */}
-              <Text>Task</Text>
-            </View>
-          )}
-        </TouchableOpacity>
-      );
-    });
+
+    return daysArray.map((day, index) => (
+      <TouchableOpacity
+        key={index}
+        style={[
+          styles.dayItem,
+          format(day, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd")
+            ? styles.selectedDay
+            : null,
+        ]}
+        onPress={() => onDateSelect(day)}
+      >
+        <Text style={styles.dayText}>{format(day, "d")}</Text>
+      </TouchableOpacity>
+    ));
   };
 
   return (
@@ -107,30 +78,23 @@ const Calendar = ({ userID }) => {
       {/* Days display */}
       <View style={styles.daysContainer}>{renderDays()}</View>
 
-{/* Popup window when a date is selected */}
-<Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <View style={styles.modalView}>
-    <Text>{`Tasks for ${format(selectedDate, "PPPP")}`}</Text>
-    {tasks.filter(task => task.date && task.date.startsWith(format(selectedDate, "yyyy-MM-dd")))
-  .map(task => (
-      <View key={task.id} style={styles.taskItem}>
-        <Text>{task.name} - {task.location}</Text>
-        {/* Display other task details as needed */}
-      </View>
-    ))}
-    <TouchableOpacity
-      style={styles.closeButton}
-      onPress={() => setModalVisible(false)}
-    >
-      <Text>Close</Text>
-    </TouchableOpacity>
-  </View>
-</Modal>
+      {/* Popup windows when a date is selected */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalView}>
+          <Text>{`You have selected ${format(selectedDate, "PPPP")}`}</Text>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setModalVisible(false)}
+          >
+            <Text>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };

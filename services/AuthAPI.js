@@ -4,19 +4,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
 } from "firebase/auth";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  updateDoc,
-  addDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc } from "firebase/firestore";
+
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -131,48 +121,6 @@ export const updateBiometrics = async (
     return { status: "success" };
   } catch (error) {
     console.error("Something wrong", error);
-    throw error;
-  }
-};
-
-export const resetPassword = async (email) => {
-  try {
-    await sendPasswordResetEmail(auth, email);
-    // You can return a success message or handle it differently
-    return { status: "success", message: "Reset password email sent." };
-  } catch (error) {
-    console.error("Error sending reset password email", error);
-    throw error;
-  }
-};
-
-export const saveTaskForUser = async (userId, taskData) => {
-  try {
-    // Create a reference to the user's tasks subcollection
-    const userTasksRef = collection(db, "users", userId, "tasks");
-
-    // Add the task data to the user's tasks subcollection
-    const docRef = await addDoc(userTasksRef, taskData);
-    console.log("Task document written with ID: ", docRef.id);
-    return { status: "success", docId: docRef.id };
-  } catch (error) {
-    console.error("Error adding task document: ", error);
-    throw error;
-  }
-};
-
-export const fetchTasksForUser = async (userId, startDate, endDate) => {
-  try {
-    const userTasksRef = collection(db, "users", userId, "tasks");
-    const q = query(userTasksRef, where("date", ">=", startDate.toISOString()), where("date", "<=", endDate.toISOString()));
-    const querySnapshot = await getDocs(q);
-    let tasks = [];
-    querySnapshot.forEach((doc) => {
-      tasks.push({ id: doc.id, ...doc.data() });
-    });
-    return tasks;
-  } catch (error) {
-    console.error("Error fetching tasks: ", error);
     throw error;
   }
 };

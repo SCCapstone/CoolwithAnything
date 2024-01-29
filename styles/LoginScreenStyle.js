@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 const styles = StyleSheet.create({
@@ -12,5 +12,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
 export default styles;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import styles from '../styles/WorkoutStyles.js';
 
 const WorkoutApi = ({ query }) => {
@@ -79,5 +79,6 @@ const WorkoutApi = ({ query }) => {
     
   );
 };
+
 
 export default WorkoutApi;
