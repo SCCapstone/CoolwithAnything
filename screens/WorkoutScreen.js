@@ -1,31 +1,42 @@
 // WorkoutScreen.js
-import React, { useEffect } from 'react';
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import BrowseWorkouts from '../components/BrowseWorkouts';
 import SavedWorkouts from '../components/SavedWorkouts';
 
-const Tab = createMaterialTopTabNavigator();
-
 const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
+  const [activeTab, setActiveTab] = useState('BrowseWorkouts');
+
   useEffect(() => {
+    // TODO: Save workouts
     // Code to run when savedWorkouts change, if necessary
   }, [savedWorkouts]);
 
+  const renderTabContent = () => {
+    if (activeTab === 'BrowseWorkouts') {
+      return <BrowseWorkouts />;
+    } else if (activeTab === 'SavedWorkouts') {
+      return <SavedWorkouts workouts={savedWorkouts} setSavedWorkouts={setSavedWorkouts} />;
+    }
+    // Add more conditions for additional tabs if needed
+  };
+
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Browse Workouts"
-        component={BrowseWorkouts}
-        options={{ tabBarLabel: "Browse" }}
-      />
-      <Tab.Screen
-        name="Saved Workouts"
-        children={() => (
-          <SavedWorkouts workouts={savedWorkouts} setSavedWorkouts={setSavedWorkouts} />
-        )}
-        options={{ tabBarLabel: "Saved" }}
-      />
-    </Tab.Navigator>
+    <View>
+      {/* Tab Buttons */}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
+        <TouchableOpacity onPress={() => setActiveTab('BrowseWorkouts')}>
+          <Text style={{ color: activeTab === 'BrowseWorkouts' ? 'blue' : 'black' }}>Browse Workouts</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setActiveTab('SavedWorkouts')}>
+          <Text style={{ color: activeTab === 'SavedWorkouts' ? 'blue' : 'black' }}>Saved Workouts</Text>
+        </TouchableOpacity>
+        {/* Add more TouchableOpacity elements for additional tabs if needed */}
+      </View>
+
+      {/* Render the content based on the active tab */}
+      {renderTabContent()}
+    </View>
   );
 };
 
