@@ -4,6 +4,12 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
   },
   setupFiles: ['<rootDir>/jest.setup.js'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(react-native|@react-native|@react-native-community|react-native-gesture-handler|@react-native-js-polyfills)/)',
+  ],
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js',
+  },
 
   // Detox-specific configurations
   setupFilesAfterEnv: ['<rootDir>/e2e/init.js'],  // This file will contain Detox-specific initialization code
