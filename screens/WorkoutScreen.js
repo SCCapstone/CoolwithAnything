@@ -24,12 +24,12 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   return (
     <View>
       {/* Tab Buttons */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10, backgroundColor: "white"}}>
         <TouchableOpacity onPress={() => setActiveTab('BrowseWorkouts')}>
-          <Text style={{ color: activeTab === 'BrowseWorkouts' ? 'blue' : 'black' }}>Browse Workouts</Text>
+          <Text style={{ color: activeTab === 'BrowseWorkouts' ? 'hotpink' : 'black', fontSize: 16}}>Browse Workouts</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab('SavedWorkouts')}>
-          <Text style={{ color: activeTab === 'SavedWorkouts' ? 'blue' : 'black' }}>Saved Workouts</Text>
+          <Text style={{ color: activeTab === 'SavedWorkouts' ? 'hotpink' : 'black' }}>Saved Workouts</Text>
         </TouchableOpacity>
         {/* Add more TouchableOpacity elements for additional tabs if needed */}
       </View>
