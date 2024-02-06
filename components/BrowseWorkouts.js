@@ -5,10 +5,13 @@ import {
   Text,
   TouchableOpacity,
   Modal,
+  ImageBackground,
+  ScrollView,
 } from "react-native";
 import WorkoutApi from "../APIs/WorkoutAPI";
 import styles from "../styles/WorkoutStyles";
 import SearchBar from "../components/SearchBar";
+import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 const BrowseWorkouts = () => {
   const [selectedQuery, setSelectedQuery] = useState("");
@@ -22,38 +25,59 @@ const BrowseWorkouts = () => {
   };
 
   return (
-    <View> 
+    <View>
       <View>
-        <SearchBar/>
+        <SearchBar />
       </View>
-      {/* Different Buttons for the different types of exercises */}
-      <TouchableOpacity
-        onPress={() => handleQueryButtonClick("biceps")}
-        style={styles.showAllButton}
-      >
-        <Text>Biceps</Text>
-      </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => handleQueryButtonClick("glutes")}
-        style={styles.showAllButton}
-      >
-        <Text>Glutes</Text>
-      </TouchableOpacity>
+      <ScrollView>
+        {/* Different Buttons for the different types of exercises */}
+        <View style={styles.container}>
+          <TouchableOpacity
+            onPress={() => handleQueryButtonClick("biceps")}
+            style={styles.wrapper}
+          >
+            <ImageBackground
+              source={require("../assets/biceps.png")}
+              style={styles.imageBiceps}
+            />
+            <Text style={styles.buttonText}>Biceps</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => handleQueryButtonClick("abdominals")}
-        style={styles.showAllButton}
-      >
-        <Text>Abs</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleQueryButtonClick("glutes")}
+            style={styles.wrapper}
+          >
+            <ImageBackground
+              source={require("../assets/glutes.png")}
+              style={styles.imageGlutes}
+            />
+            <Text style={styles.buttonText}>Glutes</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => handleQueryButtonClick("quadriceps")}
-        style={styles.showAllButton}
-      >
-        <Text>Legs</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleQueryButtonClick("abs")}
+            style={styles.wrapper}
+          >
+            <ImageBackground
+              source={require("../assets/abs.png")}
+              style={styles.imageAbs}
+            />
+            <Text style={styles.buttonText}>Abs</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => handleQueryButtonClick("legs")}
+            style={styles.wrapper}
+          >
+            <ImageBackground
+              source={require("../assets/legs.png")}
+              style={styles.imageLegs}
+            />
+            <Text style={styles.buttonText}>Legs</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
 
       <Modal
         animationType="slide"
