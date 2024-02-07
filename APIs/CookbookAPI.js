@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Modal,
 } from "react-native";
-
 import styles from "../styles/CookbookStyle";
 
 const CookbookAPI = ({ query }) => {

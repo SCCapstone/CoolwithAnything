@@ -45,19 +45,53 @@ const styles = StyleSheet.create({
     padding: 8,
     marginLeft: 330,
   },
-  showAllButton: {
+  addButton: {
+    color: "blue",
+    fontSize: 16,
+    padding: 16,
+  },
+  container: {
+    flexDirection: "column",
+  },
+  wrapper: {
     backgroundColor: "white",
     borderColor: "black",
-    padding: 16,
     borderRadius: 8,
     margin: 8,
-    height: 100,
+    height: 130,
     elevation: 3,
     shadowColor: "#000",
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
+    overflow: 'hidden',
   },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    padding: 16,
+    fontWeight: "bold",
+  },
+  imageSteak: {
+    flex: 1,
+    width: 400,
+    height: 130,
+  },
+  imageSeafood: {
+    flex: 1,
+    width: 400,
+    height: 130,
+  },
+  imageVeg: {
+    flex: 1,
+    width: 400,
+    height: 130,
+  },
+  imageHealthy: {
+    flex: 1,
+    width: 400,
+    height: 130,
+  }
 });
 
 export default styles;

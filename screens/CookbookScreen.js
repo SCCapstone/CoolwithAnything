@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import BrowseMeals from '../components/BrowseMeals';
-import SavedMeals from '../components/SavedMeals';
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import BrowseMeals from "../components/BrowseMeals";
+import SavedMeals from "../components/SavedMeals";
 
 const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
-  const [activeTab, setActiveTab] = useState('BrowseMeals');
+  const [activeTab, setActiveTab] = useState("BrowseMeals");
 
   useEffect(() => {
     // TODO: Save meals
@@ -12,9 +12,9 @@ const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
   }, [savedMeals]);
 
   const renderTabContent = () => {
-    if (activeTab === 'BrowseMeals') {
+    if (activeTab === "BrowseMeals") {
       return <BrowseMeals />;
-    } else if (activeTab === 'SavedMeals') {
+    } else if (activeTab === "SavedMeals") {
       return <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />;
     }
     // Add more conditions for additional tabs if needed
@@ -23,12 +23,33 @@ const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
   return (
     <View>
       {/* Tab Buttons */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
-        <TouchableOpacity onPress={() => setActiveTab('BrowseMeals')}>
-          <Text style={{ color: activeTab === 'BrowseMeals' ? 'blue' : 'black' }}>Browse Meals</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddingVertical: 10,
+          backgroundColor: "white",
+        }}
+      >
+        <TouchableOpacity onPress={() => setActiveTab("BrowseMeals")}>
+          <Text
+            style={{
+              color: activeTab === "BrowseMeals" ? "#FF7754" : "black",
+              fontSize: 16,
+            }}
+          >
+            Browse Meals
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab('SavedMeals')}>
-          <Text style={{ color: activeTab === 'SavedMeals' ? 'blue' : 'black' }}>Saved Meals</Text>
+        <TouchableOpacity onPress={() => setActiveTab("SavedMeals")}>
+          <Text
+            style={{
+              color: activeTab === "SavedMeals" ? "#FF7754" : "black",
+              fontSize: 16,
+            }}
+          >
+            Saved Meals
+          </Text>
         </TouchableOpacity>
         {/* Add more TouchableOpacity elements for additional tabs if needed */}
       </View>
