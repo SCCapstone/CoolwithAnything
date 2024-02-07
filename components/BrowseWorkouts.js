@@ -11,7 +11,6 @@ import {
 import WorkoutApi from "../APIs/WorkoutAPI";
 import styles from "../styles/WorkoutStyles";
 import SearchBar from "../components/SearchBar";
-import { height } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 const BrowseWorkouts = () => {
   const [selectedQuery, setSelectedQuery] = useState("");
@@ -56,7 +55,7 @@ const BrowseWorkouts = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleQueryButtonClick("abs")}
+            onPress={() => handleQueryButtonClick("abdominals")}
             style={styles.wrapper}
           >
             <ImageBackground
@@ -67,7 +66,7 @@ const BrowseWorkouts = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleQueryButtonClick("legs")}
+            onPress={() => handleQueryButtonClick("quadriceps")}
             style={styles.wrapper}
           >
             <ImageBackground
