@@ -12,10 +12,10 @@ import styles from "../styles/WorkoutStyles";
 import SearchBar from "../components/SearchBar";
 
 const BrowseWorkouts = () => {
-  const [selectedQuery, setSelectedQuery] = useState("");
+  const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const handleQueryButtonClick = (query) => {
-    setSelectedQuery(query);
+  const handleQueryButtonClick = (exercise) => {
+    setSelectedExercise(exercise);
     setModalVisible(true);
   };
   const closeModal = () => {
@@ -89,7 +89,7 @@ const BrowseWorkouts = () => {
             <Text style={styles.closeButton2}>Close</Text>
           </TouchableOpacity>
           {/* Render WorkoutApi component with the selected query */}
-          {selectedQuery && <WorkoutApi query={selectedQuery} />}
+          {selectedExercise && <WorkoutApi query={selectedExercise} />}
         </View>
       </Modal>
     </View>

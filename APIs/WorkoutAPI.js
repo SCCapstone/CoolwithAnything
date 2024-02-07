@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Modal } from 'react-native';
-import styles from '../styles/WorkoutStyles.js';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
+import styles from "../styles/WorkoutStyles.js";
+import MealCards from "../components/MealCards.js";
 
 const WorkoutApi = ({ query }) => {
   const [apiData, setApiData] = useState([]);
-  const [selectedExercise, setSelectedExercise] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedExercise, setSelectedExercise] = useState("");
+  const [modalVisible, setModalVisible] = useState("");
 
   useEffect(() => {
     let options = {
@@ -13,7 +22,7 @@ const WorkoutApi = ({ query }) => {
       headers: { "X-Api-Key": "272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o" },
     };
 
-    let url = 'https://api.api-ninjas.com/v1/exercises?muscle=' + query;
+    let url = "https://api.api-ninjas.com/v1/exercises?muscle=" + query;
 
     fetch(url, options)
       .then((res) => res.json()) // parse response as JSON
@@ -31,54 +40,15 @@ const WorkoutApi = ({ query }) => {
     setModalVisible(true);
   };
 
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
   return (
-    <ScrollView>
-      <View>
-        {apiData.map((exercise, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.cardContainer}
-            onPress={() => handleCardPress(exercise)}
-          >
-            <View style={styles.cardContent}>
-              <Text><Text style={styles.label}>Name:</Text> {exercise.name}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Modal for detailed information */}
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={closeModal}
-      >
-        <View>
-          <Text style={styles.modalHeader}>Exercise Details</Text>
-          {selectedExercise && (
-            <View style={styles.modalContent}>
-              <Text><Text style={styles.label}>Name:</Text> {selectedExercise.name}</Text>
-              <Text><Text style={styles.label}>Type:</Text> {selectedExercise.type}</Text>
-              <Text><Text style={styles.label}>Muscle:</Text> {selectedExercise.muscle}</Text>
-              <Text><Text style={styles.label}>Equipment:</Text> {selectedExercise.equipment}</Text>
-              <Text><Text style={styles.label}>Difficulty:</Text> {selectedExercise.difficulty}</Text>
-              <Text><Text style={styles.label}>Instruction:</Text> {selectedExercise.instructions}</Text>
-            </View>
-          )}
-          <TouchableOpacity onPress={closeModal}>
-            <Text style={styles.closeButton1}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-    </ScrollView>
-    
+    <MealCards
+      apiData={apiData}
+      handleCardPress={handleCardPress}
+      selectedExercise={selectedExercise}
+      setModalVisible={setModalVisible}
+      closeModal={() => setSelectedExercise("")}
+    />
   );
 };
-
 
 export default WorkoutApi;
