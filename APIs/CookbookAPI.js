@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MealCards from "../components/MealCards.js";
+//import MealCards from "../components/MealCards.js";
 
 const WorkoutApi = ({ query }) => {
   const [apiData, setApiData] = useState([]);
@@ -30,15 +30,6 @@ const WorkoutApi = ({ query }) => {
     setModalVisible(true);
   };
 
-  return (
-    <MealCards
-      apiData={apiData}
-      handleCardPress={handleCardPress}
-      selectedExercise={selectedExercise}
-      setModalVisible={setModalVisible}
-      closeModal={() => setSelectedExercise("")}
-    />
-  );
 };
 
 export default WorkoutApi;

@@ -1,16 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
+import styles from "../styles/WorkoutStyles.js";
+import MealCards from "../components/MealCards.js";
 
-const WorkoutApi = () => {
+const WorkoutApi = ({ query }) => {
   const [apiData, setApiData] = useState([]);
+  const [selectedExercise, setSelectedExercise] = useState("");
+  const [modalVisible, setModalVisible] = useState("");
 
   useEffect(() => {
     let options = {
-      method: 'GET',
-      headers: { 'X-Api-Key': '272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o' }
+      method: "GET",
+      headers: { "X-Api-Key": "272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o" },
     };
 
-    let url = 'https://api.api-ninjas.com/v1/exercises?muscle=biceps';
+    let url = "https://api.api-ninjas.com/v1/exercises?muscle=" + query;
 
     fetch(url, options)
       .then((res) => res.json()) // parse response as JSON
@@ -21,22 +33,21 @@ const WorkoutApi = () => {
       .catch((err) => {
         console.log(`error ${err}`);
       });
-  }, []);
+  }, [query]);
+
+  const handleCardPress = (exercise) => {
+    setSelectedExercise(exercise);
+    setModalVisible(true);
+  };
 
   return (
-    <View>
-      <Text>API Screen</Text>
-      <FlatList
-  data={apiData}
-  keyExtractor={(item, index) => (item.id ? item.id.toString() : index.toString())}
-  renderItem={({ item }) => (
-    <View>
-      <Text>{item.name}</Text>
-    </View>
-  )}
-/>
-
-    </View>
+    <MealCards
+      apiData={apiData}
+      handleCardPress={handleCardPress}
+      selectedExercise={selectedExercise}
+      setModalVisible={setModalVisible}
+      closeModal={() => setSelectedExercise("")}
+    />
   );
 };
 
