@@ -7,7 +7,7 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
-//import styles from "../styles/CookbookStyle";
+import styles from "../styles/CookbookStyle";
 import CookbookApi from "../APIs/CookbookAPI";
 import SearchBar from "../components/SearchBar";
 
