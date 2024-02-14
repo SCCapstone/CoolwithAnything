@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
 import styles from "../styles/WorkoutStyles.js";
 
-const MealCards = ({
+const WorkoutCards = ({
   apiData,
   handleCardPress,
   selectedExercise,
@@ -75,4 +75,4 @@ const MealCards = ({
   );
 };
 
-export default MealCards;
+export default WorkoutCards;

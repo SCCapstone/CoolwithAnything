@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
-import styles from "../styles/WorkoutStyles.js";
-import MealCards from "../components/MealCards.js";
+import WorkoutCards from "../components/WorkoutCards.js";
 
 const WorkoutApi = ({ query }) => {
   const [apiData, setApiData] = useState([]);
@@ -41,7 +31,7 @@ const WorkoutApi = ({ query }) => {
   };
 
   return (
-    <MealCards
+    <WorkoutCards
       apiData={apiData}
       handleCardPress={handleCardPress}
       selectedExercise={selectedExercise}
