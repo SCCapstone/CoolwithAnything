@@ -22,17 +22,30 @@ const workoutStyles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     borderRadius: 5,
-    backgroundColor: '#ededed',
-    alignItems: 'center',
+    backgroundColor: "#ededed",
+    alignItems: "center",
   },
   buttonText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 
-const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
+const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
+  const [cardWorkout, setCardWorkout] = useState(workout);
   const [editMode, setEditMode] = useState(false);
   const [editableWorkout, setEditableWorkout] = useState({ ...workout });
+  const [workoutName, setWorkoutName] = useState(workout.workoutName);
+  const [workoutType, setWorkoutType] = useState(workout.workoutType);
+  const [workoutMuscle, setWorkoutMuscle] = useState(workout.workoutMuscle);
+  const [workoutEquipment, setWorkoutEquipment] = useState(
+    workout.workoutEquipment
+  );
+  const [workoutDifficulty, setWorkoutDifficulty] = useState(
+    workout.workoutDifficulty
+  );
+  const [workoutInstructions, setWorkoutInstructions] = useState(
+    workout.workoutInstructions
+  );
 
   const onCancel = () => {
     setEditableWorkout({ ...workout });
@@ -40,8 +53,18 @@ const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
   };
 
   const onSave = () => {
+    const newWorkout = {
+      workoutName,
+      workoutType,
+      workoutMuscle,
+      workoutEquipment,
+      workoutDifficulty,
+      workoutInstructions,
+    };
+    //debugger;
+    setCardWorkout(newWorkout);
+    EditWorkout(newWorkout, index);
     setEditMode(false);
-    editWorkout(editableWorkout, index);
   };
 
   return (
@@ -49,31 +72,105 @@ const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
       {editMode ? (
         <View>
           <TextInput
-            value={editableWorkout.name}
-            onChangeText={(text) => setEditableWorkout({ ...editableWorkout, name: text })}
+            value={workoutName}
+            onChangeText={setWorkoutName}
             style={workoutStyles.text}
           />
-          {/* Repeat TextInput for other fields */}
-          <Pressable style={workoutStyles.button} onPress={onCancel}>
+          <TextInput
+            value={workoutType}
+            onChangeText={setWorkoutType}
+            style={workoutStyles.text}
+          />
+          <TextInput
+            value={workoutMuscle}
+            onChangeText={setWorkoutMuscle}
+            style={workoutStyles.text}
+          />
+          <TextInput
+            value={workoutEquipment}
+            onChangeText={setWorkoutEquipment}
+            style={workoutStyles.text}
+          />
+          <TextInput
+            value={workoutDifficulty}
+            onChangeText={setWorkoutDifficulty}
+            style={workoutStyles.text}
+          />
+          <TextInput
+            value={workoutInstructions}
+            onChangeText={setWorkoutInstructions}
+            style={workoutStyles.text}
+          />
+
+          <Pressable style={workoutStyles.button} onPress={() => onCancel()}>
             <Text style={workoutStyles.buttonText}>Cancel</Text>
           </Pressable>
-          <Pressable style={workoutStyles.button} onPress={onSave}>
+          <Pressable style={workoutStyles.button} onPress={() => onSave()}>
             <Text style={workoutStyles.buttonText}>Save</Text>
           </Pressable>
         </View>
       ) : (
         <View>
-          <Text style={workoutStyles.text}>Name: {workout.name}</Text>
-          {/* Repeat Text for other fields */}
-          <Pressable style={workoutStyles.button} onPress={() => setEditMode(true)}>
+          <Text style={workoutStyles.text}>Name: {workout.workoutName}</Text>
+          <Text style={workoutStyles.text}>Type: {workout.workoutType}</Text>
+          <Text style={workoutStyles.text}>
+            Muscle: {workout.workoutMuscle}
+          </Text>
+          <Text style={workoutStyles.text}>
+            Equipment: {workout.workoutEquipment}
+          </Text>
+          <Text style={workoutStyles.text}>
+            Difficulty: {workout.workoutDifficulty}
+          </Text>
+          <Text style={workoutStyles.text}>
+            Instructions: {workout.workoutInstructions}
+          </Text>
+
+          <Pressable
+            style={workoutStyles.button}
+            onPress={() => setEditMode(true)}
+          >
             <Text style={workoutStyles.buttonText}>Edit</Text>
           </Pressable>
-          <Pressable style={workoutStyles.button} onPress={() => deleteWorkout(index)}>
+          <Pressable
+            style={workoutStyles.button}
+            onPress={() => deleteWorkout(index)}
+          >
             <Text style={workoutStyles.buttonText}>Delete</Text>
           </Pressable>
         </View>
       )}
     </View>
+  );
+};
+const SavedWorkouts = ({ workouts, setSavedWorkouts }) => {
+  useEffect(() => {}, [workouts]);
+  const deleteWorkout = (index) => {
+    const newWorkouts = [...workouts];
+    newWorkouts.splice(index, 1);
+    setSavedWorkouts(newWorkouts);
+  };
+  const EditWorkout = (cardWorkout, index) => {
+    const newWorkouts = [...workouts];
+    newWorkouts[index] = cardWorkout;
+    setSavedWorkouts(newWorkouts);
+  };
+
+  return (
+    <ScrollView style={{ flex: 1 }}>
+      {workouts != null &&
+        workouts.length > 0 &&
+        workouts.map((workout, index) => {
+          return (
+            <WorkoutCard
+              index={index}
+              workout={workout}
+              EditWorkout={EditWorkout}
+              deleteWorkout={deleteWorkout}
+            />
+          );
+        })}
+    </ScrollView>
   );
 };
 

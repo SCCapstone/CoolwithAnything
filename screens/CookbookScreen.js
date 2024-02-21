@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import BrowseMeals from '../components/BrowseMeals';
-import SavedMeals from '../components/SavedMeals';
+import BrowseMeals from "../components/BrowseMeals";
+import SavedMeals from "../components/SavedMeals";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -21,10 +21,11 @@ const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
       {/* Tab Screen for displaying saved meals */}
       <Tab.Screen
         name="Saved Meals"
+        children={() => (
+          <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />
+        )}
         options={{ tabBarLabel: "Saved" }}
-      >
-        {() => <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />}
-      </Tab.Screen>
+      />
     </Tab.Navigator>
   );
 };

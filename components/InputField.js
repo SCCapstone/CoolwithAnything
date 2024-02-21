@@ -1,10 +1,11 @@
 // components/InputField.js
-import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import React from "react";
+import { TextInput, StyleSheet } from "react-native";
 
-const InputField = ({ placeholder, onChangeText }) => {
+const InputField = ({ placeholder, onChangeText, value }) => {
   return (
     <TextInput
+      value={value}
       style={styles.input}
       placeholder={placeholder}
       onChangeText={onChangeText} // Using the onChangeText prop cause certain fields werent ggetting passed through for creating a task
@@ -15,7 +16,7 @@ const InputField = ({ placeholder, onChangeText }) => {
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: "grey",
     borderRadius: 5,
     padding: 10,
     marginVertical: 5,

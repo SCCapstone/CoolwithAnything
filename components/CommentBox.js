@@ -1,15 +1,17 @@
 // components/CommentBox.js
-import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import React from "react";
+import { View, TextInput, StyleSheet } from "react-native";
 
-const CommentBox = ({ onCommentChange }) => {
+const CommentBox = ({ onChangeText, value, placeholder, keyboardType }) => {
   return (
     <View style={styles.container}>
       <TextInput
+        value={value}
         style={styles.commentInput}
         multiline
-        placeholder="Comments"
-        onChangeText={onCommentChange}
+        placeholder="Instructions"
+        onChangeText={onChangeText}
+        keyboardType={keyboardType}
       />
     </View>
   );
@@ -21,10 +23,10 @@ const styles = StyleSheet.create({
   },
   commentInput: {
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: "grey",
     borderRadius: 5,
     height: 100,
-    textAlignVertical: 'top',
+    textAlignVertical: "top",
     padding: 10,
   },
 });

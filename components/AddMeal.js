@@ -1,37 +1,66 @@
 // CreateMealScreen.js
-import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import MealHeader from './MealHeader';
-import IngredientItem from './IngredientItem';
-import DirectionsBox from './DirectionsBox';
-import CreateButton from './CreateButton'; // Reused from previous examples
-import InputField from './InputField'; // Reused from previous examples
+import React, { useState, useEffect } from "react";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import MealHeader from "./MealHeader";
+import IngredientItem from "./IngredientItem";
+import DirectionsBox from "./DirectionsBox";
+import CreateButton from "./CreateButton"; // Reused from previous examples
+import InputField from "./InputField"; // Reused from previous examples
+import CommentBox from "./CommentBox";
 
-const CreateMealScreen = () => {
-  // You would manage your ingredients and their amounts/calories here
-  const [ingredients, setIngredients] = useState([
-    { name: 'Steak', amount: '10 oz', calories: '847' },
-    // ...other ingredients
-  ]);
+const CreateMealScreen = ({ route }) => {
+  const { userID } = route.params;
+  const { savedMeals } = route.params;
+  const { setSavedMeals } = route.params;
+  const [mealName, setMealName] = useState("");
+  const [mealIngredients, setMealIngredients] = useState("");
+  const [mealServing, setMealServings] = useState("");
+  const [mealInstructions, setMealInstructions] = useState("");
 
+  const handleAdd = () => {
+    console.log(mealName);
+    const addMeal = {
+      mealName,
+      mealIngredients,
+      mealServing,
+      mealInstructions,
+    };
+
+    setSavedMeals((savedMeals) => [...savedMeals, addMeal]);
+
+    console.log(addMeal);
+
+    setMealName("");
+    setMealIngredients("");
+    setMealServings("");
+    setMealInstructions("");
+  };
   return (
     <ScrollView style={styles.container}>
-      <MealHeader onClose={() => console.log('Close pressed')} />
-      <InputField placeholder="Meal Name" />
-      {ingredients.map((ingredient, index) => (
-        <IngredientItem key={index} ingredient={ingredient.name} />
-      ))}
-      {/* Add New Ingredient Button */}
-      <TouchableOpacity style={styles.addButton}>
-        <Text style={styles.addButtonText}>Add New +</Text>
-      </TouchableOpacity>
-      {/* Total Calories */}
-      <View style={styles.totalCalories}>
-        <Text>Total Calories:</Text>
-        <Text>1004</Text>
-      </View>
-      <DirectionsBox />
-      <CreateButton onPress={() => console.log('Create Meal')} />
+      <MealHeader onClose={() => console.log("Close pressed")} />
+      <InputField
+        value={mealName}
+        placeholder="Meal Name"
+        onChangeText={setMealName}
+      />
+
+      <DirectionsBox
+        value={mealIngredients}
+        onChangeText={setMealIngredients}
+      />
+      <InputField
+        value={mealServing}
+        placeholder="Servings"
+        onChangeText={setMealServings}
+      />
+      <CommentBox value={mealInstructions} onChangeText={setMealInstructions} />
+      <CreateButton onPress={() => handleAdd()} label={"Create Meal"} />
     </ScrollView>
   );
 };
@@ -42,17 +71,17 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   addButton: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
   },
   addButtonText: {
     fontSize: 18,
-    color: 'blue',
+    color: "blue",
   },
   totalCalories: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 10,
   },
 });

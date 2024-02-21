@@ -1,14 +1,14 @@
 // WorkoutScreen.js
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import BrowseWorkouts from '../components/BrowseWorkouts';
-import SavedWorkouts from '../components/SavedWorkouts';
+import BrowseWorkouts from "../components/BrowseWorkouts";
+import SavedWorkouts from "../components/SavedWorkouts";
 
 const Tab = createMaterialTopTabNavigator();
 
 const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   useEffect(() => {
-    // Code to run when savedWorkouts change, if necessary
+    // debugger; // Code to run when savedWorkouts change, if necessary
   }, [savedWorkouts]);
 
   return (
@@ -21,7 +21,10 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
       <Tab.Screen
         name="Saved Workouts"
         children={() => (
-          <SavedWorkouts workouts={savedWorkouts} setSavedWorkouts={setSavedWorkouts} />
+          <SavedWorkouts
+            workouts={savedWorkouts}
+            setSavedWorkouts={setSavedWorkouts}
+          />
         )}
         options={{ tabBarLabel: "Saved" }}
       />

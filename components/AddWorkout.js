@@ -1,35 +1,82 @@
 // CreateWorkoutScreen.js
-import React, { useState } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
-import WorkoutHeader from './WorkoutHeader';
-import InputField from './InputField'; // Reused from Create Task
-import ExerciseItem from './ExerciseItem';
-import DaySelector from './DateTimePicker';
-import CommentBox from './CommentBox'; // Reused from Create Task
-import CreateButton from './CreateButton'; // Reused from Create Task
+import React, { useState, useEffect } from "react";
+import { ScrollView, View, StyleSheet, TextInput } from "react-native";
+import WorkoutHeader from "./WorkoutHeader";
+import InputField from "./InputField"; // Reused from Create Task
+import ExerciseItem from "./ExerciseItem";
+import DaySelector from "./DateTimePicker";
+import CommentBox from "./CommentBox"; // Reused from Create Task
+import CreateButton from "./CreateButton"; // Reused from Create Task
 
-const CreateWorkoutScreen = () => {
-  const [selectedDays, setSelectedDays] = useState([]);
+const AddWorkout = ({ route }) => {
+  //const [selectedDays, setSelectedDays] = useState([]);
+  const { userID } = route.params;
+  const { savedWorkouts } = route.params;
+  const { setSavedWorkouts } = route.params;
+  const [workoutName, setWorkoutName] = useState("");
+  const [workoutType, setWorkoutType] = useState("");
+  const [workoutMuscle, setWorkoutMuscle] = useState("");
+  const [workoutEquipment, setWorkoutEquipment] = useState("");
+  const [workoutDifficulty, setWorkoutDifficulty] = useState("");
+  const [workoutInstructions, setWorkoutInstructions] = useState("");
 
-  const toggleDay = (day) => {
-    setSelectedDays((currentDays) =>
-      currentDays.includes(day)
-        ? currentDays.filter((d) => d !== day)
-        : [...currentDays, day]
-    );
+  const handleAdd = () => {
+    //console.log(workoutName);
+    const addWorkout = {
+      workoutName,
+      workoutType,
+      workoutMuscle,
+      workoutEquipment,
+      workoutDifficulty,
+      workoutInstructions,
+    };
+
+    setSavedWorkouts((savedWorkouts) => [...savedWorkouts, addWorkout]);
+
+    console.log(addWorkout);
+
+    setWorkoutName("");
+    setWorkoutType("");
+    setWorkoutMuscle("");
+    setWorkoutEquipment("");
+    setWorkoutDifficulty("");
+    setWorkoutInstructions("");
   };
 
   return (
     <ScrollView style={styles.container}>
-      <WorkoutHeader onClose={() => console.log('Close pressed')} />
-      <InputField placeholder="Workout Name" />
-      {/* Repeat ExerciseItem for each exercise */}
-      <ExerciseItem />
-      <ExerciseItem />
-      {/* ... */}
-      <DaySelector selectedDays={selectedDays} onDayToggle={toggleDay} />
-      <CommentBox />
-      <CreateButton onPress={() => console.log('Create Workout')} />
+      <WorkoutHeader onClose={() => console.log("Close pressed")} />
+      <InputField
+        value={workoutName}
+        placeholder="Workout Name"
+        onChangeText={setWorkoutName}
+      />
+      <InputField
+        value={workoutType}
+        placeholder="Type"
+        onChangeText={setWorkoutType}
+      />
+      <InputField
+        value={workoutMuscle}
+        placeholder="Muscle"
+        onChangeText={setWorkoutMuscle}
+      />
+      <InputField
+        value={workoutEquipment}
+        placeholder="Equipment"
+        onChangeText={setWorkoutEquipment}
+      />
+      <InputField
+        value={workoutDifficulty}
+        placeholder="Difficulty"
+        onChangeText={setWorkoutDifficulty}
+      />
+
+      <CommentBox
+        value={workoutInstructions}
+        onChangeText={setWorkoutInstructions}
+      />
+      <CreateButton onPress={() => handleAdd()} label={"Create Workout"} />
     </ScrollView>
   );
 };
@@ -41,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateWorkoutScreen;
+export default AddWorkout;
