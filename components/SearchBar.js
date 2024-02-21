@@ -5,9 +5,12 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  Modal,
+  Text,
 } from "react-native";
 import styles from "../styles/SearchBarStyle.js";
-import WorkoutCards from "./WorkoutCards.js";
+import WorkoutStyles from "../styles/WorkoutStyles.js"
+import WorkoutApi from "../APIs/WorkoutAPI";
 
 const SearchBar = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
@@ -48,9 +51,14 @@ const SearchBar = ({ setSearchTerm }) => {
     // You can perform additional logic if needed when the 'apiData' state changes
   }, [apiData]);
 
-  const handleCardPress = (exercise) => {
+
+  const handleQueryButtonClick = (exercise) => {
     setSelectedExercise(exercise);
     setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -65,7 +73,7 @@ const SearchBar = ({ setSearchTerm }) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={handleSearch}>
+        <TouchableOpacity style={styles.button} onPress={() => handleQueryButtonClick(input)}>
           <Image
             source={require("../assets/search.png")}
             resizeMode="contain"
@@ -76,26 +84,24 @@ const SearchBar = ({ setSearchTerm }) => {
         {loading && <ActivityIndicator size="small" color="#0000ff" />}
         {/* Render the loading indicator based on the 'loading' state */}
 
-        {/* Render your search results here based on the 'apiData' state */}
-        {apiData.length > 0 && (
-          <WorkoutCards
-            apiData={apiData}
-            handleCardPress={handleCardPress}
-            selectedExercise={selectedExercise}
-            setModalVisible={setModalVisible}
-            closeModal={() => setSelectedExercise("")}
-          />
-        )}
+
       </View>
 
-      {/* Move the WorkoutCards component outside the main View if it's not directly related */}
-      {/* <WorkoutCards
-        apiData={apiData}
-        handleCardPress={handleCardPress}
-        selectedExercise={selectedExercise}
-        setModalVisible={setModalVisible}
-        closeModal={() => setSelectedExercise("")}
-      /> */}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={closeModal}
+      >
+        <View>
+          <Text style={WorkoutStyles.modalHeader}>Workouts</Text>
+          <TouchableOpacity onPress={closeModal}>
+            <Text style={WorkoutStyles.closeButton2}>Close</Text>
+          </TouchableOpacity>
+          {/* Render WorkoutApi component with the selected query */}
+          {selectedExercise && <WorkoutApi query={selectedExercise} />}
+        </View>
+      </Modal>
     </View>
   );
 };
