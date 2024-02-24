@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Share,
+} from "react-native";
 
 const mealStyles = StyleSheet.create({
   card: {
@@ -41,7 +48,25 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   const [mealInstructions, setMealInstructions] = useState(
     meal.mealInstructions
   );
-
+  const myShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `Meal\nMeal Name: ${meal.mealName}\nIngredients: ${meal.mealIngredients}
+        \nServing size: ${meal.mealServing} \nInstruction: ${meal.mealInstructions}`,
+      });
+      if (result.action == Share.sharedAction) {
+        if (result.activityType) {
+          console.log("shared with activity type of: ", result.activityType);
+        } else {
+          console.log("shared");
+        }
+      } else if (result.action === Share.dismissedAction) {
+        confirm.log("dismissed");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   // Function to handle canceling the edit operation
   const onCancel = () => {
     setEditableMeal({ ...meal });
@@ -121,6 +146,9 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
               onPress={() => deleteMeal(index)}
             >
               <Text>Delete</Text>
+            </Pressable>
+            <Pressable style={mealStyles.button} onPress={myShare}>
+              <Text style={mealStyles.buttonText}>Share</Text>
             </Pressable>
           </View>
         </View>
