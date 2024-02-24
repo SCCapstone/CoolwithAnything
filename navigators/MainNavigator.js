@@ -9,6 +9,11 @@ import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import BiometricScreen from "../screens/BiometricScreen";
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import TransactionHistoryScreen from "../screens/TransactionHistoryScreen";
+import ToSScreen from "../screens/ToSScreen";
+import QRScreen from "../screens/QRScreen";
+import PaymentMethodsScreen from "../screens/PaymentMethodsScreen";
+import AddPaymentMethodsScreen from "../screens/AddPaymentMethodsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +54,31 @@ function MainNavigator() {
         <Stack.Screen
           name="Settings"
           component={SettingsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TransactionHistory"
+          component={TransactionHistoryScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ToS"
+          component={ToSScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="QR"
+          component={QRScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PaymentMethods"
+          component={PaymentMethodsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddPaymentMethods"
+          component={AddPaymentMethodsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -27,7 +27,7 @@ function SelectProfile() {
   return (
     <View style={{ flex: 1, flexDirection: 'column', padding: 20 }}>
       <Pressable onPress={() => navigation.goBack()}>
-        <Text style={{ fontSize: 18, marginBottom: 10 }}>Back</Text>
+        <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
       </Pressable>
       
       <Text style={styles.title}>Profile</Text>
@@ -98,28 +98,28 @@ function SelectAccount() {
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigation.goBack()}>
-        <Text style={{ fontSize: 18, marginBottom: 10 }}>Back</Text>
+        <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
       </Pressable>
 
       <Text style={styles.title}>Account</Text>
       <Text style={styles.profileID}>User ID: U124350622456</Text>
       <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Transaction History Button')} >
+        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
           <Text style={styles.accountText}>Transaction History</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Payment Methods Button')}>
+        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')}>
           <Text style={styles.accountText}>Payment Methods</Text>
         </Pressable>
       </View>
       <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Policy & ToS Button')}>
-          <Text style={styles.accountText}>Privacy Policy & Terms of Service</Text>
+        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('ToS')}>
+          <Text style={styles.accountText}>Terms of Service</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('QR Code Button')}>
+        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('QR')}>
           <Text style={styles.accountText}>QR Code</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.editButton} onPress={() => Alert.alert('Sign Out Button')}>
+      <Pressable style={styles.editButton} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </Pressable>
     </View>
@@ -132,7 +132,7 @@ function SelectOthers() {
     <View style={styles.container}>
 
       <Pressable onPress={() => navigation.goBack()}>
-        <Text style={{ fontSize: 18, marginBottom: 10 }}>Back</Text>
+        <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
       </Pressable>
       <Text style={styles.title}>Other Settings</Text>
       <Text style={styles.profileID}>User ID: U124350622456</Text>
@@ -163,22 +163,22 @@ const Tab = createMaterialTopTabNavigator();
 
 const SettingsScreen = ({ route }) => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Select Profile">
+    <Tab.Navigator style= {{marginTop: 45}}>
+      <Tab.Screen name="Profile">
         {() => (
           <SelectProfile
             section={route.params?.section}
           />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Select Account">
+      <Tab.Screen name="Account">
         {() => (
             <SelectAccount
             section={route.params?.section}
            />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Select Others">
+      <Tab.Screen name="Other">
       {() => (
             <SelectOthers
             section={route.params?.section}
@@ -187,7 +187,7 @@ const SettingsScreen = ({ route }) => {
       </Tab.Screen>
     </Tab.Navigator>
   );
-  }
+}
 
 
 export default SettingsScreen;

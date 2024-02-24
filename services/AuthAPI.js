@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc, addDoc, collection  } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, collection  } from "firebase/firestore";
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -151,6 +151,35 @@ export const saveTaskForUser = async (userId, taskData) => {
     throw error;
   }
 };
+
+export const savePaymentMethodForUser = async (userId, paymentMethodData) => {
+  try {
+    // Create a reference to the user's paymentMethods subcollection
+    const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
+
+    // Add the payment method data to the user's paymentMethods subcollection
+    const docRef = await addDoc(userPaymentMethodsRef, paymentMethodData);
+    console.log("Payment method document written with ID: ", docRef.id);
+    return { status: "success", docId: docRef.id };
+  } catch (error) {
+    console.error("Error adding payment method document: ", error);
+    throw error;
+  }
+};
+
+export const fetchAllPaymentMethodsForUser = async (userId) => {
+  try {
+    const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
+    const querySnapshot = await getDocs(userPaymentMethodsRef);
+    const paymentMethods = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log("Fetched payment methods: ", paymentMethods);
+    return paymentMethods; // Returns an array of payment method objects
+  } catch (error) {
+    console.error("Error fetching payment methods: ", error);
+    throw error;
+  }
+};
+
 
 
 // Export the AsyncStorage getData function if needed elsewhere
