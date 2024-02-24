@@ -28,6 +28,11 @@ function MainNavigator() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="EditTaskScreen"
+          component={EditTaskScreen}
+          options={{ title: 'Edit Task' }}
+        />
+        <Stack.Screen
           name="Register"
           component={RegisterScreen}
           options={{ headerShown: false }}

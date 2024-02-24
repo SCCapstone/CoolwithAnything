@@ -10,7 +10,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = ({ route }) => {
   const { userID } = route.params;
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // This hook provides navigation prop
+
   return (
     <ScrollView style={styles.container}>
       <DateTracker month="January" year={2021}/>

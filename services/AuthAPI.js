@@ -10,6 +10,7 @@ import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, deleteDoc, colle
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { deleteDoc } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -42,6 +43,7 @@ const storeData = async (key, value) => {
     throw e;
   }
 };
+
 
 const getData = async (key) => {
   try {
@@ -133,6 +135,34 @@ export const resetPassword = async (email) => {
     return { status: "success", message: "Reset password email sent." };
   } catch (error) {
     console.error("Error sending reset password email", error);
+    throw error;
+  }
+};
+
+export const deleteTask = async (userId, taskId) => {
+  try {
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    await deleteDoc(taskDocRef);
+    console.log("Task deleted successfully");
+  } catch (error) {
+    console.error("Error deleting task: ", error);
+    throw error;
+  }
+};
+
+export const updateTaskForUser = async (userId, taskId, updatedData) => {
+  try {
+    // Ensure the updatedData is not undefined and has the properties you expect
+    if (!updatedData || typeof updatedData !== 'object') {
+      throw new Error('Updated data is undefined or not an object');
+    }
+
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    await updateDoc(taskDocRef, updatedData);
+    console.log("Task updated successfully");
+    return { status: "success" };
+  } catch (error) {
+    console.error("Error updating task: ", error);
     throw error;
   }
 };
