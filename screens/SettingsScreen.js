@@ -145,10 +145,10 @@ function SelectOthers() {
         </Pressable>
       </View>
       <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Support Button')}>
+        <Pressable style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
           <Text style={styles.accountText}>Support</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Version Button')}>
+        <Pressable style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.5')}>
           <Text style={styles.accountText}>Version</Text>
         </Pressable>
       </View>
