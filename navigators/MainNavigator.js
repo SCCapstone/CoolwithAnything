@@ -9,6 +9,7 @@ import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import BiometricScreen from "../screens/BiometricScreen";
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import EditTaskScreen from "../screens/EditTaskScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ function MainNavigator() {
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditTaskScreen"
+          component={EditTaskScreen}
+          options={{ title: 'Edit Task' }}
         />
         <Stack.Screen
           name="Register"
