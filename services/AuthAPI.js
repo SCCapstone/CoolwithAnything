@@ -160,28 +160,41 @@ export const deleteTask = async (userId, taskId) => {
 };
 
 export const updateTaskForUser = async (userId, taskId, updatedData) => {
+ 
+  if (!userId || !taskId) {
+    const error = "userId or taskId is not provided";
+    console.error(error);
+    throw new Error(error);
+  }
   try {
-    // Ensure the updatedData is not undefined and has the properties you expect
+    console.log("Updating task with data:", updatedData);
+
+    if (!userId || !taskId) {
+      console.error("userId or taskId is not provided");
+      return; // Exit the function if no userId or taskId
+    }
+
     if (!updatedData || typeof updatedData !== 'object') {
-      throw new Error('Updated data is undefined or not an object');
+      console.error("Invalid updatedData:", updatedData);
+      return; // Exit the function if updatedData is invalid
     }
 
     const taskDocRef = doc(db, "users", userId, "tasks", taskId);
     await updateDoc(taskDocRef, updatedData);
     console.log("Task updated successfully");
-    return { status: "success" };
   } catch (error) {
-    console.error("Error updating task: ", error);
-    throw error;
+    console.error("Error updating task:", error);
+    // Log the error and throw it to be handled
+    throw new Error(error.message || "Unknown error occurred while updating task");
   }
 };
 
 export const saveTaskForUser = async (userId, taskData) => {
   try {
-    // Create a reference to the user's tasks subcollection
+    // Create a reference to user's tasks subcollection
     const userTasksRef = collection(db, "users", userId, "tasks");
 
-    // Add the task data to the user's tasks subcollection
+    // Add the task data to user's tasks subcollection
     const docRef = await addDoc(userTasksRef, taskData);
     console.log("Task document written with ID: ", docRef.id);
     return { status: "success", docId: docRef.id };

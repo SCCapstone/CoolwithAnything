@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Alert } from "react-native";
-import Header from "../components/Header"; // Assuming this is a custom component
-import InputField from "../components/InputField"; // Assuming this is a custom component
-import DateTimePicker from "../components/DateTimePicker"; // Assuming this is a custom component
-import TypeSelector from "../components/TypeSelector"; // Assuming this is a custom component
-import CommentBox from "../components/CommentBox"; // Assuming this is a custom component
-import CreateButton from "../components/CreateButton"; // Assuming this is a custom component, consider renaming it to ActionButton for reuse
+import Header from "../components/Header";
+import InputField from "../components/InputField"; 
+import DateTimePicker from "../components/DateTimePicker"; 
+import TypeSelector from "../components/TypeSelector"; 
+import CommentBox from "../components/CommentBox"; 
+import CreateButton from "../components/CreateButton"; 
 import { updateTaskForUser } from "../services/AuthAPI";
 
 const EditTaskScreen = ({ route, navigation }) => {
-  const { task } = route.params;
+  const { task, userId } = route.params;
 
   // State for each field with initial values from the task
   const [taskName, setTaskName] = useState(task.name);
@@ -19,6 +19,7 @@ const EditTaskScreen = ({ route, navigation }) => {
   const [date, setDate] = useState(new Date(task.date));
 
   const handleUpdateTask = async () => {
+    console.log("UserID:", userId, "TaskID:", task.id);
     const taskData = {
       name: taskName,
       date: date.toISOString(),
@@ -28,14 +29,15 @@ const EditTaskScreen = ({ route, navigation }) => {
     };
 
     try {
-      await updateTaskForUser(task.userId, task.id, taskData);
-      Alert.alert("Success", "Task updated successfully");
-      navigation.goBack(); // Go back to the previous screen
-    } catch (error) {
-      Alert.alert("Error", "Failed to update task");
-      console.error(error);
-    }
-  };
+        await updateTaskForUser(userId, task.id, taskData);
+        Alert.alert("Success", "Task updated successfully");
+        navigation.goBack();
+      } catch (error) {
+         // Display the error message directly
+        Alert.alert("Error", error.toString());
+        console.error("Error updating task:", error);
+      }
+    };
 
   return (
     <ScrollView style={styles.container}>
