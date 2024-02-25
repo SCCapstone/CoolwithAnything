@@ -10,7 +10,6 @@ import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, deleteDoc, colle
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteDoc } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -43,7 +42,6 @@ const storeData = async (key, value) => {
     throw e;
   }
 };
-
 
 const getData = async (key) => {
   try {
@@ -180,17 +178,34 @@ export const updateTaskForUser = async (userId, taskId, updatedData) => {
   }
 };
 
+
 export const saveTaskForUser = async (userId, taskData) => {
   try {
-    // Create a reference to user's tasks subcollection
+    // Create a reference to the user's tasks subcollection
     const userTasksRef = collection(db, "users", userId, "tasks");
 
-    // Add the task data to user's tasks subcollection
+    // Add the task data to the user's tasks subcollection
     const docRef = await addDoc(userTasksRef, taskData);
     console.log("Task document written with ID: ", docRef.id);
     return { status: "success", docId: docRef.id };
   } catch (error) {
     console.error("Error adding task document: ", error);
+    throw error;
+  }
+};
+
+export const fetchTasksForUser = async (userId) => {
+  try {
+    const userTasksRef = collection(db, "users", userId, "tasks");
+    const querySnapshot = await getDocs(userTasksRef);
+    let tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+    console.log("Tasks fetched successfully:", tasks);
+    return tasks;
+  } catch (error) {
+    console.error("Error fetching tasks: ", error);
     throw error;
   }
 };
@@ -266,6 +281,7 @@ export const deletePaymentMethodForUser = async (userId, paymentMethodId) => {
     throw error;
   }
 };
+
 
 
 
