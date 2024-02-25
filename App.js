@@ -9,6 +9,7 @@ import MainNavigator from "./navigators/MainNavigator";
 import { styles } from "./styles/ThemesStyle.js";
 import UseDarkMode from "./components/UseDarkMode";
 import { WorkoutsProvider } from "./services/WorkoutsContext.js";
+import { MealsProvider } from "./services/MealsContext.js";
 
 export default function App() {
   // const [theme, themeToggler, mountedComponent] = UseDarkMode();
@@ -18,15 +19,11 @@ export default function App() {
   return (
     <ActionSheetProvider>
       <UserProvider>
-        <WorkoutsProvider>
-          {/* <ThemeProvider theme={themeMode}>
-          <>
-            <GlobalStyles />
-            <Toggle theme={theme} toggleTheme={themeToggler} /> */}
+        <MealsProvider>
+          <WorkoutsProvider>
             <MainNavigator />
-          {/* </> */}
-          {/* </ThemeProvider> */}
-        </WorkoutsProvider>
+          </WorkoutsProvider>
+        </MealsProvider>        
       </UserProvider>
     </ActionSheetProvider>
   );

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import BrowseWorkouts from '../components/BrowseWorkouts';
 import SavedWorkouts from '../components/SavedWorkouts';
+import { useWorkouts } from '../services/WorkoutsContext';
 
 // Notice how we're not passing savedWorkouts and setSavedWorkouts as props anymore
 const WorkoutScreen = () => {
+  const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const [activeTab, setActiveTab] = useState('BrowseWorkouts');
 
   const renderTabContent = () => {

@@ -1,45 +1,65 @@
-import React, { useEffect, useState } from "react";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import BrowseMeals from "../components/BrowseMeals";
-import SavedMeals from "../components/SavedMeals";
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import BrowseMeals from '../components/BrowseMeals';
+import SavedMeals from '../components/SavedMeals';
+import { useMeals } from '../services/MealsContext'; // Make sure to import useMeals from MealsContext
 
-const Tab = createMaterialTopTabNavigator();
+const CookbookScreen = () => {
+  const [activeTab, setActiveTab] = useState('BrowseMeals');
 
-const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
-  const [activeTab, setActiveTab] = useState("BrowseMeals");
-
-  useEffect(() => {
-    // TODO: Save meals
-    // Code to run when savedMeals change, if necessary
-  }, [savedMeals]);
+  // You no longer need to extract savedMeals and setSavedMeals from useWorkouts
+  // as we're now assuming you'll be using useMeals if you're managing meal data
 
   const renderTabContent = () => {
-    if (activeTab === "BrowseMeals") {
-      return <BrowseMeals />;
-    } else if (activeTab === "SavedMeals") {
-      return <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />;
+    switch (activeTab) {
+      case 'BrowseMeals':
+        return <BrowseMeals />;
+      case 'SavedMeals':
+        return <SavedMeals />; // No need to pass meals and setSavedMeals as props
+      default:
+        return <BrowseMeals />;
     }
-    // Add more conditions for additional tabs if needed
   };
 
   return (
-    <Tab.Navigator>
-      {/* Tab Screen for browsing meals */}
-      <Tab.Screen
-        name="Browse Meals"
-        component={BrowseMeals}
-        options={{ tabBarLabel: "Browse" }}
-      />
-      {/* Tab Screen for displaying saved meals */}
-      <Tab.Screen
-        name="Saved Meals"
-        children={() => (
-          <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />
-        )}
-        options={{ tabBarLabel: "Saved" }}
-      />
-    </Tab.Navigator>
+    <View style={{ flex: 1 }}>
+      <View style={styles.tabBar}>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 'BrowseMeals' && styles.activeTab]}
+          onPress={() => setActiveTab('BrowseMeals')}
+        >
+          <Text style={styles.tabText}>Browse</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 'SavedMeals' && styles.activeTab]}
+          onPress={() => setActiveTab('SavedMeals')}
+        >
+          <Text style={styles.tabText}>Saved</Text>
+        </TouchableOpacity>
+      </View>
+      {renderTabContent()}
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  tabBar: {
+    flexDirection: 'row',
+    paddingTop: 10,
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 16,
+  },
+  activeTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: 'navy',
+  },
+  tabText: {
+    fontSize: 16,
+    color: 'black',
+  },
+});
 
 export default CookbookScreen;
