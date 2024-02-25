@@ -1,11 +1,11 @@
 // SavedWorkouts.js
-import React, { useEffect } from 'react';
-import { ScrollView } from 'react-native';
-import WorkoutCard from './WorkoutCard';
+import React, { useEffect } from "react";
+import { ScrollView } from "react-native";
+import WorkoutCard from "./WorkoutCard";
 
 const SavedWorkouts = ({ workouts, setSavedWorkouts }) => {
   useEffect(() => {
-    // Code to run when workouts change, if necessary
+    //debugger; // Code to run when savedWorkouts change, if necessary
   }, [workouts]);
   const deleteWorkout = (index) => {
     const newWorkouts = [...workouts];

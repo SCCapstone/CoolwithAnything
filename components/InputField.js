@@ -1,10 +1,11 @@
 // components/InputField.js
-import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import React from "react";
+import { View, TextInput, StyleSheet } from "react-native";
 
-const InputField = ({ placeholder }) => {
+const InputField = ({ placeholder, value }) => {
   return (
     <TextInput
+      value={value}
       style={styles.input}
       placeholder={placeholder}
     />
@@ -14,7 +15,7 @@ const InputField = ({ placeholder }) => {
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: "grey",
     borderRadius: 5,
     padding: 10,
     marginVertical: 5,
