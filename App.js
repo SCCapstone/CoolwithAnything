@@ -19,17 +19,15 @@ export default function App() {
   return (
     <ActionSheetProvider>
       <UserProvider>
-        <MealsProvider>
-          {/* <WorkoutsProvider> */}
-            {/* <ThemeProvider theme={themeMode}>
-              <>
-                <GlobalStyles />
-                <Toggle theme={theme} toggleTheme={themeToggler} /> */}
-                <MainNavigator />
-              {/* </> */}
-            {/* </ThemeProvider> */}
-          {/* </WorkoutsProvider> */}
-        </MealsProvider>
+        <WorkoutsProvider>
+          {/* <ThemeProvider theme={themeMode}>
+          <>
+            <GlobalStyles />
+            <Toggle theme={theme} toggleTheme={themeToggler} /> */}
+            <MainNavigator />
+          {/* </> */}
+          {/* </ThemeProvider> */}
+        </WorkoutsProvider>
       </UserProvider>
     </ActionSheetProvider>
   );
