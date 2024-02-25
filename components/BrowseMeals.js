@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import styles from "../styles/CookbookStyle";
 import CookbookApi from "../APIs/CookbookAPI";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "./SearchWorkout";
 
 const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
   const [selectedQuery, setSelectedQuery] = useState("");
