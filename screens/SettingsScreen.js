@@ -132,6 +132,8 @@ function SelectProfile() {
 
 function SelectAccount() {
   const navigation = useNavigation();
+  const auth = getAuth();
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigation.goBack()}>
@@ -139,7 +141,7 @@ function SelectAccount() {
       </Pressable>
 
       <Text style={styles.title}>Account</Text>
-      <Text style={styles.profileID}>User ID: U124350622456</Text>
+      <Text style={styles.profileID}>User ID: {userId}</Text>
       <View style={styles.rowContainer}>
         <Pressable style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
           <Text style={styles.accountText}>Transaction History</Text>
@@ -165,6 +167,8 @@ function SelectAccount() {
 
 function SelectOthers() {
   const navigation = useNavigation();
+  const auth = getAuth();
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
   return (
     <View style={styles.container}>
 
@@ -172,7 +176,7 @@ function SelectOthers() {
         <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
       </Pressable>
       <Text style={styles.title}>Other Settings</Text>
-      <Text style={styles.profileID}>User ID: U124350622456</Text>
+      <Text style={styles.profileID}>User ID: {userId}</Text>
       <View style={styles.rowContainer}>
         <Pressable style={styles.pageButton} onPress={() => Alert.alert('Color Scheme Button')} >
           <Text style={styles.accountText}>Color Scheme</Text>
