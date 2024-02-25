@@ -36,7 +36,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             style={styles.wrapper}
           >
             <ImageBackground
-              source={require("../assets/meat.png")}
+              source={require("../images/meat.png")}
               style={styles.imageSteak}
             />
             <Text style={styles.buttonText}>Meat</Text>
@@ -47,7 +47,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             style={styles.wrapper}
           >
             <ImageBackground
-              source={require("../assets/seafood.png")}
+              source={require("../images/seafood.png")}
               style={styles.imageSeafood}
             />
             <Text style={styles.buttonText}>Seafood</Text>
@@ -58,7 +58,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             style={styles.wrapper}
           >
             <ImageBackground
-              source={require("../assets/veg.png")}
+              source={require("../images/veg.png")}
               style={styles.imageVeg}
             />
             <Text style={styles.buttonText}>Veggitarian</Text>
@@ -69,7 +69,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             style={styles.wrapper}
           >
             <ImageBackground
-              source={require("../assets/healthy.png")}
+              source={require("../images/healthy.png")}
               style={styles.imageHealthy}
             />
             <Text style={styles.buttonText}>Healthy</Text>
