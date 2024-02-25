@@ -37,7 +37,7 @@ const workoutStyles = StyleSheet.create({
   },
 });
 
-const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
+const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
   const [cardWorkout, setCardWorkout] = useState(workout);
   const [editMode, setEditMode] = useState(false);
   const [editableWorkout, setEditableWorkout] = useState({ ...workout });
@@ -88,7 +88,7 @@ const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
     };
     //debugger;
     setCardWorkout(newWorkout);
-    EditWorkout(newWorkout, index);
+    editWorkout(newWorkout, index);
     setEditMode(false);
   };
 
