@@ -5,6 +5,7 @@ import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import styles from '../styles/settingsStyles';
+import ThemeToggle from '../components/ThemeToggle';
 
 function SelectProfile() {
   const navigation = useNavigation();
@@ -178,9 +179,7 @@ function SelectOthers() {
       <Text style={styles.title}>Other Settings</Text>
       <Text style={styles.profileID}>User ID: {userId}</Text>
       <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Color Scheme Button')} >
-          <Text style={styles.accountText}>Color Scheme</Text>
-        </Pressable>
+      <ThemeToggle/>
         <Pressable style={styles.pageButton} onPress={() => Alert.alert('Languages Button')}>
           <Text style={styles.accountText}>Languages</Text>
         </Pressable>
