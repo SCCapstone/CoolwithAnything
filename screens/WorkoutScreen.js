@@ -1,16 +1,21 @@
-// WorkoutScreen.js
 import React, { useEffect, useState } from "react";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { View, Text, TouchableOpacity } from "react-native";
 import BrowseWorkouts from "../components/BrowseWorkouts";
 import SavedWorkouts from "../components/SavedWorkouts";
-
-const Tab = createMaterialTopTabNavigator();
+import { useNavigation } from '@react-navigation/native';
 
 const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   const [activeTab, setActiveTab] = useState("BrowseWorkouts");
+  const navigation = useNavigation();
 
   useEffect(() => {
-    // debugger; // Code to run when savedWorkouts change, if necessary
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => setSavedWorkouts(/* your logic here */)}>
+          <Text>Save Workouts</Text>
+        </TouchableOpacity>
+      ),
+    });
   }, [savedWorkouts]);
 
   const renderTabContent = () => {
@@ -28,23 +33,42 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   };
 
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Browse Workouts"
-        component={BrowseWorkouts}
-        options={{ tabBarLabel: "Browse" }}
-      />
-      <Tab.Screen
-        name="Saved Workouts"
-        children={() => (
-          <SavedWorkouts
-            workouts={savedWorkouts}
-            setSavedWorkouts={setSavedWorkouts}
-          />
-        )}
-        options={{ tabBarLabel: "Saved" }}
-      />
-    </Tab.Navigator>
+    <View>
+      {/* Tab Buttons */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddingVertical: 10,
+          backgroundColor: "white",
+        }}
+      >
+        <TouchableOpacity onPress={() => setActiveTab("BrowseWorkouts")}>
+          <Text
+            style={{
+              color: activeTab === "BrowseWorkouts" ? "#FF7754" : "black",
+              fontSize: 16,
+            }}
+          >
+            Browse Workouts
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setActiveTab("SavedWorkouts")}>
+          <Text
+            style={{
+              color: activeTab === "SavedWorkouts" ? "#FF7754" : "black",
+              fontSize: 16,
+            }}
+          >
+            Saved Workouts
+          </Text>
+        </TouchableOpacity>
+        {/* Add more TouchableOpacity elements for additional tabs if needed */}
+      </View>
+
+      {/* Render the content based on the active tab */}
+      {renderTabContent()}
+    </View>
   );
 };
 
