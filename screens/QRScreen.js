@@ -13,7 +13,7 @@ const QRScreen = () => {
       </View>
       <View style={styles.QRcontainer}>
         <Text style={styles.QRtext}>Scan the QR code below!</Text>
-        <Image source={require('../components/SchedulerX-QR.png')} style={styles.QR} />
+        <Image source={require('../images/SchedulerX-QR.png')} style={styles.QR} />
       </View>
     </View>
   );
