@@ -2,20 +2,13 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import BrowseWorkouts from "../components/BrowseWorkouts";
 import SavedWorkouts from "../components/SavedWorkouts";
-import { useNavigation } from '@react-navigation/native';
 
 const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   const [activeTab, setActiveTab] = useState("BrowseWorkouts");
-  const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity onPress={() => setSavedWorkouts(/* your logic here */)}>
-          <Text>Save Workouts</Text>
-        </TouchableOpacity>
-      ),
-    });
+    // TODO: Save workouts
+    // Code to run when savedWorkouts change, if necessary
   }, [savedWorkouts]);
 
   const renderTabContent = () => {

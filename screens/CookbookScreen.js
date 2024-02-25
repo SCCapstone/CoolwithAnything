@@ -3,12 +3,13 @@ import { View, Text, TouchableOpacity } from "react-native";
 import BrowseMeals from "../components/BrowseMeals";
 import SavedMeals from "../components/SavedMeals";
 
+
 const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
   const [activeTab, setActiveTab] = useState("BrowseMeals");
 
   useEffect(() => {
     // TODO: Save meals
-    // Code to run when savedMeals change, if necessary
+    <SavedMeals/>
   }, [savedMeals]);
 
   const renderTabContent = () => {
