@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Modal, Alert, Pressable} from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -63,7 +62,7 @@ function SelectProfile() {
   const closeModal = () => setModalVisible(false);
 
   return (
-    <View style={{ flex: 1, flexDirection: 'column', padding: 20 }}>
+    <View style={{ flex: 1, flexDirection: 'column', padding: 20 }}>      
       <Pressable onPress={() => navigation.goBack()}>
         <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
       </Pressable>
@@ -197,35 +196,54 @@ function SelectOthers() {
   );
 }
 
-const Tab = createMaterialTopTabNavigator();
+const TabBar = ({ activeTab, setActiveTab }) => (
+  <View style={styles.tabContainer}>
+    {['Profile', 'Account', 'Others'].map((tab) => (
+      <Pressable
+        key={tab}
+        onPress={() => setActiveTab(tab)}
+        style={[
+          styles.tab,
+          activeTab === tab && styles.activeTab,
+        ]}
+      >
+        <Text
+          style={[
+            styles.tabText,
+            activeTab === tab && styles.activeTabText,
+          ]}
+        >
+          {tab}
+        </Text>
+      </Pressable>
+    ))}
+  </View>
+);
 
-const SettingsScreen = ({ route }) => {
+
+const SettingsScreen = () => {
+  const [activeTab, setActiveTab] = useState('Profile');
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case 'Profile':
+        return <SelectProfile />;
+      case 'Account':
+        return <SelectAccount />;
+      case 'Others':
+        return <SelectOthers />;
+      default:
+        return <SelectProfile />;
+    }
+  };
+
   return (
-    <Tab.Navigator style= {{marginTop: 45}}>
-      <Tab.Screen name="Profile">
-        {() => (
-          <SelectProfile
-            section={route.params?.section}
-          />
-        )}
-      </Tab.Screen>
-      <Tab.Screen name="Account">
-        {() => (
-            <SelectAccount
-            section={route.params?.section}
-           />
-        )}
-      </Tab.Screen>
-      <Tab.Screen name="Other">
-      {() => (
-            <SelectOthers
-            section={route.params?.section}
-           />
-        )}
-      </Tab.Screen>
-    </Tab.Navigator>
+    <View style={{ flex: 1 }}>
+      <TabBar activeTab={activeTab} setActiveTab={setActiveTab}/>
+      {renderTab(activeTab)}
+    </View>
   );
-}
+};
 
 
 export default SettingsScreen;
