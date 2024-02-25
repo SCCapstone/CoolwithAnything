@@ -8,6 +8,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import MainNavigator from "./navigators/MainNavigator";
 import { styles } from "./styles/ThemesStyle.js";
 import UseDarkMode from "./components/UseDarkMode";
+import { WorkoutsProvider } from "./services/WorkoutsContext.js";
 
 export default function App() {
   // const [theme, themeToggler, mountedComponent] = UseDarkMode();
@@ -17,13 +18,15 @@ export default function App() {
   return (
     <ActionSheetProvider>
       <UserProvider>
-        {/* <ThemeProvider theme={themeMode}>
+        <WorkoutsProvider>
+          {/* <ThemeProvider theme={themeMode}>
           <>
             <GlobalStyles />
             <Toggle theme={theme} toggleTheme={themeToggler} /> */}
             <MainNavigator />
           {/* </> */}
-        {/* </ThemeProvider> */}
+          {/* </ThemeProvider> */}
+        </WorkoutsProvider>
       </UserProvider>
     </ActionSheetProvider>
   );
