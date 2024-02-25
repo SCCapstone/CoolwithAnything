@@ -5,6 +5,7 @@ import SavedMeals from '../components/SavedMeals';
 import { useMeals } from '../services/MealsContext'; // Make sure to import useMeals from MealsContext
 
 const CookbookScreen = () => {
+  const { savedMeals, setSavedMeals } = useMeals();
   const [activeTab, setActiveTab] = useState('BrowseMeals');
 
   // You no longer need to extract savedMeals and setSavedMeals from useWorkouts

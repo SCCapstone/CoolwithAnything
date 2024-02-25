@@ -126,18 +126,10 @@ const TabNavigator = ({ route }) => {
 
       <Tab.Screen
         name="Your Cookbook"
-        children={() => (
-          <CookbookScreen
-            savedMeals={savedMeals}
-            setSavedMeals={setSavedMeals}
-          />
-        )}
-        initialParams={{
-          userID: userID,
-
-          setSavedMeals: setSavedMeals,
-        }}
+        component={CookbookScreen}
+        initialParams={{ userID: userID }}
       />
+
       {/* Hidden screens for action sheet options */}
       <Tab.Screen
         name="Task"
@@ -151,8 +143,6 @@ const TabNavigator = ({ route }) => {
         options={{ tabBarButton: () => null }}
         initialParams={{
           userID: userID,
-          savedWorkouts: savedWorkouts,
-          setSavedWorkouts: setSavedWorkouts,
         }} // Pass the user id to the workout screen
       />
       <Tab.Screen
@@ -161,8 +151,6 @@ const TabNavigator = ({ route }) => {
         options={{ tabBarButton: () => null }}
         initialParams={{
           userID: userID,
-          savedMeals: savedMeals,
-          setSavedMeals: setSavedMeals,
         }} // Pass the user id to the meal screen
       />
     </Tab.Navigator>
