@@ -9,10 +9,10 @@ import {
   Text,
 } from "react-native";
 import styles from "../styles/SearchBarStyle.js";
-import CookbookStyle from "../styles/CookbookStyle.js.js"
+import CookbookStyle from "../styles/CookbookStyle.js.js";
 import CookbookAPI from "../APIs/CookbookAPI.js";
 
-const SearchBar = ({ setSearchTerm }) => {
+const SearchMeal = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,35 +30,33 @@ const SearchBar = ({ setSearchTerm }) => {
     let url = "https://api.api-ninjas.com/v1/recipe?query=" + input;
 
     fetch(url, options)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data && data.recipe && data.recipe.length > 0) {
-        setApiData(data.recipe);
-        setModalVisible(true);
-        setErrorMessage('');
-      } else {
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.recipe && data.recipe.length > 0) {
+          setApiData(data.recipe);
+          setModalVisible(true);
+          setErrorMessage("");
+        } else {
+          setApiData([]);
+          setModalVisible(false);
+          setErrorMessage("No results found for the given search.");
+        }
+      })
+      .catch((err) => {
+        console.log(`error ${err}`);
         setApiData([]);
         setModalVisible(false);
-        setErrorMessage('No results found for the given search.');
-      }
-    })
-    .catch((err) => {
-      console.log(`error ${err}`);
-      setApiData([]);
-      setModalVisible(false);
-      setErrorMessage('Error fetching data. Please try again later.');
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-};
-
+        setErrorMessage("Error fetching data. Please try again later.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     console.log("API data updated:", apiData);
     // You can perform additional logic if needed when the 'apiData' state changes
   }, [apiData]);
-
 
   const handleQueryButtonClick = (recipe) => {
     setSelectedExercise(recipe);
@@ -81,7 +79,10 @@ const SearchBar = ({ setSearchTerm }) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleQueryButtonClick(input)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleQueryButtonClick(input)}
+        >
           <Image
             source={require("../assets/search.png")}
             resizeMode="contain"
@@ -91,8 +92,6 @@ const SearchBar = ({ setSearchTerm }) => {
 
         {loading && <ActivityIndicator size="small" color="#0000ff" />}
         {/* Render the loading indicator based on the 'loading' state */}
-
-
       </View>
 
       <Modal
@@ -106,12 +105,19 @@ const SearchBar = ({ setSearchTerm }) => {
           <TouchableOpacity onPress={closeModal}>
             <Text style={CookbookStyle.closeButton2}>Close</Text>
           </TouchableOpacity>
-          {/* Render WorkoutApi component with the selected query */}
-          {selectedRecipe && <CookbookAPI query={selectedRecipe} />}
+
+          {/* Check if apiData is not empty before rendering CookbookAPI */}
+          {apiData.length > 0 ? (
+            // Render CookbookAPI component with the selected query
+            selectedRecipe && <CookbookAPI query={selectedRecipe} />
+          ) : (
+            // Render a message if apiData is empty
+            <Text>No results found for the given search.</Text>
+          )}
         </View>
       </Modal>
     </View>
   );
 };
 
-export default SearchBar;
+export default SearchMeal;

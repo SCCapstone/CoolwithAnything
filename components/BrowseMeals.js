@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import styles from "../styles/CookbookStyle";
 import CookbookApi from "../APIs/CookbookAPI";
-import SearchBar from "./SearchWorkout";
+import SearchMeal from "./SearchWorkout";
 
 const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
   const [selectedQuery, setSelectedQuery] = useState("");
@@ -25,7 +25,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
   return (
     <View>
       <View>
-        <SearchBar />
+        <SearchMeal />
       </View>
 
       <ScrollView>
@@ -35,10 +35,10 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("meat")}
             style={styles.wrapper}
           >
-            {/*<ImageBackground
+            <ImageBackground
               source={require("../images/meat.png")}
               style={styles.imageSteak}
-            />*/}
+            />
             <Text style={styles.buttonText}>Meat</Text>
           </TouchableOpacity>
 
@@ -46,11 +46,10 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("fish")}
             style={styles.wrapper}
           >
-            {/*<ImageBackground
+            <ImageBackground
               source={require("../images/seafood.png")}
               style={styles.imageSeafood}
             />
-          */}
             <Text style={styles.buttonText}>Seafood</Text>
           </TouchableOpacity>
 
@@ -58,11 +57,10 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("veggies")}
             style={styles.wrapper}
           >
-            {/*<ImageBackground
+            <ImageBackground
               source={require("../images/veg.png")}
               style={styles.imageVeg}
             />
-            */}
             <Text style={styles.buttonText}>Veggitarian</Text>
           </TouchableOpacity>
 
@@ -70,10 +68,10 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("healthy")}
             style={styles.wrapper}
           >
-            {/*<ImageBackground
+            <ImageBackground
               source={require("../images/healthy.png")}
               style={styles.imageHealthy}
-          />*/}
+            />
             <Text style={styles.buttonText}>Healthy</Text>
           </TouchableOpacity>
 

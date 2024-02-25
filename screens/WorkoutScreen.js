@@ -1,5 +1,5 @@
 // WorkoutScreen.js
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import BrowseWorkouts from "../components/BrowseWorkouts";
 import SavedWorkouts from "../components/SavedWorkouts";
