@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import WorkoutApi from "../APIs/WorkoutAPI";
 import styles from "../styles/WorkoutStyles";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "./SearchWorkout";
 
 const BrowseWorkouts = () => {
   const [selectedExercise, setSelectedExercise] = useState("");

@@ -9,14 +9,14 @@ import {
   Text,
 } from "react-native";
 import styles from "../styles/SearchBarStyle.js";
-import WorkoutStyles from "../styles/WorkoutStyles.js"
-import WorkoutApi from "../APIs/WorkoutAPI";
+import CookbookStyle from "../styles/CookbookStyle.js.js"
+import CookbookAPI from "../APIs/CookbookAPI.js";
 
 const SearchBar = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedExercise, setSelectedExercise] = useState("");
+  const [selectedRecipe, setSelectedRecipe] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleSearch = () => {
@@ -27,13 +27,13 @@ const SearchBar = ({ setSearchTerm }) => {
       headers: { "X-Api-Key": "272B6ZvC3H2fVwwWGIngig==qQ1K3uNZQm2Pgn0o" },
     };
 
-    let url = "https://api.api-ninjas.com/v1/exercises?muscle=" + input;
+    let url = "https://api.api-ninjas.com/v1/recipe?query=" + input;
 
     fetch(url, options)
     .then((res) => res.json())
     .then((data) => {
-      if (data && data.exercise && data.exercise.length > 0) {
-        setApiData(data.exercise);
+      if (data && data.recipe && data.recipe.length > 0) {
+        setApiData(data.recipe);
         setModalVisible(true);
         setErrorMessage('');
       } else {
@@ -60,8 +60,8 @@ const SearchBar = ({ setSearchTerm }) => {
   }, [apiData]);
 
 
-  const handleQueryButtonClick = (exercise) => {
-    setSelectedExercise(exercise);
+  const handleQueryButtonClick = (recipe) => {
+    setSelectedExercise(recipe);
     setModalVisible(true);
   };
 
@@ -102,12 +102,12 @@ const SearchBar = ({ setSearchTerm }) => {
         onRequestClose={closeModal}
       >
         <View>
-          <Text style={WorkoutStyles.modalHeader}>Workouts</Text>
+          <Text style={CookbookStyle.modalHeader}>Recipes</Text>
           <TouchableOpacity onPress={closeModal}>
-            <Text style={WorkoutStyles.closeButton2}>Close</Text>
+            <Text style={CookbookStyle.closeButton2}>Close</Text>
           </TouchableOpacity>
           {/* Render WorkoutApi component with the selected query */}
-          {selectedExercise && <WorkoutApi query={selectedExercise} />}
+          {selectedRecipe && <CookbookAPI query={selectedRecipe} />}
         </View>
       </Modal>
     </View>
