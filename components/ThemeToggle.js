@@ -1,32 +1,14 @@
-import React from "react";
-import { func, string } from "prop-types";
-import { TouchableOpacity, View, StyleSheet } from "react-native";
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { func, string } from 'prop-types';
 
 const Toggle = ({ theme, toggleTheme }) => {
   return (
-    <TouchableOpacity onPress={toggleTheme}>
-      <View style={styles.button}>
-        {theme === "light" ? (
-          <Sun width="24" height="24" />
-        ) : (
-          <Moon width="24" height="24" />
-        )}
-      </View>
+    <TouchableOpacity onPress={toggleTheme} style={styles.button}>
+      <Text style={styles.text}>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</Text>
     </TouchableOpacity>
   );
 };
-
-const Sun = ({ width, height }) => (
-  <View style={[styles.icon, { backgroundColor: "#F6C358" }]}>
-    {/* SVG path for Sun */}
-  </View>
-);
-
-const Moon = ({ width, height }) => (
-  <View style={[styles.icon, { backgroundColor: "#F6C358" }]}>
-    {/* SVG path for Moon */}
-  </View>
-);
 
 Toggle.propTypes = {
   theme: string.isRequired,
@@ -36,15 +18,14 @@ Toggle.propTypes = {
 const styles = StyleSheet.create({
   button: {
     border: 2,
-    borderColor: "transparent",
+    borderColor: 'gray',
     borderRadius: 30,
     padding: 8,
-    alignItems: "center",
+    alignItems: 'center',
   },
-  icon: {
-    height: 24,
-    width: 24,
-    borderRadius: 12,
+  text: {
+    fontSize: 16,
+    color: 'black', // Adjust color based on your theme
   },
 });
 
