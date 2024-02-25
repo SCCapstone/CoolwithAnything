@@ -32,14 +32,13 @@ const Calendar = ({ userID, navigation }) => {
         const start = startOfMonth(currentMonth);
         const end = endOfMonth(currentMonth);
   
-        // Insert console logs here to debug the values
+        // console logs here to debug the values
         console.log("Current Month:", currentMonth);
         console.log("Start Date:", start);
         console.log("End Date:", end);
   
         // Safeguard: Ensure 'start' and 'end' are Date objects before calling toISOString
         if (start && end && start instanceof Date && end instanceof Date) {
-          // Now it's safe to call toISOString because 'start' and 'end' are confirmed to be Date objects
           const fetchedTasks = await fetchTasksForUser(userID, new Date(start).toISOString(), new Date(end).toISOString());
           setTasks(fetchedTasks);
         } else {
@@ -53,10 +52,10 @@ const Calendar = ({ userID, navigation }) => {
   }, [currentMonth, userID]);
 
   const taskTypeColors = {
-    School: '#FFA07A', // Light Salmon
-    Work: '#20B2AA', // Light Sea Green
-    Personal: '#778899', // Light Slate Gray
-    // Add more types and colors as needed
+    School: '#FFA07A', // Light Salmon random color they dont match up to examples we can swtich this later
+    Work: '#20B2AA', // Light Sea Green random color ^
+    Personal: '#778899', // Light Slate Gray random color ^
+    
   };
 
   const nextMonth = () => {
@@ -192,7 +191,7 @@ const renderDays = () => {
             },
             {
               text: "Edit",
-              onPress: () => navigation.navigate('EditTaskScreen', { task: item }),
+              onPress: () => navigation.navigate('EditTaskScreen', { task: item, userId: userID}),
             },
           ],
           { cancelable: false }
