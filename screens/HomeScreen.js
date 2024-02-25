@@ -10,7 +10,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = ({ route }) => {
   const { userID } = route.params;
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // This hook provides navigation prop
+
   return (
     <ScrollView style={styles.container}>
       <DateTracker month="January" year={2021}/>
@@ -21,7 +22,8 @@ const HomeScreen = ({ route }) => {
         <CategoryCounter count={2} label="Personal" color="skyblue" />
         <CategoryCounter count={1} label="Gym" color="salmon" />
       </View>
-      <Calendar />
+      {/* Pass the navigation prop to Calendar */}
+      <Calendar userID={userID} navigation={navigation} />
     </ScrollView>
   );
 };

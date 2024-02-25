@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.0.1",
+<<<<<<< HEAD
     "@firebase/firestore": "^4.4.1",
     "@react-native-async-storage/async-storage": "1.21.0",
     "@react-native-community/datetimepicker": "7.6.1",
@@ -24,22 +25,47 @@
     "expo": "^50.0.0",
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.7.1",
+=======
+    "@firebase/firestore": "^4.4.2",
+    "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-native-community/datetimepicker": "7.6.1",
+    "@react-navigation/bottom-tabs": "^6.5.12",
+    "@react-navigation/material-top-tabs": "^6.6.6",
+    "@react-navigation/native": "^6.1.10",
+    "@react-navigation/native-stack": "^6.9.18",
+    "@react-navigation/stack": "^6.3.21",
+    "date-fns": "^3.3.1",
+    "deprecated-react-native-prop-types": "^5.0.0",
+    "expo": "~50.0.7",
+    "expo-status-bar": "~1.11.1",
+    "firebase": "^10.8.0",
+>>>>>>> feature/add-edit-task
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-action-sheet": "^2.2.0",
     "react-native-modal-datetime-picker": "^17.1.0",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
+<<<<<<< HEAD
     "react-native-share": "^10.0.2",
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.0.2",
     "styled-components": "^6.1.8"
+=======
+    "react-native-tab-view": "^3.5.2",
+    "react-native-vector-icons": "^10.0.3"
+>>>>>>> feature/add-edit-task
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.23.9",
     "@testing-library/react-native": "^12.4.3",
+<<<<<<< HEAD
     "jest": "^29.3.1",
     "jest-expo": "^50.0.0"
+=======
+    "jest": "^29.7.0",
+    "jest-expo": "50.0.2"
+>>>>>>> feature/add-edit-task
   },
   "private": true
 }

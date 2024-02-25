@@ -27,6 +27,7 @@ const CreateTaskScreen = ({ route }) => {
       location: location,
       type: taskType,
       comment: comment,
+      priority: 'low' // default priority
     };
 
     try {

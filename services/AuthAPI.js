@@ -10,6 +10,7 @@ import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, deleteDoc, colle
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { deleteDoc } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -42,6 +43,7 @@ const storeData = async (key, value) => {
     throw e;
   }
 };
+
 
 const getData = async (key) => {
   try {
@@ -137,12 +139,53 @@ export const resetPassword = async (email) => {
   }
 };
 
+export const deleteTask = async (userId, taskId) => {
+  try {
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    await deleteDoc(taskDocRef);
+    console.log("Task deleted successfully");
+  } catch (error) {
+    console.error("Error deleting task: ", error);
+    throw error;
+  }
+};
+
+export const updateTaskForUser = async (userId, taskId, updatedData) => {
+ 
+  if (!userId || !taskId) {
+    const error = "userId or taskId is not provided";
+    console.error(error);
+    throw new Error(error);
+  }
+  try {
+    console.log("Updating task with data:", updatedData);
+
+    if (!userId || !taskId) {
+      console.error("userId or taskId is not provided");
+      return; // Exit the function if no userId or taskId
+    }
+
+    if (!updatedData || typeof updatedData !== 'object') {
+      console.error("Invalid updatedData:", updatedData);
+      return; // Exit the function if updatedData is invalid
+    }
+
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    await updateDoc(taskDocRef, updatedData);
+    console.log("Task updated successfully");
+  } catch (error) {
+    console.error("Error updating task:", error);
+    // Log the error and throw it to be handled
+    throw new Error(error.message || "Unknown error occurred while updating task");
+  }
+};
+
 export const saveTaskForUser = async (userId, taskData) => {
   try {
-    // Create a reference to the user's tasks subcollection
+    // Create a reference to user's tasks subcollection
     const userTasksRef = collection(db, "users", userId, "tasks");
 
-    // Add the task data to the user's tasks subcollection
+    // Add the task data to user's tasks subcollection
     const docRef = await addDoc(userTasksRef, taskData);
     console.log("Task document written with ID: ", docRef.id);
     return { status: "success", docId: docRef.id };
@@ -152,6 +195,7 @@ export const saveTaskForUser = async (userId, taskData) => {
   }
 };
 
+export const fetchTasksForUser = async (userId) => {
 export const updateUserProfile = async (userId, updatedData) => {
   try {
     const userDocRef = doc(db, "users", userId);
@@ -166,6 +210,14 @@ export const updateUserProfile = async (userId, updatedData) => {
 
 export const savePaymentMethodForUser = async (userId, paymentMethodData) => {
   try {
+    const userTasksRef = collection(db, "users", userId, "tasks");
+    const querySnapshot = await getDocs(userTasksRef);
+    let tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+    console.log("Tasks fetched successfully:", tasks);
+    return tasks;
     // Create a reference to the user's paymentMethods subcollection
     const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
 
@@ -223,7 +275,6 @@ export const deletePaymentMethodForUser = async (userId, paymentMethodId) => {
     throw error;
   }
 };
-
 
 
 
