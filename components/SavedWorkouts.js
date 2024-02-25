@@ -31,6 +31,17 @@ const SavedWorkouts = ({ workouts, setSavedWorkouts }) => {
             deleteWorkout={deleteWorkout}
           />
         ))}
+        workouts.map((workout, index) => {
+          return (
+            <WorkoutCard
+              key={index}
+              index={index}
+              workout={workout}
+              EditWorkout={EditWorkout}
+              deleteWorkout={deleteWorkout}
+            />
+          );
+        })}
     </ScrollView>
   );
 };
