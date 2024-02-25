@@ -5,7 +5,7 @@ import React from "react";
 // import Toggle from "./components/ThemeToggle.js";
 import { UserProvider } from "./services/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-// import { WorkoutsProvider } from './services/WorkoutsContext';
+import { WorkoutsProvider } from "./services/WorkoutsContext";
 import { MealsProvider } from "./services/MealsContext.js";
 import MainNavigator from "./navigators/MainNavigator";
 // import { styles } from "./styles/ThemesStyle.js";
@@ -20,13 +20,15 @@ export default function App() {
     <ActionSheetProvider>
       <UserProvider>
         <WorkoutsProvider>
-          {/* <ThemeProvider theme={themeMode}>
+          <MealsProvider>
+            {/* <ThemeProvider theme={themeMode}>
           <>
             <GlobalStyles />
             <Toggle theme={theme} toggleTheme={themeToggler} /> */}
             <MainNavigator />
-          {/* </> */}
-          {/* </ThemeProvider> */}
+            {/* </> */}
+            {/* </ThemeProvider> */}
+          </MealsProvider>
         </WorkoutsProvider>
       </UserProvider>
     </ActionSheetProvider>

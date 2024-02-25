@@ -13,7 +13,7 @@ import CreateButton from "./CreateButton"; // Reused from previous examples
 import InputField from "./InputField"; // Reused from previous examples
 import CommentBox from "./CommentBox";
 
-const CreateMealScreen = ({ route }) => {
+const AddMeal = ({ route }) => {
   const { userID } = route.params;
   const { savedMeals } = route.params;
   const { setSavedMeals } = route.params;
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateMealScreen;
+export default AddMeal;
