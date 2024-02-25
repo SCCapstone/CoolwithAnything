@@ -14,6 +14,7 @@ import ToSScreen from "../screens/ToSScreen";
 import QRScreen from "../screens/QRScreen";
 import PaymentMethodsScreen from "../screens/PaymentMethodsScreen";
 import AddPaymentMethodsScreen from "../screens/AddPaymentMethodsScreen";
+import EditPaymentMethodsScreen from "../screens/EditPaymentMethodsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -79,6 +80,11 @@ function MainNavigator() {
         <Stack.Screen
           name="AddPaymentMethods"
           component={AddPaymentMethodsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditPaymentMethods"
+          component={EditPaymentMethodsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

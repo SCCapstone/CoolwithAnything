@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, collection  } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, deleteDoc, collection  } from "firebase/firestore";
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -179,6 +179,39 @@ export const fetchAllPaymentMethodsForUser = async (userId) => {
     throw error;
   }
 };
+
+export const updatePaymentMethodForUser = async (userId, paymentMethodId, paymentMethodData) => {
+  try {
+    // Reference to a specific payment method document for the user
+    const paymentMethodDocRef = doc(db, "users", userId, "paymentMethods", paymentMethodId);
+
+    // Update the payment method document with new data
+    await updateDoc(paymentMethodDocRef, paymentMethodData);
+
+    console.log("Payment method document updated with ID: ", paymentMethodId);
+    return { status: "success", docId: paymentMethodId };
+  } catch (error) {
+    console.error("Error updating payment method document: ", error);
+    throw error;
+  }
+};
+
+export const deletePaymentMethodForUser = async (userId, paymentMethodId) => {
+  try {
+    // Reference to a specific payment method document for the user
+    const paymentMethodDocRef = doc(db, "users", userId, "paymentMethods", paymentMethodId);
+
+    // Delete the payment method document
+    await deleteDoc(paymentMethodDocRef);
+
+    console.log("Payment method document deleted with ID: ", paymentMethodId);
+    return { status: "success", docId: paymentMethodId };
+  } catch (error) {
+    console.error("Error deleting payment method document: ", error);
+    throw error;
+  }
+};
+
 
 
 

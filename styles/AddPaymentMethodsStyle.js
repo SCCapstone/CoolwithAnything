@@ -46,14 +46,30 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       width: '80%',
     },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+    },
     saveButtonContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    deleteButtonContainer: {
+      flex: 1,
       alignItems: 'center',
     },
     saveButton: {
       backgroundColor: '#007bff',
       padding: 10,
       borderRadius: 10,
-      width: '60%',
+      height: 60,
+      justifyContent: 'center',
+    },
+    deleteButton: {
+      backgroundColor: 'red',
+      padding: 10,
+      borderRadius: 10,
       height: 60,
       justifyContent: 'center',
     },
@@ -62,7 +78,13 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 16,
       fontWeight: 'bold',
-    }
+    },
+    deleteButtonText: {
+      color: '#ffffff',
+      textAlign: 'center',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
   });
 
   export default styles;

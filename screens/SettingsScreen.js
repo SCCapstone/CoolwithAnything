@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Modal, Alert, Pressable, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, Modal, Alert, Pressable} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/core';
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 import styles from '../styles/settingsStyles';
 
 function SelectProfile() {
   const navigation = useNavigation();
+  const auth = getAuth();
+  const db = getFirestore();
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
+
   const [isModalVisible, setModalVisible] = useState(false);
   const [address, setAddress] = useState('123 Main Street\nColumbia, South Carolina\n29201');
   const [mobile, setMobile] = useState('(123) 456-7890');

@@ -1,15 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core'; 
+import { fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
+import { getAuth } from 'firebase/auth';
+import styles from "../styles/PaymentMethodsStyle";
 
 const PaymentMethodsScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const paymentMethods = route.params?.paymentMethods || []; // Array of payment methods
+  const [paymentMethods, setPaymentMethods] = useState([]); // Initialize paymentMethods state
+  const auth = getAuth();
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      const fetchPaymentMethods = async () => {
+        const methods = await fetchAllPaymentMethodsForUser(userId);
+        setPaymentMethods(methods);
+      };
+
+      fetchPaymentMethods();
+    }
+  }, [isFocused, userId]);
 
   const renderPaymentMethod = ({ item }) => (
-    <Text style={styles.paymentMethod}>Nickname: {item.nickname}</Text>
+    <Pressable onPress={() => navigation.navigate('EditPaymentMethods', {
+      id: item.id,
+      nickname: item.nickname,
+      creditCard: item.creditCard,
+      CVC: item.CVC,
+      expDate: item.expDate,
+      name: item.name,
+      ZIP: item.ZIP
+    })}>
+      <View style={styles.paymentsContainer}>
+        <Text style={styles.paymentMethod}>{item.nickname}</Text>
+      </View>
+    </Pressable>
   );
+  
 
   return (
     <View style={styles.container}>
@@ -22,63 +52,33 @@ const PaymentMethodsScreen = () => {
       <View style={styles.content}>
         {paymentMethods.length > 0 ? (
           <FlatList
-            data={paymentMethods}
-            renderItem={renderPaymentMethod}
-            keyExtractor={item => item.id} // Each payment method has a unique id
-          />
+          data={paymentMethods}
+          renderItem={renderPaymentMethod}
+          keyExtractor={item => item.id.toString()}
+          contentContainerStyle={{ alignItems: 'center' }}
+          ListFooterComponent={
+            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
+              <Text style={styles.addPayment}>
+                Add a payment method<Text style={styles.plusStyle}> +</Text>
+              </Text>
+            </Pressable>
+          }
+        />
         ) : (
-          <Text style={styles.text}>You have no saved payment methods</Text>
-        )}
-        
-        <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+          <View>
+            <Text style={styles.text}>You have no saved payment methods</Text>
+            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
           <Text style={styles.addPayment}>
             Add a payment method
             <Text style={styles.plusStyle}> +</Text>
           </Text>
-          
         </Pressable>
+          </View>
+        )}
       </View>
+
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5', 
-    position: 'relative', 
-  },
-  header: {
-    position: 'absolute', 
-    top: 45, 
-    left: 20, 
-    zIndex: 1, 
-  },
-  backText: {
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  content: {
-    flex: 1,
-    marginTop: 85,
-
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: '600',
-  },
-  addPayment: {
-    marginTop: 15,
-  },
-  plusStyle: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  paymentMethod: {
-    fontSize: 16,
-    marginVertical: 8,
-  },
-});
 
 export default PaymentMethodsScreen;

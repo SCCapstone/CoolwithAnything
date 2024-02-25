@@ -1,46 +1,60 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
-import { savePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
+import { useNavigation, useRoute } from '@react-navigation/core'; // useRoute to receive parameters
+import { deletePaymentMethodForUser, updatePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI"; 
 import { getAuth } from 'firebase/auth';
-import styles from "../styles/AddPaymentMethodsStyle";
+import styles from "../styles/AddPaymentMethodsStyle"; 
 
-const AddPaymentMethodsScreen = () => {
+const EditPaymentMethodsScreen = () => {
   const navigation = useNavigation();
-  const [nickname, setNickname] = useState('');
-  const [creditCard, setCreditCard] = useState('');
-  const [CVC, setCVC] = useState('');
-  const [expDate, setExpDate] = useState('');
-  const [name, setName] = useState('');
-  const [ZIP, setZIP] = useState('');
+  const { params } = useRoute();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
 
-  const handleSavePaymentMethod = async () => {
+  const [nickname, setNickname] = useState(params?.nickname || '');
+  const [creditCard, setCreditCard] = useState(params?.creditCard || '');
+  const [CVC, setCVC] = useState(params?.CVC || '');
+  const [expDate, setExpDate] = useState(params?.expDate || '');
+  const [name, setName] = useState(params?.name || '');
+  const [ZIP, setZIP] = useState(params?.ZIP || '');
+
+  const handleUpdatePaymentMethod = async () => {
     try {
-      await savePaymentMethodForUser(userId, { nickname, creditCard, CVC, expDate, name, ZIP });
-      console.log("Payment method saved successfully");
-      
-      // Fetch all payment methods for the user after adding a new one
+      // Ensure params?.id is correctly passed when navigating to this screen
+      await updatePaymentMethodForUser(userId, params?.id, {
+        nickname, creditCard, CVC, expDate, name, ZIP
+      });
+      console.log("Payment method updated successfully");
+      //Fetch existing payment methods and go back to payments list
       const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
-      
-      // Navigate back to the PaymentMethodsScreen with the updated list
       navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
     } catch (error) {
-      console.error("Failed to save payment method", error);
+      console.error("Failed to update payment method", error);
+    }
+  };
+
+  const handleDeletePaymentMethod = async () => {
+    try {
+      await deletePaymentMethodForUser(userId, params?.id);
+      console.log("Payment method deleted successfully");
+      // Optionally, fetch the updated list of payment methods
+      const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
+      navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
+    } catch (error) {
+      console.error("Failed to delete payment method", error);
     }
   };
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={styles.header}>
+      <View style={styles.header}>
           <Pressable onPress={() => navigation.goBack()}>
             <Text style={styles.backText}>Back</Text>
           </Pressable>
         </View>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Add Payment Method</Text>
+          <Text style={styles.title}>Edit Payment Method</Text>
         </View>
         <View style={styles.contentContainer}>
 
@@ -96,7 +110,7 @@ const AddPaymentMethodsScreen = () => {
 
           <View>
             <Text style={styles.label}>ZIP:</Text>
-            <TextInput style={[styles.input, {width: '16%'}]} 
+            <TextInput style={[styles.input, {width: '17%'}]} 
             onChangeText={setZIP} 
             value={ZIP} 
             placeholder="12345"
@@ -105,17 +119,27 @@ const AddPaymentMethodsScreen = () => {
           </View> 
 
         </View>
-        
-        <View style={styles.saveButtonContainer}>
-          <Pressable 
-            onPress={handleSavePaymentMethod} //This also navigates back to PaymentMethods
-            style={styles.saveButton}>
-            <Text style={styles.saveButtonText}>Save Payment Method</Text>
-          </Pressable>
+        <View style={styles.buttonContainer}>
+          <View style={styles.saveButtonContainer}>
+            <Pressable 
+              onPress={handleUpdatePaymentMethod} // Update this to handleUpdatePaymentMethod
+              style={styles.saveButton}>
+              <Text style={styles.saveButtonText}>Update Payment Method</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.deleteButtonContainer}>
+            <Pressable 
+              onPress={handleDeletePaymentMethod}
+              style={styles.deleteButton}>
+              <Text style={styles.deleteButtonText}>Delete Payment Method</Text>
+            </Pressable>
+          </View>
         </View>
+
       </View>
     </ScrollView>
   );
 };
 
-export default AddPaymentMethodsScreen;
+export default EditPaymentMethodsScreen;
