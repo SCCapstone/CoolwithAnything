@@ -152,6 +152,18 @@ export const saveTaskForUser = async (userId, taskData) => {
   }
 };
 
+export const updateUserProfile = async (userId, updatedData) => {
+  try {
+    const userDocRef = doc(db, "users", userId);
+    await updateDoc(userDocRef, updatedData);
+    console.log("User profile updated successfully");
+    return { status: "success" };
+  } catch (error) {
+    console.error("Error updating user profile: ", error);
+    throw error;
+  }
+};
+
 export const savePaymentMethodForUser = async (userId, paymentMethodData) => {
   try {
     // Create a reference to the user's paymentMethods subcollection
