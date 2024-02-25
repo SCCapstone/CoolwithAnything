@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import BrowseWorkouts from '../components/BrowseWorkouts';
 import SavedWorkouts from '../components/SavedWorkouts';
 
-const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
+// Notice how we're not passing savedWorkouts and setSavedWorkouts as props anymore
+const WorkoutScreen = () => {
   const [activeTab, setActiveTab] = useState('BrowseWorkouts');
 
   const renderTabContent = () => {
@@ -11,7 +12,7 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
       case 'BrowseWorkouts':
         return <BrowseWorkouts />;
       case 'SavedWorkouts':
-        return <SavedWorkouts workouts={savedWorkouts} setSavedWorkouts={setSavedWorkouts} />;
+        return <SavedWorkouts />; // No props passed here
       default:
         return <BrowseWorkouts />; // Default view
     }
@@ -38,6 +39,7 @@ const WorkoutScreen = ({ savedWorkouts, setSavedWorkouts }) => {
   );
 };
 
+// Styles remain unchanged
 const styles = StyleSheet.create({
   container: {
     flex: 1,

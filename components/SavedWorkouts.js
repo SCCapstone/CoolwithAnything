@@ -8,7 +8,7 @@ const SavedWorkouts = () => {
   const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   useEffect(() => {
     //debugger; // Code to run when savedWorkouts change, if necessary
-  }, [workouts]);
+  }, [savedWorkouts]);
 
   const deleteWorkout = (index) => {
     const newWorkouts = [...savedWorkouts];

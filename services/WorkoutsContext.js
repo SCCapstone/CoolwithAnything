@@ -2,8 +2,6 @@ import React, { createContext, useContext, useState } from 'react';
 
 const WorkoutsContext = createContext();
 
-export const useWorkouts = () => useContext(WorkoutsContext);
-
 export const WorkoutsProvider = ({ children }) => {
   const [savedWorkouts, setSavedWorkouts] = useState([]);
 
@@ -13,3 +11,5 @@ export const WorkoutsProvider = ({ children }) => {
     </WorkoutsContext.Provider>
   );
 };
+
+export const useWorkouts = () => useContext(WorkoutsContext);
