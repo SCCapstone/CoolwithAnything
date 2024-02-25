@@ -30,21 +30,29 @@ const SearchBar = ({ setSearchTerm }) => {
     let url = "https://api.api-ninjas.com/v1/exercises?muscle=" + input;
 
     fetch(url, options)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data && data.exercise) {
-          setApiData(data.exercise);
-          setModalVisible(true);
-        }
-      })
-      .catch((err) => {
-        console.log(`error ${err}`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+    .then((res) => res.json())
+    .then((data) => {
+      if (data && data.exercise && data.exercise.length > 0) {
+        setApiData(data.exercise);
+        setModalVisible(true);
+        setErrorMessage('');
+      } else {
+        setApiData([]);
+        setModalVisible(false);
+        setErrorMessage('No results found for the given search.');
+      }
+    })
+    .catch((err) => {
+      console.log(`error ${err}`);
+      setApiData([]);
+      setModalVisible(false);
+      setErrorMessage('Error fetching data. Please try again later.');
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+};
+
 
   useEffect(() => {
     console.log("API data updated:", apiData);

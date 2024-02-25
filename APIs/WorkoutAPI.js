@@ -35,7 +35,6 @@ const WorkoutApi = ({ query }) => {
       apiData={apiData}
       handleCardPress={handleCardPress}
       selectedExercise={selectedExercise}
-    //  setModalVisible={setModalVisible}
       closeModal={() => setSelectedExercise("")}
     />
   );
