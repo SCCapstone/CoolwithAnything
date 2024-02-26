@@ -21,7 +21,6 @@ import eventEmitter from './EventEmitter';
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 const Calendar = ({ userID, navigation, birthday }) => {
-const Calendar = ({ userID, navigation, birthday }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
@@ -129,11 +128,7 @@ const getPriorityColor = (priority) => {
       { cancelable: false }
     );
   };
-  const isBirthday = (day) => {
-    if (!birthday) return false;
-    const [birthMonth, birthDay] = birthday.split("/").slice(0, 2);
-    return format(day, "MM") === birthMonth && format(day, "dd") === birthDay;
-  };
+
 
 const renderDays = () => {
   // Start from the first day of the week that includes the first day of the current month
