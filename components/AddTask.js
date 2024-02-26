@@ -9,6 +9,8 @@ import TypeSelector from "./TypeSelector";
 import CommentBox from "./CommentBox";
 import CreateButton from "./CreateButton";
 import { saveTaskForUser } from "../services/AuthAPI";
+import eventEmitter from './EventEmitter';
+import { Picker } from '@react-native-picker/picker';
 
 const CreateTaskScreen = ({ route }) => {
   const { userID } = route.params;
@@ -17,6 +19,7 @@ const CreateTaskScreen = ({ route }) => {
   const [taskType, setTaskType] = useState("");
   const [comment, setComment] = useState("");
   const [date, setDate] = useState(new Date());
+  const [priority, setPriority] = useState('medium');
 
   const handleCreateTask = async () => {
     const user = userID;
@@ -27,7 +30,7 @@ const CreateTaskScreen = ({ route }) => {
       location: location,
       type: taskType,
       comment: comment,
-      priority: 'low' // default priority
+      priority: priority, // default priority
     };
 
     try {
@@ -41,6 +44,7 @@ const CreateTaskScreen = ({ route }) => {
       );
       console.error(error);
     }
+    eventEmitter.emit('taskCreated');
   };
   return (
     <ScrollView style={styles.container}>
@@ -51,6 +55,14 @@ const CreateTaskScreen = ({ route }) => {
       <TypeSelector onSelect={setTaskType} />
       <CommentBox onChangeText={setComment} />
       <CreateButton onPress={handleCreateTask} label={"Create Task"} />
+      <Picker
+       selectedValue={priority}
+      onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+      style={{ height: 50, width: 150 }}>
+      <Picker.Item label="Low" value="low" />
+      <Picker.Item label="Medium" value="medium" />
+     <Picker.Item label="High" value="high" />
+      </Picker>
     </ScrollView>
   );
 };

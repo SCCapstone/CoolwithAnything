@@ -16,6 +16,7 @@ import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
 import styles from "../styles/CalendarStyle";
 import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
+import eventEmitter from './EventEmitter';
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -49,8 +50,30 @@ const Calendar = ({ userID, navigation }) => {
       }
     };
     fetchTasks();
+
+    // Subscribe to the taskCreated event
+    const unsubscribe = eventEmitter.subscribe('taskCreated', fetchTasks);
+
+    // Unsubscribe from the event when the component unmounts
+    return () => {
+      unsubscribe();
+    };
   }, [currentMonth, userID]);
 
+  // Define a function to get color based on priority
+const getPriorityColor = (priority) => {
+  switch (priority) {
+    case 'high':
+      return 'red';
+    case 'medium':
+      return 'orange';
+    case 'low':
+      return 'green';
+    default:
+      return 'black'; // default color
+  }
+};
+  
   const taskTypeColors = {
     School: '#FFA07A', // Light Salmon random color they dont match up to examples we can swtich this later
     Work: '#20B2AA', // Light Sea Green random color ^
@@ -198,7 +221,7 @@ const renderDays = () => {
         );
       }}
     >
-      <Text style={styles.taskDetailText}>{item.name}</Text>
+      <Text style={[styles.taskDetailText, { color: getPriorityColor(item.priority) }]}>{item.name}</Text>
     </TouchableOpacity>
   )}
   keyExtractor={item => item.id}
