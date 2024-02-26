@@ -179,8 +179,10 @@ function SelectOthers() {
       <Text style={styles.title}>Other Settings</Text>
       <Text style={styles.profileID}>User ID: {userId}</Text>
       <View style={styles.rowContainer}>
-      <ThemeToggle/>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Languages Button')}>
+      <Pressable style={styles.pageButton} onPress={() => Alert.alert('Changing color theme is not supported right now.')}>
+          <Text style={styles.accountText}>Color Theme</Text>
+        </Pressable>
+        <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
           <Text style={styles.accountText}>Languages</Text>
         </Pressable>
       </View>
