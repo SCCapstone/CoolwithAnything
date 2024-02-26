@@ -21,6 +21,7 @@ import eventEmitter from './EventEmitter';
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 const Calendar = ({ userID, navigation, birthday }) => {
+const Calendar = ({ userID, navigation, birthday }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
@@ -93,6 +94,11 @@ const getPriorityColor = (priority) => {
     setSelectedDate(day);
     setModalVisible(true);
   };
+  const isBirthday = (day) => {
+    if (!birthday) return false;
+    const [birthMonth, birthDay] = birthday.split("/").slice(0, 2);
+    return format(day, "MM") === birthMonth && format(day, "dd") === birthDay;
+  };
 
   const handleDeleteTask = async (taskId) => {
     Alert.alert(
@@ -150,7 +156,7 @@ const renderDays = () => {
     const uniqueTaskTypes = [...new Set(dayTasks.map(task => task.type))];
 
     return (
-      <TouchableOpacity key={index}         style={[
+      <TouchableOpacity key={index} style={[
         styles.dayItem,
         format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy")
           ? styles.selectedDay
