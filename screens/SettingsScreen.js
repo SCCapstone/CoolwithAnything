@@ -4,14 +4,18 @@ import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
+import { useTheme } from '../services/ThemeContext';
 import styles from '../styles/settingsStyles';
 import ThemeToggle from '../components/ThemeToggle';
+import settingsStyles from '../styles/settingsStyles';
 
 function SelectProfile() {
   const navigation = useNavigation();
   const auth = getAuth();
   const db = getFirestore();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = settingsStyles(theme);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [fitnessGoal, setFitnessGoal] = useState(''); // Changed from address
@@ -135,6 +139,9 @@ function SelectAccount() {
   const navigation = useNavigation();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = settingsStyles(theme);
+  
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigation.goBack()}>
@@ -170,6 +177,8 @@ function SelectOthers() {
   const navigation = useNavigation();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = settingsStyles(theme);
   return (
     <View style={styles.container}>
 
@@ -194,7 +203,7 @@ function SelectOthers() {
           <Text style={styles.accountText}>Version</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.editButton} onPress={() => Alert.alert('Dark Mode Button')}>
+      <Pressable style={styles.editButton} onPress={toggleTheme}>
         <Text style={styles.buttonText}>Dark Mode</Text>
       </Pressable>
     </View>

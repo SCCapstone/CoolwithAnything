@@ -2,6 +2,7 @@ import React from "react";
 // import { useState } from "react";
 // import { ThemeProvider } from "styled-components/native";
 // import { GlobalStyles } from "./components/GlobalStyles";
+import { ThemeProvider } from "@react-navigation/native";
 // import Toggle from "./components/ThemeToggle.js";
 import { UserProvider } from "./services/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
@@ -21,13 +22,9 @@ export default function App() {
       <UserProvider>
         <MealsProvider>
           {/* <WorkoutsProvider> */}
-            {/* <ThemeProvider theme={themeMode}>
-              <>
-                <GlobalStyles />
-                <Toggle theme={theme} toggleTheme={themeToggler} /> */}
+            <ThemeProvider>
                 <MainNavigator />
-              {/* </> */}
-            {/* </ThemeProvider> */}
+            </ThemeProvider>
           {/* </WorkoutsProvider> */}
         </MealsProvider>
       </UserProvider>

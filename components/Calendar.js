@@ -16,6 +16,7 @@ import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
 import styles from "../styles/CalendarStyle";
 import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
+import useIsFocused from '@react-navigation/native';
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -48,7 +49,9 @@ const Calendar = ({ userID, navigation }) => {
         console.error("Error fetching tasks: ", error);
       }
     };
+
     fetchTasks();
+    
   }, [currentMonth, userID]);
 
   const taskTypeColors = {
