@@ -1,4 +1,3 @@
-// CreateMealScreen.js
 import React, { useState, useEffect } from "react";
 import {
   ScrollView,
@@ -13,11 +12,11 @@ import DirectionsBox from "./DirectionsBox";
 import CreateButton from "./CreateButton"; // Reused from previous examples
 import InputField from "./InputField"; // Reused from previous examples
 import CommentBox from "./CommentBox";
+import { useMeals } from "../services/MealsContext";
 
-const CreateMealScreen = ({ route }) => {
+const AddMeal = ({ route }) => {
+  const { savedMeals, setSavedMeals } = useMeals();
   const { userID } = route.params;
-  const { savedMeals } = route.params;
-  const { setSavedMeals } = route.params;
   const [mealName, setMealName] = useState("");
   const [mealIngredients, setMealIngredients] = useState("");
   const [mealServing, setMealServings] = useState("");
@@ -86,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateMealScreen;
+export default AddMeal;

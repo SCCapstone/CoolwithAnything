@@ -6,20 +6,10 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  updateDoc,
-  addDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, deleteDoc, collection  } from "firebase/firestore";
+
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteDoc } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -52,7 +42,6 @@ const storeData = async (key, value) => {
     throw e;
   }
 };
-
 
 const getData = async (key) => {
   try {
@@ -189,12 +178,13 @@ export const updateTaskForUser = async (userId, taskId, updatedData) => {
   }
 };
 
+
 export const saveTaskForUser = async (userId, taskData) => {
   try {
-    // Create a reference to user's tasks subcollection
+    // Create a reference to the user's tasks subcollection
     const userTasksRef = collection(db, "users", userId, "tasks");
 
-    // Add the task data to user's tasks subcollection
+    // Add the task data to the user's tasks subcollection
     const docRef = await addDoc(userTasksRef, taskData);
     console.log("Task document written with ID: ", docRef.id);
     return { status: "success", docId: docRef.id };
@@ -219,5 +209,81 @@ export const fetchTasksForUser = async (userId) => {
     throw error;
   }
 };
+
+export const updateUserProfile = async (userId, updatedData) => {
+  try {
+    const userDocRef = doc(db, "users", userId);
+    await updateDoc(userDocRef, updatedData);
+    console.log("User profile updated successfully");
+    return { status: "success" };
+  } catch (error) {
+    console.error("Error updating user profile: ", error);
+    throw error;
+  }
+};
+
+export const savePaymentMethodForUser = async (userId, paymentMethodData) => {
+  try {
+    // Create a reference to the user's paymentMethods subcollection
+    const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
+
+    // Add the payment method data to the user's paymentMethods subcollection
+    const docRef = await addDoc(userPaymentMethodsRef, paymentMethodData);
+    console.log("Payment method document written with ID: ", docRef.id);
+    return { status: "success", docId: docRef.id };
+  } catch (error) {
+    console.error("Error adding payment method document: ", error);
+    throw error;
+  }
+};
+
+export const fetchAllPaymentMethodsForUser = async (userId) => {
+  try {
+    const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
+    const querySnapshot = await getDocs(userPaymentMethodsRef);
+    const paymentMethods = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log("Fetched payment methods: ", paymentMethods);
+    return paymentMethods; // Returns an array of payment method objects
+  } catch (error) {
+    console.error("Error fetching payment methods: ", error);
+    throw error;
+  }
+};
+
+export const updatePaymentMethodForUser = async (userId, paymentMethodId, paymentMethodData) => {
+  try {
+    // Reference to a specific payment method document for the user
+    const paymentMethodDocRef = doc(db, "users", userId, "paymentMethods", paymentMethodId);
+
+    // Update the payment method document with new data
+    await updateDoc(paymentMethodDocRef, paymentMethodData);
+
+    console.log("Payment method document updated with ID: ", paymentMethodId);
+    return { status: "success", docId: paymentMethodId };
+  } catch (error) {
+    console.error("Error updating payment method document: ", error);
+    throw error;
+  }
+};
+
+export const deletePaymentMethodForUser = async (userId, paymentMethodId) => {
+  try {
+    // Reference to a specific payment method document for the user
+    const paymentMethodDocRef = doc(db, "users", userId, "paymentMethods", paymentMethodId);
+
+    // Delete the payment method document
+    await deleteDoc(paymentMethodDocRef);
+
+    console.log("Payment method document deleted with ID: ", paymentMethodId);
+    return { status: "success", docId: paymentMethodId };
+  } catch (error) {
+    console.error("Error deleting payment method document: ", error);
+    throw error;
+  }
+};
+
+
+
+
 // Export the AsyncStorage getData function if needed elsewhere
 export { getData };

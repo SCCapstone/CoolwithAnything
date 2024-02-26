@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Share,
+} from "react-native";
 
 const workoutStyles = StyleSheet.create({
   card: {
@@ -30,7 +37,7 @@ const workoutStyles = StyleSheet.create({
   },
 });
 
-const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
+const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
   const [cardWorkout, setCardWorkout] = useState(workout);
   const [editMode, setEditMode] = useState(false);
   const [editableWorkout, setEditableWorkout] = useState({ ...workout });
@@ -46,7 +53,25 @@ const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
   const [workoutInstructions, setWorkoutInstructions] = useState(
     workout.workoutInstructions
   );
-
+  const myShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `Workout\nName: ${workout.workoutName}\nType: ${workout.workoutType}\nMuscle: ${workout.workoutMuscle}
+        \nEquipment: ${workout.workoutEquipment}\nDifficulty: ${workout.workoutDifficulty}\nInstructions: ${workout.workoutInstructions}`,
+      });
+      if (result.action == Share.sharedAction) {
+        if (result.activityType) {
+          console.log("shared with activity type of: ", result.activityType);
+        } else {
+          console.log("shared");
+        }
+      } else if (result.action === Share.dismissedAction) {
+        confirm.log("dismissed");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const onCancel = () => {
     setEditableWorkout({ ...workout });
     setEditMode(false);
@@ -63,7 +88,7 @@ const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
     };
     //debugger;
     setCardWorkout(newWorkout);
-    EditWorkout(newWorkout, index);
+    editWorkout(newWorkout, index);
     setEditMode(false);
   };
 
@@ -137,6 +162,9 @@ const WorkoutCard = ({ workout, index, deleteWorkout, EditWorkout }) => {
             onPress={() => deleteWorkout(index)}
           >
             <Text style={workoutStyles.buttonText}>Delete</Text>
+          </Pressable>
+          <Pressable style={workoutStyles.button} onPress={myShare}>
+            <Text style={workoutStyles.buttonText}>Share</Text>
           </Pressable>
         </View>
       )}

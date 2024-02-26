@@ -7,12 +7,12 @@ import ExerciseItem from "./ExerciseItem";
 import DaySelector from "./DateTimePicker";
 import CommentBox from "./CommentBox"; // Reused from Create Task
 import CreateButton from "./CreateButton"; // Reused from Create Task
+import { useWorkouts } from "../services/WorkoutsContext";
 
 const AddWorkout = ({ route }) => {
   //const [selectedDays, setSelectedDays] = useState([]);
+  const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const { userID } = route.params;
-  const { savedWorkouts } = route.params;
-  const { setSavedWorkouts } = route.params;
   const [workoutName, setWorkoutName] = useState("");
   const [workoutType, setWorkoutType] = useState("");
   const [workoutMuscle, setWorkoutMuscle] = useState("");
