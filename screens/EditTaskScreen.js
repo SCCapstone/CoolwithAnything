@@ -7,6 +7,7 @@ import TypeSelector from "../components/TypeSelector";
 import CommentBox from "../components/CommentBox"; 
 import CreateButton from "../components/CreateButton"; 
 import { updateTaskForUser } from "../services/AuthAPI";
+import eventEmitter from '../components/EventEmitter';
 
 const EditTaskScreen = ({ route, navigation }) => {
   const { task, userId } = route.params;
@@ -31,6 +32,7 @@ const EditTaskScreen = ({ route, navigation }) => {
     try {
         await updateTaskForUser(userId, task.id, taskData);
         Alert.alert("Success", "Task updated successfully");
+        eventEmitter.emit('taskUpdated');
         navigation.goBack();
       } catch (error) {
          // Display the error message directly
@@ -38,6 +40,7 @@ const EditTaskScreen = ({ route, navigation }) => {
         console.error("Error updating task:", error);
       }
     };
+
 
   return (
     <ScrollView style={styles.container}>

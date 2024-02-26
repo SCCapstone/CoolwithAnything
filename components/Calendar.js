@@ -52,11 +52,12 @@ const Calendar = ({ userID, navigation }) => {
     fetchTasks();
 
     // Subscribe to the taskCreated event
-    const unsubscribe = eventEmitter.subscribe('taskCreated', fetchTasks);
-
-    // Unsubscribe from the event when the component unmounts
+    const unsubscribeCreated = eventEmitter.subscribe('taskCreated', fetchTasks);
+    const unsubscribeUpdated = eventEmitter.subscribe('taskUpdated', fetchTasks); // Listen for task updates
+  
     return () => {
-      unsubscribe();
+      unsubscribeCreated();
+      unsubscribeUpdated(); // Clean up
     };
   }, [currentMonth, userID]);
 
