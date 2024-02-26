@@ -35,10 +35,12 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("meat")}
             style={styles.wrapper}
           >
-            {/* <ImageBackground
-              source={require("../images/meat.png")}
-              style={styles.imageSteak}
-            /> */}
+            {
+              <ImageBackground
+                source={require("../images/meat.png")}
+                style={styles.imageSteak}
+              />
+            }
             <Text style={styles.buttonText}>Meat</Text>
           </TouchableOpacity>
 
@@ -46,10 +48,12 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("fish")}
             style={styles.wrapper}
           >
-            {/* <ImageBackground
-              source={require("../images/seafood.png")}
-              style={styles.imageSeafood}
-            /> */}
+            {
+              <ImageBackground
+                source={require("../images/seafood.png")}
+                style={styles.imageSeafood}
+              />
+            }
             <Text style={styles.buttonText}>Seafood</Text>
           </TouchableOpacity>
 
@@ -57,10 +61,12 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("veggies")}
             style={styles.wrapper}
           >
-            {/* <ImageBackground
-              source={require("../images/veg.png")}
-              style={styles.imageVeg}
-            /> */}
+            {
+              <ImageBackground
+                source={require("../images/veg.png")}
+                style={styles.imageVeg}
+              />
+            }
             <Text style={styles.buttonText}>Veggitarian</Text>
           </TouchableOpacity>
 
