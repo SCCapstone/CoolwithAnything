@@ -19,21 +19,40 @@ const CookbookScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.tabBar}>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === 'BrowseMeals' && styles.activeTab]}
-          onPress={() => setActiveTab('BrowseMeals')}
-        >
-          <Text style={styles.tabText}>Browse</Text>
+<View>
+      {/* Tab Buttons */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddingVertical: 10,
+          backgroundColor: "white",
+        }}
+      >
+        <TouchableOpacity onPress={() => setActiveTab("BrowseMeals")}>
+          <Text
+            style={{
+              color: activeTab === "BrowseMeals" ? "#FF7754" : "black",
+              fontSize: 16,
+            }}
+          >
+            Browse Meals
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === 'SavedMeals' && styles.activeTab]}
-          onPress={() => setActiveTab('SavedMeals')}
-        >
-          <Text style={styles.tabText}>Saved</Text>
+        <TouchableOpacity onPress={() => setActiveTab("SavedMeals")}>
+          <Text
+            style={{
+              color: activeTab === "SavedMeals" ? "#FF7754" : "black",
+              fontSize: 16,
+            }}
+          >
+            Saved Meals
+          </Text>
         </TouchableOpacity>
+        {/* Add more TouchableOpacity elements for additional tabs if needed */}
       </View>
+
+      {/* Render the content based on the active tab */}
       {renderTabContent()}
     </View>
   );

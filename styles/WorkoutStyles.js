@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonText: {
-    color: "black",
+    color: "white",
     fontSize: 20,
     padding: 16,
     fontWeight: "bold",
