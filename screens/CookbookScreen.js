@@ -1,63 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import BrowseMeals from "../components/BrowseMeals";
 import SavedMeals from "../components/SavedMeals";
 
+const Tab = createMaterialTopTabNavigator();
 
-const CookbookScreen = ({ savedMeals, setSavedMeals }) => {
-  const [activeTab, setActiveTab] = useState("BrowseMeals");
+const CookbookScreen = () => {
+  const { savedMeals, setSavedMeals } = useMeals();
+  const [activeTab, setActiveTab] = useState('BrowseMeals');
 
   useEffect(() => {
     // TODO: Save meals
-    <SavedMeals/>
+    // Code to run when savedMeals change, if necessary
   }, [savedMeals]);
 
   const renderTabContent = () => {
-    if (activeTab === "BrowseMeals") {
-      return <BrowseMeals />;
-    } else if (activeTab === "SavedMeals") {
-      return <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />;
+    switch (activeTab) {
+      case 'BrowseMeals':
+        return <BrowseMeals />;
+      case 'SavedMeals':
+        return <SavedMeals />; // No need to pass meals and setSavedMeals as props
+      default:
+        return <BrowseMeals />;
     }
-    // Add more conditions for additional tabs if needed
   };
 
   return (
-    <View>
-      {/* Tab Buttons */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          paddingVertical: 10,
-          backgroundColor: "white",
-        }}
-      >
-        <TouchableOpacity onPress={() => setActiveTab("BrowseMeals")}>
-          <Text
-            style={{
-              color: activeTab === "BrowseMeals" ? "#FF7754" : "black",
-              fontSize: 16,
-            }}
-          >
-            Browse Meals
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab("SavedMeals")}>
-          <Text
-            style={{
-              color: activeTab === "SavedMeals" ? "#FF7754" : "black",
-              fontSize: 16,
-            }}
-          >
-            Saved Meals
-          </Text>
-        </TouchableOpacity>
-        {/* Add more TouchableOpacity elements for additional tabs if needed */}
-      </View>
-
-      {/* Render the content based on the active tab */}
-      {renderTabContent()}
-    </View>
+    <Tab.Navigator>
+      {/* Tab Screen for browsing meals */}
+      <Tab.Screen
+        name="Browse Meals"
+        component={BrowseMeals}
+        options={{ tabBarLabel: "Browse" }}
+      />
+      {/* Tab Screen for displaying saved meals */}
+      <Tab.Screen
+        name="Saved Meals"
+        children={() => (
+          <SavedMeals meals={savedMeals} setSavedMeals={setSavedMeals} />
+        )}
+        options={{ tabBarLabel: "Saved" }}
+      />
+    </Tab.Navigator>
   );
 };
 
