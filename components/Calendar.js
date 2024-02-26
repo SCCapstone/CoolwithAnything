@@ -12,7 +12,7 @@ import {
 } from "date-fns";
 import styles from "../styles/CalendarStyle";
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const Calendar = () => {
+const Calendar = ({ birthday }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,19 +29,27 @@ const Calendar = () => {
     setSelectedDate(day);
     setModalVisible(true);
   };
+  const isBirthday = (day) => {
+    if (!birthday) return false;
+    const [birthMonth, birthDay] = birthday.split("/").slice(0, 2);
+    return format(day, "MM") === birthMonth && format(day, "dd") === birthDay;
+  };
+
   // Render days of the month
   const renderDays = () => {
     const startDate = startOfWeek(startOfMonth(currentMonth));
     const endDate = endOfWeek(endOfMonth(currentMonth));
     const daysArray = eachDayOfInterval({ start: startDate, end: endDate });
-
+    // Check if a day is the user's birthday
     return daysArray.map((day, index) => (
       <TouchableOpacity
         key={index}
         style={[
           styles.dayItem,
-          format(day, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd")
+          format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy")
             ? styles.selectedDay
+            : isBirthday(day)
+            ? styles.birthdayDay
             : null,
         ]}
         onPress={() => onDateSelect(day)}
@@ -65,7 +73,7 @@ const Calendar = () => {
           <Text style={styles.arrowText}>{">"}</Text>
         </TouchableOpacity>
       </View>
-      
+
       {/* Days of the week */}
       <View style={styles.daysOfWeek}>
         {days.map((day) => (

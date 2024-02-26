@@ -64,5 +64,16 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
+  birthdayDay: {
+    borderColor: 'red',
+    borderWidth: 2,
+    borderRadius: 20,
+  },
+  selectedBD: {
+    borderColor: 'red',
+    borderWidth: 2,
+    backgroundColor: "pink",
+    borderRadius: 20,
+  },
 });
 export default styles;
