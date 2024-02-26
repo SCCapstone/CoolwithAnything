@@ -19,40 +19,21 @@ const WorkoutScreen = () => {
   };
 
   return (
-<View>
-      {/* Tab Buttons */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          paddingVertical: 10,
-          backgroundColor: "white",
-        }}
-      >
-        <TouchableOpacity onPress={() => setActiveTab("BrowseWorkouts")}>
-          <Text
-            style={{
-              color: activeTab === "BrowseWorkouts" ? "#FF7754" : "black",
-              fontSize: 16,
-            }}
-          >
-            Browse Workouts
-          </Text>
+    <View style={styles.container}>
+      <View style={styles.tabBar}>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 'BrowseWorkouts' && styles.activeTab]}
+          onPress={() => setActiveTab('BrowseWorkouts')}
+        >
+          <Text style={styles.tabText}>Browse</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab("SavedWorkouts")}>
-          <Text
-            style={{
-              color: activeTab === "SavedWorkouts" ? "#FF7754" : "black",
-              fontSize: 16,
-            }}
-          >
-            Saved Workouts
-          </Text>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 'SavedWorkouts' && styles.activeTab]}
+          onPress={() => setActiveTab('SavedWorkouts')}
+        >
+          <Text style={styles.tabText}>Saved</Text>
         </TouchableOpacity>
-        {/* Add more TouchableOpacity elements for additional tabs if needed */}
       </View>
-
-      {/* Render the content based on the active tab */}
       {renderTabContent()}
     </View>
   );

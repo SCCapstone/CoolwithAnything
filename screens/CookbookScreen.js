@@ -19,42 +19,23 @@ const CookbookScreen = () => {
   };
 
   return (
-    <View>
-    {/* Tab Buttons */}
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-around",
-        paddingVertical: 10,
-        backgroundColor: "white",
-      }}
-    >
-      <TouchableOpacity onPress={() => setActiveTab("BrowseMeals")}>
-        <Text
-          style={{
-            color: activeTab === "BrowseMeals" ? "#FF7754" : "black",
-            fontSize: 16,
-          }}
+    <View style={styles.container}>
+      <View style={styles.tabBar}>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 'BrowseMeals' && styles.activeTab]}
+          onPress={() => setActiveTab('BrowseMeals')}
         >
-          Browse Meals
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setActiveTab("SavedMeals")}>
-        <Text
-          style={{
-            color: activeTab === "SavedMeals" ? "#FF7754" : "black",
-            fontSize: 16,
-          }}
+          <Text style={styles.tabText}>Browse</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 'SavedMeals' && styles.activeTab]}
+          onPress={() => setActiveTab('SavedMeals')}
         >
-          Saved Meals
-        </Text>
-      </TouchableOpacity>
-      {/* Add more TouchableOpacity elements for additional tabs if needed */}
+          <Text style={styles.tabText}>Saved</Text>
+        </TouchableOpacity>
+      </View>
+      {renderTabContent()}
     </View>
-
-    {/* Render the content based on the active tab */}
-    {renderTabContent()}
-  </View>
   );
 };
 
