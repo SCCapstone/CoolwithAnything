@@ -9,7 +9,7 @@ import {
   Text,
 } from "react-native";
 import styles from "../styles/SearchBarStyle.js";
-import CookbookStyle from "../styles/CookbookStyle.js.js";
+import CookbookStyle from "../styles/CookbookStyle.js";
 import CookbookAPI from "../APIs/CookbookAPI.js";
 
 const SearchMeal = ({ setSearchTerm }) => {
@@ -59,7 +59,7 @@ const SearchMeal = ({ setSearchTerm }) => {
   }, [apiData]);
 
   const handleQueryButtonClick = (recipe) => {
-    setSelectedExercise(recipe);
+    setSelectedRecipe(recipe);
     setModalVisible(true);
   };
 
@@ -79,10 +79,7 @@ const SearchMeal = ({ setSearchTerm }) => {
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => handleQueryButtonClick(input)}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => handleQueryButtonClick(input)}>
           <Image
             source={require("../assets/search.png")}
             resizeMode="contain"
@@ -106,14 +103,9 @@ const SearchMeal = ({ setSearchTerm }) => {
             <Text style={CookbookStyle.closeButton2}>Close</Text>
           </TouchableOpacity>
 
-          {/* Check if apiData is not empty before rendering CookbookAPI */}
-          {apiData.length > 0 ? (
-            // Render CookbookAPI component with the selected query
-            selectedRecipe && <CookbookAPI query={selectedRecipe} />
-          ) : (
-            // Render a message if apiData is empty
-            <Text>No results found for the given search.</Text>
-          )}
+         
+            {/* // Render CookbookAPI component with the selected query */}
+            {selectedRecipe && <CookbookAPI query={selectedRecipe} />}
         </View>
       </Modal>
     </View>
