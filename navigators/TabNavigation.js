@@ -118,18 +118,12 @@ const TabNavigator = ({ route }) => {
       />
       <Tab.Screen
         name="Your Workouts"
-        children={() => (
-          <WorkoutScreen
-            savedWorkouts={savedWorkouts}
-            setSavedWorkouts={setSavedWorkouts}
-          />
-        )}
+        component={WorkoutScreen} // Changed from using children prop for clarity
         initialParams={{
-          userID: userID,
-
-          setSavedWorkouts: setSavedWorkouts,
+          userID: userID, // Keep only serializable parameters
         }}
       />
+
       <Tab.Screen
         name="Your Cookbook"
         children={() => (
