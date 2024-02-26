@@ -74,10 +74,10 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
             onPress={() => handleQueryButtonClick("healthy")}
             style={styles.wrapper}
           >
-            {/* <ImageBackground
+           <ImageBackground
               source={require("../images/healthy.png")}
               style={styles.imageHealthy}
-            /> */}
+            /> 
             <Text style={styles.buttonText}>Healthy</Text>
           </TouchableOpacity>
 
