@@ -20,7 +20,7 @@ import eventEmitter from './EventEmitter';
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-const Calendar = ({ userID, navigation }) => {
+const Calendar = ({ userID, navigation, birthday }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
@@ -123,6 +123,11 @@ const getPriorityColor = (priority) => {
       { cancelable: false }
     );
   };
+  const isBirthday = (day) => {
+    if (!birthday) return false;
+    const [birthMonth, birthDay] = birthday.split("/").slice(0, 2);
+    return format(day, "MM") === birthMonth && format(day, "dd") === birthDay;
+  };
 
 const renderDays = () => {
   // Start from the first day of the week that includes the first day of the current month
@@ -145,7 +150,14 @@ const renderDays = () => {
     const uniqueTaskTypes = [...new Set(dayTasks.map(task => task.type))];
 
     return (
-      <TouchableOpacity key={index} style={styles.dayItem} onPress={() => onDateSelect(day)}>
+      <TouchableOpacity key={index}         style={[
+        styles.dayItem,
+        format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy")
+          ? styles.selectedDay
+          : isBirthday(day)
+          ? styles.birthdayDay
+          : null,
+      ]} onPress={() => onDateSelect(day)}>
         <Text style={[
           styles.dayText,
           isSameMonth(day, currentMonth) ? {} : { color: '#cccccc' } // Grey out the days that are not in the current month
@@ -157,10 +169,11 @@ const renderDays = () => {
             <View key={typeIndex} style={[styles.taskIndicator, { backgroundColor: taskTypeColors[type] || '#ccc' }]} />
           ))}
         </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
     );
   });
 };
+
 
   return (
     <View style={styles.calendarContainer}>
@@ -174,8 +187,8 @@ const renderDays = () => {
           <Text style={styles.arrowText}>{">"}</Text>
         </TouchableOpacity>
       </View>
-      
-      {/* Days of the Week */}
+
+      {/* Days of the week */}
       <View style={styles.daysOfWeek}>
         {days.map(day => (
           <Text key={day} style={styles.dayOfWeekText}>{day}</Text>

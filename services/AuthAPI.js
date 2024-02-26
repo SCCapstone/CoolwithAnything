@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc, getDocs, addDoc, deleteDoc, collection  } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, getDocs, addDoc, deleteDoc, collection  } from "firebase/firestore";
 
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -50,6 +50,18 @@ const getData = async (key) => {
   } catch (e) {
     console.error("Error retrieving data", e);
     throw e;
+  }
+};
+
+export const getUserData = async (userId) => {
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    return userSnap.data();
+  } else {
+    console.log("No such document!");
+    return null;
   }
 };
 
