@@ -22,7 +22,8 @@ const HomeScreen = ({ route }) => {
         <CategoryCounter count={2} label="Personal" color="skyblue" />
         <CategoryCounter count={1} label="Gym" color="salmon" />
       </View>
-      <Calendar />
+      {/* Pass the navigation prop to Calendar */}
+      <Calendar userID={userID} navigation={navigation} />
     </ScrollView>
   );
 };

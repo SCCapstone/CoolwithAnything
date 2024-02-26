@@ -9,6 +9,7 @@ import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import BiometricScreen from "../screens/BiometricScreen";
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import EditTaskScreen from "../screens/EditTaskScreen";
 import TransactionHistoryScreen from "../screens/TransactionHistoryScreen";
 import ToSScreen from "../screens/ToSScreen";
 import QRScreen from "../screens/QRScreen";
