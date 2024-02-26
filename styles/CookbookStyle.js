@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   buttonText: {
-    color: "white",
+    color: "black",
     fontSize: 20,
     padding: 16,
     fontWeight: "bold",
