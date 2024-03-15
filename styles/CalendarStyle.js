@@ -1,10 +1,12 @@
 import { StyleSheet } from "react-native";
+
 const styles = StyleSheet.create({
   calendarContainer: {
     backgroundColor: "#fff",
-    margin: 10,
-    padding: 10,
-    borderRadius: 6,
+    margin: 5,
+    padding: 5,
+    borderRadius: 3,
+    flex: 1, // Encourage container to fill available space
   },
   header: {
     flexDirection: "row",
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
   dayItem: {
     width: "13%", // approximately 1/7th of the container width
     alignItems: "center",
-    marginVertical: 5,
+    marginVertical: 2,
   },
   selectedDay: {
     backgroundColor: "pink",
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -64,5 +66,79 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
+  birthdayDay: {
+    borderColor: 'red',
+    borderWidth: 2,
+    borderRadius: 20,
+  },
+  selectedBD: {
+    borderColor: 'red',
+    borderWidth: 2,
+    backgroundColor: "pink",
+    borderRadius: 20,
+  },
+  // Added styles for task indicators
+  indicatorContainer: {
+    flexDirection: 'row', // Or 'column' for vertical
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  taskIndicator: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginHorizontal: 1, // Adjust spacing between indicators
+  },
+  taskIndicatorText: {
+    color: '#FFFFFF', 
+    fontSize: 12, 
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 10,
+  },
+  buttonEdit: {
+    backgroundColor: "#FFA500",
+  },
+  buttonDelete: {
+    backgroundColor: "#FF6347",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3", 
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });
+
 export default styles;

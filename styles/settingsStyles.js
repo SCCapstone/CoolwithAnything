@@ -99,6 +99,29 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 20,
   },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingTop: 45,
+    backgroundColor: '#f0f0f0',
+  },
+  tab: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'gray',
+    backgroundColor: '#fff',
+  },
+  activeTab: {
+    backgroundColor: '#24A0ED', 
+  },
+  tabText: {
+    color: 'gray', // Default text color
+  },
+  activeTabText: {
+    color: 'white', // Text color for the active tab
+  },
 });
 
 export default styles;

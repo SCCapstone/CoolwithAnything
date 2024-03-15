@@ -6,17 +6,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  updateDoc,
-  addDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, getDocs, addDoc, deleteDoc, collection  } from "firebase/firestore";
+
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -59,6 +50,18 @@ const getData = async (key) => {
   } catch (e) {
     console.error("Error retrieving data", e);
     throw e;
+  }
+};
+
+export const getUserData = async (userId) => {
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    return userSnap.data();
+  } else {
+    console.log("No such document!");
+    return null;
   }
 };
 
@@ -146,6 +149,48 @@ export const resetPassword = async (email) => {
   }
 };
 
+export const deleteTask = async (userId, taskId) => {
+  try {
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    await deleteDoc(taskDocRef);
+    console.log("Task deleted successfully");
+  } catch (error) {
+    console.error("Error deleting task: ", error);
+    throw error;
+  }
+};
+
+export const updateTaskForUser = async (userId, taskId, updatedData) => {
+ 
+  if (!userId || !taskId) {
+    const error = "userId or taskId is not provided";
+    console.error(error);
+    throw new Error(error);
+  }
+  try {
+    console.log("Updating task with data:", updatedData);
+
+    if (!userId || !taskId) {
+      console.error("userId or taskId is not provided");
+      return; // Exit the function if no userId or taskId
+    }
+
+    if (!updatedData || typeof updatedData !== 'object') {
+      console.error("Invalid updatedData:", updatedData);
+      return; // Exit the function if updatedData is invalid
+    }
+
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    await updateDoc(taskDocRef, updatedData);
+    console.log("Task updated successfully");
+  } catch (error) {
+    console.error("Error updating task:", error);
+    // Log the error and throw it to be handled
+    throw new Error(error.message || "Unknown error occurred while updating task");
+  }
+};
+
+
 export const saveTaskForUser = async (userId, taskData) => {
   try {
     // Create a reference to the user's tasks subcollection
@@ -161,21 +206,97 @@ export const saveTaskForUser = async (userId, taskData) => {
   }
 };
 
-export const fetchTasksForUser = async (userId, startDate, endDate) => {
+export const fetchTasksForUser = async (userId) => {
   try {
     const userTasksRef = collection(db, "users", userId, "tasks");
-    const q = query(userTasksRef, where("date", ">=", startDate.toISOString()), where("date", "<=", endDate.toISOString()));
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(userTasksRef);
     let tasks = [];
     querySnapshot.forEach((doc) => {
       tasks.push({ id: doc.id, ...doc.data() });
     });
+    console.log("Tasks fetched successfully:", tasks);
     return tasks;
   } catch (error) {
     console.error("Error fetching tasks: ", error);
     throw error;
   }
 };
+
+export const updateUserProfile = async (userId, updatedData) => {
+  try {
+    const userDocRef = doc(db, "users", userId);
+    await updateDoc(userDocRef, updatedData);
+    console.log("User profile updated successfully");
+    return { status: "success" };
+  } catch (error) {
+    console.error("Error updating user profile: ", error);
+    throw error;
+  }
+};
+
+export const savePaymentMethodForUser = async (userId, paymentMethodData) => {
+  try {
+    // Create a reference to the user's paymentMethods subcollection
+    const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
+
+    // Add the payment method data to the user's paymentMethods subcollection
+    const docRef = await addDoc(userPaymentMethodsRef, paymentMethodData);
+    console.log("Payment method document written with ID: ", docRef.id);
+    return { status: "success", docId: docRef.id };
+  } catch (error) {
+    console.error("Error adding payment method document: ", error);
+    throw error;
+  }
+};
+
+export const fetchAllPaymentMethodsForUser = async (userId) => {
+  try {
+    const userPaymentMethodsRef = collection(db, "users", userId, "paymentMethods");
+    const querySnapshot = await getDocs(userPaymentMethodsRef);
+    const paymentMethods = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log("Fetched payment methods: ", paymentMethods);
+    return paymentMethods; // Returns an array of payment method objects
+  } catch (error) {
+    console.error("Error fetching payment methods: ", error);
+    throw error;
+  }
+};
+
+export const updatePaymentMethodForUser = async (userId, paymentMethodId, paymentMethodData) => {
+  try {
+    // Reference to a specific payment method document for the user
+    const paymentMethodDocRef = doc(db, "users", userId, "paymentMethods", paymentMethodId);
+
+    // Update the payment method document with new data
+    await updateDoc(paymentMethodDocRef, paymentMethodData);
+
+    console.log("Payment method document updated with ID: ", paymentMethodId);
+    return { status: "success", docId: paymentMethodId };
+  } catch (error) {
+    console.error("Error updating payment method document: ", error);
+    throw error;
+  }
+};
+
+export const deletePaymentMethodForUser = async (userId, paymentMethodId) => {
+  try {
+    // Reference to a specific payment method document for the user
+    const paymentMethodDocRef = doc(db, "users", userId, "paymentMethods", paymentMethodId);
+
+    // Delete the payment method document
+    await deleteDoc(paymentMethodDocRef);
+
+    console.log("Payment method document deleted with ID: ", paymentMethodId);
+    return { status: "success", docId: paymentMethodId };
+  } catch (error) {
+    console.error("Error deleting payment method document: ", error);
+    throw error;
+  }
+};
+
+
+
+
 
 // Export the AsyncStorage getData function if needed elsewhere
 export { getData };
