@@ -14,12 +14,20 @@ function SelectProfile() {
   const userId = auth.currentUser ? auth.currentUser.uid : null;
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [fitnessGoal, setFitnessGoal] = useState(''); // Changed from address
+  const [firstName, setFirstName] = useState(''); // Changed from address
+  const [lastName, setLastName] = useState('');
   const [mobile, setMobile] = useState('');
+  const [fitnessGoal, setFitnessGoal] = useState(''); // Changed from address
   const [fitnessLevel, setFitnessLevel] = useState('');
-  const [editedFitnessGoal, setEditedFitnessGoal] = useState(''); // Changed from editedAddress
+  const [height, setHeight] = useState(''); // Changed from address
+  const [weight, setWeight] = useState('');
+  const [editedFirstName, setEditedFirstName] = useState(''); // Changed from editedAddress
+  const [editedLastName, setEditedLastName] = useState('');
   const [editedMobile, setEditedMobile] = useState('');
+  const [editedFitnessGoal, setEditedFitnessGoal] = useState(''); // Changed from editedAddress
   const [editedFitnessLevel, setEditedFitnessLevel] = useState('');
+  const [editedHeight, setEditedHeight] = useState(''); // Changed from editedAddress
+  const [editedWeight, setEditedWeight] = useState('');
 
   useEffect(() => {
     if (!userId) return;
@@ -27,9 +35,13 @@ function SelectProfile() {
     getDoc(userRef).then(docSnap => {
       if (docSnap.exists()) {
         const userData = docSnap.data();
-        setFitnessGoal(userData.fitnessGoal || ''); // Changed from address
         setMobile(userData.phone_number || '');
+        setFitnessGoal(userData.fitnessGoal || '');
         setFitnessLevel(userData.fitnessLevel || '');
+        setFirstName(userData.firstName || '');
+        setLastName(userData.lastName || '');
+        setHeight(userData.height || '');
+        setWeight(userData.weight || '');
       } else {
         console.log("No user data found in Firestore");
       }
@@ -41,17 +53,25 @@ function SelectProfile() {
   const handleSaveChanges = async () => {
     try {
       const updatedData = {
-        fitnessGoal: editedFitnessGoal || fitnessGoal, // Changed from date_of_birth
+        firstName: editedFirstName || firstName,
+        lastName: editedLastName || lastName,
         phone_number: editedMobile || mobile,
+        fitnessGoal: editedFitnessGoal || fitnessGoal,
         fitnessLevel: editedFitnessLevel || fitnessLevel,
+        height: editedHeight || height,
+        weight: editedWeight || weight,
       };
 
       await updateUserProfile(userId, updatedData);
       console.log("Profile updated successfully");
 
-      setFitnessGoal(updatedData.fitnessGoal); // Changed from setAddress
+      setFirstName(updatedData.firstName);
+      setLastName(updatedData.lastName);
       setMobile(updatedData.phone_number);
+      setFitnessGoal(updatedData.fitnessGoal);
       setFitnessLevel(updatedData.fitnessLevel);
+      setHeight(updatedData.height);
+      setWeight(updatedData.weight);
 
       closeModal();
     } catch (error) {
@@ -73,12 +93,26 @@ function SelectProfile() {
 
       <View style={{ flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: 100, alignItems: 'flex-start' }}>
+          <Text style={styles.label}>First Name:</Text>
+        </View>
+        <Text style={styles.text}>{firstName}</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <View style={{ width: 100, alignItems: 'flex-start' }}>
+          <Text style={styles.label}>Last Name:</Text>
+        </View>
+        <Text style={styles.text}>{lastName}</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <View style={{ width: 100, alignItems: 'flex-start' }}>
           <Text style={styles.label}>Phone:</Text>
         </View>
         <Text style={styles.text}>{mobile}</Text>
       </View>
 
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: 100, alignItems: 'flex-start' }}>
           <Text style={styles.label}>Fitness Goal:</Text>
         </View>
@@ -87,9 +121,23 @@ function SelectProfile() {
 
       <View style={{ flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>fitnessLevel:</Text>
+          <Text style={styles.label}>Fitness Level:</Text>
         </View>
         <Text style={styles.text}>{fitnessLevel}</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <View style={{ width: 100, alignItems: 'flex-start' }}>
+          <Text style={styles.label}>Height (in):</Text>
+        </View>
+        <Text style={styles.text}>{height}</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <View style={{ width: 100, alignItems: 'flex-start' }}>
+          <Text style={styles.label}>Weight (lbs):</Text>
+        </View>
+        <Text style={styles.text}>{weight}</Text>
       </View>
 
       <Pressable style={styles.editButton} onPress={openModal}>
@@ -101,27 +149,51 @@ function SelectProfile() {
           <Text style={styles.modalTitle}>Edit Profile Information</Text>
           <TextInput
             style={styles.modalInput}
-            placeholder={'Fitness Goal'}
+            placeholder={firstName ? firstName : 'John'}
             placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedFitnessGoal(text)}
+            onChangeText={(text) => setEditedFirstName(text)}
           />
           <TextInput
             style={styles.modalInput}
-            placeholder={'(123) 456-7890'}
+            placeholder={lastName ? lastName : 'Doe'}
+            placeholderTextColor={'#ddd'}
+            onChangeText={(text) => setEditedLastName(text)}
+          />
+          <TextInput
+            style={styles.modalInput}
+            placeholder={mobile ? mobile : '(123) 456-7890'}
             placeholderTextColor={'#ddd'}
             onChangeText={(text) => setEditedMobile(text)}
           />
           <TextInput
             style={styles.modalInput}
-            placeholder={'Intermediate'}
+            placeholder={fitnessGoal ? fitnessGoal : 'Fitness Goal'}
+            placeholderTextColor={'#ddd'}
+            onChangeText={(text) => setEditedFitnessGoal(text)}
+          />
+          <TextInput
+            style={styles.modalInput}
+            placeholder={fitnessLevel ? fitnessLevel : 'Fitness Level'}
             placeholderTextColor={'#ddd'}
             onChangeText={(text) => setEditedFitnessLevel(text)}
+          />
+          <TextInput
+            style={styles.modalInput}
+            placeholder={height ? height : 'Height (in)'}
+            placeholderTextColor={'#ddd'}
+            onChangeText={(text) => setEditedHeight(text)}
+          />
+          <TextInput
+            style={styles.modalInput}
+            placeholder={weight ? weight : 'Weight (lbs)'}
+            placeholderTextColor={'#ddd'}
+            onChangeText={(text) => setEditedWeight(text)}
           />
           <View style={styles.modalButtonContainer}>
           <Pressable style={styles.modalSaveButton} onPress={handleSaveChanges} >
             <Text style={styles.modalText}>Save</Text>
           </Pressable>
-          <Pressable style={styles.modalCancelButton} onPress={handleSaveChanges} >
+          <Pressable style={styles.modalCancelButton} onPress={closeModal} >
             <Text style={styles.modalText}>Cancel</Text>
           </Pressable>
           </View>
