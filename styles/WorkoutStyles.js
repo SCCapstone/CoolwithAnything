@@ -91,6 +91,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 16,
     fontWeight: "bold",
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -2, height: 1 }, // Shadow position
+    textShadowRadius: 1, // Blur radius
   }
 });
 
