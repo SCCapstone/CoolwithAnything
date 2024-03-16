@@ -67,7 +67,7 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
                 style={styles.imageVeg}
               />
             }
-            <Text style={styles.buttonText}>Veggitarian</Text>
+            <Text style={styles.buttonText}>Vegetarian</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
