@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/core'; // useRoute to receive parameters
 import { deletePaymentMethodForUser, updatePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI"; 
 import { getAuth } from 'firebase/auth';
@@ -37,6 +37,16 @@ const EditPaymentMethodsScreen = () => {
     try {
       await deletePaymentMethodForUser(userId, params?.id);
       console.log("Payment method deleted successfully");
+      Alert.alert(
+        "Success", // Alert Title
+        "Your payment method was deleted successfully.", // Alert Message
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate('PaymentMethods'),
+          },
+        ]
+      );
       // Optionally, fetch the updated list of payment methods
       const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
       navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
@@ -46,99 +56,100 @@ const EditPaymentMethodsScreen = () => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <View>
       <View style={styles.header}>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Text style={styles.backText}>Back</Text>
-          </Pressable>
-        </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Edit Payment Method</Text>
-        </View>
-        <View style={styles.contentContainer}>
-
-          <View>
-            <Text style={styles.label}>Nickname:</Text>
-            <TextInput style={styles.input} 
-            onChangeText={setNickname} 
-            value={nickname} 
-            placeholder="My Card"
-            keyboardType="default"
-            secureTextEntry={false}/>
-          </View> 
-          
-          <View>
-            <Text style={styles.label}>Credit Card:</Text>
-            <TextInput style={[styles.input, {width: '43%'}]}
-            onChangeText={setCreditCard} 
-            value={creditCard} 
-            placeholder="1234 5678 9012 3456"
-            keyboardType="default"
-            secureTextEntry={false}/>
-          </View> 
-
-          <View>
-            <Text style={styles.label}>CVC:</Text>
-            <TextInput style={[styles.input, {width: '13%'}]} 
-            onChangeText={setCVC} 
-            value={CVC} 
-            placeholder="123"
-            keyboardType="default"
-            secureTextEntry={false}/>
-          </View> 
-
-          <View>
-            <Text style={styles.label}>EXP Date:</Text>
-            <TextInput style={[styles.input, {width: '16%'}]}
-            onChangeText={setExpDate} 
-            value={expDate} 
-            placeholder="01/23"
-            keyboardType="default"
-            secureTextEntry={false}/>
-          </View>
-
-          <View>
-            <Text style={styles.label}>Name on card:</Text>
-            <TextInput style={styles.input} 
-            onChangeText={setName} 
-            value={name} 
-            placeholder="John Appleseed"
-            keyboardType="default"
-            secureTextEntry={false}/>
-          </View>
-
-          <View>
-            <Text style={styles.label}>ZIP:</Text>
-            <TextInput style={[styles.input, {width: '17%'}]} 
-            onChangeText={setZIP} 
-            value={ZIP} 
-            placeholder="12345"
-            keyboardType="default"
-            secureTextEntry={false}/>
-          </View> 
-
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.saveButtonContainer}>
-            <Pressable 
-              onPress={handleUpdatePaymentMethod} // Update this to handleUpdatePaymentMethod
-              style={styles.saveButton}>
-              <Text style={styles.saveButtonText}>Update Payment Method</Text>
-            </Pressable>
-          </View>
-
-          <View style={styles.deleteButtonContainer}>
-            <Pressable 
-              onPress={handleDeletePaymentMethod}
-              style={styles.deleteButton}>
-              <Text style={styles.deleteButtonText}>Delete Payment Method</Text>
-            </Pressable>
-          </View>
-        </View>
-
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backText}>←</Text>
+        </Pressable>
+        <Text style={styles.title}>Edit Payment Method</Text>
+        <View style={{width: 24}}/>
       </View>
-    </ScrollView>
+
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.contentContainer}>
+            <View>
+              <Text style={styles.label}>Nickname:</Text>
+              <TextInput style={styles.input} 
+              onChangeText={setNickname} 
+              value={nickname} 
+              placeholder="My Card"
+              keyboardType="default"
+              secureTextEntry={false}/>
+            </View> 
+            
+            <View>
+              <Text style={styles.label}>Credit Card:</Text>
+              <TextInput style={[styles.input, {width: '43%'}]}
+              onChangeText={setCreditCard} 
+              value={creditCard} 
+              placeholder="1234 5678 9012 3456"
+              keyboardType="default"
+              secureTextEntry={false}/>
+            </View> 
+
+            <View>
+              <Text style={styles.label}>CVC:</Text>
+              <TextInput style={[styles.input, {width: '13%'}]} 
+              onChangeText={setCVC} 
+              value={CVC} 
+              placeholder="123"
+              keyboardType="default"
+              secureTextEntry={false}/>
+            </View> 
+
+            <View>
+              <Text style={styles.label}>EXP Date:</Text>
+              <TextInput style={[styles.input, {width: '16%'}]}
+              onChangeText={setExpDate} 
+              value={expDate} 
+              placeholder="01/23"
+              keyboardType="default"
+              secureTextEntry={false}/>
+            </View>
+
+            <View>
+              <Text style={styles.label}>Name on card:</Text>
+              <TextInput style={styles.input} 
+              onChangeText={setName} 
+              value={name} 
+              placeholder="John Appleseed"
+              keyboardType="default"
+              secureTextEntry={false}/>
+            </View>
+
+            <View>
+              <Text style={styles.label}>ZIP:</Text>
+              <TextInput style={[styles.input, {width: '17%'}]} 
+              onChangeText={setZIP} 
+              value={ZIP} 
+              placeholder="12345"
+              keyboardType="default"
+              secureTextEntry={false}/>
+            </View> 
+
+          </View>
+        </View>
+      </ScrollView>
+
+      <View style={styles.buttonContainer}>
+            <View style={styles.saveButtonContainer}>
+              <Pressable 
+                onPress={handleUpdatePaymentMethod} // Update this to handleUpdatePaymentMethod
+                style={styles.saveButton}>
+                <Text style={styles.saveButtonText}>Update Payment Method</Text>
+              </Pressable>
+            </View>
+
+            <View style={styles.deleteButtonContainer}>
+              <Pressable 
+                onPress={handleDeletePaymentMethod}
+                style={styles.deleteButton}>
+                <Text style={styles.deleteButtonText}>Delete Payment Method</Text>
+              </Pressable>
+            </View>
+          </View>
+    </View>
   );
 };
 

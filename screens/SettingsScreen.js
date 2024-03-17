@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Modal, Alert, Pressable} from 'react-native';
+import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -83,122 +83,114 @@ function SelectProfile() {
   const closeModal = () => setModalVisible(false);
 
   return (
-    <View style={{ flex: 1, flexDirection: 'column', padding: 20 }}>      
+    <View style={{flex: 1}}>
+      <View style={styles.settingsTextContainer}>
       <Pressable onPress={() => navigation.goBack()}>
-        <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
-      </Pressable>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.settingsText}>Settings</Text>
+        <View style={{ width: 24 }} />
+      </View>
       
-      <Text style={styles.title}>Profile</Text>
-      <Text style={styles.profileID}>User ID: {userId}</Text>
+      <ScrollView style={styles.container}>              
+        <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
+        <Text style={styles.profileID}>User ID: {userId}</Text>
 
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>First Name:</Text>
-        </View>
-        <Text style={styles.text}>{firstName}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>Last Name:</Text>
-        </View>
-        <Text style={styles.text}>{lastName}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>Phone:</Text>
-        </View>
-        <Text style={styles.text}>{mobile}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>Fitness Goal:</Text>
-        </View>
-        <Text style={styles.text}>{fitnessGoal}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>Fitness Level:</Text>
-        </View>
-        <Text style={styles.text}>{fitnessLevel}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>Height (in):</Text>
-        </View>
-        <Text style={styles.text}>{height}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <View style={{ width: 100, alignItems: 'flex-start' }}>
-          <Text style={styles.label}>Weight (lbs):</Text>
-        </View>
-        <Text style={styles.text}>{weight}</Text>
-      </View>
-
-      <Pressable style={styles.editButton} onPress={openModal}>
-        <Text style={styles.buttonText}>Edit</Text>
-      </Pressable>
-
-      <Modal visible={isModalVisible} animationType="slide" transparent={true}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Edit Profile Information</Text>
-          <TextInput
-            style={styles.modalInput}
-            placeholder={firstName ? firstName : 'John'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedFirstName(text)}
-          />
-          <TextInput
-            style={styles.modalInput}
-            placeholder={lastName ? lastName : 'Doe'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedLastName(text)}
-          />
-          <TextInput
-            style={styles.modalInput}
-            placeholder={mobile ? mobile : '(123) 456-7890'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedMobile(text)}
-          />
-          <TextInput
-            style={styles.modalInput}
-            placeholder={fitnessGoal ? fitnessGoal : 'Fitness Goal'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedFitnessGoal(text)}
-          />
-          <TextInput
-            style={styles.modalInput}
-            placeholder={fitnessLevel ? fitnessLevel : 'Fitness Level'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedFitnessLevel(text)}
-          />
-          <TextInput
-            style={styles.modalInput}
-            placeholder={height ? height : 'Height (in)'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedHeight(text)}
-          />
-          <TextInput
-            style={styles.modalInput}
-            placeholder={weight ? weight : 'Weight (lbs)'}
-            placeholderTextColor={'#ddd'}
-            onChangeText={(text) => setEditedWeight(text)}
-          />
-          <View style={styles.modalButtonContainer}>
-          <Pressable style={styles.modalSaveButton} onPress={handleSaveChanges} >
-            <Text style={styles.modalText}>Save</Text>
-          </Pressable>
-          <Pressable style={styles.modalCancelButton} onPress={closeModal} >
-            <Text style={styles.modalText}>Cancel</Text>
-          </Pressable>
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={{ width: 125, alignItems: 'flex-start' }}>
+            <Text style={styles.label}>Phone:</Text>
           </View>
+          <Text style={styles.text}>{mobile}</Text>
         </View>
-      </Modal>
+
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={{ width: 125, alignItems: 'flex-start' }}>
+            <Text style={styles.label}>Fitness Goal:</Text>
+          </View>
+          <Text style={styles.text}>{fitnessGoal}</Text>
+        </View>
+
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={{ width: 125, alignItems: 'flex-start' }}>
+            <Text style={styles.label}>Fitness Level:</Text>
+          </View>
+          <Text style={styles.text}>{fitnessLevel}</Text>
+        </View>
+
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={{ width: 125, alignItems: 'flex-start' }}>
+            <Text style={styles.label}>Height (in):</Text>
+          </View>
+          <Text style={styles.text}>{height}</Text>
+        </View>
+
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={{ width: 125, alignItems: 'flex-start' }}>
+            <Text style={styles.label}>Weight (lbs):</Text>
+          </View>
+          <Text style={styles.text}>{weight}</Text>
+        </View>
+
+        <Pressable style={styles.editButton} onPress={openModal}>
+          <Text style={styles.buttonText}>Edit</Text>
+        </Pressable>
+
+        <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Edit Profile Information</Text>
+            <TextInput
+              style={styles.modalInput}
+              placeholder={firstName ? firstName : 'John'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedFirstName(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder={lastName ? lastName : 'Doe'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedLastName(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder={mobile ? mobile : '(123) 456-7890'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedMobile(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder={fitnessGoal ? fitnessGoal : 'Fitness Goal'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedFitnessGoal(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder={fitnessLevel ? fitnessLevel : 'Fitness Level'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedFitnessLevel(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder={height ? height : 'Height (in)'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedHeight(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder={weight ? weight : 'Weight (lbs)'}
+              placeholderTextColor={'#ddd'}
+              onChangeText={(text) => setEditedWeight(text)}
+            />
+            <View style={styles.modalButtonContainer}>
+            <Pressable style={styles.modalSaveButton} onPress={handleSaveChanges} >
+              <Text style={styles.modalText}>Save</Text>
+            </Pressable>
+            <Pressable style={styles.modalCancelButton} onPress={closeModal} >
+              <Text style={styles.modalText}>Cancel</Text>
+            </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </ScrollView>
     </View>
   );
 }
@@ -206,69 +198,123 @@ function SelectProfile() {
 function SelectAccount() {
   const navigation = useNavigation();
   const auth = getAuth();
+  const db = getFirestore();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
-  return (
-    <View style={styles.container}>
-      <Pressable onPress={() => navigation.goBack()}>
-        <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
-      </Pressable>
 
-      <Text style={styles.title}>Account</Text>
-      <Text style={styles.profileID}>User ID: {userId}</Text>
-      <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
-          <Text style={styles.accountText}>Transaction History</Text>
+  const [firstName, setFirstName] = useState(''); // Changed from address
+  const [lastName, setLastName] = useState('');
+
+  useEffect(() => {
+    if (!userId) return;
+    const userRef = doc(db, "users", userId);
+    getDoc(userRef).then(docSnap => {
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        setFirstName(userData.firstName || '');
+        setLastName(userData.lastName || '');
+      } else {
+        console.log("No user data found in Firestore");
+      }
+    }).catch(error => {
+      console.error("Error fetching user data:", error);
+    });
+  }, [userId]);
+
+  return (
+    <View style={{flex: 1}}>
+      <View style={styles.settingsTextContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')}>
-          <Text style={styles.accountText}>Payment Methods</Text>
-        </Pressable>
+        <Text style={styles.settingsText}>Settings</Text>
+        <View style={{ width: 24 }} />
       </View>
-      <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('ToS')}>
-          <Text style={styles.accountText}>Terms of Service</Text>
+
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
+        <Text style={styles.profileID}>User ID: {userId}</Text>
+        <View style={styles.rowContainer}>
+          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
+            <Text style={styles.accountText}>Transaction History</Text>
+          </Pressable>
+          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')}>
+            <Text style={styles.accountText}>Payment Methods</Text>
+          </Pressable>
+        </View>
+        <View style={styles.rowContainer}>
+          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('ToS')}>
+            <Text style={styles.accountText}>Terms of Service</Text>
+          </Pressable>
+          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('QR')}>
+            <Text style={styles.accountText}>QR Code</Text>
+          </Pressable>
+        </View>
+        <Pressable style={styles.editButton} onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Sign Out</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => navigation.navigate('QR')}>
-          <Text style={styles.accountText}>QR Code</Text>
-        </Pressable>
-      </View>
-      <Pressable style={styles.editButton} onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.buttonText}>Sign Out</Text>
-      </Pressable>
+      </ScrollView>
     </View>
-  );
+    );
 }
 
 function SelectOthers() {
   const navigation = useNavigation();
   const auth = getAuth();
+  const db = getFirestore();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
-  return (
-    <View style={styles.container}>
 
+  const [firstName, setFirstName] = useState(''); // Changed from address
+  const [lastName, setLastName] = useState('');
+
+  useEffect(() => {
+    if (!userId) return;
+    const userRef = doc(db, "users", userId);
+    getDoc(userRef).then(docSnap => {
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        setFirstName(userData.firstName || '');
+        setLastName(userData.lastName || '');
+      } else {
+        console.log("No user data found in Firestore");
+      }
+    }).catch(error => {
+      console.error("Error fetching user data:", error);
+    });
+  }, [userId]);
+
+  return (
+    <View style={{flex: 1}}>
+      <View style={styles.settingsTextContainer}>
       <Pressable onPress={() => navigation.goBack()}>
-        <Text style={{ fontSize: 18, marginBottom: 10, fontWeight: 700 }}>Back</Text>
-      </Pressable>
-      <Text style={styles.title}>Other Settings</Text>
-      <Text style={styles.profileID}>User ID: {userId}</Text>
-      <View style={styles.rowContainer}>
-      <Pressable style={styles.pageButton} onPress={() => Alert.alert('Changing color theme is not supported right now.')}>
-          <Text style={styles.accountText}>Color Theme</Text>
+          <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
-          <Text style={styles.accountText}>Languages</Text>
-        </Pressable>
+        <Text style={styles.settingsText}>Settings</Text>
+        <View style={{ width: 24 }} />
       </View>
-      <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
-          <Text style={styles.accountText}>Support</Text>
+
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
+        <Text style={styles.profileID}>User ID: {userId}</Text>
+        <View style={styles.rowContainer}>
+        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Changing color theme is not supported right now.')}>
+            <Text style={styles.accountText}>Color Theme</Text>
+          </Pressable>
+          <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
+            <Text style={styles.accountText}>Languages</Text>
+          </Pressable>
+        </View>
+        <View style={styles.rowContainer}>
+          <Pressable style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
+            <Text style={styles.accountText}>Support</Text>
+          </Pressable>
+          <Pressable style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.5')}>
+            <Text style={styles.accountText}>Version</Text>
+          </Pressable>
+        </View>
+        <Pressable style={styles.editButton} onPress={() => Alert.alert('Dark Mode Button')}>
+          <Text style={styles.buttonText}>Dark Mode</Text>
         </Pressable>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.5')}>
-          <Text style={styles.accountText}>Version</Text>
-        </Pressable>
-      </View>
-      <Pressable style={styles.editButton} onPress={() => Alert.alert('Dark Mode Button')}>
-        <Text style={styles.buttonText}>Dark Mode</Text>
-      </Pressable>
+      </ScrollView>
     </View>
   );
 }
@@ -287,7 +333,7 @@ const TabBar = ({ activeTab, setActiveTab }) => (
         <Text
           style={[
             styles.tabText,
-            activeTab === tab && styles.activeTabText,
+            activeTab === tab,
           ]}
         >
           {tab}
@@ -315,9 +361,13 @@ const SettingsScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <TabBar activeTab={activeTab} setActiveTab={setActiveTab}/>
-      {renderTab(activeTab)}
+    <View style={{ flex: 1 }}> 
+      <View style={{ flex: 1 }}> 
+        {renderTab(activeTab)}
+      </View>
+      <View style={styles.tabBarContainer}>
+        <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      </View>
     </View>
   );
 };

@@ -8,7 +8,7 @@ const QRScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backText}>Back</Text>
+          <Text style={styles.backText}>←</Text>
         </Pressable>
       </View>
       <View style={styles.QRcontainer}>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     zIndex: 1, 
   },
   backText: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: '700',
   },
   QRcontainer: {

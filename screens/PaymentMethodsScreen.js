@@ -42,41 +42,51 @@ const PaymentMethodsScreen = () => {
   
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={{flex: 1}}>
+      
+      <View style={styles.PMTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backText}>Back</Text>
+          <Text style={styles.backText}>←</Text>
         </Pressable>
+        <Text style={styles.PMText}>Payment Methods</Text>
+        <View style={{ width: 24 }} />
       </View>
 
-      <View style={styles.content}>
-        {paymentMethods.length > 0 ? (
-          <FlatList
-          data={paymentMethods}
-          renderItem={renderPaymentMethod}
-          keyExtractor={item => item.id.toString()}
-          contentContainerStyle={{ alignItems: 'center' }}
-          ListFooterComponent={
-            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
+    
+      {paymentMethods.length > 0 ? (
+        <FlatList
+        data={paymentMethods}
+        renderItem={renderPaymentMethod}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={{ alignItems: 'center' }}
+        ListFooterComponent={
+          <Pressable onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
+            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+              <View style={styles.addPaymentContainer}>
               <Text style={styles.addPayment}>
-                Add a payment method<Text style={styles.plusStyle}> +</Text>
+                Add a payment method
+                <Text style={styles.plusStyle}>  +</Text>
               </Text>
+              </View>
             </Pressable>
-          }
+          </Pressable>
+        }
         />
         ) : (
-          <View>
-            <Text style={styles.text}>You have no saved payment methods</Text>
-            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
-          <Text style={styles.addPayment}>
-            Add a payment method
-            <Text style={styles.plusStyle}> +</Text>
-          </Text>
-        </Pressable>
-          </View>
-        )}
-      </View>
-
+          <View style={styles.noPaymentContainer}>
+            <Text style={styles.noPaymentText}>
+              You have no payment methods.
+            </Text>
+          <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+            <View style={styles.addPaymentContainer}>
+              <Text style={styles.addPayment}>
+                Add a payment method
+                <Text style={styles.plusStyle}> +</Text>
+              </Text>
+            </View>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 };
