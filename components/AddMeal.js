@@ -13,8 +13,11 @@ import CreateButton from "./CreateButton"; // Reused from previous examples
 import InputField from "./InputField"; // Reused from previous examples
 import CommentBox from "./CommentBox";
 import { useMeals } from "../services/MealsContext";
+import { useNavigation } from "@react-navigation/native";
+import { addMealData } from "../services/AuthAPI";
 
 const AddMeal = ({ route }) => {
+  const navigation = useNavigation();
   const { savedMeals, setSavedMeals } = useMeals();
   const { userID } = route.params;
   const [mealName, setMealName] = useState("");
@@ -22,7 +25,14 @@ const AddMeal = ({ route }) => {
   const [mealServing, setMealServings] = useState("");
   const [mealInstructions, setMealInstructions] = useState("");
 
-  const handleAdd = () => {
+  const handleclose = () => {
+    setMealName("");
+    setMealIngredients("");
+    setMealServings("");
+    setMealInstructions("");
+    navigation.navigate("Today");
+  };
+  const handleAdd = async () => {
     console.log(mealName);
     const addMeal = {
       mealName,
@@ -30,7 +40,7 @@ const AddMeal = ({ route }) => {
       mealServing,
       mealInstructions,
     };
-
+    await addMealData(userID, addMeal);
     setSavedMeals((savedMeals) => [...savedMeals, addMeal]);
 
     console.log(addMeal);
@@ -39,10 +49,11 @@ const AddMeal = ({ route }) => {
     setMealIngredients("");
     setMealServings("");
     setMealInstructions("");
+    navigation.navigate("Today");
   };
   return (
     <ScrollView style={styles.container}>
-      <MealHeader onClose={() => console.log("Close pressed")} />
+      <MealHeader onClose={() => handleclose()} />
       <InputField
         value={mealName}
         placeholder="Meal Name"

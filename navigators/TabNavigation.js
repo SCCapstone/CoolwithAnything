@@ -126,16 +126,9 @@ const TabNavigator = ({ route }) => {
 
       <Tab.Screen
         name="Your Cookbook"
-        children={() => (
-          <CookbookScreen
-            savedMeals={savedMeals}
-            setSavedMeals={setSavedMeals}
-          />
-        )}
+        component={CookbookScreen}
         initialParams={{
           userID: userID,
-
-          setSavedMeals: setSavedMeals,
         }}
       />
       {/* Hidden screens for action sheet options */}
