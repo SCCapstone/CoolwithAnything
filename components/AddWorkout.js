@@ -8,9 +8,12 @@ import DaySelector from "./DateTimePicker";
 import CommentBox from "./CommentBox"; // Reused from Create Task
 import CreateButton from "./CreateButton"; // Reused from Create Task
 import { useWorkouts } from "../services/WorkoutsContext";
+import { useNavigation } from "@react-navigation/native";
+import { addWorkoutData } from "../services/AuthAPI";
 
 const AddWorkout = ({ route }) => {
   //const [selectedDays, setSelectedDays] = useState([]);
+  const navigation = useNavigation();
   const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const { userID } = route.params;
   const [workoutName, setWorkoutName] = useState("");
@@ -20,7 +23,16 @@ const AddWorkout = ({ route }) => {
   const [workoutDifficulty, setWorkoutDifficulty] = useState("");
   const [workoutInstructions, setWorkoutInstructions] = useState("");
 
-  const handleAdd = () => {
+  const handleclose = () => {
+    setWorkoutName("");
+    setWorkoutType("");
+    setWorkoutMuscle("");
+    setWorkoutEquipment("");
+    setWorkoutDifficulty("");
+    setWorkoutInstructions("");
+    navigation.navigate("Today");
+  };
+  const handleAdd = async () => {
     //console.log(workoutName);
     const addWorkout = {
       workoutName,
@@ -31,6 +43,7 @@ const AddWorkout = ({ route }) => {
       workoutInstructions,
     };
 
+    await addWorkoutData(userID, addWorkout);
     setSavedWorkouts((savedWorkouts) => [...savedWorkouts, addWorkout]);
 
     console.log(addWorkout);
@@ -41,11 +54,12 @@ const AddWorkout = ({ route }) => {
     setWorkoutEquipment("");
     setWorkoutDifficulty("");
     setWorkoutInstructions("");
+    navigation.navigate("Today");
   };
 
   return (
     <ScrollView style={styles.container}>
-      <WorkoutHeader onClose={() => console.log("Close pressed")} />
+      <WorkoutHeader onClose={() => handleclose()} />
       <InputField
         value={workoutName}
         placeholder="Workout Name"

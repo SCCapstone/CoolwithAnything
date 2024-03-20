@@ -85,6 +85,7 @@ const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
       workoutEquipment,
       workoutDifficulty,
       workoutInstructions,
+      id: workout.id,
     };
     //debugger;
     setCardWorkout(newWorkout);
