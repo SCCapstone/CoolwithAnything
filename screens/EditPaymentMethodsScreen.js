@@ -25,6 +25,16 @@ const EditPaymentMethodsScreen = () => {
         nickname, creditCard, CVC, expDate, name, ZIP
       });
       console.log("Payment method updated successfully");
+      Alert.alert(
+        "Success", // Alert Title
+        "Your payment method was updated successfully!", // Alert Message
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate('PaymentMethods'),
+          },
+        ]
+      );
       //Fetch existing payment methods and go back to payments list
       const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
       navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
@@ -33,27 +43,49 @@ const EditPaymentMethodsScreen = () => {
     }
   };
 
-  const handleDeletePaymentMethod = async () => {
-    try {
-      await deletePaymentMethodForUser(userId, params?.id);
-      console.log("Payment method deleted successfully");
-      Alert.alert(
-        "Success", // Alert Title
-        "Your payment method was deleted successfully.", // Alert Message
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate('PaymentMethods'),
-          },
-        ]
-      );
-      // Optionally, fetch the updated list of payment methods
-      const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
-      navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
-    } catch (error) {
-      console.error("Failed to delete payment method", error);
-    }
+  const handleDeletePaymentMethod = () => {
+    // Use Alert to confirm deletion
+    Alert.alert(
+      "Confirm Deletion", // Alert Title
+      "Are you sure you want to delete this payment method?", // Alert Message
+      [
+        // Button: No, do not delete
+        {
+          text: "Cancel",
+          onPress: () => console.log("Deletion cancelled"),
+          style: "cancel"
+        },
+        // Button: Yes, proceed with deletion
+        {
+          text: "Yes",
+          onPress: async () => {
+            try {
+              await deletePaymentMethodForUser(userId, params?.id);
+              console.log("Payment method deleted successfully");
+              
+              // Notify the user of success
+              Alert.alert(
+                "Success",
+                "Your payment method was deleted successfully!",
+                [{ text: "OK", onPress: () => navigation.navigate('PaymentMethods') }]
+              );
+              
+              // Optionally, fetch the updated list of payment methods
+              const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
+              navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
+              
+            } catch (error) {
+              console.error("Failed to delete payment method", error);
+              // Optionally, inform the user of the error
+              Alert.alert("Error", "Failed to delete the payment method.");
+            }
+          }
+        }
+      ],
+      { cancelable: true } // This allows the alert to be dismissed by tapping outside of it
+    );
   };
+  
 
   return (
     <View>

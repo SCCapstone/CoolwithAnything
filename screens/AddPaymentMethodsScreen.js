@@ -22,7 +22,7 @@ const AddPaymentMethodsScreen = () => {
       console.log("Payment method saved successfully");
       Alert.alert(
         "Success", // Alert Title
-        "Your payment method was saved successfully.", // Alert Message
+        "Your payment method was saved successfully!", // Alert Message
         [
           {
             text: "OK",

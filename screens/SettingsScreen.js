@@ -141,43 +141,43 @@ function SelectProfile() {
             <TextInput
               style={styles.modalInput}
               placeholder={firstName ? firstName : 'John'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedFirstName(text)}
             />
             <TextInput
               style={styles.modalInput}
               placeholder={lastName ? lastName : 'Doe'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedLastName(text)}
             />
             <TextInput
               style={styles.modalInput}
               placeholder={mobile ? mobile : '(123) 456-7890'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedMobile(text)}
             />
             <TextInput
               style={styles.modalInput}
               placeholder={fitnessGoal ? fitnessGoal : 'Fitness Goal'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedFitnessGoal(text)}
             />
             <TextInput
               style={styles.modalInput}
               placeholder={fitnessLevel ? fitnessLevel : 'Fitness Level'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedFitnessLevel(text)}
             />
             <TextInput
               style={styles.modalInput}
               placeholder={height ? height : 'Height (in)'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedHeight(text)}
             />
             <TextInput
               style={styles.modalInput}
               placeholder={weight ? weight : 'Weight (lbs)'}
-              placeholderTextColor={'#ddd'}
+              placeholderTextColor={'#cdcbca'}
               onChangeText={(text) => setEditedWeight(text)}
             />
             <View style={styles.modalButtonContainer}>
@@ -249,9 +249,27 @@ function SelectAccount() {
             <Text style={styles.accountText}>QR Code</Text>
           </Pressable>
         </View>
-        <Pressable style={styles.editButton} onPress={() => navigation.navigate('Login')}>
+        <Pressable
+          style={styles.editButton}
+          onPress={() => {
+            Alert.alert(
+              "Sign Out", // Alert Title
+              "Are you sure you would like to sign out?", // Alert Message
+              [
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                  style: "cancel"
+                },
+                { text: "Yes", onPress: () => navigation.navigate('Login') }
+              ],
+              { cancelable: false }
+            );
+          }}
+        >
           <Text style={styles.buttonText}>Sign Out</Text>
         </Pressable>
+
       </ScrollView>
     </View>
     );
