@@ -138,18 +138,20 @@ function SelectProfile() {
         <Modal visible={isModalVisible} animationType="slide" transparent={true}>
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Edit Profile Information</Text>
-            <TextInput
-              style={styles.modalInput}
-              placeholder={firstName ? firstName : 'John'}
-              placeholderTextColor={'#cdcbca'}
-              onChangeText={(text) => setEditedFirstName(text)}
-            />
-            <TextInput
-              style={styles.modalInput}
-              placeholder={lastName ? lastName : 'Doe'}
-              placeholderTextColor={'#cdcbca'}
-              onChangeText={(text) => setEditedLastName(text)}
-            />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '80%' }}>
+              <TextInput
+                style={{ ...styles.modalInput, flex: 1, marginRight: 10 }}
+                placeholder={firstName ? firstName : 'John'}
+                placeholderTextColor={'#cdcbca'}
+                onChangeText={(text) => setEditedFirstName(text)}
+              />
+              <TextInput
+                style={{ ...styles.modalInput, flex: 1 }}
+                placeholder={lastName ? lastName : 'Doe'}
+                placeholderTextColor={'#cdcbca'}
+                onChangeText={(text) => setEditedLastName(text)}
+              />
+            </View>
             <TextInput
               style={styles.modalInput}
               placeholder={mobile ? mobile : '(123) 456-7890'}

@@ -44,14 +44,6 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 2,
     borderColor: 'rgba(0, 0, 0, 0.15)',
-    /*
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 7 }, // Shadow offset x, y
-    shadowOpacity: 0.3, // Shadow opacity
-    shadowRadius: 2, // Shadow blur radius
-    // Android Shadow
-    elevation: 5,
-    */
   },
   buttonText: {
     color: 'white',
