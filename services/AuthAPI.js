@@ -222,6 +222,20 @@ export const fetchTasksForUser = async (userId) => {
   }
 };
 
+export const countTasksForUser = async (userId) => {
+  try {
+    const tasksRef = collection(db, "users", userId, "tasks");
+    const querySnapshot = await getDocs(tasksRef);
+    const tasksCount = querySnapshot.size;
+
+    console.log('Total tasks for user ${userId}: ${tasksCount}');
+    return tasksCount;
+  } catch (error) {
+    console.error("Error fetching task count: ", error);
+    throw error;
+  }
+};
+
 export const updateUserProfile = async (userId, updatedData) => {
   try {
     const userDocRef = doc(db, "users", userId);

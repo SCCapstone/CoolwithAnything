@@ -10,15 +10,16 @@ const styles = StyleSheet.create({
     },
     progressBar: {
       height: '100%',
-      backgroundColor: 'purple',
+      backgroundColor: 'pink',
       borderRadius: 10,
     },
     progressText: {
       position: 'absolute',
       left: '50%',
       top: '50%',
-      transform: [{ translateX: -25 }, { translateY: -10 }],
-      color: 'white',
+      transform: [{ translateX: -25 }, { translateY: -0 }],
+      color: 'black',
+      fontWeight: 'heavy', 
     },
   });
 
