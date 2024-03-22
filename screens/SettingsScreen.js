@@ -5,7 +5,6 @@ import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import styles from '../styles/settingsStyles';
-import { useTheme } from '../services/ThemeContext'
 
 function SelectProfile() {
   const navigation = useNavigation();

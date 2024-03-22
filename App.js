@@ -8,7 +8,6 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { WorkoutsProvider } from "./services/WorkoutsContext";
 import { MealsProvider } from "./services/MealsContext.js";
 import MainNavigator from "./navigators/MainNavigator";
-import { ThemeProvider } from "./services/ThemeContext.js"
 // import { styles } from "./styles/ThemesStyle.js";
 // import UseDarkMode from "./components/UseDarkMode";
 
