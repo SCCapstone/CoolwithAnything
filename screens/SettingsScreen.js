@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView} from 'react-native';
+import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import styles from '../styles/settingsStyles';
-import ThemeToggle from '../components/ThemeToggle';
+import { useTheme } from '../services/ThemeContext'
 
 function SelectProfile() {
   const navigation = useNavigation();
@@ -14,19 +14,19 @@ function SelectProfile() {
   const userId = auth.currentUser ? auth.currentUser.uid : null;
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [firstName, setFirstName] = useState(''); // Changed from address
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [mobile, setMobile] = useState('');
-  const [fitnessGoal, setFitnessGoal] = useState(''); // Changed from address
+  const [fitnessGoal, setFitnessGoal] = useState('');
   const [fitnessLevel, setFitnessLevel] = useState('');
-  const [height, setHeight] = useState(''); // Changed from address
+  const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
-  const [editedFirstName, setEditedFirstName] = useState(''); // Changed from editedAddress
+  const [editedFirstName, setEditedFirstName] = useState(''); 
   const [editedLastName, setEditedLastName] = useState('');
   const [editedMobile, setEditedMobile] = useState('');
-  const [editedFitnessGoal, setEditedFitnessGoal] = useState(''); // Changed from editedAddress
+  const [editedFitnessGoal, setEditedFitnessGoal] = useState(''); 
   const [editedFitnessLevel, setEditedFitnessLevel] = useState('');
-  const [editedHeight, setEditedHeight] = useState(''); // Changed from editedAddress
+  const [editedHeight, setEditedHeight] = useState('');
   const [editedWeight, setEditedWeight] = useState('');
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function SelectProfile() {
         <View style={{ width: 24 }} />
       </View>
       
-      <ScrollView style={styles.container}>              
+      <ScrollView style={styles.container}>   
         <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
         <Text style={styles.profileID}>User ID: {userId}</Text>
 
@@ -316,7 +316,7 @@ function SelectOthers() {
         <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
         <Text style={styles.profileID}>User ID: {userId}</Text>
         <View style={styles.rowContainer}>
-        <Pressable style={styles.pageButton} onPress={() => Alert.alert('Changing color theme is not supported right now.')}>
+          <Pressable style={styles.pageButton} onPress={() => Alert.alert('Changing color theme is not supported right now.')}>
             <Text style={styles.accountText}>Color Theme</Text>
           </Pressable>
           <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
