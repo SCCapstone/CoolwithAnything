@@ -7,6 +7,7 @@ import { UserProvider } from "./services/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { WorkoutsProvider } from "./services/WorkoutsContext";
 import { MealsProvider } from "./services/MealsContext.js";
+import { ThemeProvider } from './services/ThemeContext.js';
 import MainNavigator from "./navigators/MainNavigator";
 // import { styles } from "./styles/ThemesStyle.js";
 // import UseDarkMode from "./components/UseDarkMode";
@@ -18,13 +19,15 @@ export default function App() {
 
   return (
     <ActionSheetProvider>
-      <UserProvider>
-        <WorkoutsProvider>
-          <MealsProvider>
-            <MainNavigator />
-          </MealsProvider>
-        </WorkoutsProvider>
-      </UserProvider>
+      <ThemeProvider>
+        <UserProvider>
+          <WorkoutsProvider>
+            <MealsProvider>
+              <MainNavigator />
+            </MealsProvider>
+          </WorkoutsProvider>
+        </UserProvider>
+      </ThemeProvider> 
     </ActionSheetProvider>
   );
 }

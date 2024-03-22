@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: theme === 'light' ? 'white' : "red",
+  },
   settingsTextContainer: {
     flexDirection: 'row',
     height: 80,
@@ -165,4 +169,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default getStyles;

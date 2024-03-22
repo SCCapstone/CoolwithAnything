@@ -4,13 +4,16 @@ import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import styles from '../styles/settingsStyles';
+import { useTheme } from '../services/ThemeContext';
+import getStyles from '../styles/settingsStyles';
 
 function SelectProfile() {
   const navigation = useNavigation();
   const auth = getAuth();
   const db = getFirestore();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [firstName, setFirstName] = useState('');
@@ -82,7 +85,7 @@ function SelectProfile() {
   const closeModal = () => setModalVisible(false);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.screen}>
       <View style={styles.settingsTextContainer}>
       <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
@@ -201,6 +204,8 @@ function SelectAccount() {
   const auth = getAuth();
   const db = getFirestore();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const [firstName, setFirstName] = useState(''); // Changed from address
   const [lastName, setLastName] = useState('');
@@ -222,7 +227,7 @@ function SelectAccount() {
   }, [userId]);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.screen}>
       <View style={styles.settingsTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
@@ -281,6 +286,8 @@ function SelectOthers() {
   const auth = getAuth();
   const db = getFirestore();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme, toggleTheme } = useTheme();
+  const styles = getStyles(theme);
 
   const [firstName, setFirstName] = useState(''); // Changed from address
   const [lastName, setLastName] = useState('');
@@ -302,7 +309,7 @@ function SelectOthers() {
   }, [userId]);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.screen}>
       <View style={styles.settingsTextContainer}>
       <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
@@ -330,7 +337,7 @@ function SelectOthers() {
             <Text style={styles.accountText}>Version</Text>
           </Pressable>
         </View>
-        <Pressable style={styles.editButton} onPress={() => Alert.alert('Dark Mode Button')}>
+        <Pressable style={styles.editButton} onPress={toggleTheme}>
           <Text style={styles.buttonText}>Dark Mode</Text>
         </Pressable>
       </ScrollView>
@@ -338,7 +345,7 @@ function SelectOthers() {
   );
 }
 
-const TabBar = ({ activeTab, setActiveTab }) => (
+const TabBar = ({ activeTab, setActiveTab, styles }) => (
   <View style={styles.tabContainer}>
     {['Profile', 'Account', 'Others'].map((tab) => (
       <Pressable
@@ -365,17 +372,19 @@ const TabBar = ({ activeTab, setActiveTab }) => (
 
 const SettingsScreen = () => {
   const [activeTab, setActiveTab] = useState('Profile');
+  const { theme, toggleTheme } = useTheme();
+  const styles = getStyles(theme);
 
   const renderTab = () => {
     switch (activeTab) {
       case 'Profile':
-        return <SelectProfile />;
+        return <SelectProfile theme={theme}/>;
       case 'Account':
-        return <SelectAccount />;
+        return <SelectAccount theme={theme}/>;
       case 'Others':
-        return <SelectOthers />;
+        return <SelectOthers theme={theme} toggleTheme={toggleTheme}/>;
       default:
-        return <SelectProfile />;
+        return <SelectProfile theme={theme}/>;
     }
   };
 
@@ -385,7 +394,7 @@ const SettingsScreen = () => {
         {renderTab(activeTab)}
       </View>
       <View style={styles.tabBarContainer}>
-        <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <TabBar activeTab={activeTab} setActiveTab={setActiveTab} styles={styles}/>
       </View>
     </View>
   );
