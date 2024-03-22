@@ -21,13 +21,7 @@ export default function App() {
       <UserProvider>
         <WorkoutsProvider>
           <MealsProvider>
-            {/* <ThemeProvider theme={themeMode}>
-          <>
-            <GlobalStyles />
-            <Toggle theme={theme} toggleTheme={themeToggler} /> */}
             <MainNavigator />
-            {/* </> */}
-            {/* </ThemeProvider> */}
           </MealsProvider>
         </WorkoutsProvider>
       </UserProvider>
