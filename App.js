@@ -9,8 +9,8 @@ import MainNavigator from "./navigators/MainNavigator";
 export default function App() {
 
   return (
-    <ActionSheetProvider>
-      <ThemeProvider>
+    <ThemeProvider>
+      <ActionSheetProvider>
         <UserProvider>
           <WorkoutsProvider>
             <MealsProvider>
@@ -18,7 +18,7 @@ export default function App() {
             </MealsProvider>
           </WorkoutsProvider>
         </UserProvider>
-      </ThemeProvider> 
-    </ActionSheetProvider>
+      </ActionSheetProvider>
+    </ThemeProvider>
   );
 }

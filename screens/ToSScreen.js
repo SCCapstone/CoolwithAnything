@@ -1,12 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, Pressable, ScrollView } from 'react-native';
+import { useTheme } from '../services/ThemeContext';
 import { useNavigation } from '@react-navigation/core';
-import styles from "../styles/ToSStyles";
+import getStyles from "../styles/ToSStyles";
 
 const ToSScreen = () => {
   const navigation = useNavigation();
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View style={styles.header}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>←</Text>
@@ -264,8 +268,7 @@ const ToSScreen = () => {
                 </Text>
                 <Text style={styles.contentParagraph}>
                 Questions about the Terms of Service should be sent to us at schedulerx@schedx.com.
-                </Text>
-                    
+                </Text>                 
             </View>
         </View>
     </ScrollView>

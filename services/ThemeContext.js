@@ -35,7 +35,6 @@ export const ThemeProvider = ({ children }) => {
     // Don't forget to unsubscribe from the observer when the component unmounts
     return () => unsubscribe();
   }, []);
-  
 
   const toggleTheme = async () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -56,7 +55,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme}}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

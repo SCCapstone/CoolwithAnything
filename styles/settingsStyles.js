@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const getStyles = (theme) => StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: theme === 'light' ? 'white' : "red",
+    backgroundColor: theme === 'light' ? 'white' : "#262626",
   },
   settingsTextContainer: {
     flexDirection: 'row',
@@ -30,6 +30,7 @@ const getStyles = (theme) => StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Arial',
     marginBottom: 7,
+    color: theme === 'light' ? 'black' : 'white',
   },
   profileID: {
     marginBottom: 40,
@@ -38,6 +39,10 @@ const getStyles = (theme) => StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
+    color: theme === 'light' ? 'black' : 'white',
+  },
+  labelText: {
+    color: theme === 'light' ? 'black' : 'white',
   },
   editButton: {
     marginTop: 40,

@@ -102,35 +102,35 @@ function SelectProfile() {
           <View style={{ width: 125, alignItems: 'flex-start' }}>
             <Text style={styles.label}>Phone:</Text>
           </View>
-          <Text style={styles.text}>{mobile}</Text>
+          <Text style={styles.labelText}>{mobile}</Text>
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={{ width: 125, alignItems: 'flex-start' }}>
             <Text style={styles.label}>Fitness Goal:</Text>
           </View>
-          <Text style={styles.text}>{fitnessGoal}</Text>
+          <Text style={styles.labelText}>{fitnessGoal}</Text>
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={{ width: 125, alignItems: 'flex-start' }}>
             <Text style={styles.label}>Fitness Level:</Text>
           </View>
-          <Text style={styles.text}>{fitnessLevel}</Text>
+          <Text style={styles.labelText}>{fitnessLevel}</Text>
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={{ width: 125, alignItems: 'flex-start' }}>
             <Text style={styles.label}>Height (in):</Text>
           </View>
-          <Text style={styles.text}>{height}</Text>
+          <Text style={styles.labelText}>{height}</Text>
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={{ width: 125, alignItems: 'flex-start' }}>
             <Text style={styles.label}>Weight (lbs):</Text>
           </View>
-          <Text style={styles.text}>{weight}</Text>
+          <Text style={styles.labelText}>{weight}</Text>
         </View>
 
         <Pressable style={styles.editButton} onPress={openModal}>
