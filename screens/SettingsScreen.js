@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView } from 'react-native';
+import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import { updateUserThemePreference, useTheme } from '../services/ThemeContext';
+import { useTheme } from '../services/ThemeContext';
 import getStyles from '../styles/settingsStyles';
 
 function SelectProfile() {
@@ -370,8 +370,12 @@ const TabBar = ({ activeTab, setActiveTab, styles }) => (
 
 const SettingsScreen = () => {
   const [activeTab, setActiveTab] = useState('Profile');
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, loading } = useTheme();
   const styles = getStyles(theme);
+
+  if (loading) {
+    return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size="large" /></View>;
+  }
 
   const renderTab = () => {
     switch (activeTab) {
