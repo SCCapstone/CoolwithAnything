@@ -58,9 +58,10 @@ const HomeScreen = ({ route }) => {
       <AccountButton navigation={navigation} />
       <ProgressBar progress={taskCount}/>
       <View style={styles.categoryContainer}>
-        <CategoryCounter count={3} label="School" color="gold" />
-        <CategoryCounter count={2} label="Personal" color="skyblue" />
-        <CategoryCounter count={1} label="Gym" color="salmon" />
+        <CategoryCounter count={3} label="School" color="#57BCBE" />
+        <CategoryCounter count={2} label="Personal" color="#4BA4A6" />
+        <CategoryCounter count={1} label="Work" color="#408D8E" />
+        <CategoryCounter count={1} label="Gym" color="#347576" />
       </View>
       <Calendar userID={userID} navigation={navigation} birthday={userData.birthday}/>
       <BirthdayCelebration
