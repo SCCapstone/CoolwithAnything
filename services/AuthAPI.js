@@ -369,6 +369,20 @@ export const fetchTasksForUser = async (userId) => {
   }
 };
 
+export const updateUserThemePreference = async (userId, themePreference) => {
+  const db = getFirestore();
+  const userRef = doc(db, "users", userId); 
+
+  try {
+    await updateDoc(userRef, {
+      themePreference: themePreference,
+    });
+    console.log("Theme preference updated successfully");
+  } catch (error) {
+    console.error("Error updating theme preference: ", error);
+  }
+};
+
 export const updateUserProfile = async (userId, updatedData) => {
   try {
     const userDocRef = doc(db, "users", userId);

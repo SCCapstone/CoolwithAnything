@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
-import { useTheme } from '../services/ThemeContext';
+import { updateUserThemePreference, useTheme } from '../services/ThemeContext';
 import getStyles from '../styles/settingsStyles';
 
 function SelectProfile() {
@@ -207,7 +207,7 @@ function SelectAccount() {
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
-  const [firstName, setFirstName] = useState(''); // Changed from address
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   useEffect(() => {
@@ -289,7 +289,7 @@ function SelectOthers() {
   const { theme, toggleTheme } = useTheme();
   const styles = getStyles(theme);
 
-  const [firstName, setFirstName] = useState(''); // Changed from address
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   useEffect(() => {
@@ -307,6 +307,7 @@ function SelectOthers() {
       console.error("Error fetching user data:", error);
     });
   }, [userId]);
+  
 
   return (
     <View style={styles.screen}>
@@ -322,8 +323,8 @@ function SelectOthers() {
         <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
         <Text style={styles.profileID}>User ID: {userId}</Text>
         <View style={styles.rowContainer}>
-          <Pressable style={styles.pageButton} onPress={() => Alert.alert('Changing color theme is not supported right now.')}>
-            <Text style={styles.accountText}>Color Theme</Text>
+          <Pressable style={styles.pageButton} onPress={toggleTheme}>
+            <Text style={styles.accountText}>Dark Mode</Text>
           </Pressable>
           <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
             <Text style={styles.accountText}>Languages</Text>
@@ -337,9 +338,6 @@ function SelectOthers() {
             <Text style={styles.accountText}>Version</Text>
           </Pressable>
         </View>
-        <Pressable style={styles.editButton} onPress={toggleTheme}>
-          <Text style={styles.buttonText}>Dark Mode</Text>
-        </Pressable>
       </ScrollView>
     </View>
   );
