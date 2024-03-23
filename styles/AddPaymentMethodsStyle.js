@@ -1,9 +1,12 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
+  screen : {
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+  },
     container: {
       flex: 1,
-      backgroundColor: '#f5f5f5', 
+      backgroundColor: theme === 'dark' ? '#262626' : "white",
       position: 'relative', 
     },
     header: {
@@ -35,6 +38,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     label: {
+      color: theme === 'dark' ? 'white' : 'black',
       marginRight: 10, // Add some margin to the right of the label for spacing
       fontWeight: 'bold',
       marginTop: 1,
@@ -45,14 +49,16 @@ const styles = StyleSheet.create({
       margin: 12,
       marginBottom: 20,
       borderWidth: 1,
-      borderColor: '#ddd',
+      borderColor: 'grey',
       padding: 10,
       textAlignVertical: 'top', // Ensures text starts from the top
-      backgroundColor: '#fff',
+      color: theme === 'dark' ? 'white' : 'black',
       borderRadius: 5,
       width: '80%',
     },
     buttonContainer: {
+      position: 'absolute',
+      bottom: 70,
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
@@ -94,4 +100,4 @@ const styles = StyleSheet.create({
     },
   });
 
-  export default styles;
+  export default getStyles;

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/core'; 
+import { useTheme } from '../services/ThemeContext';
 import { fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
 import { getAuth } from 'firebase/auth';
-import styles from "../styles/PaymentMethodsStyle";
+import getStyles from "../styles/PaymentMethodsStyle";
 
 const PaymentMethodsScreen = () => {
   const navigation = useNavigation();
   const [paymentMethods, setPaymentMethods] = useState([]); // Initialize paymentMethods state
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -42,7 +45,7 @@ const PaymentMethodsScreen = () => {
   
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.screen}>
       
       <View style={styles.PMTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>

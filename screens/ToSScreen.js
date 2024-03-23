@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useTheme } from '../services/ThemeContext';
 import { useNavigation } from '@react-navigation/core';

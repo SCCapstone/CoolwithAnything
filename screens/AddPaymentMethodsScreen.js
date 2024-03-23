@@ -1,9 +1,10 @@
 import React, { useState} from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import { useTheme } from '../services/ThemeContext';
 import { savePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
 import { getAuth } from 'firebase/auth';
-import styles from "../styles/AddPaymentMethodsStyle";
+import getStyles from "../styles/AddPaymentMethodsStyle";
 
 const AddPaymentMethodsScreen = () => {
   const navigation = useNavigation();
@@ -15,6 +16,8 @@ const AddPaymentMethodsScreen = () => {
   const [ZIP, setZIP] = useState('');
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const handleSavePaymentMethod = async () => {
     try {
@@ -42,8 +45,7 @@ const AddPaymentMethodsScreen = () => {
   };
 
   return (
-    <View>
-
+    <View style={{ flex: 1 }}>
       <View style={styles.header}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>←</Text>
@@ -52,7 +54,7 @@ const AddPaymentMethodsScreen = () => {
         <View style={{width: 24}}/>
       </View>
 
-      <ScrollView>
+      <ScrollView style={styles.screen}>
         <View style={styles.container}>
           <View style={styles.contentContainer}>
             <View>
@@ -61,6 +63,7 @@ const AddPaymentMethodsScreen = () => {
               onChangeText={setNickname} 
               value={nickname} 
               placeholder="My Card"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -71,6 +74,7 @@ const AddPaymentMethodsScreen = () => {
               onChangeText={setCreditCard} 
               value={creditCard} 
               placeholder="1234 5678 9012 3456"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -81,6 +85,7 @@ const AddPaymentMethodsScreen = () => {
               onChangeText={setCVC} 
               value={CVC} 
               placeholder="123"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -91,6 +96,7 @@ const AddPaymentMethodsScreen = () => {
               onChangeText={setExpDate} 
               value={expDate} 
               placeholder="01/23"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View>
@@ -101,6 +107,7 @@ const AddPaymentMethodsScreen = () => {
               onChangeText={setName} 
               value={name} 
               placeholder="John Appleseed"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View>
@@ -111,6 +118,7 @@ const AddPaymentMethodsScreen = () => {
               onChangeText={setZIP} 
               value={ZIP} 
               placeholder="12345"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -118,12 +126,15 @@ const AddPaymentMethodsScreen = () => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.saveButtonContainer}>
-        <Pressable 
-          onPress={handleSavePaymentMethod}
-          style={styles.saveButton}>
-          <Text style={styles.saveButtonText}>Save Payment Method</Text>
-        </Pressable>
+
+      <View style={styles.buttonContainer}> 
+        <View style={styles.saveButtonContainer}>
+          <Pressable 
+            onPress={handleSavePaymentMethod}
+            style={styles.saveButton}>
+            <Text style={styles.saveButtonText}>Save Payment Method</Text>
+          </Pressable>
+        </View>
       </View>
 
     </View>
