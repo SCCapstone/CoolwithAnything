@@ -7,14 +7,18 @@ const styles = StyleSheet.create({
       position: 'relative', 
     },
     header: {
-      position: 'absolute', 
-      top: 45, 
-      left: 20, 
-      zIndex: 1, 
+      flexDirection: 'row',
+      height: 80,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#3e5e60',
+      paddingHorizontal: 20,
     },
     backText: {
-      fontSize: 18,
+      marginTop: 30,
+      fontSize: 24,
       fontWeight: '700',
+      color: 'white',
     },
     contentContainer: {
       marginTop: 25,
@@ -24,6 +28,8 @@ const styles = StyleSheet.create({
       marginTop: 85,
     },
     title: {
+      marginTop: 30,
+      color: 'white',
       fontSize: 24,
       fontWeight: 'bold',
       alignItems: 'center',
@@ -48,8 +54,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
       flexDirection: 'row',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
       alignItems: 'center',
+      paddingHorizontal: 10,
     },
     saveButtonContainer: {
       flex: 1,
@@ -60,14 +67,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     saveButton: {
-      backgroundColor: '#007bff',
+      backgroundColor: '#5da8af',
       padding: 10,
       borderRadius: 10,
       height: 60,
       justifyContent: 'center',
     },
     deleteButton: {
-      backgroundColor: 'red',
+      backgroundColor: '#c60e0b',
       padding: 10,
       borderRadius: 10,
       height: 60,

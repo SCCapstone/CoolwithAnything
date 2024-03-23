@@ -1,9 +1,36 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: theme === 'light' ? 'white' : "#262626",
+  },
+  settingsTextContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+    paddingHorizontal: 20,
+  },
+  settingsText: {
+    marginTop: 30,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+  backButton: {
+    fontSize: 24, 
+    fontWeight: 900, 
+    marginTop: 30, 
+    color: 'white',
+  },
   title: {
     fontSize: 35,
     textAlign: 'center',
+    fontFamily: 'Arial',
+    marginBottom: 7,
+    color: theme === 'light' ? 'black' : 'white',
   },
   profileID: {
     marginBottom: 40,
@@ -12,14 +39,20 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
+    color: theme === 'light' ? 'black' : 'white',
+  },
+  labelText: {
+    color: theme === 'light' ? 'black' : 'white',
   },
   editButton: {
     marginTop: 40,
     padding: 20,
-    backgroundColor: '#24A0ED', 
+    backgroundColor: '#5da8af', 
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    borderRadius: 50,
+    justifyContent: 'center',
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: 'rgba(0, 0, 0, 0.15)',
   },
   buttonText: {
     color: 'white',
@@ -39,9 +72,19 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     margin: 6,
-    backgroundColor: '#24A0ED',
+    backgroundColor: '#5da8af',
     justifyContent: 'center',
     borderRadius: 5,
+    borderWidth: 2,
+    borderColor: 'rgba(0, 0, 0, 0.15)',
+    /*
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 7 }, // Shadow offset x, y
+    shadowOpacity: 0.3, // Shadow opacity
+    shadowRadius: 2, // Shadow blur radius
+    // Android Shadow
+    elevation: 5,
+    */
   },
   accountText: {
     color: 'white',
@@ -53,7 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
   },
   modalTitle: {
     fontSize: 20,
@@ -80,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     margin: 6,
-    backgroundColor: '#24A0ED',
+    backgroundColor: '#5da8af',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -89,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     margin: 6,
-    backgroundColor: 'red',
+    backgroundColor: '#c60e0b',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -99,29 +142,36 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 20,
   },
+  tabBarContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+  },
   tabContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: 45,
-    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   tab: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    borderWidth: 1,
+    fontWeight: '900',
+    flex: 1,
+    justifyContent: 'center',
+    height: 100,
+    alignItems: 'center',
     borderColor: 'gray',
-    backgroundColor: '#fff',
+    backgroundColor: '#3e5e60',
   },
   activeTab: {
-    backgroundColor: '#24A0ED', 
+    backgroundColor: '#5da8af', 
   },
   tabText: {
-    color: 'gray', // Default text color
-  },
-  activeTabText: {
-    color: 'white', // Text color for the active tab
+    color: 'white',
+    fontWeight: "800",
+    fontSize: 24,
+    marginBottom: 10,
   },
 });
 
-export default styles;
+export default getStyles;
