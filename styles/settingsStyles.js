@@ -28,7 +28,6 @@ const getStyles = (theme) => StyleSheet.create({
   title: {
     fontSize: 35,
     textAlign: 'center',
-    fontFamily: 'Arial',
     marginBottom: 7,
     color: theme === 'light' ? 'black' : 'white',
   },
