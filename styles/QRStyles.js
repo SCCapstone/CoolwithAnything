@@ -17,7 +17,7 @@ const getStyles = (theme) => StyleSheet.create({
     backText: {
       marginTop: 30,
       fontSize: 24,
-      fontWeight: '700',
+      fontWeight: "700",
       color: 'white',
     },
     title: {

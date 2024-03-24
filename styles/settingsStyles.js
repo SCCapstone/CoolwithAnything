@@ -21,7 +21,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   backButton: {
     fontSize: 24, 
-    fontWeight: 900, 
+    fontWeight: "900", 
     marginTop: 30, 
     color: 'white',
   },
@@ -138,7 +138,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   modalText: {
     color: 'white',
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 20,
   },
   tabBarContainer: {
@@ -154,7 +154,7 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
   },
   tab: {
-    fontWeight: '900',
+    fontWeight: "900",
     flex: 1,
     justifyContent: 'center',
     height: 100,

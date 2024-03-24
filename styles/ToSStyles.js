@@ -20,14 +20,14 @@ const getStyles = (theme) => StyleSheet.create({
   backText: {
     marginTop: 30,
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
     color: 'white',
   },
   title: {
     marginTop: 30,
     color: 'white',
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     alignItems: 'center',
   },
   contentTitleContainer: {
@@ -36,14 +36,14 @@ const getStyles = (theme) => StyleSheet.create({
   },
   contentTitleText: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: -20,
   },
   content: {
     padding: 20,
   },
   contentHeader: {
-    fontWeight: '800',
+    fontWeight: "800",
     color: theme === 'dark' ? 'white' : 'black',
     marginTop: 20,
   },
