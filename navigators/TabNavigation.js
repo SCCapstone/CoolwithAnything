@@ -86,7 +86,7 @@ const TabNavigator = ({ route }) => {
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );
         },
-        tabBarActiveTintColor: "tomato",
+        tabBarActiveTintColor: "#5da8af",
         tabBarInactiveTintColor: "gray",
         tabBarStyle: [{ display: "flex" }, null],
       })}
