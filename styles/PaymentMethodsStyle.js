@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+  },
   PMTextContainer: {
     position: 'relative',
     flexDirection: 'row',
@@ -27,6 +31,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     paddingVertical: 20,
+    color: theme === 'dark' ? 'white' : 'black',
   },
   addPaymentContainer: {
     flexDirection: 'row',
@@ -75,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default getStyles;

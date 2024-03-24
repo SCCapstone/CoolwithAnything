@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useTheme } from '../services/ThemeContext';
 import { useNavigation } from '@react-navigation/core';
@@ -10,7 +10,7 @@ const ToSScreen = () => {
   const styles = getStyles(theme);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.screen}>
       <View style={styles.header}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>←</Text>

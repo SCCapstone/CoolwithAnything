@@ -9,12 +9,16 @@ import BirthdayCelebration from "../components/BDCelebration";
 import AccountButton from "../components/AccountButton";
 import { useNavigation } from "@react-navigation/native";
 import { countTasksForUser, getUserData } from "../services/AuthAPI";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/HomeScreenStyles";
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userID } = route.params;
   const [userData, setUserData] = useState({ name: '', birthday: ''});
   const [taskCount, setTaskCount] = useState(0);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,17 +75,5 @@ const HomeScreen = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-  categoryContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
-  },
-});
 
 export default HomeScreen;

@@ -1,7 +1,7 @@
 // CreateTaskScreen.js
 import React from "react";
 import { useState } from "react";
-import { ScrollView, StyleSheet, Alert } from "react-native";
+import { ScrollView, Alert } from "react-native";
 import Header from "./Header";
 import InputField from "./InputField";
 import DateTimePicker from "./DateTimePicker";
@@ -12,6 +12,8 @@ import { saveTaskForUser } from "../services/AuthAPI";
 import eventEmitter from "./EventEmitter";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/AddStyles";
 
 const CreateTaskScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -22,6 +24,8 @@ const CreateTaskScreen = ({ route }) => {
   const [comment, setComment] = useState("");
   const [date, setDate] = useState(new Date());
   const [priority, setPriority] = useState("medium");
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const handleclose = () => {
     setTaskName("");
@@ -89,12 +93,5 @@ const CreateTaskScreen = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-});
 
 export default CreateTaskScreen;

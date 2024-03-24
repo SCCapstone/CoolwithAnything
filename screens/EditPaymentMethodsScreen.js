@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, ScrollView, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/core'; // useRoute to receive parameters
 import { deletePaymentMethodForUser, updatePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI"; 
 import { getAuth } from 'firebase/auth';
-import styles from "../styles/AddPaymentMethodsStyle"; 
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/AddPaymentMethodsStyle"; 
 
 const EditPaymentMethodsScreen = () => {
   const navigation = useNavigation();
   const { params } = useRoute();
   const auth = getAuth();
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const userId = auth.currentUser ? auth.currentUser.uid : null;
 
   const [nickname, setNickname] = useState(params?.nickname || '');
@@ -88,7 +91,7 @@ const EditPaymentMethodsScreen = () => {
   
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.header}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>←</Text>
@@ -97,15 +100,16 @@ const EditPaymentMethodsScreen = () => {
         <View style={{width: 24}}/>
       </View>
 
-      <ScrollView>
+      <ScrollView style={styles.screen}>
         <View style={styles.container}>
           <View style={styles.contentContainer}>
             <View>
               <Text style={styles.label}>Nickname:</Text>
               <TextInput style={styles.input} 
               onChangeText={setNickname} 
-              value={nickname} 
-              placeholder="My Card"
+              value={nickname}
+              placeholder={nickname ? nickname : 'My Card'}
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -114,8 +118,9 @@ const EditPaymentMethodsScreen = () => {
               <Text style={styles.label}>Credit Card:</Text>
               <TextInput style={[styles.input, {width: '43%'}]}
               onChangeText={setCreditCard} 
-              value={creditCard} 
-              placeholder="1234 5678 9012 3456"
+              value={creditCard}
+              placeholder={creditCard ? creditCard : "1234 5678 9012 3456"}
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -126,6 +131,7 @@ const EditPaymentMethodsScreen = () => {
               onChangeText={setCVC} 
               value={CVC} 
               placeholder="123"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
@@ -136,6 +142,7 @@ const EditPaymentMethodsScreen = () => {
               onChangeText={setExpDate} 
               value={expDate} 
               placeholder="01/23"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View>
@@ -146,6 +153,7 @@ const EditPaymentMethodsScreen = () => {
               onChangeText={setName} 
               value={name} 
               placeholder="John Appleseed"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View>
@@ -156,6 +164,7 @@ const EditPaymentMethodsScreen = () => {
               onChangeText={setZIP} 
               value={ZIP} 
               placeholder="12345"
+              placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
             </View> 
