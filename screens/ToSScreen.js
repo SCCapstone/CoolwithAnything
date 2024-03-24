@@ -10,7 +10,7 @@ const ToSScreen = () => {
   const styles = getStyles(theme);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.screen}>
       <View style={styles.header}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>←</Text>

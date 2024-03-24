@@ -51,7 +51,7 @@ const getStyles = (theme) => StyleSheet.create({
       borderWidth: 1,
       borderColor: 'grey',
       padding: 10,
-      textAlignVertical: 'top', // Ensures text starts from the top
+      textAlignVertical: 'top',
       color: theme === 'dark' ? 'white' : 'black',
       borderRadius: 5,
       width: '80%',

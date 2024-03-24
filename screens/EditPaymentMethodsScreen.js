@@ -107,8 +107,8 @@ const EditPaymentMethodsScreen = () => {
               <Text style={styles.label}>Nickname:</Text>
               <TextInput style={styles.input} 
               onChangeText={setNickname} 
-              value={nickname} 
-              placeholder="My Card"
+              value={nickname}
+              placeholder={nickname ? nickname : 'My Card'}
               placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
@@ -118,8 +118,8 @@ const EditPaymentMethodsScreen = () => {
               <Text style={styles.label}>Credit Card:</Text>
               <TextInput style={[styles.input, {width: '43%'}]}
               onChangeText={setCreditCard} 
-              value={creditCard} 
-              placeholder="1234 5678 9012 3456"
+              value={creditCard}
+              placeholder={creditCard ? creditCard : "1234 5678 9012 3456"}
               placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>

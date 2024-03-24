@@ -70,10 +70,10 @@ const AddPaymentMethodsScreen = () => {
             
             <View>
               <Text style={styles.label}>Credit Card:</Text>
-              <TextInput style={[styles.input, {width: '43%'}]}
+              <TextInput style={[styles.input, {width: '13%'}]} 
               onChangeText={setCreditCard} 
               value={creditCard} 
-              placeholder="1234 5678 9012 3456"
+              placeholder="123"
               placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>

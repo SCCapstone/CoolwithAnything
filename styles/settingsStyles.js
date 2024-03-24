@@ -30,6 +30,7 @@ const getStyles = (theme) => StyleSheet.create({
     textAlign: 'center',
     marginBottom: 7,
     color: theme === 'light' ? 'black' : 'white',
+    fontWeight: '700',
   },
   profileID: {
     marginBottom: 40,
