@@ -8,9 +8,10 @@ import {
   Modal,
   Text,
 } from "react-native";
-import styles from "../styles/SearchBarStyle.js";
 import CookbookStyle from "../styles/CookbookStyle.js";
 import CookbookAPI from "../APIs/CookbookAPI.js";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/SearchBarStyle.js";
 
 const SearchMeal = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
@@ -18,6 +19,9 @@ const SearchMeal = ({ setSearchTerm }) => {
   const [loading, setLoading] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const handleSearch = () => {
     setLoading(true);
@@ -76,6 +80,7 @@ const SearchMeal = ({ setSearchTerm }) => {
             value={input}
             onChangeText={(text) => setInput(text)}
             placeholder="What are you looking for?"
+            placeholderTextColor="grey"
           />
         </View>
 

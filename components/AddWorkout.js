@@ -1,6 +1,6 @@
 // CreateWorkoutScreen.js
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, TextInput } from "react-native";
+import { ScrollView, View, TextInput } from "react-native";
 import WorkoutHeader from "./WorkoutHeader";
 import InputField from "./InputField"; // Reused from Create Task
 import ExerciseItem from "./ExerciseItem";
@@ -10,6 +10,8 @@ import CreateButton from "./CreateButton"; // Reused from Create Task
 import { useWorkouts } from "../services/WorkoutsContext";
 import { useNavigation } from "@react-navigation/native";
 import { addWorkoutData } from "../services/AuthAPI";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/AddStyles";
 
 const AddWorkout = ({ route }) => {
   //const [selectedDays, setSelectedDays] = useState([]);
@@ -22,6 +24,8 @@ const AddWorkout = ({ route }) => {
   const [workoutEquipment, setWorkoutEquipment] = useState("");
   const [workoutDifficulty, setWorkoutDifficulty] = useState("");
   const [workoutInstructions, setWorkoutInstructions] = useState("");
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const handleclose = () => {
     setWorkoutName("");
@@ -94,12 +98,5 @@ const AddWorkout = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-});
 
 export default AddWorkout;
