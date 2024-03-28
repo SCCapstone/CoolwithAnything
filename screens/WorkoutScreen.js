@@ -15,7 +15,7 @@ const WorkoutScreen = ({ route }) => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "BrowseWorkouts":
-        return <BrowseWorkouts />;
+        return <BrowseWorkouts userID={userID} />;
       case "SavedWorkouts":
         return <SavedWorkouts userID={userID} />; // No props passed here
       default:

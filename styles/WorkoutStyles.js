@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
   },
-  modalHeader: {
+  cardModalHeader: {
     fontSize: 20,
     fontWeight: "bold",
+    padding: 16,
   },
   modalContent: {
     padding: 16,
-    height: 10,
   },
   closeButton1: {
     color: "blue",

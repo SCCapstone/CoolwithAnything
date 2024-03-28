@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WorkoutCards from "../components/WorkoutCards.js";
 
-const WorkoutApi = ({ query }) => {
+const WorkoutApi = ({ query, route }) => {
   const [apiData, setApiData] = useState([]);
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState("");
@@ -36,6 +36,7 @@ const WorkoutApi = ({ query }) => {
       handleCardPress={handleCardPress}
       selectedExercise={selectedExercise}
       closeModal={() => setSelectedExercise("")}
+      route={route}
     />
   );
 };

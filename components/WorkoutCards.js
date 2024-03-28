@@ -1,17 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
 import styles from "../styles/WorkoutStyles.js";
+import { addWorkoutData } from "../services/AuthAPI";
+import { useWorkouts } from "../services/WorkoutsContext";
 
 const WorkoutCards = ({
   apiData,
   handleCardPress,
   selectedExercise,
   closeModal,
+  route,
 }) => {
-  const [setModalVisible] = useState(false);
+  const { userID } = route.userID;
+  const [modalVisible, setModalVisible] = useState(false);
+  const { savedWorkouts, setSavedWorkouts } = useWorkouts();
+  const [workoutName, setWorkoutName] = useState("");
+  const [workoutType, setWorkoutType] = useState("");
+  const [workoutMuscle, setWorkoutMuscle] = useState("");
+  const [workoutEquipment, setWorkoutEquipment] = useState("");
+  const [workoutDifficulty, setWorkoutDifficulty] = useState("");
+  const [workoutInstructions, setWorkoutInstructions] = useState("");
+
   const handleCloseModal = () => {
     closeModal();
   };
+
+  const handleAddExercise = async () => {
+    // Save the selected exercise to workout data state variables
+    setWorkoutName(selectedExercise.name);
+    setWorkoutType(selectedExercise.type);
+    setWorkoutMuscle(selectedExercise.muscle);
+    setWorkoutEquipment(selectedExercise.equipment);
+    setWorkoutDifficulty(selectedExercise.difficulty);
+    setWorkoutInstructions(selectedExercise.instructions);
+  
+    // Create the workout object
+    const addWorkout = {
+      workoutName,
+      workoutType,
+      workoutMuscle,
+      workoutEquipment,
+      workoutDifficulty,
+      workoutInstructions,
+    };
+  
+    // Add the workout data
+    await addWorkoutData(userID, addWorkout);
+    setSavedWorkouts((savedWorkouts) => [...savedWorkouts, addWorkout]);
+  
+    // Reset the workout data state variables if needed
+    setWorkoutName("");
+    setWorkoutType("");
+    setWorkoutMuscle("");
+    setWorkoutEquipment("");
+    setWorkoutDifficulty("");
+    setWorkoutInstructions("");
+  
+    console.log(addWorkout);
+  };
+  
 
   return (
     <ScrollView>
@@ -39,7 +86,7 @@ const WorkoutCards = ({
         onRequestClose={closeModal}
       >
         <View>
-          <Text style={styles.modalHeader}>Exercise Details</Text>
+          <Text style={styles.cardModalHeader}>Exercise Details</Text>
           {selectedExercise && (
             <View style={styles.modalContent}>
               <Text>
@@ -66,6 +113,10 @@ const WorkoutCards = ({
               </Text>
             </View>
           )}
+          {/* Add button */}
+{      /*    <TouchableOpacity onPress={handleAddExercise}>
+            <Text style={styles.addButton}>Add</Text>
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={handleCloseModal}>
             <Text style={styles.closeButton1}>Close</Text>
           </TouchableOpacity>

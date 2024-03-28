@@ -12,7 +12,7 @@ import styles from "../styles/WorkoutStyles";
 import SearchBar from "./SearchWorkout";
 import { style } from "deprecated-react-native-prop-types/DeprecatedViewPropTypes";
 
-const BrowseWorkouts = () => {
+const BrowseWorkouts = (route) => {
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const handleQueryButtonClick = (exercise) => {
@@ -100,7 +100,7 @@ const BrowseWorkouts = () => {
             </TouchableOpacity>
           </View>
           {/* Render WorkoutApi component with the selected query */}
-          {selectedExercise && <WorkoutApi query={selectedExercise} />}
+          {selectedExercise && <WorkoutApi query={selectedExercise} route={route}/>}
         </View>
       </Modal>
     </View>

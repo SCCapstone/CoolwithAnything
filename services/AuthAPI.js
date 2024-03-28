@@ -75,6 +75,18 @@ export const getUserData = async (userId) => {
   }
 };
 
+export const getUserID = async (userId) => {
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    return userId; // Return the user ID if the document exists
+  } else {
+    console.log("No such document!");
+    return null;
+  }
+};
+
 // Authentication and Firestore functions
 export const loginUser = async (email, password) => {
   try {
