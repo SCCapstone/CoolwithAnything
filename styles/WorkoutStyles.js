@@ -1,5 +1,11 @@
 import { StyleSheet } from "react-native";
 
+const imageStyles = (aspectRatio) => ({
+  width: 400,
+  flex: 1,
+  aspectRatio: aspectRatio,
+});
+
 const styles = StyleSheet.create({
   header: {
     fontSize: 18,
@@ -27,23 +33,24 @@ const styles = StyleSheet.create({
   modalHeader: {
     fontSize: 20,
     fontWeight: "bold",
-    padding: 16,
   },
   modalContent: {
     padding: 16,
+    height: 10,
   },
   closeButton1: {
     color: "blue",
     fontSize: 16,
     padding: 16,
   },
+  headerContainer: {
+    flexDirection: "row",
+    padding: 20,
+    justifyContent: "space-between",
+  },
   closeButton2: {
     color: "red",
     fontSize: 20,
-    textAlign: "center",
-    width: 70,
-    padding: 8,
-    marginLeft: 330,
   },
   addButton: {
     color: "blue",
@@ -68,22 +75,21 @@ const styles = StyleSheet.create({
   },
   imageBiceps: {
     height: 210,
-    width: 400,
     flex: 1,
   },
   imageGlutes: {
     height: 170,
-    width: 400,
+
     flex: 1,
   },
   imageAbs: {
     height: 140,
-    width: 400,
+
     flex: 1,
   },
   imageLegs: {
     height: 170,
-    width: 400,
+
     flex: 1,
   },
   buttonText: {

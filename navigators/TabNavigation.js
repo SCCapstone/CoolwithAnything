@@ -86,8 +86,10 @@ const TabNavigator = ({ route }) => {
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );
         },
-        tabBarActiveTintColor: "#5da8af",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "white",
+        tabBarActiveBackgroundColor: "#5da8af",
+        tabBarInactiveBackgroundColor: "#3e5e60",
         tabBarStyle: [{ display: "flex" }, null],
       })}
     >
@@ -169,7 +171,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 35,
-    backgroundColor: "white", // Use the color of your tab bar for the background
+    backgroundColor: "#466e70", // Use the color of your tab bar for the background
     position: "relative", // Position absolutely within the parent container
     shadowOpacity: 0.3,
     shadowRadius: 4,

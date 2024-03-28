@@ -10,6 +10,7 @@ import {
 import WorkoutApi from "../APIs/WorkoutAPI";
 import styles from "../styles/WorkoutStyles";
 import SearchBar from "./SearchWorkout";
+import { style } from "deprecated-react-native-prop-types/DeprecatedViewPropTypes";
 
 const BrowseWorkouts = () => {
   const [selectedExercise, setSelectedExercise] = useState("");
@@ -92,10 +93,12 @@ const BrowseWorkouts = () => {
         onRequestClose={closeModal}
       >
         <View>
-          <Text style={styles.modalHeader}>Workouts</Text>
-          <TouchableOpacity onPress={closeModal}>
-            <Text style={styles.closeButton2}>Close</Text>
-          </TouchableOpacity>
+          <View style={styles.headerContainer}>
+            <Text style={styles.modalHeader}>Workouts</Text>
+            <TouchableOpacity onPress={closeModal}>
+              <Text style={styles.closeButton2}>Close</Text>
+            </TouchableOpacity>
+          </View>
           {/* Render WorkoutApi component with the selected query */}
           {selectedExercise && <WorkoutApi query={selectedExercise} />}
         </View>
