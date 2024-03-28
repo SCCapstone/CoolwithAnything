@@ -17,6 +17,7 @@ import styles from "../styles/CalendarStyle";
 import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import eventEmitter from './EventEmitter';
+import DailyView from './DailyView';
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -91,8 +92,9 @@ const getPriorityColor = (priority) => {
 
   const onDateSelect = (day) => {
     setSelectedDate(day);
-    setModalVisible(true);
+    setModalVisible(false);
   };
+
   const isBirthday = (day) => {
     if (!birthday) return false;
     const [birthMonth, birthDay] = birthday.split("/").slice(0, 2);
@@ -198,6 +200,7 @@ const renderDays = () => {
 
       {/* Days Grid */}
       <View style={styles.daysContainer}>{renderDays()}</View>
+      <DailyView userID={userID} selectedDate={selectedDate} navigation={navigation} />
 
       {/* Task Details and Actions Modal */}
       <Modal
