@@ -26,6 +26,7 @@ const getStyles = (theme) => StyleSheet.create({
     backgroundColor: theme === 'dark' ? '#262626' : "white",
     borderWidth: 1,
     borderColor: '#ddd',
+    color: theme === 'dark' ? 'white' : "black",
   },
   button: {
     width: 50,

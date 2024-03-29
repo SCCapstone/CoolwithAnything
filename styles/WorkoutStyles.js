@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const{width, height} = Dimensions.get("window");
+const paddingValue = 20;
 
 const imageStyles = (aspectRatio) => ({
   width: 400,
@@ -30,6 +32,10 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
   },
+  modalHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   cardModalHeader: {
     fontSize: 20,
     fontWeight: "bold",
@@ -45,7 +51,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: "row",
-    padding: 20,
+    padding: 16,
+    paddingTop: (height > 500) ? 60 : 16,
     justifyContent: "space-between",
   },
   closeButton2: {
