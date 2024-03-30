@@ -53,7 +53,8 @@ const MealCards = ({
   }; 
 
   return (
-    <ScrollView>
+    <View style={styles.screen}>
+      <ScrollView styles={styles.scrollScreen}>
       <View style={styles.background}>
         {apiData.map((recipe, index) => (
           <TouchableOpacity
@@ -110,7 +111,8 @@ const MealCards = ({
           </TouchableOpacity>
         </View>
       </Modal>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

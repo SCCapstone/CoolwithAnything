@@ -103,7 +103,7 @@ const getStyles = (theme) => StyleSheet.create({
 
   //----- MealCards.js (under browse => api) -----//
   background: {
-    backgroundColor: theme === 'dark' ? "#262626" : "white",
+    backgroundColor: theme === 'light' ? 'white' : "#262626",
   },
   cardContainer: {
     backgroundColor: theme === 'dark' ? "#5da8af" : 'white',

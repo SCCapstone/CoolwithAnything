@@ -65,7 +65,8 @@ const WorkoutCards = ({
   };
 
   return (
-    <ScrollView>
+    <View style={styles.screen}>
+      <ScrollView>
       <View style={styles.background}>
         {apiData.map((exercise, index) => (
           <TouchableOpacity
@@ -133,6 +134,7 @@ const WorkoutCards = ({
         </View>
       </Modal>
     </ScrollView>
+    </View>
   );
 };
 
