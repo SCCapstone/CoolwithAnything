@@ -9,9 +9,24 @@ const imageStyles = (aspectRatio) => ({
 });
 
 const getStyles = (theme) => StyleSheet.create({
+
+  //------Workoutscreen.js-----//
   screen: {
     flex: 1,
     backgroundColor: theme === 'light' ? 'white' : "#262626",
+  },
+  workoutTextContainer: {
+    height: 80,
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+  },
+  workoutText: {
+    marginTop: 36,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
   },
   tabContainer: {
     flex: 1,
@@ -34,89 +49,10 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: 16,
     color: theme === 'dark' ? 'white' : 'black',
   },
+
+  //----- BrowseWorkouts.js -----//
   typeContainer: {
     flexDirection: "column",
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 8,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    height: 80,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#3e5e60',
-    paddingHorizontal: 20,
-  },
-  background: {
-    backgroundColor: theme === 'dark' ? '#262626' : "white",
-  },
-  cardContainer: {
-    backgroundColor: theme === 'dark' ? '#5da8af' : 'white',
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  label: {
-    fontWeight: "bold",
-    color: theme === 'dark' ? 'white' : 'black',
-  },
-  apiText: {
-    color: theme === 'dark' ? 'white' : 'black',
-  },
-  textContainer: {
-    padding: 5,
-  },
-  modalHeader: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: 'white',
-  },
-  cardModalHeader: {
-    fontSize: 20,
-    fontWeight: "bold",
-    padding: 16,
-    color: theme === 'dark' ? 'white' : 'black',
-  },
-  modalContent: {
-    padding: 16,
-  },
-  closeButton1: {
-    color: "blue",
-    fontSize: 16,
-    padding: 16,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    padding: 16,
-    paddingTop: (height > 500) ? 40 : 16,
-    justifyContent: "space-between",
-    backgroundColor: theme === 'dark' ? '#262626' : "white",
-  },
-  closeButton2: {
-    color: "white",
-    fontSize: 30,
-    marginLeft: 20,
-  },
-  addButton: {
-    color: "blue",
-    fontSize: 16,
-    padding: 16,
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: theme === 'dark' ? '#262626' : "white",
   },
   wrapper: {
     backgroundColor: "white",
@@ -137,17 +73,14 @@ const getStyles = (theme) => StyleSheet.create({
   },
   imageGlutes: {
     height: 170,
-
     flex: 1,
   },
   imageAbs: {
     height: 140,
-
     flex: 1,
   },
   imageLegs: {
     height: 170,
-
     flex: 1,
   },
   buttonText: {
@@ -170,18 +103,126 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
     paddingTop: 29,
   },
-  workoutTextContainer: {
+  backButton1: {
+    color: "white",
+    fontSize: 30,
+    marginLeft: 20,
+  },
+  modalHeader: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: 'white',
+  },
+
+  //----- WorkoutCards.js (under browse => api) -----//
+  background: {
+    backgroundColor: theme === 'dark' ? "#262626" : "white",
+  },
+  cardContainer: {
+    backgroundColor: theme === 'dark' ? "#5da8af" : 'white',
+    borderColor: "black",
+    height: 90,
+    borderRadius: 8,
+    margin: 8,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  cardContent: {
+    padding: 20,
+  },
+  modal: {
+    color: theme === 'dark' ? 'white' : 'black',
+    fontSize: 16,
+  },
+  modalName: {
+    fontWeight: "bold",
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+  },
+  cardModalHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 16,
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  modalContent: {
+    padding: 16,
+  },
+  textContainer: {
+    padding: 5,
+  },
+  label: {
+    fontWeight: "bold",
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  apiText: {
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  addButton: {
+    color: "blue",
+    fontSize: 16,
+    padding: 16,
+  },
+  closeButton1: {
+    color: "blue",
+    fontSize: 16,
+    padding: 16,
+  },
+
+  //----- WorkoutCard.js (under saved) -----//
+  savedCard: {
+    backgroundColor: theme === 'dark' ? '#5da8af' : 'white',
+    borderColor: "black",
+    padding: 16,
+    borderRadius: 8,
+    margin: 8,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  savedText: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  buttonOptions: {
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 5,
+    backgroundColor: theme === 'dark' ? 'white' : "#ededed",
+    alignItems: "center",
+  },
+  optionText: {
+    fontWeight: "bold",
+  },
+
+  //----- I DONT THINK THESE ARE USED ANYWHERE - KAYLY ------//
+  
+  header: {
+    fontSize: 18,
+    fontWeight: "bold",
+    padding: 8,
+  },
+  headerContainer: {
+    flexDirection: 'row',
     height: 80,
-    width: '100%',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#3e5e60',
+    paddingHorizontal: 20,
   },
-  workoutText: {
-    marginTop: 36,
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 24,
+  headerContainer: {
+    flexDirection: "row",
+    padding: 16,
+    paddingTop: (height > 500) ? 40 : 16,
+    justifyContent: "space-between",
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
   },
   backButton: {
     fontSize: 24, 

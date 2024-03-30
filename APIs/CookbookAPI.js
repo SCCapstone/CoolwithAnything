@@ -30,10 +30,6 @@ const CookbookAPI = ({ query, route }) => {
     setModalVisible(true);
   };
 
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
   return (
     <MealCards
     apiData={apiData}
@@ -43,7 +39,6 @@ const CookbookAPI = ({ query, route }) => {
     route={route}
     />
   )
-    
 };
 
 export default CookbookAPI;

@@ -239,7 +239,7 @@ const renderDays = () => {
         );
       }}
     >
-      <Text style={[styles.taskDetailText, { color: getPriorityColor(item.priority) }]}>{item.name}</Text>
+      <Text style={[ { color: getPriorityColor(item.priority) }]}>{item.name}</Text>
     </TouchableOpacity>
   )}
   keyExtractor={item => item.id}
