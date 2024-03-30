@@ -17,7 +17,7 @@ import { getUserID } from "../services/AuthAPI";
 const BrowseWorkouts = ({props}) => {
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const { user } = props.params;
+ // const { user } = props.params;
   const [userID, setUserID] = useState({userID: ""})
   const { theme } = useTheme();
   const styles = getStyles(theme);
@@ -29,7 +29,7 @@ const BrowseWorkouts = ({props}) => {
     setModalVisible(false);
   };
 
-  useEffect(() => {
+{/*  useEffect(() => {
     const fetchData = async () => {
       try {
           const fetchedUserID = await getUserID(props.userID);
@@ -43,7 +43,7 @@ const BrowseWorkouts = ({props}) => {
       fetchData(); // Always fetch data when component mounts
     }
    
-  }, [user]); // Dependency only on route.userID
+  }, [user]); // Dependency only on route.userID*/}
 
   return (
     <View>
