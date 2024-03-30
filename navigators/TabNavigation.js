@@ -16,11 +16,13 @@ import CookbookScreen from "../screens/CookbookScreen";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = ({ route }) => {
-  const { userID } = route.params;
+  const navigation = useNavigation();
+  const userID = route.params?.userID;
+  console.log("checking fetching User ID" + userID);
   const [savedWorkouts, setSavedWorkouts] = useState([]);
   const [savedMeals, setSavedMeals] = useState([]);
   const { showActionSheetWithOptions } = useActionSheet();
-  const navigation = useNavigation();
+
   useEffect(() => {
     //debugger; // Code to run when savedWorkouts change, if neces
   }, [savedWorkouts]);
@@ -95,7 +97,7 @@ const TabNavigator = ({ route }) => {
       <Tab.Screen
         name="Today"
         component={HomeScreen}
-        initialParams={{ userID: userID }}
+        initialParams={{ userID : userID}}
       />
       <Tab.Screen
         name="Add"
@@ -120,7 +122,7 @@ const TabNavigator = ({ route }) => {
         name="Your Workouts"
         component={WorkoutScreen} // Changed from using children prop for clarity
         initialParams={{
-          userID: userID, // Keep only serializable parameters
+          userID: userID , // Keep only serializable parameters
         }}
       />
 

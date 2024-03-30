@@ -1,7 +1,3 @@
-// Calendar.js
-// This component will render a calendar view where days can be selected.
-// You might use a library like `react-native-calendars` to facilitate calendar functionality.
-
 // ProgressBar.js
 import React from 'react';
 import { View, Text } from 'react-native';

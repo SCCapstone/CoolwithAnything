@@ -13,11 +13,11 @@ import styles from "../styles/LoginScreenStyle";
 import { loginUser } from "../services/AuthAPI";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState(""); // Changed from username to email
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!email.trim() || !password) {
       Alert.alert("Missing Fields", "Please enter both email and password.", [
         { text: "OK" },
       ]);
@@ -27,14 +27,21 @@ const LoginScreen = ({ navigation }) => {
       const user = await loginUser(email, password);
       if (user) {
         // Handle successful login
-        Alert.alert("Login Successful", "Logged in successfully.");
-        navigation.navigate("Home", { userID: user.uid }); // Pass user data to Home screen if needed
+        Alert.alert("Login Successful", "You are logged in.", [
+          {
+            text: "OK",
+            onPress: () => navigation.replace("Home", { userID: user.uid }),
+          },
+        ]);
+      } else {
+        throw new Error("Failed to log in.");
       }
     } catch (error) {
       console.error(error);
+      // Ensure that error messages are user-friendly
       Alert.alert(
         "Login Error",
-        error.message || "An error occurred during login."
+        error.message || "Failed to log in. Please try again later."
       );
     }
   };
@@ -46,9 +53,7 @@ const LoginScreen = ({ navigation }) => {
         <PasswordInput value={password} onChangeText={setPassword} />
         <LoginButton onPress={handleLogin} />
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.registerText}>
-            Don't have an account? Register
-          </Text>
+          <Text style={styles.registerText}>Don't have an account? Register</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Forgot Password")}>
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
