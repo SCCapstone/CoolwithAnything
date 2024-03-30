@@ -4,7 +4,6 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme === 'dark' ? '#262626' : "white",
-      justifyContent: "space-around",
     },
     topContainer: {
       flexDirection: "row",
@@ -208,24 +207,17 @@ const getStyles = (theme) => StyleSheet.create({
       textAlign: "center"
     },
     homeTextContainer: {
-      flexDirection: 'row',
       height: 80,
-      justifyContent: 'space-between',
+      width: '100%',
+      justifyContent: 'space-around',
       alignItems: 'center',
       backgroundColor: '#3e5e60',
-      paddingHorizontal: 20,
     },
     homeText: {
-      marginTop: 30,
+      marginTop: 40,
       color: 'white',
       fontWeight: 'bold',
       fontSize: 24,
-    },
-    backButton: {
-      fontSize: 24, 
-      fontWeight: 900, 
-      marginTop: 30, 
-      color: 'white',
     },
 });
 

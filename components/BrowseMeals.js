@@ -92,7 +92,6 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
               <TouchableOpacity onPress={closeModal}>
                 <Text style={styles.closeButton2}>Close</Text>
               </TouchableOpacity>
-              {/* Render WorkoutApi component with the selected query */}
               {selectedQuery && <CookbookApi query={selectedQuery} />}
             </View>
           </Modal>

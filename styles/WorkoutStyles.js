@@ -72,9 +72,9 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: "bold",
   },
   modalHeader: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
-    color: theme === 'dark' ? 'white' : 'black',
+    color: 'white',
   },
   cardModalHeader: {
     fontSize: 20,
@@ -97,8 +97,9 @@ const getStyles = (theme) => StyleSheet.create({
     backgroundColor: theme === 'dark' ? '#262626' : "white",
   },
   closeButton2: {
-    color: "red",
-    fontSize: 20,
+    color: "white",
+    fontSize: 30,
+    marginLeft: 20,
   },
   addButton: {
     color: "blue",
@@ -149,17 +150,24 @@ const getStyles = (theme) => StyleSheet.create({
   },
   listContainer: {
     flex: 1,
+    backgroundColor: '#3e5e60',
+  },
+  browseHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 80,
+    alignItems: 'center',
+    paddingTop: 29,
   },
   workoutTextContainer: {
-    flexDirection: 'row',
     height: 80,
-    justifyContent: 'space-between',
+    width: '100%',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#3e5e60',
-    paddingHorizontal: 20,
   },
   workoutText: {
-    marginTop: 30,
+    marginTop: 36,
     color: 'white',
     fontWeight: 'bold',
     fontSize: 24,
@@ -169,6 +177,14 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: 900, 
     marginTop: 30, 
     color: 'white',
+  },
+  workoutCardsTextContainer: {
+    flexDirection: 'row',
+    height: 80,
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
   },
 });
 

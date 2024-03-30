@@ -59,9 +59,6 @@ const HomeScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.homeTextContainer}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </Pressable>
         <Text style={styles.homeText}>Today</Text>
         <View style={{ width: 24 }} />
       </View>

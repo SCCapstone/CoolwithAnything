@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const getStyles = (theme) => StyleSheet.create({
     container: {
       flex: 1,
-      padding: 10,
       backgroundColor: theme === 'dark' ? '#262626' : "white",
     },
     addButton: {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Pressable } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import BrowseWorkouts from "../components/BrowseWorkouts";
 import SavedWorkouts from "../components/SavedWorkouts";
 import { useTheme } from "../services/ThemeContext";
@@ -26,9 +26,6 @@ const WorkoutScreen = ({ route }) => {
   return (
     <View style={styles.screen}>
       <View style={styles.workoutTextContainer}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </Pressable>
         <Text style={styles.workoutText}>Workouts</Text>
         <View style={{ width: 24 }} />
       </View>

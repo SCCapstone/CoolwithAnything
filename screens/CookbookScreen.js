@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Pressable } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import BrowseMeals from "../components/BrowseMeals";
 import SavedMeals from "../components/SavedMeals";
 import { useTheme } from '../services/ThemeContext';
@@ -25,10 +25,7 @@ const CookbookScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cookbookContainer}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </Pressable>
+      <View style={styles.cookbookTextContainer}>
         <Text style={styles.cookbookText}>Cookbook</Text>
         <View style={{ width: 24 }} />
       </View>
