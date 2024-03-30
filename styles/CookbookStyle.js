@@ -79,6 +79,15 @@ const getStyles = (theme) => StyleSheet.create({
     width: 400,
     height: 130,
   },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    padding: 16,
+    fontWeight: "bold",
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -2, height: 1 }, // Shadow position
+    textShadowRadius: 1, // Blur radius
+  },
   listContainer: {
     flex: 1,
     backgroundColor: '#3e5e60',
