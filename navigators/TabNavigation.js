@@ -54,6 +54,7 @@ const TabNavigator = ({ route }) => {
     <Tab.Navigator
       initialRouteName="Today"
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
