@@ -9,6 +9,10 @@ const imageStyles = (aspectRatio) => ({
 });
 
 const getStyles = (theme) => StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: theme === 'light' ? 'white' : "#262626",
+  },
   tabContainer: {
     flex: 1,
     backgroundColor: theme === 'dark' ? '#262626' : "white",
@@ -37,6 +41,14 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     padding: 8,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+    paddingHorizontal: 20,
   },
   background: {
     backgroundColor: theme === 'dark' ? '#262626' : "white",

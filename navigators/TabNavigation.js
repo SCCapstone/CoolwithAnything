@@ -104,13 +104,17 @@ const TabNavigator = ({ route }) => {
         component={View} // This is just a placeholder
         options={{
           tabBarIcon: ({ focused, color, size }) => (
+<TouchableOpacity
 
+              onPress={openActionSheet}
+              onLongPress={openActionSheet}
+            >
               <MaterialCommunityIcons
                 name="plus-circle"
                 color={color}
                 size={focused ? size + 10 : size}
               />
-
+            </TouchableOpacity>
           ),
           headerShown: false 
         }}
@@ -162,6 +166,7 @@ const TabNavigator = ({ route }) => {
     </Tab.Navigator>
   );
 };
+
 
 
 export default TabNavigator;
