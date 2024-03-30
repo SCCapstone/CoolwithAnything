@@ -1,6 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const{width, height} = Dimensions.get("window");
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   header: {
     fontSize: 18,
     fontWeight: "bold",
@@ -97,4 +98,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default styles;
+export default getStyles;

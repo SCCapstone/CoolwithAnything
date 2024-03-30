@@ -7,13 +7,16 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
-import styles from "../styles/CookbookStyle";
+import getStyles from "../styles/CookbookStyle";
+import { useTheme } from "../services/ThemeContext";
 import CookbookApi from "../APIs/CookbookAPI";
 import SearchMeal from "./SearchMeal";
 
-const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
+const BrowseMeals = ({ route }) => {
   const [selectedQuery, setSelectedQuery] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const handleQueryButtonClick = (query) => {
     setSelectedQuery(query);
     setModalVisible(true);
@@ -92,7 +95,8 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
               <TouchableOpacity onPress={closeModal}>
                 <Text style={styles.closeButton2}>Close</Text>
               </TouchableOpacity>
-              {selectedQuery && <CookbookApi query={selectedQuery} />}
+              {/* Render WorkoutApi component with the selected query */}
+              {selectedQuery && <CookbookApi query={selectedQuery} route={route}/>}
             </View>
           </Modal>
         </View>

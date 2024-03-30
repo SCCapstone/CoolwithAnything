@@ -70,6 +70,13 @@ const getStyles = (theme) => StyleSheet.create({
   },
   label: {
     fontWeight: "bold",
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  apiText: {
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  textContainer: {
+    padding: 5,
   },
   modalHeader: {
     fontSize: 24,
@@ -80,6 +87,7 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     padding: 16,
+    color: theme === 'dark' ? 'white' : 'black',
   },
   modalContent: {
     padding: 16,
@@ -106,7 +114,10 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: 16,
     padding: 16,
   },
-
+  modalContainer: {
+    flex: 1,
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+  },
   wrapper: {
     backgroundColor: "white",
     borderColor: "black",
