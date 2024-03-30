@@ -98,6 +98,119 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
     paddingTop: 29,
   },
+  backButton1: {
+    color: "white",
+    fontSize: 30,
+    marginLeft: 20,
+  },
+  modalHeader: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: 'white',
+  },
+
+  //----- MealCards.js (under browse => api) -----//
+  background: {
+    backgroundColor: theme === 'dark' ? "#262626" : "white",
+  },
+  cardContainer: {
+    backgroundColor: theme === 'dark' ? "#5da8af" : 'white',
+    borderColor: "black",
+    height: 90,
+    borderRadius: 8,
+    margin: 8,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  cardContent: {
+    padding: 20,
+  },
+  modal: {
+    color: theme === 'dark' ? 'white' : 'black',
+    fontSize: 16,
+  },
+  modalName: {
+    fontWeight: "bold",
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+  },
+  cardModalHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 16,
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  modalContent: {
+    padding: 16,
+  },
+  textContainer: {
+    padding: 5,
+  },
+  label: {
+    fontWeight: "bold",
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  apiText: {
+    color: theme === 'dark' ? 'white' : 'black',
+  },
+  addButton: {
+    color: "blue",
+    fontSize: 16,
+    padding: 16,
+  },
+  closeButton1: {
+    color: "blue",
+    fontSize: 16,
+    padding: 16,
+  },
+
+  //----- MealCard.js (under saved) -----//
+  savedCard: {
+    backgroundColor: theme === 'dark' ? '#5da8af' : 'white',
+    borderColor: "black",
+    padding: 16,
+    borderRadius: 8,
+    margin: 8,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  savedText: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  buttonOptions: {
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 5,
+    backgroundColor: theme === 'dark' ? 'white' : "#ededed",
+    alignItems: "center",
+  },
+  optionText: {
+    fontWeight: "bold",
+  },
+
+
+
+
+
+
+
+  mealCardsTextContainer: {
+    flexDirection: 'row',
+    height: 80,
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+  },
 });
 
 export default getStyles;

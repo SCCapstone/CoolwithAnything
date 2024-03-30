@@ -10,7 +10,7 @@ import {
 import CookbookApi from "../APIs/CookbookAPI";
 import SearchBar from "./SearchMeal";
 import { useTheme } from "../services/ThemeContext";
-import getStyles from "../styles/CookbookStyle";
+import getStyles from "../styles/CookbookStyle.js";
 
 const BrowseMeals = ({ route }) => {
   const [selectedQuery, setSelectedQuery] = useState("");

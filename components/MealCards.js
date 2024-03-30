@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
-import getStyles from "../styles/CookbookStyle";
+import getStyles from "../styles/CookbookStyle.js";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
 import { addMealData } from "../services/AuthAPI";
 import { useMeals } from "../services/MealsContext";
-import { add } from "date-fns";
 
 const MealCards = ({
   apiData,
