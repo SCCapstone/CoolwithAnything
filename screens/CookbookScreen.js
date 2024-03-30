@@ -14,7 +14,7 @@ const CookbookScreen = ({ route }) => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "BrowseWorkouts":
+      case "BrowseMeals":
         return <BrowseMeals userID={userID} />;
       case "SavedMeals":
         return <SavedMeals userID={userID} />; // No props passed here
@@ -34,7 +34,7 @@ const CookbookScreen = ({ route }) => {
           <TouchableOpacity
             style={[
               styles.tabItem,
-              activeTab === "BrosweMeals" && styles.activeTab,
+              activeTab === "BrowseMeals" && styles.activeTab,
             ]}
             onPress={() => setActiveTab("BrowseMeals")}
           >
