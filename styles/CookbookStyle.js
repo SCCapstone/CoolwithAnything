@@ -25,28 +25,20 @@ const getStyles = (theme) => StyleSheet.create({
     flex: 1,
     backgroundColor: theme === 'dark' ? '#262626' : "white",
   },
-  modalHeader: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: 'white'
+  tabBar: {
+    flexDirection: "row",
+    paddingTop: 10,
   },
   tabItem: {
     flex: 1,
     alignItems: "center",
     padding: 16,
   },
-  closeButton1: {
-    color: "blue",
-    fontSize: 16,
-    padding: 16,
+  activeTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#5da8af",
   },
-  closeButton2: {
-    color: "white",
-    fontSize: 30,
-    marginLeft: 20,
-  },
-  addButton: {
-    color: "blue",
+  tabText: {
     fontSize: 16,
     color: theme === 'dark' ? 'white' : 'black',
   },
