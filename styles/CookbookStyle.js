@@ -116,7 +116,7 @@ const getStyles = (theme) => StyleSheet.create({
     backgroundColor: theme === 'dark' ? "#262626" : "white",
   },
   cardContainer: {
-    backgroundColor: theme === 'dark' ? "#5da8af" : "white",
+    backgroundColor: theme === 'dark' ? "#5da8af" : 'white',
     borderColor: "black",
     height: 90,
     borderRadius: 8,
@@ -129,7 +129,6 @@ const getStyles = (theme) => StyleSheet.create({
   },
   cardContent: {
     padding: 20,
-
   },
   modal: {
     color: theme === 'dark' ? 'white' : 'black',
@@ -199,6 +198,11 @@ const getStyles = (theme) => StyleSheet.create({
   optionText: {
     fontWeight: "bold",
   },
+
+
+
+
+
 
 
   mealCardsTextContainer: {

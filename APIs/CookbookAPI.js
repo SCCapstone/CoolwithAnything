@@ -3,8 +3,8 @@ import MealCards from "../components/MealCards";
 
 const CookbookAPI = ({ query, route }) => {
   const [apiData, setApiData] = useState([]);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState("");
+  const [modalVisible, setModalVisible] = useState("");
 
   useEffect(() => {
     let options = {
