@@ -67,20 +67,6 @@ const TabNavigator = ({ route }) => {
             iconName = "food-fork-drink";
           } else if (route.name === "Add") {
             iconName = "plus-circle"; // Customize as needed
-            size = focused ? size + 10 : size; // Increase size if focused
-            return (
-              <TouchableOpacity
-                style={styles.addButton}
-                onPress={openActionSheet}
-                onLongPress={openActionSheet}
-              >
-                <MaterialCommunityIcons
-                  name={iconName}
-                  color={color}
-                  size={size}
-                />
-              </TouchableOpacity>
-            );
           }
 
           // You can return any component that you like here!
@@ -104,21 +90,21 @@ const TabNavigator = ({ route }) => {
       <Tab.Screen
         name="Add"
         component={View} // This is just a placeholder
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault(); // Prevent default action
+            openActionSheet(); // Open action sheet
+          },
+        })}
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <TouchableOpacity
-
-              onPress={openActionSheet}
-              onLongPress={openActionSheet}
-            >
-              <MaterialCommunityIcons
-                name="plus-circle"
-                color={color}
-                size={focused ? size + 10 : size}
-              />
-            </TouchableOpacity>
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="plus-circle"
+              color={color}
+              size={size}
+            />
           ),
-          headerShown: false 
+          headerShown: false,
         }}
       />
       <Tab.Screen

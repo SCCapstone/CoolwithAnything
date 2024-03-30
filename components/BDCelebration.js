@@ -1,12 +1,15 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { format, parse } from 'date-fns'; // Import parse along with format
-import styles from '../styles/BDCelebrationStyle';
+import getStyles from '../styles/HomeScreenStyles';
+import { useTheme } from '../services/ThemeContext';
 import CakeIcon from '../assets/cake-icon.png';
 
 const BirthdayCelebration = ({ userName, birthday }) => {
   const today = new Date();
   const todayStr = format(today, 'MM/dd');
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   let userBirthdayStr = '';
   let isUserBirthdayToday = false;

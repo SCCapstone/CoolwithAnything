@@ -2,35 +2,37 @@ import { StyleSheet, Dimensions } from "react-native";
 const{width, height} = Dimensions.get("window");
 
 const getStyles = (theme) => StyleSheet.create({
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    padding: 8,
+
+  //------CookbookScreen.js-----//
+  screen: {
+    flex: 1,
+    backgroundColor: theme === 'light' ? 'white' : "#262626",
   },
-  cardContainer: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+  cookbookTextContainer: {
+    height: 80,
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
   },
-  cardContent: {
-    padding: 16,
+  cookbookText: {
+    marginTop: 36,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
   },
-  label: {
-    fontWeight: "bold",
+  tabContainer: {
+    flex: 1,
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
   },
   modalHeader: {
     fontSize: 24,
     fontWeight: "bold",
     color: 'white'
   },
-  modalContent: {
+  tabItem: {
+    flex: 1,
+    alignItems: "center",
     padding: 16,
   },
   closeButton1: {
@@ -46,9 +48,10 @@ const getStyles = (theme) => StyleSheet.create({
   addButton: {
     color: "blue",
     fontSize: 16,
-    padding: 16,
+    color: theme === 'dark' ? 'white' : 'black',
   },
-  container: {
+  //----- BrowseMeals.js -----//
+  typeContainer: {
     flexDirection: "column",
   },
   wrapper: {
@@ -63,15 +66,6 @@ const getStyles = (theme) => StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     overflow: 'hidden',
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 20,
-    padding: 16,
-    fontWeight: "bold",
-    textShadowColor: 'rgba(0, 0, 0, 0.75)', // Choose a color for the outline
-    textShadowOffset: { width: -2, height: 1 }, // Shadow position
-    textShadowRadius: 1, // Blur radius
   },
   imageSteak: {
     flex: 1,

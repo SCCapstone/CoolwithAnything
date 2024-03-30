@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
 import getStyles from "../styles/CookbookStyle";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
 import { addMealData } from "../services/AuthAPI";
 import { useMeals } from "../services/MealsContext";
+import { add } from "date-fns";
 
 const MealCards = ({
   apiData,
@@ -12,13 +14,14 @@ const MealCards = ({
   closeModal,
   route,
 }) => {
+  const navigation = useNavigation();
   //const { userID } = route.userID;
   const [modalVisible, setModalVisible] = useState(false);
   const { savedMeals, setSavedMeals } = useMeals();
-  const [ mealName, setMealName ] = useState("");
-  const [ mealIngredients, setMealIngredients ] = useState("");
-  const [ mealServings, setMealServings ] = useState("");
-  const [ mealInstructions, setMealInstructions ] = useState("");
+  const [mealName, setMealName] = useState("");
+  const [mealIngredients, setMealIngredients] = useState("");
+  const [mealServings, setMealServings] = useState("");
+  const [mealInstructions, setMealInstructions] = useState("");
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
@@ -26,7 +29,7 @@ const MealCards = ({
     closeModal();
   };
 
-  const handleAddMeal = async () => {
+ const handleAddMeal = async () => {
     setMealName(selectedRecipe.name);
     setMealIngredients(selectedRecipe.ingredients);
     setMealServings(selectedRecipe.servings);
@@ -42,14 +45,17 @@ const MealCards = ({
     await addMealData(userID, addMeal);
     setSavedMeals((savedWorkouts) => [...savedMeals, addMeal]);
 
-  }
+    setMealName("");
+    setMealIngredients("");
+    setMealServings("");
+    setMealInstructions("");
 
+    console.log(addMeal);
+  }; 
 
-
-
-return (
-  <ScrollView>
-      <View>
+  return (
+    <ScrollView>
+      <View style={styles.background}>
         {apiData.map((recipe, index) => (
           <TouchableOpacity
             key={index}
@@ -57,8 +63,8 @@ return (
             onPress={() => handleCardPress(recipe)}
           >
             <View style={styles.cardContent}>
-              <Text>
-                <Text style={styles.label}>Name:</Text> {recipe.title}
+              <Text style={styles.modal}>
+                <Text style={styles.modalName}>Name:</Text> {recipe.title}
               </Text>
             </View>
           </TouchableOpacity>
@@ -69,27 +75,37 @@ return (
       <Modal
         animationType="slide"
         transparent={false}
-        visible={modalVisible}
+        visible={selectedRecipe !== ""}
         onRequestClose={closeModal}
       >
-        <View>
-          <Text style={styles.modalHeader}>Exercise Details</Text>
+        <View style={styles.modalContainer}>
+          <Text style={styles.cardModalHeader}>Meal Details</Text>
           {selectedRecipe && (
             <View style={styles.modalContent}>
-              <Text>
-                <Text style={styles.label}>Name:</Text> {selectedRecipe.title}
+              <Text style={styles.textContainer}>
+                <Text style={styles.label}>Name:</Text>{" "}
+                <Text style={styles.apiText}>{selectedRecipe.title}</Text>
               </Text>
-              <Text>
-                <Text style={styles.label}>Ingredients:</Text> {selectedRecipe.ingredients}
+              <Text style={styles.textContainer}>
+                <Text style={styles.label}>Ingredients:</Text>{" "}
+                <Text style={styles.apiText}>{selectedRecipe.ingredients}</Text>
               </Text>
-              <Text>
-                <Text style={styles.label}>Servings:</Text> {selectedRecipe.servings}
+              <Text style={styles.textContainer}>
+                <Text style={styles.label}>Servings:</Text>{" "}
+                <Text style={styles.apiText}>{selectedRecipe.servings}</Text>
               </Text>
-              <Text>
-                <Text style={styles.label}>Instructions:</Text> {selectedRecipe.instructions}
+              <Text style={styles.textContainer}>
+                <Text style={styles.label}>Instructions:</Text>{" "}
+                <Text style={styles.apiText}>
+                  {selectedRecipe.instructions}
+                </Text>
               </Text>
             </View>
           )}
+          {/* Add button */}
+         <TouchableOpacity onPress={handleAddMeal}>
+            <Text style={styles.addButton}>Add</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={handleCloseModal}>
             <Text style={styles.closeButton1}>Close</Text>
           </TouchableOpacity>

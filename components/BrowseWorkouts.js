@@ -117,7 +117,7 @@ const BrowseWorkouts = ({props}) => {
         <View style={styles.listContainer}>
           <View style={styles.browseHeaderContainer}>
             <TouchableOpacity onPress={closeModal}>
-              <Text style={styles.closeButton2}>←</Text>
+              <Text style={styles.backButton1}>←</Text>
             </TouchableOpacity>
             <Text style={[styles.modalHeader, {marginLeft: -23}]}>Workouts</Text>  
             <View style={{ width: 24 }} />

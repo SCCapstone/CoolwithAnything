@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Modal, ScrollView, BackHandler, Pressable } from "react-native";
+import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
 import getStyles from "../styles/WorkoutStyles.js";
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "../services/ThemeContext.js";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useWorkouts } from "../services/WorkoutsContext";
-import WorkoutScreen from "../screens/WorkoutScreen";
 
-const WorkoutCards = ({ 
+const WorkoutCards = ({
   apiData,
   handleCardPress,
   selectedExercise,
   closeModal,
-  route, }) => {
+  route,
+}) => {
   const navigation = useNavigation();
   const { userID } = route.userID;
   const [modalVisible, setModalVisible] = useState(false);
@@ -74,15 +74,8 @@ const WorkoutCards = ({
             onPress={() => handleCardPress(exercise)}
           >
             <View style={styles.cardContent}>
-              <Text>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                  }}
-                >
-                  Name:
-                </Text>{" "}
-                {exercise.name}
+              <Text style={styles.modal}>
+                <Text style={styles.modalName}>Name:</Text> {exercise.name}
               </Text>
             </View>
           </TouchableOpacity>
@@ -131,9 +124,9 @@ const WorkoutCards = ({
             </View>
           )}
           {/* Add button */}
-  <TouchableOpacity onPress={handleAddExercise}>
+          <TouchableOpacity onPress={handleAddExercise}>
             <Text style={styles.addButton}>Add</Text>
-          </TouchableOpacity> 
+          </TouchableOpacity>
           <TouchableOpacity onPress={handleCloseModal}>
             <Text style={styles.closeButton1}>Close</Text>
           </TouchableOpacity>
