@@ -150,6 +150,26 @@ const getStyles = (theme) => StyleSheet.create({
   listContainer: {
     flex: 1,
   },
+  workoutTextContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+    paddingHorizontal: 20,
+  },
+  workoutText: {
+    marginTop: 30,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+  backButton: {
+    fontSize: 24, 
+    fontWeight: 900, 
+    marginTop: 30, 
+    color: 'white',
+  },
 });
 
 export default getStyles;

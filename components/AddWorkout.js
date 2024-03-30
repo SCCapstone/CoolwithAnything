@@ -1,6 +1,6 @@
 // CreateWorkoutScreen.js
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, TextInput } from "react-native";
+import { ScrollView, View, TextInput, Pressable, Text } from "react-native";
 import WorkoutHeader from "./WorkoutHeader";
 import InputField from "./InputField"; // Reused from Create Task
 import ExerciseItem from "./ExerciseItem";
@@ -63,6 +63,13 @@ const AddWorkout = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.createTextContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.createText}>Create Workout</Text>
+        <View style={{ width: 24 }} />
+      </View>
       <WorkoutHeader onClose={() => handleclose()} />
       <InputField
         value={workoutName}

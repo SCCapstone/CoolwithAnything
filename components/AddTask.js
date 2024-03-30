@@ -1,7 +1,7 @@
 // CreateTaskScreen.js
 import React from "react";
 import { useState } from "react";
-import { ScrollView, Alert } from "react-native";
+import { ScrollView, Alert, Pressable, Text, View } from "react-native";
 import Header from "./Header";
 import InputField from "./InputField";
 import DateTimePicker from "./DateTimePicker";
@@ -66,6 +66,13 @@ const CreateTaskScreen = ({ route }) => {
   };
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.createTextContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.createText}>Create Task</Text>
+        <View style={{ width: 24 }} />
+      </View>
       <Header onClose={() => handleclose()} />
       <InputField
         value={taskName}

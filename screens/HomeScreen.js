@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -58,6 +58,13 @@ const HomeScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.homeTextContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.homeText}>Today</Text>
+        <View style={{ width: 24 }} />
+      </View>
       <View style={styles.topContainer}>
         <DateTracker month="March" year={2024} />
         <AccountButton navigation={navigation} />
