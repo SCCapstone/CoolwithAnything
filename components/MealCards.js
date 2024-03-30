@@ -21,7 +21,7 @@ const MealCards = ({
   const { savedMeals, setSavedMeals } = useMeals();
   const [mealName, setMealName] = useState("");
   const [mealIngredients, setMealIngredients] = useState("");
-  const [mealServings, setMealServings] = useState("");
+  const [mealServing, setMealServings] = useState("");
   const [mealInstructions, setMealInstructions] = useState("");
   const { theme } = useTheme();
   const styles = getStyles(theme);
@@ -30,29 +30,25 @@ const MealCards = ({
     closeModal();
   };
 
- const handleAddMeal = async () => {
-    setMealName(selectedRecipe.name);
-    setMealIngredients(selectedRecipe.ingredients);
-    setMealServings(selectedRecipe.servings);
-    setMealInstructions(selectedRecipe.instructions);
-
+  const handleAddMeal = async () => {
+    console.log(mealName);
+    
     const addMeal = {
-      mealName,
-      mealIngredients,
-      mealServings,
-      mealInstructions,
+      mealName: selectedRecipe.title, // Adjust based on the actual property names in selectedRecipe
+      mealIngredients: selectedRecipe.ingredients,
+      mealServings: selectedRecipe.servings, // Adjust variable name to match the object key if necessary
+      mealInstructions: selectedRecipe.instructions,
     };
-
     await addMealData(userID, addMeal);
-    setSavedMeals((savedWorkouts) => [...savedMeals, addMeal]);
-
-    setMealName("");
-    setMealIngredients("");
-    setMealServings("");
-    setMealInstructions("");
+    setSavedMeals((savedMeals) => [...savedMeals, addMeal]);
 
     console.log(addMeal);
-  }; 
+
+    setMealName(mealName);
+    setMealIngredients(mealIngredients);
+    setMealServings(mealServing);
+    setMealInstructions(mealInstructions);
+  };
 
   return (
     <View style={styles.screen}>
@@ -112,7 +108,7 @@ const MealCards = ({
             </View>
           )}
           {/* Add button */}
-         <TouchableOpacity onPress={() => {console.log("meal added"); handleAddMeal}}>
+         <TouchableOpacity onPress={() => {console.log("meal added"); handleAddMeal()}}>
             <Text style={styles.addButton}>Add</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleCloseModal}>
