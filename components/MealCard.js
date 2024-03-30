@@ -80,6 +80,7 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
       mealIngredients,
       mealServing,
       mealInstructions,
+      id: meal.id,
     };
 
     setCardMeal(newMeal);

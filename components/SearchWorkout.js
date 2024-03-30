@@ -8,9 +8,10 @@ import {
   Modal,
   Text,
 } from "react-native";
-import styles from "../styles/SearchBarStyle.js";
 import WorkoutStyles from "../styles/WorkoutStyles.js"
 import WorkoutApi from "../APIs/WorkoutAPI.js";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/SearchBarStyle.js";
 
 const SearchWorkout = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
@@ -18,6 +19,8 @@ const SearchWorkout = ({ setSearchTerm }) => {
   const [loading, setLoading] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const handleSearch = () => {
     setLoading(true);
@@ -78,6 +81,7 @@ const SearchWorkout = ({ setSearchTerm }) => {
             value={input}
             onChangeText={(text) => setInput(text)}
             placeholder="What are you looking for?"
+            placeholderTextColor="grey"
           />
         </View>
 

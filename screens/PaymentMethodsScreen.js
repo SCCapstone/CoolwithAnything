@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/core'; 
+import { useTheme } from '../services/ThemeContext';
 import { fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
 import { getAuth } from 'firebase/auth';
-import styles from "../styles/PaymentMethodsStyle";
+import getStyles from "../styles/PaymentMethodsStyle";
 
 const PaymentMethodsScreen = () => {
   const navigation = useNavigation();
   const [paymentMethods, setPaymentMethods] = useState([]); // Initialize paymentMethods state
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -42,41 +45,51 @@ const PaymentMethodsScreen = () => {
   
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={styles.screen}>
+      
+      <View style={styles.PMTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backText}>Back</Text>
+          <Text style={styles.backText}>←</Text>
         </Pressable>
+        <Text style={styles.PMText}>Payment Methods</Text>
+        <View style={{ width: 24 }} />
       </View>
 
-      <View style={styles.content}>
-        {paymentMethods.length > 0 ? (
-          <FlatList
-          data={paymentMethods}
-          renderItem={renderPaymentMethod}
-          keyExtractor={item => item.id.toString()}
-          contentContainerStyle={{ alignItems: 'center' }}
-          ListFooterComponent={
-            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
+    
+      {paymentMethods.length > 0 ? (
+        <FlatList
+        data={paymentMethods}
+        renderItem={renderPaymentMethod}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={{ alignItems: 'center' }}
+        ListFooterComponent={
+          <Pressable onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
+            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+              <View style={styles.addPaymentContainer}>
               <Text style={styles.addPayment}>
-                Add a payment method<Text style={styles.plusStyle}> +</Text>
+                Add a payment method
+                <Text style={styles.plusStyle}>  +</Text>
               </Text>
+              </View>
             </Pressable>
-          }
+          </Pressable>
+        }
         />
         ) : (
-          <View>
-            <Text style={styles.text}>You have no saved payment methods</Text>
-            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
-          <Text style={styles.addPayment}>
-            Add a payment method
-            <Text style={styles.plusStyle}> +</Text>
-          </Text>
-        </Pressable>
-          </View>
-        )}
-      </View>
-
+          <View style={styles.noPaymentContainer}>
+            <Text style={styles.noPaymentText}>
+              You have no payment methods.
+            </Text>
+          <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+            <View style={styles.addPaymentContainer}>
+              <Text style={styles.addPayment}>
+                Add a payment method
+                <Text style={styles.plusStyle}> +</Text>
+              </Text>
+            </View>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 };

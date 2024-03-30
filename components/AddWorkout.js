@@ -1,6 +1,6 @@
 // CreateWorkoutScreen.js
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, TextInput } from "react-native";
+import { ScrollView, View, TextInput } from "react-native";
 import WorkoutHeader from "./WorkoutHeader";
 import InputField from "./InputField"; // Reused from Create Task
 import ExerciseItem from "./ExerciseItem";
@@ -8,9 +8,14 @@ import DaySelector from "./DateTimePicker";
 import CommentBox from "./CommentBox"; // Reused from Create Task
 import CreateButton from "./CreateButton"; // Reused from Create Task
 import { useWorkouts } from "../services/WorkoutsContext";
+import { useNavigation } from "@react-navigation/native";
+import { addWorkoutData } from "../services/AuthAPI";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/AddStyles";
 
 const AddWorkout = ({ route }) => {
   //const [selectedDays, setSelectedDays] = useState([]);
+  const navigation = useNavigation();
   const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const { userID } = route.params;
   const [workoutName, setWorkoutName] = useState("");
@@ -19,8 +24,19 @@ const AddWorkout = ({ route }) => {
   const [workoutEquipment, setWorkoutEquipment] = useState("");
   const [workoutDifficulty, setWorkoutDifficulty] = useState("");
   const [workoutInstructions, setWorkoutInstructions] = useState("");
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
-  const handleAdd = () => {
+  const handleclose = () => {
+    setWorkoutName("");
+    setWorkoutType("");
+    setWorkoutMuscle("");
+    setWorkoutEquipment("");
+    setWorkoutDifficulty("");
+    setWorkoutInstructions("");
+    navigation.navigate("Today");
+  };
+  const handleAdd = async () => {
     //console.log(workoutName);
     const addWorkout = {
       workoutName,
@@ -31,6 +47,7 @@ const AddWorkout = ({ route }) => {
       workoutInstructions,
     };
 
+    await addWorkoutData(userID, addWorkout);
     setSavedWorkouts((savedWorkouts) => [...savedWorkouts, addWorkout]);
 
     console.log(addWorkout);
@@ -41,11 +58,12 @@ const AddWorkout = ({ route }) => {
     setWorkoutEquipment("");
     setWorkoutDifficulty("");
     setWorkoutInstructions("");
+    navigation.navigate("Today");
   };
 
   return (
     <ScrollView style={styles.container}>
-      <WorkoutHeader onClose={() => console.log("Close pressed")} />
+      <WorkoutHeader onClose={() => handleclose()} />
       <InputField
         value={workoutName}
         placeholder="Workout Name"
@@ -80,12 +98,5 @@ const AddWorkout = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-});
 
 export default AddWorkout;

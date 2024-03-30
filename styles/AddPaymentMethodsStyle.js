@@ -1,20 +1,27 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
+  screen : {
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+  },
     container: {
       flex: 1,
-      backgroundColor: '#f5f5f5', 
+      backgroundColor: theme === 'dark' ? '#262626' : "white",
       position: 'relative', 
     },
     header: {
-      position: 'absolute', 
-      top: 45, 
-      left: 20, 
-      zIndex: 1, 
+      flexDirection: 'row',
+      height: 80,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#3e5e60',
+      paddingHorizontal: 20,
     },
     backText: {
-      fontSize: 18,
+      marginTop: 30,
+      fontSize: 24,
       fontWeight: '700',
+      color: 'white',
     },
     contentContainer: {
       marginTop: 25,
@@ -24,11 +31,14 @@ const styles = StyleSheet.create({
       marginTop: 85,
     },
     title: {
+      marginTop: 30,
+      color: 'white',
       fontSize: 24,
       fontWeight: 'bold',
       alignItems: 'center',
     },
     label: {
+      color: theme === 'dark' ? 'white' : 'black',
       marginRight: 10, // Add some margin to the right of the label for spacing
       fontWeight: 'bold',
       marginTop: 1,
@@ -39,17 +49,20 @@ const styles = StyleSheet.create({
       margin: 12,
       marginBottom: 20,
       borderWidth: 1,
-      borderColor: '#ddd',
+      borderColor: 'grey',
       padding: 10,
-      textAlignVertical: 'top', // Ensures text starts from the top
-      backgroundColor: '#fff',
+      textAlignVertical: 'top',
+      color: theme === 'dark' ? 'white' : 'black',
       borderRadius: 5,
       width: '80%',
     },
     buttonContainer: {
+      position: 'absolute',
+      bottom: 70,
       flexDirection: 'row',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
       alignItems: 'center',
+      paddingHorizontal: 10,
     },
     saveButtonContainer: {
       flex: 1,
@@ -60,14 +73,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     saveButton: {
-      backgroundColor: '#007bff',
+      backgroundColor: '#5da8af',
       padding: 10,
       borderRadius: 10,
       height: 60,
       justifyContent: 'center',
     },
     deleteButton: {
-      backgroundColor: 'red',
+      backgroundColor: '#c60e0b',
       padding: 10,
       borderRadius: 10,
       height: 60,
@@ -87,4 +100,4 @@ const styles = StyleSheet.create({
     },
   });
 
-  export default styles;
+  export default getStyles;

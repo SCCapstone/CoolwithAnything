@@ -5,7 +5,6 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-// Import your screens here
 import HomeScreen from "../screens/HomeScreen";
 import AddTask from "../components/AddTask";
 import AddWorkout from "../components/AddWorkout";
@@ -128,16 +127,9 @@ const TabNavigator = ({ route }) => {
 
       <Tab.Screen
         name="Your Cookbook"
-        children={() => (
-          <CookbookScreen
-            savedMeals={savedMeals}
-            setSavedMeals={setSavedMeals}
-          />
-        )}
+        component={CookbookScreen}
         initialParams={{
           userID: userID,
-
-          setSavedMeals: setSavedMeals,
         }}
       />
       {/* Hidden screens for action sheet options */}
