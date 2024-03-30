@@ -35,7 +35,7 @@ const BrowseWorkouts = (route) => {
 
       <ScrollView>
         {/* Different Buttons for the different types of exercises */}
-        <View style={styles.container}>
+        <View style={styles.typeContainer}>
           <TouchableOpacity
             onPress={() => handleQueryButtonClick("biceps")}
             style={styles.wrapper}
