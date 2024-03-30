@@ -1,5 +1,4 @@
 import { StyleSheet, Platform } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 const styles = StyleSheet.create({
   safeArea: {

@@ -1,23 +1,20 @@
-import { StyleSheet } from "react-native";
-import MainNavigator from "./navigators/MainNavigator";
+import React from 'react';
 import { UserProvider } from "./services/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { WorkoutsProvider } from "./services/WorkoutsContext";
+import { MealsProvider } from "./services/MealsContext.js";
+import MainNavigator from "./navigators/MainNavigator";
 
 export default function App() {
   return (
     <ActionSheetProvider>
       <UserProvider>
-        <MainNavigator />
+        <WorkoutsProvider>
+          <MealsProvider>
+          <MainNavigator />
+          </MealsProvider>
+        </WorkoutsProvider>
       </UserProvider>
     </ActionSheetProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

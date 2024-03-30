@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useActionSheet } from "@expo/react-native-action-sheet";
@@ -16,10 +16,16 @@ import CookbookScreen from "../screens/CookbookScreen";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = ({ route }) => {
-  const { userID } = route.params;
-  const { showActionSheetWithOptions } = useActionSheet();
   const navigation = useNavigation();
+  const userID = route.params?.userID;
+  console.log("checking fetching User ID" + userID);
+  const [savedWorkouts, setSavedWorkouts] = useState([]);
+  const [savedMeals, setSavedMeals] = useState([]);
+  const { showActionSheetWithOptions } = useActionSheet();
 
+  useEffect(() => {
+    //debugger; // Code to run when savedWorkouts change, if neces
+  }, [savedWorkouts]);
   const openActionSheet = () => {
     const options = ["Create Task", "Create Workout", "Create Meal", "Cancel"];
     const cancelButtonIndex = 3;
@@ -91,7 +97,7 @@ const TabNavigator = ({ route }) => {
       <Tab.Screen
         name="Today"
         component={HomeScreen}
-        initialParams={{ userID: userID }}
+        initialParams={{ userID : userID}}
       />
       <Tab.Screen
         name="Add"
@@ -112,8 +118,28 @@ const TabNavigator = ({ route }) => {
           ),
         }}
       />
-      <Tab.Screen name="Your Workouts" component={WorkoutScreen} />
-      <Tab.Screen name="Your Cookbook" component={CookbookScreen} />
+      <Tab.Screen
+        name="Your Workouts"
+        component={WorkoutScreen} // Changed from using children prop for clarity
+        initialParams={{
+          userID: userID , // Keep only serializable parameters
+        }}
+      />
+
+      <Tab.Screen
+        name="Your Cookbook"
+        children={() => (
+          <CookbookScreen
+            savedMeals={savedMeals}
+            setSavedMeals={setSavedMeals}
+          />
+        )}
+        initialParams={{
+          userID: userID,
+
+          setSavedMeals: setSavedMeals,
+        }}
+      />
       {/* Hidden screens for action sheet options */}
       <Tab.Screen
         name="Task"
@@ -125,13 +151,21 @@ const TabNavigator = ({ route }) => {
         name="Workout"
         component={AddWorkout}
         options={{ tabBarButton: () => null }}
-        initialParams={{ userID: userID }} // Pass the user id to the workout screen
+        initialParams={{
+          userID: userID,
+          savedWorkouts: savedWorkouts,
+          setSavedWorkouts: setSavedWorkouts,
+        }} // Pass the user id to the workout screen
       />
       <Tab.Screen
         name="Meal"
         component={AddMeal}
         options={{ tabBarButton: () => null }}
-        initialParams={{ userID: userID }} // Pass the user id to the meal screen
+        initialParams={{
+          userID: userID,
+          savedMeals: savedMeals,
+          setSavedMeals: setSavedMeals,
+        }} // Pass the user id to the meal screen
       />
     </Tab.Navigator>
   );

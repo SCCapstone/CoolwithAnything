@@ -1,14 +1,20 @@
-// AddScreen.js
-import React from 'react';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import AddTask from '../components/AddTask';
-import AddWorkout from '../components/AddWorkout';
-import AddMeal from '../components/AddMeal';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import AddTask from "../components/AddTask";
+import AddWorkout from "../components/AddWorkout";
+import AddMeal from "../components/AddMeal";
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 const AddScreen = () => {
-  
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="AddScreenTabs" component={AddScreenTabs} />
+    </Stack.Navigator>
+  );
+};
+
+const AddScreenTabs = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Create Task" component={AddTask} />
