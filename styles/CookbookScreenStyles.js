@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const getStyles = (theme) => StyleSheet.create({
-    container: {
+      screen: {
         flex: 1,
         backgroundColor: theme === 'dark' ? '#262626' : "white",
       },
@@ -30,7 +30,7 @@ const getStyles = (theme) => StyleSheet.create({
         backgroundColor: '#3e5e60',
       },
       cookbookText: {
-        marginTop: 40,
+        marginTop: 36,
         color: 'white',
         fontWeight: 'bold',
         fontSize: 24,

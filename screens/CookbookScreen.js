@@ -24,7 +24,7 @@ const CookbookScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <View style={styles.cookbookTextContainer}>
         <Text style={styles.cookbookText}>Cookbook</Text>
         <View style={{ width: 24 }} />
