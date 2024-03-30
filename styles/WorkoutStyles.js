@@ -23,7 +23,7 @@ const getStyles = (theme) => StyleSheet.create({
     backgroundColor: '#3e5e60',
   },
   workoutText: {
-    marginTop: 36,
+    marginTop: 30,
     color: 'white',
     fontWeight: 'bold',
     fontSize: 24,
@@ -216,13 +216,6 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#3e5e60',
     paddingHorizontal: 20,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    padding: 16,
-    paddingTop: (height > 500) ? 40 : 16,
-    justifyContent: "space-between",
-    backgroundColor: theme === 'dark' ? '#262626' : "white",
   },
   backButton: {
     fontSize: 24, 

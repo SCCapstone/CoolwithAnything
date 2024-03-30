@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, Modal, ScrollView, Pressable } from "react-native";
 import getStyles from "../styles/WorkoutStyles.js";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth } from 'firebase/auth';
 import { useTheme } from "../services/ThemeContext.js";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useWorkouts } from "../services/WorkoutsContext";
@@ -14,7 +15,8 @@ const WorkoutCards = ({
   route,
 }) => {
   const navigation = useNavigation();
-  const { userID } = route.userID;
+  const auth = getAuth();
+  const userID = auth.currentUser ? auth.currentUser.uid : null;
   const [modalVisible, setModalVisible] = useState(false);
   const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const [workoutName, setWorkoutName] = useState("");
@@ -31,37 +33,30 @@ const WorkoutCards = ({
   };
 
   const handleAddExercise = async () => {
-    // Save the selected exercise to workout data state variables
-    setWorkoutName(selectedExercise.name);
-    setWorkoutType(selectedExercise.type);
-    setWorkoutMuscle(selectedExercise.muscle);
-    setWorkoutEquipment(selectedExercise.equipment);
-    setWorkoutDifficulty(selectedExercise.difficulty);
-    setWorkoutInstructions(selectedExercise.instructions);
+    console.log(workoutName);
 
-    // Create the workout object
     const addWorkout = {
-      workoutName,
-      workoutType,
-      workoutMuscle,
-      workoutEquipment,
-      workoutDifficulty,
-      workoutInstructions,
+      workoutName: selectedExercise.name,
+      workoutType: selectedExercise.type,
+      workoutMuscle: selectedExercise.muscle,
+      workoutEquipment: selectedExercise.equipment,
+      workoutDifficulty: selectedExercise.difficulty,
+      workoutInstructions: selectedExercise.instructions,
     };
 
     // Add the workout data
     await addWorkoutData(userID, addWorkout);
     setSavedWorkouts((savedWorkouts) => [...savedWorkouts, addWorkout]);
 
-    // Reset the workout data state variables if needed
-    setWorkoutName("");
-    setWorkoutType("");
-    setWorkoutMuscle("");
-    setWorkoutEquipment("");
-    setWorkoutDifficulty("");
-    setWorkoutInstructions("");
-
     console.log(addWorkout);
+
+    // Save the selected exercise to workout data state variables
+    setWorkoutName(workoutName);
+    setWorkoutType(workoutType);
+    setWorkoutMuscle(workoutMuscle);
+    setWorkoutEquipment(workoutEquipment);
+    setWorkoutDifficulty(workoutDifficulty);
+    setWorkoutInstructions(workoutInstructions);
   };
 
   return (
@@ -90,7 +85,14 @@ const WorkoutCards = ({
         visible={selectedExercise !== ""}
         onRequestClose={closeModal}
       >
-        <View style={styles.modalContainer}>
+      <View style={styles.modalContainer}>
+        <View style={styles.headerContainer}>
+            <Pressable onPress={handleCloseModal}>
+              <Text style={styles.backButton}>←</Text>
+            </Pressable>
+            <Text style={styles.workoutText}>Workouts</Text>
+            <View style={{ width: 24 }} />
+          </View>
           <Text style={styles.cardModalHeader}>Exercise Details</Text>
           {selectedExercise && (
             <View style={styles.modalContent}>
@@ -127,9 +129,6 @@ const WorkoutCards = ({
           {/* Add button */}
           <TouchableOpacity onPress={handleAddExercise}>
             <Text style={styles.addButton}>Add</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleCloseModal}>
-            <Text style={styles.closeButton1}>Close</Text>
           </TouchableOpacity>
         </View>
       </Modal>

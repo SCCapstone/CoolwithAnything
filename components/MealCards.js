@@ -111,9 +111,6 @@ const MealCards = ({
          <TouchableOpacity onPress={() => {console.log("meal added"); handleAddMeal()}}>
             <Text style={styles.addButton}>Add</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleCloseModal}>
-            <Text style={styles.closeButton1}>Close</Text>
-          </TouchableOpacity>
         </View>
       </Modal>
       </ScrollView>
