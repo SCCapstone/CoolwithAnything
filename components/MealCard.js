@@ -64,7 +64,7 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   };
 
   return (
-    <View style={styles.savedCard}>
+    <View style={styles.screen}>
       {editMode ? (
         // Edit mode UI with TextInputs for meal properties
         <View>
@@ -126,10 +126,11 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
             <Pressable style={styles.buttonOptions} onPress={myShare}>
               <Text style={styles.optionText}>Share</Text>
             </Pressable>
+            </View>
           </View>
-        </View>
-      )}
-    </View>
+        )}
+      </View>
+    
   );
 };
 

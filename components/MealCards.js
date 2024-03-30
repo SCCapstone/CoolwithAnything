@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, Modal, ScrollView, Pressable } from "react-native";
 import getStyles from "../styles/CookbookStyle.js";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth } from 'firebase/auth';
 import { useTheme } from "@react-navigation/native";
 import { addMealData } from "../services/AuthAPI";
 import { useMeals } from "../services/MealsContext";
@@ -14,7 +15,8 @@ const MealCards = ({
   route,
 }) => {
   const navigation = useNavigation();
-  //const { userID } = route.userID;
+  const auth = getAuth();
+  const userID = auth.currentUser ? auth.currentUser.uid : null;
   const [modalVisible, setModalVisible] = useState(false);
   const { savedMeals, setSavedMeals } = useMeals();
   const [mealName, setMealName] = useState("");
@@ -54,7 +56,7 @@ const MealCards = ({
 
   return (
     <View style={styles.screen}>
-      <ScrollView styles={styles.scrollScreen}>
+      <ScrollView>
       <View style={styles.background}>
         {apiData.map((recipe, index) => (
           <TouchableOpacity
@@ -79,6 +81,13 @@ const MealCards = ({
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
+          <View style={styles.mealCardsTextContainer}>
+            <Pressable onPress={handleCloseModal}>
+              <Text style={styles.backButton}>←</Text>
+            </Pressable>
+            <Text style={styles.mealText}>Recipes</Text>
+            <View style={{ width: 24 }} />
+          </View>
           <Text style={styles.cardModalHeader}>Meal Details</Text>
           {selectedRecipe && (
             <View style={styles.modalContent}>
@@ -103,7 +112,7 @@ const MealCards = ({
             </View>
           )}
           {/* Add button */}
-         <TouchableOpacity onPress={handleAddMeal}>
+         <TouchableOpacity onPress={() => {console.log("meal added"); handleAddMeal}}>
             <Text style={styles.addButton}>Add</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleCloseModal}>

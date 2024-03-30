@@ -99,6 +99,12 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: 'center',
     paddingTop: 29,
   },
+  backButton: {
+    fontSize: 24, 
+    fontWeight: "900", 
+    marginTop: 30, 
+    color: 'white',
+  },
   backButton1: {
     color: "white",
     fontSize: 30,
@@ -125,6 +131,20 @@ const getStyles = (theme) => StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
+  },
+  mealCardsTextContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+    paddingHorizontal: 20,
+  },
+  mealText: {
+    marginTop: 30,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
   },
   cardContent: {
     padding: 20,
@@ -172,7 +192,7 @@ const getStyles = (theme) => StyleSheet.create({
 
   //----- MealCard.js (under saved) -----//
   savedCard: {
-    backgroundColor: theme === 'dark' ? '#5da8af' : 'white',
+    backgroundColor: 'red',
     borderColor: "black",
     padding: 16,
     borderRadius: 8,
@@ -196,21 +216,6 @@ const getStyles = (theme) => StyleSheet.create({
   },
   optionText: {
     fontWeight: "bold",
-  },
-
-
-
-
-
-
-
-  mealCardsTextContainer: {
-    flexDirection: 'row',
-    height: 80,
-    width: '100%',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#3e5e60',
   },
 });
 
