@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import BrowseWorkouts from "../components/BrowseWorkouts";
 import SavedWorkouts from "../components/SavedWorkouts";
 import { useTheme } from '../services/ThemeContext';
-import getStyles from "../styles/CookbookScreenStyles";
+import getStyles from "../styles/WorkoutStyles";
 
 // Notice how we're not passing savedWorkouts and setSavedWorkouts as props anymore
 const WorkoutScreen = ({ route }) => {
@@ -24,7 +24,7 @@ const WorkoutScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.tabContainer}>
       <View style={styles.tabBar}>
         <TouchableOpacity
           style={[
@@ -49,29 +49,5 @@ const WorkoutScreen = ({ route }) => {
     </View>
   );
 };
-
-// Styles remain unchanged
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  tabBar: {
-    flexDirection: "row",
-    paddingTop: 10,
-  },
-  tabItem: {
-    flex: 1,
-    alignItems: "center",
-    padding: 16,
-  },
-  activeTab: {
-    borderBottomWidth: 2,
-    borderBottomColor: "navy",
-  },
-  tabText: {
-    fontSize: 16,
-    color: "black",
-  },
-});
 
 export default WorkoutScreen;

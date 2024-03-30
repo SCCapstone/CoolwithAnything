@@ -10,11 +10,15 @@ import {
 import WorkoutApi from "../APIs/WorkoutAPI";
 import styles from "../styles/WorkoutStyles";
 import SearchBar from "./SearchWorkout";
-import { style } from "deprecated-react-native-prop-types/DeprecatedViewPropTypes";
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/WorkoutStyles";
+
 
 const BrowseWorkouts = (route) => {
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const handleQueryButtonClick = (exercise) => {
     setSelectedExercise(exercise);
     setModalVisible(true);
@@ -92,7 +96,7 @@ const BrowseWorkouts = (route) => {
         visible={modalVisible}
         onRequestClose={closeModal}
       >
-        <View>
+        <View style={styles.listContainer}>
           <View style={styles.headerContainer}>
             <Text style={styles.modalHeader}>Workouts</Text>
             <TouchableOpacity onPress={closeModal}>

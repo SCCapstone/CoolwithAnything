@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Modal, ScrollView } from "react-native";
-import styles from "../styles/WorkoutStyles.js";
+import { View, Text, TouchableOpacity, Modal, ScrollView, BackHandler } from "react-native";
+import getStyles from "../styles/WorkoutStyles.js";
+import { useTheme } from "../services/ThemeContext.js";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useWorkouts } from "../services/WorkoutsContext";
 
@@ -20,6 +21,8 @@ const WorkoutCards = ({
   const [workoutEquipment, setWorkoutEquipment] = useState("");
   const [workoutDifficulty, setWorkoutDifficulty] = useState("");
   const [workoutInstructions, setWorkoutInstructions] = useState("");
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   const handleCloseModal = () => {
     closeModal();
@@ -62,7 +65,7 @@ const WorkoutCards = ({
 
   return (
     <ScrollView>
-      <View>
+      <View style={styles.background}>
         {apiData.map((exercise, index) => (
           <TouchableOpacity
             key={index}
