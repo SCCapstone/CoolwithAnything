@@ -90,14 +90,17 @@ const BrowseMeals = ({ route }) => {
             visible={modalVisible}
             onRequestClose={closeModal}
           >
-            <View>
-              <Text style={styles.modalHeader}>Recipes</Text>
+          <View style={styles.listContainer}>
+            <View style={styles.browseHeaderContainer}>
               <TouchableOpacity onPress={closeModal}>
-                <Text style={styles.closeButton2}>Close</Text>
+                <Text style={styles.closeButton2}>←</Text>
               </TouchableOpacity>
-              {/* Render WorkoutApi component with the selected query */}
-              {selectedQuery && <CookbookApi query={selectedQuery} route={route}/>}
+              <Text style={[styles.modalHeader, {marginLeft: -23}]}>Recipes</Text>  
+              <View style={{ width: 24 }} />
             </View>
+            {/* Render CookbookApi component with the selected query */}
+            {selectedQuery && <CookbookApi query={selectedQuery} route={route}/>}
+          </View>
           </Modal>
         </View>
       </ScrollView>

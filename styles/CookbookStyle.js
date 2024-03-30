@@ -26,9 +26,9 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: "bold",
   },
   modalHeader: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
-    padding: 16,
+    color: 'white'
   },
   modalContent: {
     padding: 16,
@@ -39,12 +39,9 @@ const getStyles = (theme) => StyleSheet.create({
     padding: 16,
   },
   closeButton2: {
-    color: "red",
-    fontSize: 20,
-    textAlign: "center",
-    width: 70,
-    padding: 8,
-    marginLeft: 330,
+    color: "white",
+    fontSize: 30,
+    marginLeft: 20,
   },
   addButton: {
     color: "blue",
@@ -95,7 +92,18 @@ const getStyles = (theme) => StyleSheet.create({
     flex: 1,
     width: 400,
     height: 130,
-  }
+  },
+  listContainer: {
+    flex: 1,
+    backgroundColor: '#3e5e60',
+  },
+  browseHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 80,
+    alignItems: 'center',
+    paddingTop: 29,
+  },
 });
 
 export default getStyles;
