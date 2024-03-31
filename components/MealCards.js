@@ -48,6 +48,8 @@ const MealCards = ({
     setMealIngredients(mealIngredients);
     setMealServings(mealServing);
     setMealInstructions(mealInstructions);
+
+    closeModal();
   };
 
   return (

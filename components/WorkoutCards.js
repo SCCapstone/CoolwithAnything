@@ -57,6 +57,8 @@ const WorkoutCards = ({
     setWorkoutEquipment(workoutEquipment);
     setWorkoutDifficulty(workoutDifficulty);
     setWorkoutInstructions(workoutInstructions);
+
+    closeModal();
   };
 
   return (

@@ -65,7 +65,7 @@ const CreateTaskScreen = ({ route }) => {
     navigation.navigate("Today");
   };
   return (
-    <View style={styles.screen}>
+    <View style={styles.container}>
       <View style={styles.createTextContainer}>
           <Pressable onPress={() => navigation.goBack()}>
             <Text style={styles.backButton}>←</Text>
