@@ -13,10 +13,11 @@ import {
   parseISO,
 } from "date-fns";
 import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
-import styles from "../styles/CalendarStyle";
+import getStyles from "../styles/HomeScreenStyles";
 import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import eventEmitter from './EventEmitter';
+import { useTheme } from "../services/ThemeContext";
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -26,6 +27,9 @@ const Calendar = ({ userID, navigation, birthday }) => {
   const [modalVisible, setModalVisible] = useState(false);
  // const navigation = useNavigation();
   const [tasks, setTasks] = useState([]);
+
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -179,7 +183,7 @@ const renderDays = () => {
   return (
     <View style={styles.calendarContainer}>
       {/* Calendar Header */}
-      <View style={styles.header}>
+      <View style={styles.calendarHeader}>
         <TouchableOpacity onPress={prevMonth}>
           <Text style={styles.arrowText}>{"<"}</Text>
         </TouchableOpacity>
@@ -235,7 +239,7 @@ const renderDays = () => {
         );
       }}
     >
-      <Text style={[styles.taskDetailText, { color: getPriorityColor(item.priority) }]}>{item.name}</Text>
+      <Text style={[ { color: getPriorityColor(item.priority) }]}>{item.name}</Text>
     </TouchableOpacity>
   )}
   keyExtractor={item => item.id}

@@ -75,6 +75,18 @@ export const getUserData = async (userId) => {
   }
 };
 
+export const getUserID = async (userId) => {
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    return userId; // Return the user ID if the document exists
+  } else {
+    console.log("No such document!");
+    return null;
+  }
+};
+
 // Authentication and Firestore functions
 export const loginUser = async (email, password) => {
   try {
@@ -365,6 +377,20 @@ export const fetchTasksForUser = async (userId) => {
     return tasks;
   } catch (error) {
     console.error("Error fetching tasks: ", error);
+    throw error;
+  }
+};
+
+export const countTasksForUser = async (userId) => {
+  try {
+    const tasksRef = collection(db, "users", userId, "tasks");
+    const querySnapshot = await getDocs(tasksRef);
+    const tasksCount = querySnapshot.size;
+
+    console.log('Total tasks for user ${userId}: ${tasksCount}');
+    return tasksCount;
+  } catch (error) {
+    console.error("Error fetching task count: ", error);
     throw error;
   }
 };

@@ -3,7 +3,7 @@ import {
   ScrollView,
   View,
   Text,
-  StyleSheet,
+  Pressable,
   TouchableOpacity,
 } from "react-native";
 import MealHeader from "./MealHeader";
@@ -57,6 +57,15 @@ const AddMeal = ({ route }) => {
   };
   return (
     <ScrollView style={styles.container}>
+
+      <View style={styles.createTextContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.createText}>Create Meal</Text>
+        <View style={{ width: 24 }} />
+      </View>
+
       <MealHeader onClose={() => handleclose()} />
       <InputField
         value={mealName}

@@ -52,8 +52,10 @@ const TabNavigator = ({ route }) => {
 
   return (
     <Tab.Navigator
+    name="Tab Navigator"
       initialRouteName="Today"
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -65,20 +67,6 @@ const TabNavigator = ({ route }) => {
             iconName = "food-fork-drink";
           } else if (route.name === "Add") {
             iconName = "plus-circle"; // Customize as needed
-            size = focused ? size + 10 : size; // Increase size if focused
-            return (
-              <TouchableOpacity
-                style={styles.addButton}
-                onPress={openActionSheet}
-                onLongPress={openActionSheet}
-              >
-                <MaterialCommunityIcons
-                  name={iconName}
-                  color={color}
-                  size={size}
-                />
-              </TouchableOpacity>
-            );
           }
 
           // You can return any component that you like here!
@@ -86,33 +74,38 @@ const TabNavigator = ({ route }) => {
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );
         },
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-        tabBarStyle: [{ display: "flex" }, null],
+        tabBarActiveTintColor: '#5da8af', // Color of the icon and text when the tab is active
+        tabBarInactiveTintColor: 'white',
+        tabBarStyle: {
+          display: "flex",
+          backgroundColor: '#3e5e60', 
+        },
       })}
     >
       <Tab.Screen
         name="Today"
         component={HomeScreen}
         initialParams={{ userID: userID }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Add"
         component={View} // This is just a placeholder
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault(); // Prevent default action
+            openActionSheet(); // Open action sheet
+          },
+        })}
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <TouchableOpacity
-              style={styles.addButton}
-              onPress={openActionSheet}
-              onLongPress={openActionSheet}
-            >
-              <MaterialCommunityIcons
-                name="plus-circle"
-                color={color}
-                size={focused ? size + 10 : size}
-              />
-            </TouchableOpacity>
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="plus-circle"
+              color={color}
+              size={size}
+            />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -121,6 +114,7 @@ const TabNavigator = ({ route }) => {
         initialParams={{
           userID: userID, // Keep only serializable parameters
         }}
+        options={{ headerShown: false }}
       />
 
       <Tab.Screen
@@ -129,6 +123,7 @@ const TabNavigator = ({ route }) => {
         initialParams={{
           userID: userID,
         }}
+        options={{ headerShown: false }}
       />
       {/* Hidden screens for action sheet options */}
       <Tab.Screen
@@ -140,7 +135,7 @@ const TabNavigator = ({ route }) => {
       <Tab.Screen
         name="Workout"
         component={AddWorkout}
-        options={{ tabBarButton: () => null }}
+        options={{ tabBarButton: () => null, headerShown: false }}
         initialParams={{
           userID: userID,
           savedWorkouts: savedWorkouts,
@@ -150,7 +145,7 @@ const TabNavigator = ({ route }) => {
       <Tab.Screen
         name="Meal"
         component={AddMeal}
-        options={{ tabBarButton: () => null }}
+        options={{ tabBarButton: () => null, headerShown: false }}
         initialParams={{
           userID: userID,
           savedMeals: savedMeals,
@@ -161,22 +156,6 @@ const TabNavigator = ({ route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  addButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    // Adjust the following values as necessary to position the button correctly
-    height: 70,
-    width: 70,
-    borderRadius: 35,
-    backgroundColor: "white", // Use the color of your tab bar for the background
-    position: "relative", // Position absolutely within the parent container
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    shadowColor: "#000",
-    shadowOffset: { height: 0, width: 0 },
-    elevation: 10,
-  },
-});
+
 
 export default TabNavigator;

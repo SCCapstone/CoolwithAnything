@@ -1,7 +1,7 @@
 // CreateTaskScreen.js
 import React from "react";
 import { useState } from "react";
-import { ScrollView, Alert } from "react-native";
+import { ScrollView, Alert, Pressable, Text, View } from "react-native";
 import Header from "./Header";
 import InputField from "./InputField";
 import DateTimePicker from "./DateTimePicker";
@@ -65,32 +65,41 @@ const CreateTaskScreen = ({ route }) => {
     navigation.navigate("Today");
   };
   return (
-    <ScrollView style={styles.container}>
-      <Header onClose={() => handleclose()} />
-      <InputField
-        value={taskName}
-        placeholder="Name"
-        onChangeText={setTaskName}
-      />
-      <DateTimePicker onConfirm={setDate} />
-      <InputField
-        value={location}
-        placeholder="Location"
-        onChangeText={setLocation}
-      />
-      <TypeSelector onSelect={setTaskType} />
-      <CommentBox value={comment} onChangeText={setComment} />
-      <CreateButton onPress={handleCreateTask} label={"Create Task"} />
-      <Picker
-        selectedValue={priority}
-        onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
-        style={{ height: 50, width: 150 }}
-      >
-        <Picker.Item label="Low" value="low" />
-        <Picker.Item label="Medium" value="medium" />
-        <Picker.Item label="High" value="high" />
-      </Picker>
-    </ScrollView>
+    <View style={styles.container}>
+      <View style={styles.createTextContainer}>
+          <Pressable onPress={() => navigation.goBack()}>
+            <Text style={styles.backButton}>←</Text>
+          </Pressable>
+          <Text style={styles.createText}>Create Task</Text>
+          <View style={{ width: 24 }} />
+        </View>
+      <ScrollView style={styles.container}>
+        <Header onClose={() => handleclose()} />
+        <InputField
+          value={taskName}
+          placeholder="Name"
+          onChangeText={setTaskName}
+        />
+        <DateTimePicker onConfirm={setDate} />
+        <InputField
+          value={location}
+          placeholder="Location"
+          onChangeText={setLocation}
+        />
+        <TypeSelector onSelect={setTaskType} />
+        <CommentBox value={comment} onChangeText={setComment} />
+        <CreateButton onPress={handleCreateTask} label={"Create Task"} />
+        <Picker
+          selectedValue={priority}
+          onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+          style={{ height: 50, width: 150 }}
+        >
+          <Picker.Item label="Low" value="low" />
+          <Picker.Item label="Medium" value="medium" />
+          <Picker.Item label="High" value="high" />
+        </Picker>
+      </ScrollView>
+    </View>
   );
 };
 

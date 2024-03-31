@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -8,14 +8,15 @@ import Calendar from "../components/Calendar";
 import BirthdayCelebration from "../components/BDCelebration";
 import AccountButton from "../components/AccountButton";
 import { useNavigation } from "@react-navigation/native";
-import { getUserData } from "../services/AuthAPI";
-import { useTheme } from '../services/ThemeContext';
+import { countTasksForUser, getUserData } from "../services/AuthAPI";
+import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/HomeScreenStyles";
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userID } = route.params;
-  const [userData, setUserData] = useState({ name: '', birthday: '' });
+  const [userData, setUserData] = useState({ name: "", birthday: "" });
+  const [taskCount, setTaskCount] = useState(0);
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
@@ -39,22 +40,49 @@ const HomeScreen = ({ route }) => {
     }
   }, [userID]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const count = await countTasksForUser(userID);
+        setTaskCount(count);
+        console.log("Task count: ", count);
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      }
+    };
+
+    if (userID) {
+      fetchData();
+    }
+  }, [userID]);
+
   return (
-    <ScrollView style={styles.container}>
-      <DateTracker month="January" year={2021} />
-      <AccountButton navigation={navigation} />
-      <ProgressBar progress={40} />
-      <View style={styles.categoryContainer}>
-        <CategoryCounter count={3} label="Schoolxxx" color="gold" />
-        <CategoryCounter count={2} label="Personal" color="skyblue" />
-        <CategoryCounter count={1} label="Gym" color="salmon" />
+    <View style={styles.container}>
+      <View style={styles.homeTextContainer}>
+        <Text style={styles.homeText}>Today</Text>
+        <View style={{ width: 24 }} />
       </View>
-      <Calendar userID={userID} navigation={navigation} birthday={userData.birthday}/>
+      <View style={styles.topContainer}>
+        <DateTracker month="Marchxxxx" year={2024} />
+        <AccountButton navigation={navigation} />
+      </View>
+      <ProgressBar progress={taskCount} />
+      <View style={styles.categoryContainer}>
+        <CategoryCounter count={3} label="School" color="#57BCBE" />
+        <CategoryCounter count={2} label="Personal" color="#4BA4A6" />
+        <CategoryCounter count={1} label="Work" color="#408D8E" />
+        <CategoryCounter count={1} label="Gym" color="#347576" />
+      </View>
+      <Calendar
+        userID={userID}
+        navigation={navigation}
+        birthday={userData.birthday}
+      />
       <BirthdayCelebration
         userName={userData.name}
         birthday={userData.birthday}
       />
-    </ScrollView>
+    </View>
   );
 };
 

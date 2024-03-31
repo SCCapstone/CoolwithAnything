@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import BrowseMeals from "../components/BrowseMeals";
 import SavedMeals from "../components/SavedMeals";
 import { useTheme } from '../services/ThemeContext';
-import getStyles from "../styles/CookbookScreenStyles";
+import getStyles from "../styles/CookbookStyle";
 
 // Notice how we're not passing savedWorkouts and setSavedWorkouts as props anymore
 const CookbookScreen = ({ route }) => {
@@ -14,8 +14,8 @@ const CookbookScreen = ({ route }) => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "BrowseWorkouts":
-        return <BrowseMeals />;
+      case "BrowseMeals":
+        return <BrowseMeals userID={userID} />;
       case "SavedMeals":
         return <SavedMeals userID={userID} />; // No props passed here
       default:
@@ -24,28 +24,34 @@ const CookbookScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.tabBar}>
-        <TouchableOpacity
-          style={[
-            styles.tabItem,
-            activeTab === "BrowseMeals" && styles.activeTab,
-          ]}
-          onPress={() => setActiveTab("BrowseMeals")}
-        >
-          <Text style={styles.tabText}>Browse</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.tabItem,
-            activeTab === "SavedMeals" && styles.activeTab,
-          ]}
-          onPress={() => setActiveTab("SavedMeals")}
-        >
-          <Text style={styles.tabText}>Saved</Text>
-        </TouchableOpacity>
+    <View style={styles.screen}>
+      <View style={styles.cookbookTextContainer}>
+        <Text style={styles.cookbookText}>Cookbook</Text>
+        <View style={{ width: 24 }} />
       </View>
-      {renderTabContent()}
+      <View style={styles.tabContainer}>
+        <View style={styles.tabBar}>
+          <TouchableOpacity
+            style={[
+              styles.tabItem,
+              activeTab === "BrowseMeals" && styles.activeTab,
+            ]}
+            onPress={() => setActiveTab("BrowseMeals")}
+          >
+            <Text style={styles.tabText}>Browse</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.tabItem,
+              activeTab === "SavedMeals" && styles.activeTab,
+            ]}
+            onPress={() => setActiveTab("SavedMeals")}
+          >
+            <Text style={styles.tabText}>Saved</Text>
+          </TouchableOpacity>
+        </View>
+        {renderTabContent()}
+      </View>
     </View>
   );
 };
