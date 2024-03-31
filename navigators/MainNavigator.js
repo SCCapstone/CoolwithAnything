@@ -16,6 +16,7 @@ import QRScreen from "../screens/QRScreen";
 import PaymentMethodsScreen from "../screens/PaymentMethodsScreen";
 import AddPaymentMethodsScreen from "../screens/AddPaymentMethodsScreen";
 import EditPaymentMethodsScreen from "../screens/EditPaymentMethodsScreen";
+import TaskDetailScreen from "../screens/TaskDetailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,11 @@ function MainNavigator() {
           name="EditTaskScreen"
           component={EditTaskScreen}
           options={{ title: 'Edit Task' }}
+        />
+        <Stack.Screen 
+          name="TaskDetailScreen" 
+          component={TaskDetailScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Register"

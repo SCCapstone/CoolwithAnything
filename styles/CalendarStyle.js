@@ -138,7 +138,30 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
+  typeIndicatorsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+  },
+  typeIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80, // Adjusted size
+    height: 80, // Adjusted size
+    borderRadius: 40, // Makes it circular
+    padding: 10,
+  },
+  typeIndicatorCount: {
+    color: '#FFFFFF',
+    fontSize: 18, // Adjust font size for the count
+    fontWeight: 'bold',
+  },
+  typeIndicatorText: {
+    color: '#FFFFFF',
+    fontSize: 14, // Adjust font size for the task type name
+    paddingTop: 5, // Space between count and task type name
+  },
 });
 
 export default styles;
