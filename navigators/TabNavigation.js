@@ -74,11 +74,12 @@ const TabNavigator = ({ route }) => {
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );
         },
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "white",
-        tabBarActiveBackgroundColor: "#5da8af",
-        tabBarInactiveBackgroundColor: "#3e5e60",
-        tabBarStyle: [{ display: "flex", tabBarActiveBackgroundColor: '#3e5e60' }],
+        tabBarActiveTintColor: '#5da8af', // Color of the icon and text when the tab is active
+        tabBarInactiveTintColor: 'white',
+        tabBarStyle: {
+          display: "flex",
+          backgroundColor: '#3e5e60', 
+        },
       })}
     >
       <Tab.Screen

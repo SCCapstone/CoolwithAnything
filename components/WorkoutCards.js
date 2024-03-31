@@ -86,7 +86,7 @@ const WorkoutCards = ({
         onRequestClose={closeModal}
       >
       <View style={styles.modalContainer}>
-        <View style={styles.headerContainer}>
+        <View style={styles.workoutCardsTextContainer}>
             <Pressable onPress={handleCloseModal}>
               <Text style={styles.backButton}>←</Text>
             </Pressable>
