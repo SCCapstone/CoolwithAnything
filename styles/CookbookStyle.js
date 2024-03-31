@@ -115,10 +115,28 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: "bold",
     color: 'white',
   },
+  iconContainer: {
+    alignItems: "center",
+    paddingTop: 16,
+  },
+  mealText: {
+    marginTop: 36,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
 
   //----- MealCards.js (under browse => api) -----//
+  mealCardsTextContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#3e5e60',
+    paddingHorizontal: 20,
+  },
   background: {
-    backgroundColor: theme === 'light' ? 'white' : "#262626",
+    backgroundColor: theme === 'dark' ? "#262626" : "white",
   },
   cardContainer: {
     backgroundColor: theme === 'dark' ? "#5da8af" : 'white',
@@ -131,20 +149,6 @@ const getStyles = (theme) => StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
-  },
-  mealCardsTextContainer: {
-    flexDirection: 'row',
-    height: 80,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#3e5e60',
-    paddingHorizontal: 20,
-  },
-  mealText: {
-    marginTop: 30,
-    color: theme === 'dark' ? 'black' : 'white',
-    fontWeight: 'bold',
-    fontSize: 24,
   },
   cardContent: {
     padding: 20,
@@ -159,6 +163,7 @@ const getStyles = (theme) => StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: theme === 'dark' ? '#262626' : "white",
+    height: height,
   },
   cardModalHeader: {
     fontSize: 20,
@@ -180,19 +185,24 @@ const getStyles = (theme) => StyleSheet.create({
     color: theme === 'dark' ? 'white' : 'black',
   },
   addButton: {
-    color: "blue",
+    color: "#5da8af",
     fontSize: 16,
     padding: 16,
+    fontWeight: "700",
   },
   closeButton1: {
     color: "blue",
     fontSize: 16,
     padding: 16,
   },
+  iconContainer: {
+    alignItems: "center",
+    paddingTop: 16,
+  },
 
   //----- MealCard.js (under saved) -----//
   savedCard: {
-    backgroundColor: 'red',
+    backgroundColor: theme === 'dark' ? '#5da8af' : 'white',
     borderColor: "black",
     padding: 16,
     borderRadius: 8,
@@ -206,6 +216,7 @@ const getStyles = (theme) => StyleSheet.create({
   savedText: {
     fontSize: 16,
     marginBottom: 8,
+    fontWeight: "600",
   },
   buttonOptions: {
     padding: 10,

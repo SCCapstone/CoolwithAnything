@@ -64,7 +64,7 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.savedCard}>
       {editMode ? (
         // Edit mode UI with TextInputs for meal properties
         <View>
