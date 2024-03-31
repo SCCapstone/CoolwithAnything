@@ -21,7 +21,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   backButton: {
     fontSize: 24, 
-    fontWeight: 900, 
+    fontWeight: '900', 
     marginTop: 30, 
     color: 'white',
   },

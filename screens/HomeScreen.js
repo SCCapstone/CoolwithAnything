@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, BackHandler } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -20,7 +20,21 @@ const HomeScreen = ({ route }) => {
   const styles = getStyles(theme);
   const [taskCount, setTaskCount] = useState(0);
   const [taskTypeCount, setTaskTypeCount] = useState({});
-
+  useEffect(() => {
+    const backAction = () => {
+      // Optionally, navigate to a different screen or exit the app
+      // Return true to indicate that you've handled the back press
+      // Return false to let the default behavior take place
+      return true;
+    };
+  
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+  
+    return () => backHandler.remove();
+  }, []);
   useEffect(() => {
     const fetchAndCountTasksByAttribute = async () => {
       try {

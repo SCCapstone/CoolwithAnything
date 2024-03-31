@@ -6,7 +6,7 @@ const Email = ({ value, onChangeText }) => {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={styles.emailInput}
         placeholder="Email"
         value={value}
         onChangeText={onChangeText}

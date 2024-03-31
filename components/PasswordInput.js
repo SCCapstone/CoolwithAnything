@@ -6,7 +6,7 @@ const PasswordInput = ({ value, onChangeText }) => {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={styles.passwordInput}
         placeholder="Password"
         value={value}
         onChangeText={onChangeText}
