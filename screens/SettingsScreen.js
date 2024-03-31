@@ -324,7 +324,7 @@ function SelectOthers() {
         <Text style={styles.profileID}>User ID: {userId}</Text>
         <View style={styles.rowContainer}>
           <Pressable style={styles.pageButton} onPress={toggleTheme}>
-            <Text style={styles.accountText}>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</Text>
+            <Text style={styles.accountText}>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</Text>
           </Pressable>
           <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
             <Text style={styles.accountText}>Languages</Text>
