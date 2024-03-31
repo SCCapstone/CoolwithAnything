@@ -14,7 +14,7 @@ const AccountButton = ({ navigation }) => {
   return (
     <View style={styles.accountContainer}>
       <TouchableOpacity onPress={onAccountPress}>
-        <MaterialIcons name="settings" size={24} color={theme === 'dark' ? 'white' : 'black'} />
+        <MaterialIcons name="settings" size={24} color={'white'} />
       </TouchableOpacity>
     </View>
   );
