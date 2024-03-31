@@ -23,7 +23,7 @@ const getStyles = (theme) => StyleSheet.create({
     backgroundColor: '#3e5e60',
   },
   workoutText: {
-    marginTop: 30,
+    marginTop: 36,
     color: 'white',
     fontWeight: 'bold',
     fontSize: 24,

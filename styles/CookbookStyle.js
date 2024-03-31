@@ -142,7 +142,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   mealText: {
     marginTop: 30,
-    color: 'white',
+    color: theme === 'dark' ? 'black' : 'white',
     fontWeight: 'bold',
     fontSize: 24,
   },

@@ -76,42 +76,43 @@ const MealCards = ({
         visible={selectedRecipe !== ""}
         onRequestClose={closeModal}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.mealCardsTextContainer}>
-            <Pressable onPress={handleCloseModal}>
-              <Text style={styles.backButton}>←</Text>
-            </Pressable>
-            <Text style={styles.mealText}>Recipes</Text>
-            <View style={{ width: 24 }} />
-          </View>
-          <Text style={styles.cardModalHeader}>Meal Details</Text>
-          {selectedRecipe && (
-            <View style={styles.modalContent}>
-              <Text style={styles.textContainer}>
-                <Text style={styles.label}>Name:</Text>{" "}
-                <Text style={styles.apiText}>{selectedRecipe.title}</Text>
-              </Text>
-              <Text style={styles.textContainer}>
-                <Text style={styles.label}>Ingredients:</Text>{" "}
-                <Text style={styles.apiText}>{selectedRecipe.ingredients}</Text>
-              </Text>
-              <Text style={styles.textContainer}>
-                <Text style={styles.label}>Servings:</Text>{" "}
-                <Text style={styles.apiText}>{selectedRecipe.servings}</Text>
-              </Text>
-              <Text style={styles.textContainer}>
-                <Text style={styles.label}>Instructions:</Text>{" "}
-                <Text style={styles.apiText}>
-                  {selectedRecipe.instructions}
-                </Text>
-              </Text>
+        <View style={styles.screen}>
+        <View style={styles.mealCardsTextContainer}>
+              <Pressable onPress={handleCloseModal}>
+                <Text style={styles.backButton}>←</Text>
+              </Pressable>
+              <Text style={styles.mealText}>Recipes</Text>
+              <View style={{ width: 24 }} />
             </View>
-          )}
-          {/* Add button */}
-         <TouchableOpacity onPress={() => {console.log("meal added"); handleAddMeal()}}>
-            <Text style={styles.addButton}>Add</Text>
-          </TouchableOpacity>
-        </View>
+          <ScrollView>
+            {selectedRecipe && (
+              <View style={styles.modalContent}>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Name:</Text>{" "}
+                  <Text style={styles.apiText}>{selectedRecipe.title}</Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Ingredients:</Text>{" "}
+                  <Text style={styles.apiText}>{selectedRecipe.ingredients}</Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Servings:</Text>{" "}
+                  <Text style={styles.apiText}>{selectedRecipe.servings}</Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Instructions:</Text>{" "}
+                  <Text style={styles.apiText}>
+                    {selectedRecipe.instructions}
+                  </Text>
+                </Text>
+              </View>
+            )}
+            {/* Add button */}
+          <TouchableOpacity onPress={() => {console.log("meal added"); handleAddMeal()}}>
+              <Text style={styles.addButton}>Add</Text>
+            </TouchableOpacity>
+          </ScrollView>
+          </View>
       </Modal>
       </ScrollView>
     </View>
