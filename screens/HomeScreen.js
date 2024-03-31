@@ -63,7 +63,7 @@ const HomeScreen = ({ route }) => {
         <View style={{ width: 24 }} />
       </View>
       <View style={styles.topContainer}>
-        <DateTracker month="March" year={2024} />
+        <DateTracker month="Marchxxxx" year={2024} />
         <AccountButton navigation={navigation} />
       </View>
       <ProgressBar progress={taskCount} />
