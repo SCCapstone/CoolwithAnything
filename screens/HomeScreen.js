@@ -60,8 +60,15 @@ const HomeScreen = ({ route }) => {
     <View style={styles.container}>
       <View style={styles.homeTextContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.homeText}>Today</Text>
-          <AccountButton navigation={navigation} />
+        <View style={{flex: 1}}> 
+          {/* Empty View as Spacer */}
+        </View>
+          <View style={{flex: 2, alignItems: 'center'}}> 
+            <Text style={styles.homeText}>Today</Text>
+          </View>
+          <View style={{flex: 1, alignItems: 'flex-end', paddingRight: 10}}> 
+            <AccountButton navigation={navigation} />
+          </View>
         </View>
         <View style={{ width: 24 }} />
       </View>

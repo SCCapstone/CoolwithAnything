@@ -12,7 +12,7 @@ const getStyles = (theme) =>
     headerContainer: {
       flexDirection: 'row', 
       alignItems: 'center',
-      marginTop: 40,
+      marginTop: 36,
     },
     homeTextContainer: {
       height: 80,
