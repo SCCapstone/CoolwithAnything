@@ -13,10 +13,12 @@ import {
   parseISO,
 } from "date-fns";
 import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
+import { fetchTasksForCategoryAndMonth } from '../services/AuthAPI';
 import styles from "../styles/CalendarStyle";
 import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import eventEmitter from './EventEmitter';
+import DailyView from './DailyView';
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -26,6 +28,13 @@ const Calendar = ({ userID, navigation, birthday }) => {
   const [modalVisible, setModalVisible] = useState(false);
  // const navigation = useNavigation();
   const [tasks, setTasks] = useState([]);
+  const [taskCounts, setTaskCounts] = useState({
+    School: 0,
+    Work: 0,
+    Personal: 0,
+    Gym: 0,
+  });
+
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -33,22 +42,28 @@ const Calendar = ({ userID, navigation, birthday }) => {
         const start = startOfMonth(currentMonth);
         const end = endOfMonth(currentMonth);
   
-        // console logs here to debug the values
-        console.log("Current Month:", currentMonth);
-        console.log("Start Date:", start);
-        console.log("End Date:", end);
-  
-        // Safeguard: Ensure 'start' and 'end' are Date objects before calling toISOString
         if (start && end && start instanceof Date && end instanceof Date) {
-          const fetchedTasks = await fetchTasksForUser(userID, new Date(start).toISOString(), new Date(end).toISOString());
+          const fetchedTasks = await fetchTasksForUser(userID, start.toISOString(), end.toISOString());
           setTasks(fetchedTasks);
-        } else {
-          console.error("start or end date is not a valid Date object");
+  
+          // Initialize counters for each task type
+          const newTaskCounts = { School: 0, Work: 0, Personal: 0, Gym: 0 };
+          
+          // Count tasks for each type
+          fetchedTasks.forEach(task => {
+            if (newTaskCounts.hasOwnProperty(task.type) && isSameMonth(parseISO(task.date), currentMonth)) {
+              newTaskCounts[task.type]++;
+            }
+          });
+  
+          // Update the state with the new counts
+          setTaskCounts(newTaskCounts);
         }
       } catch (error) {
-        console.error("Error fetching tasks: ", error);
+        console.error("Error fetching tasks:", error);
       }
     };
+  
     fetchTasks();
 
     // Subscribe to the taskCreated event
@@ -74,12 +89,12 @@ const getPriorityColor = (priority) => {
   }
 };
   
-  const taskTypeColors = {
-    School: '#FFA07A', // Light Salmon random color they dont match up to examples we can swtich this later
-    Work: '#20B2AA', // Light Sea Green random color ^
-    Personal: '#778899', // Light Slate Gray random color ^
-    
-  };
+const taskTypeColors = {
+  School: '#FFA07A',
+  Work: '#20B2AA',
+  Personal: '#778899',
+  Gym: '#FFD700',
+};
 
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
@@ -91,8 +106,9 @@ const getPriorityColor = (priority) => {
 
   const onDateSelect = (day) => {
     setSelectedDate(day);
-    setModalVisible(true);
+    setModalVisible(false);
   };
+
   const isBirthday = (day) => {
     if (!birthday) return false;
     const [birthMonth, birthDay] = birthday.split("/").slice(0, 2);
@@ -175,9 +191,26 @@ const renderDays = () => {
   });
 };
 
+//<CategoryCounter
+//  count={taskCounts['School']}
+//  label="School"
+//  color="#FFA07A"
+//  onPress={() => navigation.navigate('TaskDetailScreen', { category: 'School', month: format(currentMonth, 'MMMM yyyy') })}
+///>
 
   return (
     <View style={styles.calendarContainer}>
+                  {/* Fixed Task Type Indicators View */}
+                  <View style={styles.typeIndicatorsContainer}>
+  {Object.entries(taskTypeColors).map(([type, color]) => (
+    <View key={type} style={styles.typeIndicatorWrapper}>
+      <View style={[styles.typeIndicator, { backgroundColor: color }]}>
+        <Text style={styles.typeIndicatorCount}>{taskCounts[type]}</Text>
+      </View>
+      <Text style={styles.typeIndicatorText}>{type}</Text>
+    </View>
+  ))}
+</View>
       {/* Calendar Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={prevMonth}>
@@ -198,6 +231,7 @@ const renderDays = () => {
 
       {/* Days Grid */}
       <View style={styles.daysContainer}>{renderDays()}</View>
+      <DailyView userID={userID} selectedDate={selectedDate} navigation={navigation} />
 
       {/* Task Details and Actions Modal */}
       <Modal

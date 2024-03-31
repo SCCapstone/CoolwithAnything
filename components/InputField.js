@@ -14,11 +14,12 @@ const InputField = ({ placeholder, onChangeText, value }) => {
 
 const styles = StyleSheet.create({
   input: {
-    borderWidth: 1,
-    borderColor: "grey",
-    borderRadius: 5,
-    padding: 10,
-    marginVertical: 5,
+    backgroundColor: '#222831', // Darker shade for input background
+    color: '#ffffff', // White color text for better contrast
+    padding: 15,
+    borderRadius: 10,
+    fontSize: 16,
+    marginBottom: 20,
   },
 });
 
