@@ -25,6 +25,7 @@ const getStyles = (theme) =>
     topContainer: {
       flexDirection: "row",
     },
+ 
 
     //-----DateTracker.js-----//
     dateTrackerContainer: {
@@ -36,6 +37,7 @@ const getStyles = (theme) =>
     monthYearText: {
       fontSize: 24,
       color: theme === "dark" ? "white" : "black",
+      fontWeight: "700",
     },
 
     //-----AccountButton.js-----//

@@ -143,6 +143,7 @@ const getStyles = (theme) => StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: theme === 'dark' ? '#262626' : "white",
+    height: height,
   },
   cardModalHeader: {
     fontSize: 20,
@@ -164,14 +165,19 @@ const getStyles = (theme) => StyleSheet.create({
     color: theme === 'dark' ? 'white' : 'black',
   },
   addButton: {
-    color: "blue",
+    color: "#5da8af",
     fontSize: 16,
     padding: 16,
+    fontWeight: "700",
   },
   closeButton1: {
     color: "blue",
     fontSize: 16,
     padding: 16,
+  },
+  iconContainer: {
+    alignItems: "center",
+    paddingTop: 16,
   },
 
   //----- WorkoutCard.js (under saved) -----//
@@ -190,6 +196,7 @@ const getStyles = (theme) => StyleSheet.create({
   savedText: {
     fontSize: 16,
     marginBottom: 8,
+    fontWeight: "600",
   },
   buttonOptions: {
     padding: 10,
