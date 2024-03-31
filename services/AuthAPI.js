@@ -274,7 +274,7 @@ export const updateMealData = async (userId, mealId, updatedData) => {
   }
   try {
     console.log("Updating meal with data:", updatedData);
-    debugger;
+
     if (!userId || !mealId) {
       console.error("userId or mealId is not provided");
       return; // Exit the function if no userId or taskId
@@ -343,7 +343,7 @@ export const updateWorkoutData = async (userId, workoutId, updatedData) => {
   }
   try {
     console.log("Updating workout with data:", updatedData);
-    debugger;
+
     if (!userId || !workoutId) {
       console.error("userId or workoutId is not provided");
       return; // Exit the function if no userId or taskId
@@ -387,7 +387,7 @@ export const countTasksForUser = async (userId) => {
     const querySnapshot = await getDocs(tasksRef);
     const tasksCount = querySnapshot.size;
 
-    console.log('Total tasks for user ${userId}: ${tasksCount}');
+    console.log("Total tasks for user ${userId}: ${tasksCount}");
     return tasksCount;
   } catch (error) {
     console.error("Error fetching task count: ", error);
@@ -397,7 +397,7 @@ export const countTasksForUser = async (userId) => {
 
 export const updateUserThemePreference = async (userId, themePreference) => {
   const db = getFirestore();
-  const userRef = doc(db, "users", userId); 
+  const userRef = doc(db, "users", userId);
 
   try {
     await updateDoc(userRef, {
