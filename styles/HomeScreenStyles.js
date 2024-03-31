@@ -9,6 +9,11 @@ const getStyles = (theme) =>
       flex: 1,
       backgroundColor: theme === "dark" ? "#262626" : "white",
     },
+    headerContainer: {
+      flexDirection: 'row', 
+      alignItems: 'center',
+      marginTop: 40,
+    },
     homeTextContainer: {
       height: 80,
       width: "100%",
@@ -17,7 +22,6 @@ const getStyles = (theme) =>
       backgroundColor: "#3e5e60",
     },
     homeText: {
-      marginTop: 40,
       color: "white",
       fontWeight: "bold",
       fontSize: 24,

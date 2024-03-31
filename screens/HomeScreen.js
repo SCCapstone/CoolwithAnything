@@ -59,12 +59,14 @@ const HomeScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.homeTextContainer}>
-        <Text style={styles.homeText}>Today</Text>
+        <View style={styles.headerContainer}>
+          <Text style={styles.homeText}>Today</Text>
+          <AccountButton navigation={navigation} />
+        </View>
         <View style={{ width: 24 }} />
       </View>
       <View style={styles.topContainer}>
         <DateTracker month="Marchxxxx" year={2024} />
-        <AccountButton navigation={navigation} />
       </View>
       <ProgressBar progress={taskCount} />
       <View style={styles.categoryContainer}>
