@@ -45,7 +45,7 @@ const HomeScreen = ({ route }) => {
       <AccountButton navigation={navigation} />
       <ProgressBar progress={40} />
       <View style={styles.categoryContainer}>
-        <CategoryCounter count={3} label="School" color="gold" />
+        <CategoryCounter count={3} label="Schoolxxx" color="gold" />
         <CategoryCounter count={2} label="Personal" color="skyblue" />
         <CategoryCounter count={1} label="Gym" color="salmon" />
       </View>
