@@ -59,7 +59,17 @@ const HomeScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.homeTextContainer}>
-        <Text style={styles.homeText}>Today</Text>
+        <View style={styles.headerContainer}>
+          <View style={{flex: 1}}> 
+            {/* Empty View as Spacer */}
+          </View>
+          <View style={{flex: 2, alignItems: 'center'}}> 
+            <Text style={styles.homeText}>Today</Text>
+          </View>
+          <View style={{flex: 1, alignItems: 'flex-end'}}> 
+            <AccountButton navigation={navigation} />
+          </View>
+        </View>
         <View style={{ width: 24 }} />
       </View>
       <View style={styles.topContainer}>
@@ -68,7 +78,8 @@ const HomeScreen = ({ route }) => {
        </View>
         <AccountButton navigation={navigation} />
       </View>
-      <ProgressBar progress={taskCount} />
+      <ProgressBar progress={taskCount}/>
+      <Text style={styles.title}>Active Tasks</Text>
       <View style={styles.categoryContainer}>
         <CategoryCounter count={3} label="School" color="#57BCBE" />
         <CategoryCounter count={2} label="Personal" color="#4BA4A6" />

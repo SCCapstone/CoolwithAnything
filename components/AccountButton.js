@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import getStyles from '../styles/HomeScreenStyles';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from "../services/ThemeContext";
 
-const AccountButton = ({navigation}) => {
+const AccountButton = ({ navigation }) => {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   const onAccountPress = () => {
@@ -13,7 +14,7 @@ const AccountButton = ({navigation}) => {
   return (
     <View style={styles.accountContainer}>
       <TouchableOpacity onPress={onAccountPress}>
-        <Text style={styles.accountButton}>👤</Text>
+        <MaterialIcons name="settings" size={24} color={'white'} />
       </TouchableOpacity>
     </View>
   );

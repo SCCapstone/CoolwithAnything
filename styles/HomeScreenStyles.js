@@ -9,6 +9,12 @@ const getStyles = (theme) =>
       flex: 1,
       backgroundColor: theme === "dark" ? "#262626" : "white",
     },
+    headerContainer: {
+      flexDirection: 'row', 
+      alignItems: 'center',
+      marginTop: 36,
+      paddingHorizontal: 10,
+    },
     homeTextContainer: {
       height: 80,
       width: "100%",
@@ -17,7 +23,6 @@ const getStyles = (theme) =>
       backgroundColor: "#3e5e60",
     },
     homeText: {
-      marginTop: 40,
       color: "white",
       fontWeight: "bold",
       fontSize: 24,
@@ -25,7 +30,13 @@ const getStyles = (theme) =>
     topContainer: {
       flexDirection: "row",
     },
- 
+    title: {
+      color: theme === "dark" ? "white" : "black",
+      fontWeight: '700',
+      fontSize: 24,
+      paddingLeft: 20,
+      marginTop: 20,
+    },
 
     //-----DateTracker.js-----//
     dateTrackerContainer: {
@@ -37,7 +48,6 @@ const getStyles = (theme) =>
     monthYearText: {
       fontSize: 24,
       color: theme === "dark" ? "white" : "black",
-      fontWeight: "700",
     },
 
     //-----AccountButton.js-----//

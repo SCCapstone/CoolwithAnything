@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -133,9 +133,9 @@ function SelectProfile() {
           <Text style={styles.labelText}>{weight}</Text>
         </View>
 
-        <Pressable style={styles.editButton} onPress={openModal}>
+        <TouchableOpacity style={styles.editButton} onPress={openModal}>
           <Text style={styles.buttonText}>Edit</Text>
-        </Pressable>
+        </TouchableOpacity>
 
         <Modal visible={isModalVisible} animationType="slide" transparent={true}>
           <View style={styles.modalContainer}>
@@ -185,12 +185,12 @@ function SelectProfile() {
               onChangeText={(text) => setEditedWeight(text)}
             />
             <View style={styles.modalButtonContainer}>
-            <Pressable style={styles.modalSaveButton} onPress={handleSaveChanges} >
+            <TouchableOpacity style={styles.modalSaveButton} onPress={handleSaveChanges} >
               <Text style={styles.modalText}>Save</Text>
-            </Pressable>
-            <Pressable style={styles.modalCancelButton} onPress={closeModal} >
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.modalCancelButton} onPress={closeModal} >
               <Text style={styles.modalText}>Cancel</Text>
-            </Pressable>
+            </TouchableOpacity>
             </View>
           </View>
         </Modal>
@@ -240,22 +240,22 @@ function SelectAccount() {
         <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
         <Text style={styles.profileID}>User ID: {userId}</Text>
         <View style={styles.rowContainer}>
-          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
             <Text style={styles.accountText}>Transaction History</Text>
-          </Pressable>
-          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')}>
             <Text style={styles.accountText}>Payment Methods</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={styles.rowContainer}>
-          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('ToS')}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('ToS')}>
             <Text style={styles.accountText}>Terms of Service</Text>
-          </Pressable>
-          <Pressable style={styles.pageButton} onPress={() => navigation.navigate('QR')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('QR')}>
             <Text style={styles.accountText}>QR Code</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
-        <Pressable
+        <TouchableOpacity
           style={styles.editButton}
           onPress={() => {
             Alert.alert(
@@ -274,7 +274,7 @@ function SelectAccount() {
           }}
         >
           <Text style={styles.buttonText}>Sign Out</Text>
-        </Pressable>
+        </TouchableOpacity>
 
       </ScrollView>
     </View>
@@ -323,20 +323,20 @@ function SelectOthers() {
         <Text style={styles.title}>{firstName ? firstName : ""} {lastName ? lastName : ""}</Text>
         <Text style={styles.profileID}>User ID: {userId}</Text>
         <View style={styles.rowContainer}>
-          <Pressable style={styles.pageButton} onPress={toggleTheme}>
-            <Text style={styles.accountText}>Dark Mode</Text>
-          </Pressable>
-          <Pressable style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
+          <TouchableOpacity style={styles.pageButton} onPress={toggleTheme}>
+            <Text style={styles.accountText}>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('This app is only available in English right now.')}>
             <Text style={styles.accountText}>Languages</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={styles.rowContainer}>
-          <Pressable style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
             <Text style={styles.accountText}>Support</Text>
-          </Pressable>
-          <Pressable style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.5')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.5')}>
             <Text style={styles.accountText}>Version</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
