@@ -1,8 +1,12 @@
 // components/WorkoutHeader.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/WorkoutHeaderStyles";
 
 const WorkoutHeader = ({ onClose }) => {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   return (
     <View style={styles.header}>
       <Text style={styles.title}>Create Workout</Text>
@@ -12,21 +16,5 @@ const WorkoutHeader = ({ onClose }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  closeButton: {
-    fontSize: 22,
-  },
-});
 
 export default WorkoutHeader;

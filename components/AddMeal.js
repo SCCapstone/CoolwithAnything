@@ -56,8 +56,7 @@ const AddMeal = ({ route }) => {
     navigation.navigate("Today");
   };
   return (
-    <ScrollView style={styles.container}>
-
+    <View style={styles.screen}>
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
@@ -65,6 +64,7 @@ const AddMeal = ({ route }) => {
         <Text style={styles.createText}>Create Meal</Text>
         <View style={{ width: 24 }} />
       </View>
+      <ScrollView style={styles.container}>
 
       <MealHeader onClose={() => handleclose()} />
       <InputField
@@ -84,7 +84,9 @@ const AddMeal = ({ route }) => {
       />
       <CommentBox value={mealInstructions} onChangeText={setMealInstructions} />
       <CreateButton onPress={() => handleAdd()} label={"Create Meal"} />
-    </ScrollView>
+      </ScrollView>
+    </View>
+    
   );
 };
 
