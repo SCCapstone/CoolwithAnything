@@ -76,11 +76,14 @@ const TabNavigator = ({ route }) => {
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );
         },
-        tabBarActiveTintColor: '#5da8af', // Color of the icon and text when the tab is active
+        tabBarActiveTintColor: '#63D4D5', // Color of the icon and text when the tab is active
         tabBarInactiveTintColor: 'white',
         tabBarStyle: {
           display: "flex",
           backgroundColor: '#3e5e60', 
+          borderTopWidth: 0, // Set borderTopWidth to 0 to remove the top border
+          elevation: 0,
+          shadowOpacity: 0,
         },
       })}
     >

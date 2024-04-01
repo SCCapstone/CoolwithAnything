@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/core'; // useRoute to receive parameters
 import { deletePaymentMethodForUser, updatePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI"; 
 import { getAuth } from 'firebase/auth';
@@ -175,19 +175,19 @@ const EditPaymentMethodsScreen = () => {
 
       <View style={styles.buttonContainer}>
             <View style={styles.saveButtonContainer}>
-              <Pressable 
+              <TouchableOpacity 
                 onPress={handleUpdatePaymentMethod} // Update this to handleUpdatePaymentMethod
                 style={styles.saveButton}>
                 <Text style={styles.saveButtonText}>Update Payment Method</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.deleteButtonContainer}>
-              <Pressable 
+              <TouchableOpacity 
                 onPress={handleDeletePaymentMethod}
                 style={styles.deleteButton}>
                 <Text style={styles.deleteButtonText}>Delete Payment Method</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
     </View>

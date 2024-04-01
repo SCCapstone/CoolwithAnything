@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { View, Text, TextInput, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { useTheme } from '../services/ThemeContext';
 import { savePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
@@ -129,11 +129,11 @@ const AddPaymentMethodsScreen = () => {
 
       <View style={styles.buttonContainer}> 
         <View style={styles.saveButtonContainer}>
-          <Pressable 
+          <TouchableOpacity 
             onPress={handleSavePaymentMethod}
             style={styles.saveButton}>
             <Text style={styles.saveButtonText}>Save Payment Method</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
 

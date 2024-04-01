@@ -166,6 +166,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   addButton: {
     color: "#5da8af",
+    color: "#5da8af",
     fontSize: 16,
     padding: 16,
     fontWeight: "700",
@@ -174,6 +175,7 @@ const getStyles = (theme) => StyleSheet.create({
     color: "blue",
     fontSize: 16,
     padding: 16,
+    fontWeight: '700',
   },
   iconContainer: {
     alignItems: "center",
