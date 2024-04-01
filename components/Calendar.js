@@ -48,7 +48,7 @@ const Calendar = ({ userID, navigation, birthday }) => {
         console.log("Current Month:", currentMonth);
         console.log("Start Date:", start);
         console.log("End Date:", end);
-        console.log("Birthday:", birthday);
+        console.log("Birthday (calendar):", birthday);
 
         // Safeguard: Ensure 'start' and 'end' are Date objects before calling toISOString
         if (start && end && start instanceof Date && end instanceof Date) {
@@ -108,10 +108,19 @@ const Calendar = ({ userID, navigation, birthday }) => {
     setSelectedDate(day);
     setModalVisible(true);
   };
+  const convertToISO = (dateString) => {
+    // Split the date string into parts
+    const parts = dateString.split("-");
+    
+    // Reorder the parts from "MM-DD-YYYY" to "YYYY-MM-DD"
+    const isoDate = `${parts[2]}-${parts[0]}-${parts[1]}`;
+  
+    return isoDate;
+  };
 
   const isBirthday = (day) => {
     if (!birthday) return false;
-    const birthDate = parseISO(birthday);
+    const birthDate = parseISO(convertToISO(birthday));
     return (
       day.getMonth() === birthDate.getMonth() &&
       day.getDate() === birthDate.getDate()

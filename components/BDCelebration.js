@@ -8,6 +8,7 @@ const BirthdayCelebration = ({ userName, birthday }) => {
   const today = new Date();
   const todayStr = format(today, 'MM/dd');
 
+  console.log("Birthday(BDC): ", birthday);
   let userBirthdayStr = '';
   let isUserBirthdayToday = false;
 

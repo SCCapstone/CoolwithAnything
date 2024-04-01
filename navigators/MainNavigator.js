@@ -68,6 +68,8 @@ function MainNavigator({ isLoggedIn }) {
       // Navigate to the appropriate screen based on auth state
       if (userIDRef.current !== null) {
         navigationRef.current?.navigate("Home", { userID: userIDRef.current });
+        console.log("Navigating to Home screen");
+        console.log("User ID (in navigation): ", userIDRef.current);
       } else {
         navigationRef.current?.navigate("Login");
       }

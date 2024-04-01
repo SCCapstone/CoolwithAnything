@@ -20,21 +20,7 @@ const HomeScreen = ({ route }) => {
   const styles = getStyles(theme);
   const [taskCount, setTaskCount] = useState(0);
   const [taskTypeCount, setTaskTypeCount] = useState({});
-  useEffect(() => {
-    const backAction = () => {
-      // Optionally, navigate to a different screen or exit the app
-      // Return true to indicate that you've handled the back press
-      // Return false to let the default behavior take place
-      return true;
-    };
-  
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-  
-    return () => backHandler.remove();
-  }, []);
+
   useEffect(() => {
     const fetchAndCountTasksByAttribute = async () => {
       try {
@@ -86,7 +72,23 @@ const HomeScreen = ({ route }) => {
       fetchData();
     }
   }, [userID]);
-
+  console.log("Birthday (HS): ", userData.birthday);
+  
+    // Handle the hardware back button on Android devices
+    useEffect(() => {
+      const backAction = () => {
+        return true;
+      };
+  
+      // Add the back press event listener
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+  
+      // Remove the event listener when the component is unmounted or no longer focused
+      return () => backHandler.remove();
+    }, []);
   return (
     <ScrollView style={styles.container}>
       <DateTracker month="January" year={2021} />

@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    if (!email.trim() || !password) {
+    if (!email || !password) {
       Alert.alert("Missing Fields", "Please enter both email and password.", [
         { text: "OK" },
       ]);
@@ -43,25 +43,16 @@ const LoginScreen = ({ navigation }) => {
       const user = await loginUser(email, password);
       if (user) {
         // Handle successful login
-        Alert.alert("Login Successful", "You are logged in.", [
-          {
-            text: "OK",
-            onPress: () =>
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Home", params: { userId: user.uid } }],
-              }),
-          },
-        ]);
+        Alert.alert("Login Successful", "Logged in successfully.");
+        navigation.navigate("Home", { userID: user.uid }); // Pass user data to Home screen if needed
       } else {
         throw new Error("Failed to log in.");
       }
     } catch (error) {
       console.error(error);
-      // Ensure that error messages are user-friendly
       Alert.alert(
         "Login Error",
-        error.message || "Failed to log in. Please try again later."
+        error.message || "An error occurred during login."
       );
     }
   };
