@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { View, Text, Pressable, FlatList } from 'react-native';
+import { View, Text, Pressable, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/core'; 
 import { useTheme } from '../services/ThemeContext';
 import { fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
@@ -28,7 +28,7 @@ const PaymentMethodsScreen = () => {
   }, [isFocused, userId]);
 
   const renderPaymentMethod = ({ item }) => (
-    <Pressable onPress={() => navigation.navigate('EditPaymentMethods', {
+    <TouchableOpacity onPress={() => navigation.navigate('EditPaymentMethods', {
       id: item.id,
       nickname: item.nickname,
       creditCard: item.creditCard,
@@ -40,7 +40,7 @@ const PaymentMethodsScreen = () => {
       <View style={styles.paymentsContainer}>
         <Text style={styles.paymentMethod}>{item.nickname}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
   
 
@@ -63,16 +63,16 @@ const PaymentMethodsScreen = () => {
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{ alignItems: 'center' }}
         ListFooterComponent={
-          <Pressable onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
-            <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+          <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
+            <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')}>
               <View style={styles.addPaymentContainer}>
               <Text style={styles.addPayment}>
                 Add a payment method
                 <Text style={styles.plusStyle}>  +</Text>
               </Text>
               </View>
-            </Pressable>
-          </Pressable>
+            </TouchableOpacity>
+          </TouchableOpacity>
         }
         />
         ) : (
@@ -80,14 +80,14 @@ const PaymentMethodsScreen = () => {
             <Text style={styles.noPaymentText}>
               You have no payment methods.
             </Text>
-          <Pressable onPress={() => navigation.navigate('AddPaymentMethods')}>
+          <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')}>
             <View style={styles.addPaymentContainer}>
               <Text style={styles.addPayment}>
                 Add a payment method
                 <Text style={styles.plusStyle}> +</Text>
               </Text>
             </View>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       )}
     </View>

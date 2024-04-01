@@ -74,8 +74,10 @@ const HomeScreen = ({ route }) => {
       </View>
       <View style={styles.topContainer}>
         {/*<DateTracker month="Marchxxxx" year={2024} />*/}
+        <Text style={styles.title}>Task Progress</Text>
       </View>
-      <ProgressBar progress={taskCount} />
+      <ProgressBar progress={taskCount}/>
+      <Text style={styles.title}>Active Tasks</Text>
       <View style={styles.categoryContainer}>
         <CategoryCounter count={3} label="School" color="#57BCBE" />
         <CategoryCounter count={2} label="Personal" color="#4BA4A6" />
