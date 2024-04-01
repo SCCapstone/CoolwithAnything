@@ -106,42 +106,43 @@ const HomeScreen = ({ route }) => {
       return () => backHandler.remove();
     }, []);
   return (
-    <View style={styles.container}>
+    <View style={{flex: 1}}>
       <View style={styles.homeTextContainer}>
-        <View style={styles.headerContainer}>
-          <View style={{flex: 1}}> 
-            {/* Empty View as Spacer */}
-          </View>
-          <View style={{flex: 2, alignItems: 'center'}}> 
-            <Text style={styles.homeText}>Today</Text>
-          </View>
-          <View style={{flex: 1, alignItems: 'flex-end'}}> 
-            <AccountButton navigation={navigation} />
-          </View>
+      <View style={styles.headerContainer}>
+        <View style={{ flex: 1 }}>{/* Empty View as Spacer */}</View>
+        <View style={{ flex: 2, alignItems: "center" }}>
+          <Text style={styles.homeText}>Today</Text>
         </View>
-        <View style={{ width: 24 }} />
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <AccountButton navigation={navigation} />
+        </View>
       </View>
-      <View style={styles.topContainer}>
-       <View style={styles.dateTrackerContainer}>
-        <Text style={styles.monthYearText}>Your Progress:</Text>
-       </View>
+      <View style={{ width: 24 }} />
+    </View>
+      <ScrollView style={styles.container}>
+    <View style={styles.topContainer}>
+      <View style={styles.indicatorContainer}>
+        <Text style={styles.title}>Your Progress</Text>
       </View>
-      <ProgressBar progress={taskCount} />
-      <View style={styles.categoryContainer}>
-        <CategoryCounter count={3} label="School" color="#57BCBE" />
-        <CategoryCounter count={2} label="Personal" color="#4BA4A6" />
-        <CategoryCounter count={1} label="Work" color="#408D8E" />
-        <CategoryCounter count={1} label="Gym" color="#347576" />
-      </View>
-      <Calendar
-        userID={userID}
-        navigation={navigation}
-        birthday={userData.birthday}
-      />
-      <BirthdayCelebration
-        userName={userData.name}
-        birthday={userData.birthday}
-      />
+    </View>
+    <ProgressBar progress={taskCount} />
+    <Text style={styles.title}>Active Tasks</Text>
+    <View style={styles.categoryContainer}>
+      <CategoryCounter count={3} label="School" color="#57BCBE" />
+      <CategoryCounter count={2} label="Personal" color="#4BA4A6" />
+      <CategoryCounter count={1} label="Work" color="#408D8E" />
+      <CategoryCounter count={1} label="Gym" color="#347576" />
+    </View>
+    <Calendar
+      userID={userID}
+      navigation={navigation}
+      birthday={userData.birthday}
+    />
+    <BirthdayCelebration
+      userName={userData.name}
+      birthday={userData.birthday}
+    />
+  </ScrollView>
     </View>
   );
 };
