@@ -74,7 +74,7 @@ const HomeScreen = ({ route }) => {
       </View>
       <View style={styles.topContainer}>
        <View style={styles.indicatorContainer}>
-        <Text style={styles.monthYearText}>Your Progress:</Text>
+        <Text style={styles.monthYearText}>Your Progress: </Text>
        </View>
         <AccountButton navigation={navigation} />
       </View>
