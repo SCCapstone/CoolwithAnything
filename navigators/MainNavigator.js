@@ -87,6 +87,11 @@ function MainNavigator({ isLoggedIn }) {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="Home"
+          component={TabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="EditTaskScreen"
           component={EditTaskScreen}
           options={{ title: 'Edit Task' }}
@@ -115,11 +120,6 @@ function MainNavigator({ isLoggedIn }) {
           name="Confirmation"
           component={ConfirmationScreen}
           options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="EditTaskScreen"
-          component={EditTaskScreen}
-          options={{ title: "Edit Task" }}
         />
         <Stack.Screen
           name="Settings"

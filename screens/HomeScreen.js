@@ -19,7 +19,6 @@ const HomeScreen = ({ route }) => {
   const [taskCount, setTaskCount] = useState(0);
   const { theme } = useTheme();
   const styles = getStyles(theme);
-  const [taskCount, setTaskCount] = useState(0);
   const [taskTypeCount, setTaskTypeCount] = useState({});
 
   useEffect(() => {

@@ -25,8 +25,6 @@ import {
 import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
 import getStyles from "../styles/HomeScreenStyles";
 import { fetchTasksForCategoryAndMonth } from '../services/AuthAPI';
-import styles from "../styles/CalendarStyle";
-import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import eventEmitter from './EventEmitter';
 import DailyView from './DailyView';
