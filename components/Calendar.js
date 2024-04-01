@@ -66,7 +66,6 @@ const Calendar = ({ userID, navigation, birthday }) => {
 
         // Safeguard: Ensure 'start' and 'end' are Date objects before calling toISOString
         if (start && end && start instanceof Date && end instanceof Date) {
-          const fetchedTasks = await fetchTasksForUser(userID, start.toISOString(), end.toISOString());
           const fetchedTasks = await fetchTasksForUser(
             userID,
             new Date(start).toISOString(),
