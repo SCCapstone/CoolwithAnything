@@ -8,9 +8,10 @@ import Calendar from "../components/Calendar";
 import BirthdayCelebration from "../components/BDCelebration";
 import AccountButton from "../components/AccountButton";
 import { useNavigation } from "@react-navigation/native";
-import { countTasksForUser, getUserData, countTasksByAttributeForUser } from "../services/AuthAPI";
+import { countTasksForUser, getUserData, countTasksByAttributeForUser, fetchTasksForUser } from "../services/AuthAPI";
 import { useTheme } from '../services/ThemeContext';
 import getStyles from "../styles/HomeScreenStyles";
+import eventEmitter from '../components/EventEmitter';
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -20,6 +21,29 @@ const HomeScreen = ({ route }) => {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   const [taskTypeCount, setTaskTypeCount] = useState({});
+  const [completedTasks, setCompletedTasks] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
+
+
+  // Function to fetch tasks and calculate progress
+  const fetchAndCalculateTasks = async () => {
+    const tasks = await fetchTasksForUser(userID);
+    const total = tasks.length;
+    const completed = tasks.filter(task => task.completed).length;
+    setTotalTasks(total);
+    setCompletedTasks(completed);
+  };
+
+  useEffect(() => {
+    // Call fetchAndCalculateTasks initially
+    fetchAndCalculateTasks();
+  
+    // Set up a listener for the taskUpdated event
+    const unsubscribe = eventEmitter.subscribe('taskUpdated', fetchAndCalculateTasks);
+  
+    // Clean up the listener when the component unmounts or when userID changes
+    return () => unsubscribe();
+  }, [userID]);
 
   useEffect(() => {
     const fetchAndCountTasksByAttribute = async () => {
@@ -37,6 +61,19 @@ const HomeScreen = ({ route }) => {
       fetchAndCountTasksByAttribute();
     }
   }, [userID]);
+
+  useEffect(() => {
+    const userID = route.params.userID; // Assuming userID is passed correctly
+    const fetchAndCalculateTasks = async () => {
+      const tasks = await fetchTasksForUser(userID);
+      setTotalTasks(tasks.length);
+      const completedCount = tasks.filter(task => task.completed).length;
+      setCompletedTasks(completedCount);
+    };
+
+    fetchAndCalculateTasks();
+    eventEmitter.emit('taskUpdated');
+  }, [route.params.userID]); // Re-run when userID changes
   
   useEffect(() => {
     const fetchData = async () => {
@@ -125,7 +162,10 @@ const HomeScreen = ({ route }) => {
         <Text style={styles.title}>Your Progress</Text>
       </View>
     </View>
-    <ProgressBar progress={taskCount} />
+    <View style={styles.container}>
+      <ProgressBar completedTasks={completedTasks} totalTasks={totalTasks} />
+      {/* Render other components */}
+    </View>
     <Text style={styles.title}>Active Tasks</Text>
     <View style={styles.categoryContainer}>
       <CategoryCounter count={3} label="School" color="#57BCBE" />
