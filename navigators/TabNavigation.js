@@ -79,6 +79,9 @@ const TabNavigator = ({ route }) => {
         tabBarStyle: {
           display: "flex",
           backgroundColor: '#3e5e60', 
+          borderTopWidth: 0, // Set borderTopWidth to 0 to remove the top border
+          elevation: 0,
+          shadowOpacity: 0,
         },
       })}
     >

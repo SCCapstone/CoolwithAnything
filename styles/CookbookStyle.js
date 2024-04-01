@@ -180,14 +180,10 @@ const getStyles = (theme) => StyleSheet.create({
     color: theme === 'dark' ? 'white' : 'black',
   },
   addButton: {
-    color: "blue",
+    color: "#5da8af",
     fontSize: 16,
     padding: 16,
-  },
-  closeButton1: {
-    color: "blue",
-    fontSize: 16,
-    padding: 16,
+    fontWeight: '700',
   },
 
   //----- MealCard.js (under saved) -----//
