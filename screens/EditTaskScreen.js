@@ -8,6 +8,7 @@ import CommentBox from "../components/CommentBox";
 import CreateButton from "../components/CreateButton"; 
 import { updateTaskForUser } from "../services/AuthAPI";
 import eventEmitter from '../components/EventEmitter';
+import { Switch } from 'react-native';
 
 
 const EditTaskScreen = ({ route, navigation }) => {
