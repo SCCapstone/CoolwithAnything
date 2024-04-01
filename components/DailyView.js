@@ -3,9 +3,13 @@ import { View, Text, FlatList, TouchableOpacity, Alert, StyleSheet } from 'react
 import { format, parseISO, startOfDay, endOfDay } from 'date-fns';
 import { deleteTask, fetchTasksForUser } from "../services/AuthAPI";
 import eventEmitter from './EventEmitter';
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/DailyViewStyles";
 
 const DailyView = ({ userID, selectedDate, navigation }) => {
   const [tasks, setTasks] = useState([]);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -75,36 +79,5 @@ const DailyView = ({ userID, selectedDate, navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  taskItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    marginVertical: 8,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 5,
-  },
-  taskItemText: {
-    fontSize: 16,
-  },
-  deleteButton: {
-    padding: 6,
-    backgroundColor: 'red',
-    borderRadius: 4,
-  },
-  deleteButtonText: {
-    color: '#fff',
-    fontSize: 14,
-  },
-});
 
 export default DailyView;

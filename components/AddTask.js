@@ -66,7 +66,7 @@ const CreateTaskScreen = ({ route }) => {
     navigation.navigate("Today");
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <View style={styles.createTextContainer}>
           <Pressable onPress={() => navigation.goBack()}>
             <Text style={styles.backButton}>←</Text>
@@ -96,10 +96,10 @@ const CreateTaskScreen = ({ route }) => {
         <Picker
           selectedValue={priority}
           onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
-          style={{ height: 50, width: 150 }}
+          style={{ height: 50, width: 150, color: 'white'}}
         >
-          <Picker.Item label="Low" value="low" />
-          <Picker.Item label="Medium" value="medium" />
+          <Picker.Item label="Low" value="low" style={{color: 'white'}} />
+          <Picker.Item label="Medium" value="medium" style={{color: 'white'}} />
           <Picker.Item label="High" value="high" />
         </Picker>
       </ScrollView>

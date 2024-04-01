@@ -62,7 +62,7 @@ const AddWorkout = ({ route }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.screen}>
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
@@ -70,6 +70,7 @@ const AddWorkout = ({ route }) => {
         <Text style={styles.createText}>Create Workout</Text>
         <View style={{ width: 24 }} />
       </View>
+      <ScrollView style={styles.container}>
       <WorkoutHeader onClose={() => handleclose()} />
       <InputField
         value={workoutName}
@@ -103,6 +104,7 @@ const AddWorkout = ({ route }) => {
       />
       <CreateButton onPress={() => handleAdd()} label={"Create Workout"} />
     </ScrollView>
+    </View>
   );
 };
 
