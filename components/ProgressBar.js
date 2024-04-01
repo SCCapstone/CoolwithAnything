@@ -9,11 +9,12 @@ const ProgressBar = ({ progress }) => {
   const styles = getStyles(theme);
 
   const complete = 9;
+  const percentage = (complete/progress)*100;
   
   return (
     <View style={styles.progressContainer}>
       <View style={styles.progressBackground}>
-        <View style={[styles.progressBar, { width: `${(complete/progress)*100}%` }]} />
+        <View style={[styles.progressBar, { width: percentage }]} />
       </View>
       <Text style={styles.progressText}>{`${(complete/progress)*100}%`}</Text>
     </View>
