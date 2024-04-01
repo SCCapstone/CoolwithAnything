@@ -24,7 +24,6 @@ import {
 } from "date-fns";
 import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
 import getStyles from "../styles/HomeScreenStyles";
-import { isSameMonth } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import eventEmitter from './EventEmitter';
 import { useTheme } from "../services/ThemeContext";
