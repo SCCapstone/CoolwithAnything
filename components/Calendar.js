@@ -35,7 +35,6 @@ const Calendar = ({ userID, navigation, birthday }) => {
   const [modalVisible, setModalVisible] = useState(false);
   // const navigation = useNavigation();
 
-  
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -111,10 +110,10 @@ const Calendar = ({ userID, navigation, birthday }) => {
   const convertToISO = (dateString) => {
     // Split the date string into parts
     const parts = dateString.split("-");
-    
+
     // Reorder the parts from "MM-DD-YYYY" to "YYYY-MM-DD"
     const isoDate = `${parts[2]}-${parts[0]}-${parts[1]}`;
-  
+
     return isoDate;
   };
 
@@ -222,6 +221,40 @@ const Calendar = ({ userID, navigation, birthday }) => {
       );
     });
   };
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const start = startOfMonth(currentMonth);
+        const end = endOfMonth(currentMonth);
+        const birthdayDate = birthday ? parseISO(convertToISO(birthday)) : null;
+
+        const fetchedTasks = await fetchTasksForUser(
+          userID,
+          start.toISOString(),
+          end.toISOString()
+        );
+
+        // If the birthday falls within the current month, add a birthday task
+        if (birthdayDate && isSameMonth(birthdayDate, currentMonth)) {
+          const birthdayTask = {
+            id: "birthday", // A unique ID for the birthday task
+            name: "User's Birthday!",
+            date: format(birthdayDate, "yyyy-MM-dd"), // Ensure the date format matches your tasks array
+            type: "Birthday",
+            priority: "high", // Optional: You can set priority as you see fit
+            comment: "Celebrate!", // Optional
+          };
+          fetchedTasks.push(birthdayTask);
+        }
+
+        setTasks(fetchedTasks);
+      } catch (error) {
+        console.error("Error fetching tasks: ", error);
+      }
+    };
+    fetchTasks();
+    // Subscribe and unsubscribe logic remains the same
+  }, [currentMonth, userID, birthday]);
 
   return (
     <View style={styles.calendarContainer}>
@@ -261,6 +294,11 @@ const Calendar = ({ userID, navigation, birthday }) => {
           <Text style={styles.modalText}>
             Tasks for {format(selectedDate, "PPPP")}
           </Text>
+          {isBirthday(selectedDate) && (
+            <Text style={styles.birthdayText}>
+              🎉 Your birthday! 🎉
+            </Text>
+          )}
           <FlatList
             data={tasks.filter(
               (task) =>
