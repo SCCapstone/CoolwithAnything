@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     header: {
       fontSize: 30,
       fontWeight: 'bold',
-      color: '#5cb85c', // A shade of green for success
+      color: '#408D8E', // A shade of green for success
       marginBottom: 10,
     },
     subHeader: {
@@ -26,16 +26,18 @@ const styles = StyleSheet.create({
       marginBottom: 30,
     },
     button: {
-      backgroundColor: '#5cb85c', // Button color that stands out
+      backgroundColor: "#57BCBE",
       padding: 15,
-      borderRadius: 10,
-      width: '100%',
-      alignItems: 'center',
+      margin: 10,
+      borderRadius: 30,
+      width: "50%",
+      alignSelf: "center",
     },
     buttonText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
+      fontSize: 20,
+      fontWeight: "bold",
+      color: "white",
+      textAlign: "center",
     },
   });
 

@@ -226,6 +226,16 @@ function SelectAccount() {
     });
   }, [userId]);
 
+  const handleLogout = () => {
+    auth.signOut().then(() => {
+      console.log('User signed out!');
+      navigation.replace('Login');
+    }).catch((error) => {
+      // An error happened.
+      console.error("Logout Error", error);
+    });
+  };
+
   return (
     <View style={styles.screen}>
       <View style={styles.settingsTextContainer}>
@@ -267,7 +277,7 @@ function SelectAccount() {
                   onPress: () => console.log("Cancel Pressed"),
                   style: "cancel"
                 },
-                { text: "Yes", onPress: () => navigation.navigate('Login') }
+                { text: "Yes", onPress: () => handleLogout() }
               ],
               { cancelable: false }
             );

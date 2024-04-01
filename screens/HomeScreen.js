@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, BackHandler, ScrollView } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -8,8 +8,8 @@ import Calendar from "../components/Calendar";
 import BirthdayCelebration from "../components/BDCelebration";
 import AccountButton from "../components/AccountButton";
 import { useNavigation } from "@react-navigation/native";
-import { countTasksForUser, getUserData } from "../services/AuthAPI";
-import { useTheme } from "../services/ThemeContext";
+import { countTasksForUser, getUserData, countTasksByAttributeForUser } from "../services/AuthAPI";
+import { useTheme } from '../services/ThemeContext';
 import getStyles from "../styles/HomeScreenStyles";
 
 const HomeScreen = ({ route }) => {
@@ -19,6 +19,40 @@ const HomeScreen = ({ route }) => {
   const [taskCount, setTaskCount] = useState(0);
   const { theme } = useTheme();
   const styles = getStyles(theme);
+  const [taskCount, setTaskCount] = useState(0);
+  const [taskTypeCount, setTaskTypeCount] = useState({});
+
+  useEffect(() => {
+    const fetchAndCountTasksByAttribute = async () => {
+      try {
+        // For example, to count by type
+        const countsByType = await countTasksByAttributeForUser(userID, 'type');
+        setTaskTypeCount(countsByType);
+        console.log(countsByType);
+      } catch (error) {
+        console.error("Error fetching and counting tasks by attribute: ", error);
+      }
+    };
+  
+    if (userID) {
+      fetchAndCountTasksByAttribute();
+    }
+  }, [userID]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const count = await countTasksForUser(userID);
+        setTaskCount(count);
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      }
+    };
+  
+    if (userID) {
+      fetchData();
+    }
+  }, [userID]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +89,23 @@ const HomeScreen = ({ route }) => {
       fetchData();
     }
   }, [userID]);
-
+  console.log("Birthday (HS): ", userData.birthday);
+  
+    // Handle the hardware back button on Android devices
+    useEffect(() => {
+      const backAction = () => {
+        return true;
+      };
+  
+      // Add the back press event listener
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+  
+      // Remove the event listener when the component is unmounted or no longer focused
+      return () => backHandler.remove();
+    }, []);
   return (
     <View style={styles.container}>
       <View style={styles.homeTextContainer}>
