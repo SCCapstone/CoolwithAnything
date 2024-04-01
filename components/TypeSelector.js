@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const types = ['School', 'Work', 'Personal', 'Gym', 'New'];
+const types = ['School', 'Work', 'Personal', 'Gym'];
 
 const TypeSelector = ({ selectedType, onSelect }) => {
   return (
@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
     borderColor: '#ccc', // Normal border color
   },
   selectedTypeButton: {
-    backgroundColor: '#007bff', // Background color for the selected type
-    borderColor: '#0056b3', // Optional: change border color for the selected type
+    backgroundColor: '#007bff', // Adjusted background color for the selected type
+    borderColor: '#0056b3', // Darker border color for the selected type
+    borderWidth: 2, // Make border thicker for selected type for more emphasis
   },
   typeText: {
     color: '#000', // Text color for the type button

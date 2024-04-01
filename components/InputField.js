@@ -7,7 +7,9 @@ const InputField = ({ placeholder, onChangeText, value }) => {
       value={value}
       style={styles.input}
       placeholder={placeholder}
-      onChangeText={onChangeText} // Using the onChangeText prop cause certain fields werent ggetting passed through for creating a task
+      onChangeText={onChangeText} // Using the onChangeText prop for better interactivity
+      placeholderTextColor="#7d7d7d" // Lighter shade for placeholder text for better visibility
+      // Ensure text color is white for visibility against the dark background
     />
   );
 };

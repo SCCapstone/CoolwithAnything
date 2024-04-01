@@ -86,7 +86,10 @@ const CreateTaskScreen = ({ route }) => {
           placeholder="Location"
           onChangeText={setLocation}
         />
-        <TypeSelector onSelect={setTaskType} />
+        <TypeSelector
+        selectedType={taskType}
+        onSelect={(type) => setTaskType(type)}
+        />
         <CommentBox value={comment} onChangeText={setComment} />
         <CreateButton onPress={handleCreateTask} label={"Create Task"} />
         <Picker
