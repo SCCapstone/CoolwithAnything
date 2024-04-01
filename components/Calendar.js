@@ -29,6 +29,7 @@ import { useNavigation } from '@react-navigation/native';
 import eventEmitter from './EventEmitter';
 import DailyView from './DailyView';
 import { useTheme } from "../services/ThemeContext";
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -282,6 +283,7 @@ const taskTypeColors = {
     // Subscribe and unsubscribe logic remains the same
   }, [currentMonth, userID, birthday]);
 
+
   return (
     <View style={styles.calendarContainer}>
                   {/* Fixed Task Type Indicators View */}
@@ -298,13 +300,13 @@ const taskTypeColors = {
       {/* Calendar Header */}
       <View style={styles.calendarHeader}>
         <TouchableOpacity onPress={prevMonth}>
-          <Text style={styles.arrowText}>{"<"}</Text>
+        <FontAwesome5 name="arrow-alt-circle-left" size={30} color="#57BCBE" />
         </TouchableOpacity>
-        <Text style={styles.monthYearText}>
+        <Text style={[styles.monthYearText, {fontSize: 25, fontWeight:"bold"}]}>
           {format(currentMonth, "MMMM yyyy")}
         </Text>
         <TouchableOpacity onPress={nextMonth}>
-          <Text style={styles.arrowText}>{">"}</Text>
+        <FontAwesome5 name="arrow-alt-circle-right" size={30} color="#57BCBE" />
         </TouchableOpacity>
       </View>
 
@@ -319,7 +321,7 @@ const taskTypeColors = {
 
       {/* Days Grid */}
       <View style={styles.daysContainer}>{renderDays()}</View>
-      <DailyView userID={userID} selectedDate={selectedDate} navigation={navigation} />
+      <DailyView userID={userID} selectedDate={selectedDate} navigation={navigation} isBirthday={isBirthday(selectedDate)} />
 
       {/* Task Details and Actions Modal */}
       <Modal
