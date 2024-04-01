@@ -60,25 +60,23 @@ const HomeScreen = ({ route }) => {
     <View style={styles.container}>
       <View style={styles.homeTextContainer}>
         <View style={styles.headerContainer}>
-          <View style={{flex: 1}}> 
-            {/* Empty View as Spacer */}
-          </View>
-          <View style={{flex: 2, alignItems: 'center'}}> 
+          <View style={{ flex: 1 }}>{/* Empty View as Spacer */}</View>
+          <View style={{ flex: 2, alignItems: "center" }}>
             <Text style={styles.homeText}>Today</Text>
           </View>
-          <View style={{flex: 1, alignItems: 'flex-end'}}> 
+          <View style={{ flex: 1, alignItems: "flex-end" }}>
             <AccountButton navigation={navigation} />
           </View>
         </View>
         <View style={{ width: 24 }} />
       </View>
       <View style={styles.topContainer}>
-       <View style={styles.indicatorContainer}>
-        <Text style={styles.monthYearText}>Your Progress: </Text>
-       </View>
+        <View style={styles.indicatorContainer}>
+          <Text style={styles.title}>Your Progress: </Text>
+        </View>
         <AccountButton navigation={navigation} />
       </View>
-      <ProgressBar progress={taskCount}/>
+      <ProgressBar progress={taskCount} />
       <Text style={styles.title}>Active Tasks</Text>
       <View style={styles.categoryContainer}>
         <CategoryCounter count={3} label="School" color="#57BCBE" />
