@@ -1,7 +1,12 @@
 import React from "react";
 import { TextInput, StyleSheet } from "react-native";
+import { useTheme } from "../services/ThemeContext.js";
+import getStyles from "../styles/InputFieldStyles.js";
 
 const InputField = ({ placeholder, onChangeText, value }) => {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
+
   return (
     <TextInput
       value={value}
@@ -11,16 +16,5 @@ const InputField = ({ placeholder, onChangeText, value }) => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#222831', // Darker shade for input background
-    color: '#ffffff', // White color text for better contrast
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 16,
-    marginBottom: 20,
-  },
-});
 
 export default InputField;

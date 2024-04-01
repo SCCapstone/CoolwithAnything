@@ -1,8 +1,13 @@
 // components/CommentBox.js
 import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
+import { useTheme } from "../services/ThemeContext.js";
+import getStyles from "../styles/CommentBoxStyles.js";
 
 const CommentBox = ({ onChangeText, value, placeholder, keyboardType }) => {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -16,19 +21,5 @@ const CommentBox = ({ onChangeText, value, placeholder, keyboardType }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-  },
-  commentInput: {
-    borderWidth: 1,
-    borderColor: "grey",
-    borderRadius: 5,
-    height: 100,
-    textAlignVertical: "top",
-    padding: 10,
-  },
-});
 
 export default CommentBox;

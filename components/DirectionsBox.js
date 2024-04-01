@@ -1,7 +1,12 @@
 import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
+import { useTheme } from "../services/ThemeContext.js";
+import getStyles from "../styles/DirectionsBoxStyles.js";
 
 const DirectionsBox = ({ onChangeText, value, placeholder, keyboardType }) => {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -15,19 +20,5 @@ const DirectionsBox = ({ onChangeText, value, placeholder, keyboardType }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-  },
-  directionsInput: {
-    borderWidth: 1,
-    borderColor: "grey",
-    borderRadius: 5,
-    height: 100,
-    textAlignVertical: "top",
-    padding: 10,
-  },
-});
 
 export default DirectionsBox;
