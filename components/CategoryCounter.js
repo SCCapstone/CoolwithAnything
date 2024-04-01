@@ -1,4 +1,6 @@
 import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import styles from '../styles/CategoryCounterStyle';
 import { View, Text } from 'react-native';
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/HomeScreenStyles";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Alert } from "react-native";
+import { ScrollView, StyleSheet, Alert, Text, View } from "react-native";
 import Header from "../components/Header";
 import InputField from "../components/InputField"; 
 import DateTimePicker from "../components/DateTimePicker"; 
@@ -7,6 +7,8 @@ import TypeSelector from "../components/TypeSelector";
 import CommentBox from "../components/CommentBox"; 
 import CreateButton from "../components/CreateButton"; 
 import { updateTaskForUser } from "../services/AuthAPI";
+import eventEmitter from '../components/EventEmitter';
+
 
 const EditTaskScreen = ({ route, navigation }) => {
   const { task, userId } = route.params;
@@ -31,6 +33,7 @@ const EditTaskScreen = ({ route, navigation }) => {
     try {
         await updateTaskForUser(userId, task.id, taskData);
         Alert.alert("Success", "Task updated successfully");
+        eventEmitter.emit('taskUpdated');
         navigation.goBack();
       } catch (error) {
          // Display the error message directly
@@ -55,7 +58,36 @@ const EditTaskScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#E0E0FF', // Light blue background
+    padding: 20,
+  },
+  inputField: {
+    backgroundColor: '#FFFFFF', // White for contrast and clarity
+    color: '#333333', // Dark text for readability
+    marginBottom: 20,
+    padding: 15,
+    borderRadius: 10,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#B0B0FF', // Light purple border for a slight contrast
+  },
+  button: {
+    backgroundColor: '#A0A0FF', // Soft purple for the button
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#FFFFFF', // White text for visibility
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  header: {
+    color: '#5C5CFF', // Darker blue for header text
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
   },
 });
 

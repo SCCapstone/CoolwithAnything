@@ -15,6 +15,7 @@ import QRScreen from "../screens/QRScreen";
 import PaymentMethodsScreen from "../screens/PaymentMethodsScreen";
 import AddPaymentMethodsScreen from "../screens/AddPaymentMethodsScreen";
 import EditPaymentMethodsScreen from "../screens/EditPaymentMethodsScreen";
+import TaskDetailScreen from "../screens/TaskDetailScreen";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ActivityIndicator } from "react-native";
 import LoadingScreen from "../screens/LoadingScreen";
@@ -86,8 +87,13 @@ function MainNavigator({ isLoggedIn }) {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={TabNavigator}
+          name="EditTaskScreen"
+          component={EditTaskScreen}
+          options={{ title: 'Edit Task' }}
+        />
+        <Stack.Screen 
+          name="TaskDetailScreen" 
+          component={TaskDetailScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
