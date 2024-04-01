@@ -72,7 +72,7 @@ const HomeScreen = ({ route }) => {
       </View>
       <View style={styles.topContainer}>
         <View style={styles.indicatorContainer}>
-          <Text style={styles.title}>Your Progress: </Text>
+          <Text style={styles.title}>Your Progress</Text>
         </View>
       </View>
       <ProgressBar progress={taskCount} />
