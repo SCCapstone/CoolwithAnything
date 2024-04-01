@@ -97,9 +97,9 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday }) => {
             <TouchableOpacity onPress={() => onTaskSelect(item)}>
               <Text style={styles.taskItemText}>{item.name}</Text>
             </TouchableOpacity>
-            {item.showOptions && (
-              <>
-                <TouchableOpacity
+            {/* {item.showOptions && (
+              <> */}
+                {/* <TouchableOpacity
                   onPress={() => toggleCheckmark(item.id)}
                   style={[styles.checkmarkButton, { marginLeft: "58%" }]}
                 >
@@ -116,22 +116,22 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday }) => {
                       color="#57BCBE"
                     />
                   )}
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   style={styles.deleteButton}
                   onPress={() => onTaskDelete(item.id)}
                 >
                   <Text style={styles.deleteButtonText}>Delete</Text>
                 </TouchableOpacity>
-              </>
-            )}
-            <TouchableOpacity onPress={() => toggleDisplayOptions(item.id)} style={{}}>
+              {/* </>
+            )} */}
+            {/* <TouchableOpacity onPress={() => toggleDisplayOptions(item.id)} style={{}}>
               <MaterialCommunityIcons
                 name="dots-vertical"
                 size={30}
                 color="#57BCBE"
-              />
-            </TouchableOpacity>
+              /> 
+            </TouchableOpacity>*/}
           </View>
         )}
       />

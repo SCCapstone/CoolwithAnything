@@ -14,6 +14,8 @@ const getStyles = (theme) => StyleSheet.create({
       },
       closeButton: {
         fontSize: 22,
+        color: theme === 'dark' ? 'white' : 'black',
+
       },
     });
 export default getStyles;

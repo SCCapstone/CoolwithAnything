@@ -24,12 +24,12 @@ import {
 } from "date-fns";
 import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
 import getStyles from "../styles/HomeScreenStyles";
-import { fetchTasksForCategoryAndMonth } from '../services/AuthAPI';
-import { useNavigation } from '@react-navigation/native';
-import eventEmitter from './EventEmitter';
-import DailyView from './DailyView';
+import { fetchTasksForCategoryAndMonth } from "../services/AuthAPI";
+import { useNavigation } from "@react-navigation/native";
+import eventEmitter from "./EventEmitter";
+import DailyView from "./DailyView";
 import { useTheme } from "../services/ThemeContext";
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -46,7 +46,6 @@ const Calendar = ({ userID, navigation, birthday }) => {
     Personal: 0,
     Gym: 0,
   });
-
 
   const { theme } = useTheme();
   const styles = getStyles(theme);
@@ -71,17 +70,20 @@ const Calendar = ({ userID, navigation, birthday }) => {
             new Date(end).toISOString()
           );
           setTasks(fetchedTasks);
-  
+
           // Initialize counters for each task type
           const newTaskCounts = { School: 0, Work: 0, Personal: 0, Gym: 0 };
-          
+
           // Count tasks for each type
-          fetchedTasks.forEach(task => {
-            if (newTaskCounts.hasOwnProperty(task.type) && isSameMonth(parseISO(task.date), currentMonth)) {
+          fetchedTasks.forEach((task) => {
+            if (
+              newTaskCounts.hasOwnProperty(task.type) &&
+              isSameMonth(parseISO(task.date), currentMonth)
+            ) {
               newTaskCounts[task.type]++;
             }
           });
-  
+
           // Update the state with the new counts
           setTaskCounts(newTaskCounts);
         }
@@ -89,7 +91,7 @@ const Calendar = ({ userID, navigation, birthday }) => {
         console.error("Error fetching tasks:", error);
       }
     };
-  
+
     fetchTasks();
 
     // Subscribe to the taskCreated event
@@ -102,25 +104,25 @@ const Calendar = ({ userID, navigation, birthday }) => {
   }, [currentMonth, userID]);
 
   // Define a function to get color based on priority
-const getPriorityColor = (priority) => {
-  switch (priority) {
-    case 'high':
-      return 'red';
-    case 'medium':
-      return 'orange';
-    case 'low':
-      return 'green';
-    default:
-      return 'black'; // default color
-  }
-};
-  
-const taskTypeColors = {
-  School: '#FFA07A',
-  Work: '#20B2AA',
-  Personal: '#778899',
-  Gym: '#FFD700',
-};
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case "high":
+        return "red";
+      case "medium":
+        return "orange";
+      case "low":
+        return "green";
+      default:
+        return "black"; // default color
+    }
+  };
+
+  const taskTypeColors = {
+    School: "#FFA07A",
+    Work: "#20B2AA",
+    Personal: "#778899",
+    Gym: "#FFD700",
+  };
 
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
@@ -283,30 +285,39 @@ const taskTypeColors = {
     // Subscribe and unsubscribe logic remains the same
   }, [currentMonth, userID, birthday]);
 
-
   return (
     <View style={styles.calendarContainer}>
-                  {/* Fixed Task Type Indicators View */}
-                  <View style={styles.typeIndicatorsContainer}>
-  {Object.entries(taskTypeColors).map(([type, color]) => (
-    <View key={type} style={styles.typeIndicatorWrapper}>
-      <View style={[styles.typeIndicator, { backgroundColor: color }]}>
-        <Text style={styles.typeIndicatorCount}>{taskCounts[type]}</Text>
+      {/* Fixed Task Type Indicators View */}
+      <View style={styles.typeIndicatorsContainer}>
+        {Object.entries(taskTypeColors).map(([type, color]) => (
+          <View key={type} style={styles.typeIndicatorWrapper}>
+            <View style={[styles.typeIndicator, { backgroundColor: color }]}>
+              <Text style={styles.typeIndicatorCount}>{taskCounts[type]}</Text>
+            </View>
+            <Text style={styles.typeIndicatorText}>{type}</Text>
+          </View>
+        ))}
       </View>
-      <Text style={styles.typeIndicatorText}>{type}</Text>
-    </View>
-  ))}
-</View>
       {/* Calendar Header */}
       <View style={styles.calendarHeader}>
         <TouchableOpacity onPress={prevMonth}>
-        <FontAwesome5 name="arrow-alt-circle-left" size={30} color="#57BCBE" />
+          <FontAwesome5
+            name="arrow-alt-circle-left"
+            size={30}
+            color="#57BCBE"
+          />
         </TouchableOpacity>
-        <Text style={[styles.monthYearText, {fontSize: 25, fontWeight:"bold"}]}>
+        <Text
+          style={[styles.monthYearText, { fontSize: 25, fontWeight: "bold" }]}
+        >
           {format(currentMonth, "MMMM yyyy")}
         </Text>
         <TouchableOpacity onPress={nextMonth}>
-        <FontAwesome5 name="arrow-alt-circle-right" size={30} color="#57BCBE" />
+          <FontAwesome5
+            name="arrow-alt-circle-right"
+            size={30}
+            color="#57BCBE"
+          />
         </TouchableOpacity>
       </View>
 
@@ -321,7 +332,12 @@ const taskTypeColors = {
 
       {/* Days Grid */}
       <View style={styles.daysContainer}>{renderDays()}</View>
-      <DailyView userID={userID} selectedDate={selectedDate} navigation={navigation} isBirthday={isBirthday(selectedDate)} />
+      <DailyView
+        userID={userID}
+        selectedDate={selectedDate}
+        navigation={navigation}
+        isBirthday={isBirthday(selectedDate)}
+      />
 
       {/* Task Details and Actions Modal */}
       <Modal
@@ -335,9 +351,7 @@ const taskTypeColors = {
             Tasks for {format(selectedDate, "PPPP")}
           </Text>
           {isBirthday(selectedDate) && (
-            <Text style={styles.birthdayText}>
-              🎉 Your birthday! 🎉
-            </Text>
+            <Text style={styles.birthdayText}>🎉 Your birthday! 🎉</Text>
           )}
           <FlatList
             data={tasks.filter(

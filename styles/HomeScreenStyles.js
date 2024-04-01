@@ -38,6 +38,7 @@ const getStyles = (theme) =>
       marginTop: 20,
     },
 
+
     //-----DateTracker.js-----//
     dateTrackerContainer: {
       flexDirection: "row",
@@ -134,6 +135,9 @@ const getStyles = (theme) =>
       justifyContent: "center",
       alignItems: "center",
       marginTop: 4,
+    },
+    typeIndicatorText:{
+      color: theme === "dark" ? "white" : "black",
     },
     taskIndicator: {
       width: 6,
