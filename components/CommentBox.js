@@ -14,6 +14,7 @@ const CommentBox = ({ onChangeText, value, placeholder, keyboardType }) => {
         value={value}
         style={styles.commentInput}
         multiline
+        placeholderTextColor="#7d7d7d"
         placeholder="Instructions"
         onChangeText={onChangeText}
         keyboardType={keyboardType}

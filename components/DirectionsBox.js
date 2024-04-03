@@ -13,6 +13,7 @@ const DirectionsBox = ({ onChangeText, value, placeholder, keyboardType }) => {
         value={value}
         style={styles.directionsInput}
         multiline
+        placeholderTextColor="#7d7d7d"
         placeholder="Ingredients"
         onChangeText={onChangeText}
         keyboardType={keyboardType}
