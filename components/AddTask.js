@@ -12,7 +12,7 @@ import { saveTaskForUser } from "../services/AuthAPI";
 import eventEmitter from "./EventEmitter";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
-import { useTheme } from '../services/ThemeContext';
+import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/AddStyles";
 
 const CreateTaskScreen = ({ route }) => {
@@ -68,12 +68,12 @@ const CreateTaskScreen = ({ route }) => {
   return (
     <View style={styles.screen}>
       <View style={styles.createTextContainer}>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Text style={styles.backButton}>←</Text>
-          </Pressable>
-          <Text style={styles.createText}>Create Task</Text>
-          <View style={{ width: 24 }} />
-        </View>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.createText}>Create Task</Text>
+        <View style={{ width: 24 }} />
+      </View>
       <ScrollView style={styles.container}>
         <Header onClose={() => handleclose()} />
         <InputField
@@ -88,20 +88,25 @@ const CreateTaskScreen = ({ route }) => {
           onChangeText={setLocation}
         />
         <TypeSelector
-        selectedType={taskType}
-        onSelect={(type) => setTaskType(type)}
+          selectedType={taskType}
+          onSelect={(type) => setTaskType(type)}
         />
         <CommentBox value={comment} onChangeText={setComment} />
-        <CreateButton onPress={handleCreateTask} label={"Create Task"} />
-        <Picker
-          selectedValue={priority}
-          onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
-          style={{ height: 50, width: 150, color: 'white'}}
+        <Text style={styles.priorityText}>Priority</Text>
+        <View
+          style={styles.priorityPicker}
         >
-          <Picker.Item label="Low" value="low" style={{color: 'white'}} />
-          <Picker.Item label="Medium" value="medium" style={{color: 'white'}} />
-          <Picker.Item label="High" value="high" />
-        </Picker>
+          <Picker
+            selectedValue={priority}
+            onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+            style={{ height: 50, width: 150 }}
+          >
+            <Picker.Item label="Low" value="low" />
+            <Picker.Item label="Medium" value="medium" />
+            <Picker.Item label="High" value="high" />
+          </Picker>
+        </View>
+        <CreateButton onPress={handleCreateTask} label={"Create Task"} />
       </ScrollView>
     </View>
   );

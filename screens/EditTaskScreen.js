@@ -1,94 +1,164 @@
-import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Alert, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Alert,
+  Text,
+  View,
+  Switch,
+} from "react-native";
 import Header from "../components/Header";
-import InputField from "../components/InputField"; 
-import DateTimePicker from "../components/DateTimePicker"; 
-import TypeSelector from "../components/TypeSelector"; 
-import CommentBox from "../components/CommentBox"; 
-import CreateButton from "../components/CreateButton"; 
+import InputField from "../components/InputField";
+import DateTimePicker from "../components/DateTimePicker";
+import TypeSelector from "../components/TypeSelector";
+import CommentBox from "../components/CommentBox";
+import CreateButton from "../components/CreateButton";
 import { updateTaskForUser } from "../services/AuthAPI";
-import eventEmitter from '../components/EventEmitter';
-import { Switch } from 'react-native';
-
+import eventEmitter from "../components/EventEmitter";
+import { Picker } from "@react-native-picker/picker";
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/AddStyles";
 
 const EditTaskScreen = ({ route, navigation }) => {
   const { task, userId } = route.params;
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
 
-  // State for each field with initial values from the task
+  // Initialize state
   const [taskName, setTaskName] = useState(task.name);
   const [location, setLocation] = useState(task.location);
   const [taskType, setTaskType] = useState(task.type);
   const [comment, setComment] = useState(task.comment);
   const [date, setDate] = useState(new Date(task.date));
+  const [priority, setPriority] = useState("medium");
+  const [isCompleted, setIsCompleted] = useState(task.completed || false); // Assuming task has a completed field
 
   const handleUpdateTask = async () => {
-    console.log("UserID:", userId, "TaskID:", task.id);
+    // Include completed status in taskData
     const taskData = {
       name: taskName,
       date: date.toISOString(),
       location: location,
       type: taskType,
       comment: comment,
+      priority: priority,
+      completed: isCompleted, // Include the completion status
     };
 
     try {
-        await updateTaskForUser(userId, task.id, taskData);
-        Alert.alert("Success", "Task updated successfully");
-        eventEmitter.emit('taskUpdated');
-        navigation.goBack();
-      } catch (error) {
-         // Display the error message directly
-        Alert.alert("Error", error.toString());
-        console.error("Error updating task:", error);
-      }
-    };
+      await updateTaskForUser(userId, task.id, taskData);
+      Alert.alert("Success", "Task updated successfully");
+      navigation.goBack();
+    } catch (error) {
+      Alert.alert("Error", error.toString());
+      console.error("Error updating task:", error);
+    }
+    eventEmitter.emit("taskCreated");
+  };
+
+  // UI Component for switch
+  const renderCompletionSwitch = () => (
+    <View style={styles.switchContainer}>
+      <Text style={styles.priorityText}>Task Completed:</Text>
+      <Switch value={isCompleted} onValueChange={setIsCompleted} />
+    </View>
+  );
 
   return (
-    <ScrollView style={styles.container}>
-      <Header onClose={() => navigation.goBack()} />
-      <InputField placeholder="Name" value={taskName} onChangeText={setTaskName} />
-      <DateTimePicker initialDate={date} onConfirm={setDate} />
-      <InputField placeholder="Location" value={location} onChangeText={setLocation} />
-      <TypeSelector selectedType={taskType} onSelect={setTaskType} />
-      <CommentBox text={comment} onChangeText={setComment} />
-      <CreateButton onPress={handleUpdateTask} label={"Update Task"} />
+    <ScrollView style={styles.screen}>
+      <View style={styles.container}>
+        <Header onClose={() => navigation.goBack()} />
+      </View>
+      <View>
+        <InputField
+          placeholder="Name"
+          value={taskName}
+          onChangeText={setTaskName}
+        />
+      </View>
+      <View>
+        <DateTimePicker initialDate={date} onConfirm={setDate} />
+      </View>
+      <View>
+        <InputField
+          placeholder="Location"
+          value={location}
+          onChangeText={setLocation}
+        />
+      </View>
+      <View>
+        <TypeSelector selectedType={taskType} onSelect={setTaskType} />
+      </View>
+      <View>
+        <CommentBox text={comment} onChangeText={setComment} />
+      </View>
+      <View style={{flex:1, flexDirection:"row", justifyContent:"space-between"}}>
+        <Text style={styles.priorityText}>Priority</Text>
+        <View
+          style={styles.priorityPicker}
+        >
+          <Picker
+            selectedValue={priority}
+            onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+            style={{ height: 50, width: 150 }}
+          >
+            <Picker.Item label="Low" value="low" />
+            <Picker.Item label="Medium" value="medium" />
+            <Picker.Item label="High" value="high" />
+          </Picker>
+        </View>
+        {renderCompletionSwitch()}
+      </View>
+
+      <View>
+        <CreateButton onPress={handleUpdateTask} label={"Update Task"} />
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 20,
+  },
+  switchLabel: {
+    fontSize: 16,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#E0E0FF', // Light blue background
+    backgroundColor: "#E0E0FF", // Light blue background
     padding: 20,
   },
   inputField: {
-    backgroundColor: '#FFFFFF', // White for contrast and clarity
-    color: '#333333', // Dark text for readability
+    backgroundColor: "#FFFFFF", // White for contrast and clarity
+    color: "#333333", // Dark text for readability
     marginBottom: 20,
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#B0B0FF', // Light purple border for a slight contrast
+    borderColor: "#B0B0FF", // Light purple border for a slight contrast
   },
   button: {
-    backgroundColor: '#A0A0FF', // Soft purple for the button
+    backgroundColor: "#A0A0FF", // Soft purple for the button
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 20,
   },
   buttonText: {
-    color: '#FFFFFF', // White text for visibility
+    color: "#FFFFFF", // White text for visibility
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   header: {
-    color: '#5C5CFF', // Darker blue for header text
+    color: "#5C5CFF", // Darker blue for header text
     fontSize: 24,
     marginBottom: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

@@ -44,6 +44,18 @@ const getStyles = (theme) => StyleSheet.create({
       marginTop: 30, 
       color: 'white',
     },
+    priorityText: {
+      color: theme === "dark" ? "white" : "black",
+      fontSize: 16,
+    },
+    priorityPicker:{
+        borderWidth: 1,
+        borderColor: "lightgray",
+        height: "wrap-content",
+        borderRadius: 10,
+        width: 160,
+        backgroundColor: theme === "dark" ? "white" : "white",
+    }
 });
   
 export default getStyles;
