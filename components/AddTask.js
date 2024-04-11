@@ -91,7 +91,7 @@ const CreateTaskScreen = ({ route }) => {
           selectedType={taskType}
           onSelect={(type) => setTaskType(type)}
         />
-        <CommentBox value={comment} onChangeText={setComment} />
+        <CommentBox value={comment} onChangeText={setComment}/>
         <Text style={styles.priorityText}>Priority</Text>
         <View
           style={styles.priorityPicker}

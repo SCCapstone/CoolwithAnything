@@ -61,6 +61,8 @@ const MealCards = ({
     closeModal();
 
     Alert.alert("Recipe added to saved");
+
+    navigation.navigate("Your Cookbook", { activeTab: "SavedMeals" });
   };
 
   return (
@@ -75,7 +77,7 @@ const MealCards = ({
             >
               <View style={styles.cardContent}>
                 <Text style={styles.modal}>
-                  <Text style={styles.modalName}>Name:</Text> {recipe.title}
+                  {recipe.title}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -89,16 +91,14 @@ const MealCards = ({
           visible={selectedRecipe !== ""}
           onRequestClose={closeModal}
         >
-          <ScrollView>
-            <View style={styles.modalContainer}>
-              <View style={styles.mealCardsTextContainer}>
+          <View style={styles.mealCardsTextContainer}>
                 <Pressable onPress={handleCloseModal}>
                   <Text style={styles.backButton}>←</Text>
                 </Pressable>
                 <Text style={styles.mealText}>Recipes</Text>
                 <View style={{ width: 24 }} />
               </View>
-
+            <ScrollView style={styles.modalContainer}>
               <View style={styles.iconContainer}>
                 <MaterialCommunityIcons
                   name={"food-fork-drink"}
@@ -142,8 +142,7 @@ const MealCards = ({
               >
                 <Text style={styles.addButton}>+ Add Recipe to Saved</Text>
               </TouchableOpacity>
-            </View>
-          </ScrollView>
+            </ScrollView>
         </Modal>
       </ScrollView>
     </View>

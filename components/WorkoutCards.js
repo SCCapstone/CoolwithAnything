@@ -70,6 +70,8 @@ const WorkoutCards = ({
     closeModal();
 
     Alert.alert("Workout added to saved");
+
+    navigation.navigate("Your Workouts", { activeTab: "SavedWorkouts" });
   };
 
   return (
@@ -84,7 +86,7 @@ const WorkoutCards = ({
             >
               <View style={styles.cardContent}>
                 <Text style={styles.modal}>
-                  <Text style={styles.modalName}>Name:</Text> {exercise.name}
+                  {exercise.name}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -98,64 +100,62 @@ const WorkoutCards = ({
           visible={selectedExercise !== ""}
           onRequestClose={closeModal}
         >
-          <ScrollView>
-            <View style={styles.modalContainer}>
-              <View style={styles.workoutCardsTextContainer}>
-                <Pressable onPress={handleCloseModal}>
-                  <Text style={styles.backButton}>←</Text>
-                </Pressable>
-                <Text style={styles.workoutText}>Workouts</Text>
-                <View style={{ width: 24 }} />
-              </View>
-              <View style={styles.iconContainer}>
-                <MaterialCommunityIcons
-                  name={"dumbbell"}
-                  size={150}
-                  color={"#5da8af"}
-                />
-              </View>
-              <Text style={styles.cardModalHeader}>Exercise Details</Text>
-              {selectedExercise && (
-                <View style={styles.modalContent}>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Name:</Text>{" "}
-                    <Text style={styles.apiText}>{selectedExercise.name}</Text>
-                  </Text>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Type:</Text>{" "}
-                    <Text style={styles.apiText}>{selectedExercise.type}</Text>
-                  </Text>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Muscle:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedExercise.muscle}
-                    </Text>
-                  </Text>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Equipment:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedExercise.equipment}
-                    </Text>
-                  </Text>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Difficulty:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedExercise.difficulty}
-                    </Text>
-                  </Text>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Instruction:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedExercise.instructions}
-                    </Text>
-                  </Text>
-                </View>
-              )}
-              {/* Add button */}
-              <TouchableOpacity onPress={handleAddExercise}>
-                <Text style={styles.addButton}>+ Add Workout to Saved</Text>
-              </TouchableOpacity>
+          <View style={styles.workoutCardsTextContainer}>
+              <Pressable onPress={handleCloseModal}>
+                <Text style={styles.backButton}>←</Text>
+              </Pressable>
+              <Text style={styles.workoutText}>Workouts</Text>
+              <View style={{ width: 24 }} />
             </View>
+          <ScrollView style={styles.modalContainer}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons
+                name={"dumbbell"}
+                size={150}
+                color={"#5da8af"}
+              />
+            </View>
+            <Text style={styles.cardModalHeader}>Exercise Details</Text>
+            {selectedExercise && (
+              <View style={styles.modalContent}>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Name:</Text>{" "}
+                  <Text style={styles.apiText}>{selectedExercise.name}</Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Type:</Text>{" "}
+                  <Text style={styles.apiText}>{selectedExercise.type}</Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Muscle:</Text>{" "}
+                  <Text style={styles.apiText}>
+                    {selectedExercise.muscle}
+                  </Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Equipment:</Text>{" "}
+                  <Text style={styles.apiText}>
+                    {selectedExercise.equipment}
+                  </Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Difficulty:</Text>{" "}
+                  <Text style={styles.apiText}>
+                    {selectedExercise.difficulty}
+                  </Text>
+                </Text>
+                <Text style={styles.textContainer}>
+                  <Text style={styles.label}>Instruction:</Text>{" "}
+                  <Text style={styles.apiText}>
+                    {selectedExercise.instructions}
+                  </Text>
+                </Text>
+              </View>
+            )}
+            {/* Add button */}
+            <TouchableOpacity onPress={handleAddExercise}>
+              <Text style={styles.addButton}>+ Add Workout to Saved</Text>
+            </TouchableOpacity>
           </ScrollView>
         </Modal>
       </ScrollView>
