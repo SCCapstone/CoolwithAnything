@@ -69,7 +69,7 @@ const AddMeal = ({ route }) => {
           setMealServings("");
           setMealInstructions("");
           setShowConfirmation(true); // Show the confirmation alert
-          navigation.navigate("Today");
+          navigation.navigate("Your Cookbook", { activeTab: "SavedMeals" });
         },
       },
     ]);

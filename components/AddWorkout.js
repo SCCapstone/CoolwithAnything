@@ -85,7 +85,7 @@ const AddWorkout = ({ route }) => {
           setWorkoutDifficulty("");
           setWorkoutInstructions("");
           setShowConfirmation(true); // Show the confirmation alert
-          navigation.navigate("Today");
+          navigation.navigate("Your Workouts", { activeTab: "SavedWorkouts" });
         },
       },
     ]);

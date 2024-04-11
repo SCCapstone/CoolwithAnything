@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import BrowseMeals from "../components/BrowseMeals";
 import SavedMeals from "../components/SavedMeals";
@@ -7,10 +7,16 @@ import getStyles from "../styles/CookbookStyle";
 
 // Notice how we're not passing savedWorkouts and setSavedWorkouts as props anymore
 const CookbookScreen = ({ route }) => {
-  const [activeTab, setActiveTab] = useState("BrowseMeals");
+  const [activeTab, setActiveTab] = useState(route.params?.activeTab || "BrowseMeals");
   const { userID } = route.params;
   const { theme } = useTheme();
   const styles = getStyles(theme);
+
+  useEffect(() => {
+    if (route.params?.activeTab) {
+      setActiveTab(route.params.activeTab);
+    }
+  }, [route.params]);
 
   const renderTabContent = () => {
     switch (activeTab) {
