@@ -17,15 +17,48 @@ const EditPaymentMethodsScreen = () => {
   const [nickname, setNickname] = useState(params?.nickname || '');
   const [creditCard, setCreditCard] = useState(params?.creditCard || '');
   const [CVC, setCVC] = useState(params?.CVC || '');
-  const [expDate, setExpDate] = useState(params?.expDate || '');
+  const [expMonth, setExpMonth] = useState(params?.expMonth || '');
+  const [expYear, setExpYear] = useState(params?.expYear || '');
   const [name, setName] = useState(params?.name || '');
   const [ZIP, setZIP] = useState(params?.ZIP || '');
 
   const handleUpdatePaymentMethod = async () => {
+    const monthNum = parseInt(expMonth, 10);
+    const yearNum = parseInt(expYear, 10);
+
+    if (!nickname || nickname.trim() === '') {
+      Alert.alert("Nickname is empty.");
+      return;
+    }
+    if (creditCard.length !== 16) {
+      Alert.alert("Invalid credit card.");
+      return;
+    }
+    if (CVC.length !== 3) {
+      Alert.alert("Invalid CVC number.");
+      return;
+    }
+    if (expMonth.length !== 2 || monthNum < 1 || monthNum > 12) {
+      Alert.alert("Invalid EXP month.", "Month must be between 01 and 12.");
+      return;
+    }
+    if (expYear.length !== 4 || yearNum < 2000 || yearNum > 2099) {
+      Alert.alert("Invalid EXP year.", "Year must be between 2000 and 2099.");
+      return;
+    }
+    if (!name || name.trim() === '') {
+      Alert.alert("Name on card is empty.");
+      return;
+    }
+    if (ZIP.length !== 5) {
+      Alert.alert("Invalid ZIP code.");
+      return;
+    }
+
     try {
       // Ensure params?.id is correctly passed when navigating to this screen
       await updatePaymentMethodForUser(userId, params?.id, {
-        nickname, creditCard, CVC, expDate, name, ZIP
+        nickname, creditCard, CVC, expMonth, expYear, name, ZIP
       });
       console.log("Payment method updated successfully");
       Alert.alert(
@@ -119,10 +152,10 @@ const EditPaymentMethodsScreen = () => {
               <TextInput style={[styles.input, {width: '43%'}]}
               onChangeText={setCreditCard} 
               value={creditCard}
-              placeholder={creditCard ? creditCard : "1234 5678 9012 3456"}
+              placeholder={creditCard ? creditCard : "1234567890123456"}
               placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+              keyboardType="number-pad"
+              secureTextEntry={true}/>
             </View> 
 
             <View>
@@ -132,19 +165,35 @@ const EditPaymentMethodsScreen = () => {
               value={CVC} 
               placeholder="123"
               placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+              keyboardType="number-pad"
+              secureTextEntry={true}/>
             </View> 
 
-            <View>
-              <Text style={styles.label}>EXP Date:</Text>
-              <TextInput style={[styles.input, {width: '16%'}]}
-              onChangeText={setExpDate} 
-              value={expDate} 
-              placeholder="01/23"
-              placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={styles.label}>EXP Month:</Text>
+                <TextInput 
+                  style={[styles.input, {width: '50%'}]}
+                  onChangeText={setExpMonth}
+                  value={expMonth}
+                  placeholder="MM"
+                  placeholderTextColor={'grey'}
+                  keyboardType="number-pad"
+                  maxLength={2}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>EXP Year:</Text>
+                <TextInput 
+                  style={[styles.input, {width: '75%'}]}
+                  onChangeText={setExpYear}
+                  value={expYear}
+                  placeholder="YYYY"
+                  placeholderTextColor={'grey'}
+                  keyboardType="number-pad"
+                  maxLength={4}
+                />
+              </View>
             </View>
 
             <View>
@@ -165,8 +214,8 @@ const EditPaymentMethodsScreen = () => {
               value={ZIP} 
               placeholder="12345"
               placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+              keyboardType="number-pad"
+              secureTextEntry={true}/>
             </View> 
 
           </View>

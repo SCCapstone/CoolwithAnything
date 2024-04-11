@@ -42,7 +42,7 @@ const getStyles = (theme) => StyleSheet.create({
       marginRight: 10, // Add some margin to the right of the label for spacing
       fontWeight: 'bold',
       marginTop: 1,
-      marginLeft: 20,
+      marginLeft: 13,
     },
     input: {
       height: 50,
