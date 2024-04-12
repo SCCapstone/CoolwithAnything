@@ -106,7 +106,7 @@ const MealCards = ({
                   color={"#5da8af"}
                 />
               </View>
-              <Text style={styles.cardModalHeader}>Exercise Details</Text>
+              <Text style={styles.cardModalHeader}>Meal Details</Text>
               {selectedRecipe && (
                 <View style={styles.modalContent}>
                   <Text style={styles.textContainer}>

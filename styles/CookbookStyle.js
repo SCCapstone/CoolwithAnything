@@ -205,7 +205,7 @@ const getStyles = (theme) => StyleSheet.create({
   savedCard: {
     backgroundColor: theme === 'dark' ? '#5da8af' : 'white',
     borderColor: "black",
-    padding: 16,
+    padding: 20,
     borderRadius: 8,
     margin: 8,
     elevation: 3,
@@ -218,6 +218,8 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
     fontWeight: "600",
+    lineHeight: 24,
+    marginBottom: 10,
   },
   buttonOptions: {
     padding: 10,
