@@ -143,7 +143,7 @@ const WorkoutCard = ({ workout, index, deleteWorkout, editWorkout }) => {
   onContentSizeChange={handleNameSizeChange}
 />
 <TextInput
-  value={`Type: ${workoutType}`}
+  value={`Type:${workoutType}`}
   onChangeText={(text) => handleTextChange(text, "Type")}
   style={[styles.savedText, { height: typeInputHeight }]}
   multiline
