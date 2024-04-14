@@ -8,15 +8,60 @@ import {
   Pressable,
   Alert,
   FlatList,
+  Image,
 } from "react-native";
 import getStyles from "../styles/CookbookStyle.js";
-import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import { useTheme } from "../services/ThemeContext.js";
 import { addMealData } from "../services/AuthAPI";
 import { useMeals } from "../services/MealsContext";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const imageMapping = {
+  "Elegant Crabmeat Balls": require("../images/cookbook/crabballs.png"),
+  "Ella's Vegetable and Meat Egg Rolls": require("../images/cookbook/eggrolls.png"),
+  "Emeril's Crab Meat Deviled Eggs": require("../images/cookbook/deviled_eggs.png"),
+  "Empanadas (Brazilian Meat Pies)": require("../images/cookbook/empanadas.png"),
+  'Friday "Meat" Loaf': require("../images/cookbook/meatloaf.png"),
+  "Friday Night Pot Roast (Meat)": require("../images/cookbook/pot_roast.png"),
+  "Meat - a N's Slow Shoulder of Lamb": require("../images/cookbook/lamb_roast.png"),
+  "Meat - Beef a la Will Moreland": require("../images/cookbook/roast_beef.png"),
+  "Meat - Chicken Breasts with Walnut Aillade": require("../images/cookbook/chicken_breast.png"),
+  'Meat - Roast Meat Loaf or "Hedgehog"': require("../images/cookbook/roast_meatloaf.png"),
+
+  "Elegant and Easy Gourmet Gefilte Fish Pate": require("../images/cookbook/gefilte_fish.png"),
+  "Elegant Baked Fish": require("../images/cookbook/baked_fish.png"),
+  "Fried Catfish": require("../images/cookbook/fried_catfish.png"),
+  "Fried Catfish #1": require("../images/cookbook/fried_catfish1.png"),
+  "Fried Catfish #2": require("../images/cookbook/fried_catfish2.png"),
+  "Fried Catfish Batter": require("../images/cookbook/fried_catfish3.png"),
+  "Fried Crawfish Remoulade": require("../images/cookbook/fried_crawfish.png"),
+  "Goan Fish Curry": require("../images/cookbook/fish_curry.png"),
+  "Goan Grilled Fish": require("../images/cookbook/grilled_fish.png"),
+
+  "Cellophane Noodles with Tofu and Veggies": require("../images/cookbook/cellophane.png"),
+  "Vinaigrette of Braised Soup Veggies": require("../images/cookbook/veggie_soup.png"),
+  "Seafood Stew W/veggies": require("../images/cookbook/veggie_stew.png"),
+  "Marinated Veggies": require("../images/cookbook/grilled_veggies.png"),
+  "Tortellini and Veggies <r T>": require("../images/cookbook/veg_tortellini.png"),
+  "Bundle of Veggies": require("../images/cookbook/baked_veg.png"),
+  "Chops And Garden Veggies": require("../images/cookbook/chop_veg.png"),
+  "Rice And Veggies Stir Fry": require("../images/cookbook/rice_veg.png"),
+  "Herb Dip for Artichokes/veggies": require("../images/cookbook/art_dip.png"),
+  "Fish and Veggies Primavera": require("../images/cookbook/fish_veg_prima.png"),
+
+  "Broccoli Cheese Soup - Healthy": require("../images/cookbook/broc_ched_soup.png"),
+  "Chocolate-Covered Cherry Pudding (Healthy Exchanges)": require("../images/cookbook/choc_pud.png"),
+  "Chocolateville Mocha Cheesecake (Healthy Exchanges)": require("../images/cookbook/choc_cheesecake.png"),
+  "Gahb Healthy Apple-Walnut Muffins": require("../images/cookbook/apple_muffs.png"),
+  "Lo-Cal Healthy Cole Slaw": require("../images/cookbook/coleslaw.png"),
+  "Western Scramble (Healthy Exchanges)": require("../images/cookbook/scram_eggs.png"),
+  "Quick and Healthy Chicken Stir-Fry, Lhj": require("../images/cookbook/stirfry.png"),
+  "Low-Fat Healthy Chili in Crockpot": require("../images/cookbook/chili.png"),
+  "Green Chile Stew-Healthy Mexican Cookbook": require("../images/cookbook/mexican_stew.png"),
+  "Healthy Alfredo-Style Noodles": require("../images/cookbook/alfredo.png"),
+
+};
 
 const MealCards = ({
   apiData,
@@ -72,10 +117,9 @@ const MealCards = ({
             style={styles.cardContainer}
             onPress={() => handleCardPress(item)}
           >
-            <MaterialCommunityIcons
-              name={"food-fork-drink"}
-
-              color={"#5da8af"}
+            <Image
+              source={imageMapping[item.title]}
+              style={{ width: 150, height: 150 }}
             />
             <View style={styles.cardContent}>
               <Text style={styles.modal}>{item.title}</Text>
@@ -85,7 +129,7 @@ const MealCards = ({
         numColumns={2}
         columnWrapperStyle={{
           justifyContent: "space-between",
-          paddingHorizontal: "2.5%", // Adjust horizontal padding for two-column layout
+          paddingHorizontal: "5%", // Adjust horizontal padding for two-column layout
         }}
         showsVerticalScrollIndicator={false}
       />
@@ -109,13 +153,12 @@ const MealCards = ({
           <ScrollView>
             <View style={styles.modalContainer}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons
-                  name={"food-fork-drink"}
-                  size={150}
-                  color={"#5da8af"}
+                <Image
+                  source={imageMapping[selectedRecipe.title]}
+                  style={styles.imageDetails}
                 />
               </View>
-              <Text style={styles.cardModalHeader}>Exercise Details</Text>
+              <Text style={styles.cardModalHeader}>Recipe Details</Text>
               {selectedRecipe && (
                 <View style={styles.modalContent}>
                   <Text style={styles.textContainer}>

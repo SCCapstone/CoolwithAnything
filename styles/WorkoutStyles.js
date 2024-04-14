@@ -177,7 +177,6 @@ const getStyles = (theme) => StyleSheet.create({
   },
   iconContainer: {
     alignItems: "center",
-    paddingTop: 16,
   },
 
   //----- WorkoutCard.js (under saved) -----//

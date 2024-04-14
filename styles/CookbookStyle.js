@@ -197,7 +197,10 @@ const getStyles = (theme) => StyleSheet.create({
   },
   iconContainer: {
     alignItems: "center",
-    paddingTop: 16,
+  },
+  imageDetails: {
+    width: width,
+    height: 150,
   },
 
   //----- MealCard.js (under saved) -----//
