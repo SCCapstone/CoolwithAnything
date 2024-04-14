@@ -159,6 +159,12 @@ const WorkoutCards = ({
                       {selectedExercise.instructions}
                     </Text>
                   </Text>
+                  <Text style={styles.textContainer}>
+                    <Text style={styles.label}>Need Help?</Text>{" "}
+                    <Text style={styles.apiText}>
+                      Link
+                    </Text>
+                  </Text>
                 </View>
               )}
               {/* Add button */}

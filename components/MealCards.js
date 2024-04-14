@@ -119,7 +119,7 @@ const MealCards = ({
           >
             <Image
               source={imageMapping[item.title]}
-              style={{ width: 150, height: 150 }}
+              style={styles.iconContainer}
             />
             <View style={styles.cardContent}>
               <Text style={styles.modal}>{item.title}</Text>
