@@ -11,14 +11,10 @@ import WorkoutApi from "../APIs/WorkoutAPI";
 import SearchBar from "./SearchWorkout";
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/WorkoutStyles";
-import { getUserID } from "../services/AuthAPI";
-
 
 const BrowseWorkouts = ({props}) => {
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
- // const { user } = props.params;
-  const [userID, setUserID] = useState({userID: ""})
   const { theme } = useTheme();
   const styles = getStyles(theme);
   const handleQueryButtonClick = (exercise) => {
@@ -29,21 +25,6 @@ const BrowseWorkouts = ({props}) => {
     setModalVisible(false);
   };
 
-{/*  useEffect(() => {
-    const fetchData = async () => {
-      try {
-          const fetchedUserID = await getUserID(props.userID);
-          setUserID(fetchedUserID);
-          console.log("UserID: ", fetchedUserID);
-      } catch (error) {
-        console.error("Error fetching user id: ", error);
-      }
-    }
-    if (user) {
-      fetchData(); // Always fetch data when component mounts
-    }
-   
-  }, [user]); // Dependency only on route.userID*/}
 
   return (
     <View>

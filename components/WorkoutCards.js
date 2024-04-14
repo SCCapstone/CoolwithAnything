@@ -23,13 +23,10 @@ const WorkoutCards = ({
   handleCardPress,
   selectedExercise,
   closeModal,
-  route,
 }) => {
-  const navigation = useNavigation();
   const auth = getAuth();
   const userID = auth.currentUser ? auth.currentUser.uid : null;
-  const [modalVisible, setModalVisible] = useState(false);
-  const { savedWorkouts, setSavedWorkouts } = useWorkouts();
+  const { setSavedWorkouts } = useWorkouts();
   const [workoutName, setWorkoutName] = useState("");
   const [workoutType, setWorkoutType] = useState("");
   const [workoutMuscle, setWorkoutMuscle] = useState("");
@@ -90,7 +87,6 @@ const WorkoutCards = ({
               color={"#5da8af"}
             />
             <View style={styles.cardContent}>
-              {/* Make sure styles.cardContent is defined */}
               <Text style={styles.modal}>{item.name}</Text>
             </View>
           </TouchableOpacity>

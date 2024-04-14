@@ -7,6 +7,7 @@ import {
   ScrollView,
   Pressable,
   Alert,
+  FlatList,
 } from "react-native";
 import getStyles from "../styles/CookbookStyle.js";
 import { useNavigation } from "@react-navigation/native";
@@ -15,19 +16,17 @@ import { useTheme } from "../services/ThemeContext.js";
 import { addMealData } from "../services/AuthAPI";
 import { useMeals } from "../services/MealsContext";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MealCards = ({
   apiData,
   handleCardPress,
   selectedRecipe,
   closeModal,
-  route,
 }) => {
-  const navigation = useNavigation();
   const auth = getAuth();
   const userID = auth.currentUser ? auth.currentUser.uid : null;
-  const [modalVisible, setModalVisible] = useState(false);
-  const { savedMeals, setSavedMeals } = useMeals();
+  const { setSavedMeals } = useMeals();
   const [mealName, setMealName] = useState("");
   const [mealIngredients, setMealIngredients] = useState("");
   const [mealServing, setMealServings] = useState("");
@@ -65,40 +64,50 @@ const MealCards = ({
 
   return (
     <View style={styles.screen}>
-      <ScrollView>
-        <View style={styles.background}>
-          {apiData.map((recipe, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.cardContainer}
-              onPress={() => handleCardPress(recipe)}
-            >
-              <View style={styles.cardContent}>
-                <Text style={styles.modal}>
-                  <Text style={styles.modalName}>Name:</Text> {recipe.title}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+      <FlatList
+        data={apiData}
+        keyExtractor={(reciepe, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.cardContainer}
+            onPress={() => handleCardPress(item)}
+          >
+            <MaterialCommunityIcons
+              name={"food-fork-drink"}
 
-        {/* Modal for detailed information */}
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={selectedRecipe !== ""}
-          onRequestClose={closeModal}
-        >
+              color={"#5da8af"}
+            />
+            <View style={styles.cardContent}>
+              <Text style={styles.modal}>{item.title}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        numColumns={2}
+        columnWrapperStyle={{
+          justifyContent: "space-between",
+          paddingHorizontal: "2.5%", // Adjust horizontal padding for two-column layout
+        }}
+        showsVerticalScrollIndicator={false}
+      />
+
+      {/* Modal for detailed information */}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={selectedRecipe !== ""}
+        onRequestClose={closeModal}
+      >
+        <SafeAreaView>
+          <View style={styles.mealCardsTextContainer}>
+            <Pressable onPress={handleCloseModal}>
+              <Text style={styles.backButton}>←</Text>
+            </Pressable>
+            <Text style={styles.mealText}>Recipes</Text>
+            <View style={{ width: 24 }} />
+          </View>
+
           <ScrollView>
             <View style={styles.modalContainer}>
-              <View style={styles.mealCardsTextContainer}>
-                <Pressable onPress={handleCloseModal}>
-                  <Text style={styles.backButton}>←</Text>
-                </Pressable>
-                <Text style={styles.mealText}>Recipes</Text>
-                <View style={{ width: 24 }} />
-              </View>
-
               <View style={styles.iconContainer}>
                 <MaterialCommunityIcons
                   name={"food-fork-drink"}
@@ -144,8 +153,8 @@ const MealCards = ({
               </TouchableOpacity>
             </View>
           </ScrollView>
-        </Modal>
-      </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 };
