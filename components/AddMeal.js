@@ -90,23 +90,19 @@ const AddMeal = ({ route }) => {
           value={mealName}
           placeholder="Meal Name"
           onChangeText={setMealName}
-          style={[styles.input]}
         />
         <DirectionsBox
           value={mealIngredients}
           onChangeText={setMealIngredients}
-          style={[styles.input]}
         />
         <InputField
           value={mealServing}
           placeholder="Servings"
           onChangeText={setMealServings}
-          style={[styles.input]}
         />
         <CommentBox
           value={mealInstructions}
           onChangeText={setMealInstructions}
-          style={[styles.input]}
         />
         <CreateButton onPress={() => handleAdd()} label={"Create Meal"} />
 

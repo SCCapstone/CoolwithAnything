@@ -21,6 +21,7 @@ const AddPaymentMethodsScreen = () => {
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
+  // Functions to accept only valid inputs
   const handleCreditCardChange = (text) => {
     const numericInput = text.replace(/[^0-9]/g, '');
     if (numericInput.length <= 16) {
@@ -57,61 +58,69 @@ const AddPaymentMethodsScreen = () => {
   };
 
   const handleSavePaymentMethod = async () => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
     const monthNum = parseInt(expMonth, 10);
     const yearNum = parseInt(expYear, 10);
-
-    if(!nickname || nickname.trim() === '') {
-      Alert.alert("Nickname is empty.");
+  
+    if (!nickname || nickname.trim() === '') {
+      Alert.alert("Nickname is empty");
       return;
     }
     if (creditCard.length !== 16) {
-      Alert.alert("Invalid credit card.");
+      Alert.alert("Invalid credit card");
       return;
     }
     if (CVC.length !== 3) {
-      Alert.alert("Invalid CVC number.");
+      Alert.alert("Invalid CVC number");
       return;
     }
-    if (expMonth.length !== 2 || monthNum < 1 || monthNum > 12) {
-      Alert.alert("Invalid EXP month.", "Month must be between 01 and 12.");
+    if (yearNum < currentYear || yearNum > 2099 || (yearNum === currentYear && monthNum < currentMonth)) {
+      Alert.alert("Invalid Expiration Date");
       return;
     }
-    if (expYear.length !== 4 || yearNum < 2000 || yearNum > 2099) {
-      Alert.alert("Invalid EXP year.", "Year must be between 2000 and 2099.");
-      return;
-    }
-    if(!name || name.trim() === '') {
-      Alert.alert("Name on card is empty.");
+    if (!name || name.trim() === '') {
+      Alert.alert("Name on card is empty");
       return;
     }
     if (ZIP.length !== 5) {
-      Alert.alert("Invalid ZIP code.");
+      Alert.alert("Invalid ZIP code");
       return;
     }
-
+  
+    // Fetch existing payment methods and check for duplicates
     try {
-      await savePaymentMethodForUser(userId, { nickname, creditCard, CVC, expMonth, expYear, name, ZIP });
-      console.log("Payment method saved successfully");
-      Alert.alert(
-        "Success", // Alert Title
-        "Your payment method was saved successfully!", // Alert Message
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate('PaymentMethods'),
-          },
-        ]
+      const paymentMethods = await fetchAllPaymentMethodsForUser(userId);
+      const isDuplicate = paymentMethods.some(method => 
+        method.creditCard === creditCard &&
+        method.CVC === CVC &&
+        method.expMonth === expMonth &&
+        method.expYear === expYear &&
+        method.name === name &&
+        method.ZIP === ZIP
       );
-      
-      // Fetch all payment methods for the user after adding a new one
+  
+      if (isDuplicate) {
+        Alert.alert("Duplicate Error", "A payment method with these details has already been added.");
+        return;
+      }
+  
+      await savePaymentMethodForUser(userId, { nickname, creditCard, CVC, expMonth, expYear, name, ZIP });
+      Alert.alert(
+        "Success", 
+        "Your payment method was saved successfully!", 
+        [{ text: "OK", onPress: () => navigation.navigate('PaymentMethods') }]
+      );
+  
       const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
-      
-      // Navigate back to the PaymentMethodsScreen with the updated list
       navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
     } catch (error) {
       console.error("Failed to save payment method", error);
+      Alert.alert("Error", "Failed to save payment method.");
     }
   };
+  
+  
 
   return (
     <View style={{ flex: 1 }}>

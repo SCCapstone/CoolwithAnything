@@ -33,7 +33,8 @@ const PaymentMethodsScreen = () => {
       nickname: item.nickname,
       creditCard: item.creditCard,
       CVC: item.CVC,
-      expDate: item.expDate,
+      expMonth: item.expMonth,
+      expYear: item.expYear,
       name: item.name,
       ZIP: item.ZIP
     })}>
