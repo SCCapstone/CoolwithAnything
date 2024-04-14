@@ -11,10 +11,7 @@ const imageStyles = (aspectRatio) => ({
 const getStyles = (theme) => StyleSheet.create({
 
   //------Workoutscreen.js-----//
-  screen: {
-    flex: 1,
-    backgroundColor: theme === 'light' ? 'white' : "#262626",
-  },
+
   workoutTextContainer: {
     height: 80,
     width: '100%',
@@ -115,20 +112,22 @@ const getStyles = (theme) => StyleSheet.create({
   },
 
   //----- WorkoutCards.js (under browse => api) -----//
-  background: {
-    backgroundColor: theme === 'dark' ? "#262626" : "white",
+  screen: {
+    flex: 1,
+    backgroundColor: theme === 'light' ? '#f2f2f2' : "#262626",
   },
   cardContainer: {
-    backgroundColor: theme === 'dark' ? "#5da8af" : 'white',
-    borderColor: "black",
-    height: 90,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
+    backgroundColor: theme === 'light' ? 'white' : "#4c4c4c",
     shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    borderRadius: 16,
+    marginVertical: 16,
+    alignItems: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 26,
+    width: "45%", // Adjust width for two-column layout
   },
   cardContent: {
     padding: 20,
@@ -136,12 +135,12 @@ const getStyles = (theme) => StyleSheet.create({
   modal: {
     color: theme === 'dark' ? 'white' : 'black',
     fontSize: 16,
+    fontWeight: "bold"
   },
   modalName: {
     fontWeight: "bold",
   },
   modalContainer: {
-    flex: 1,
     backgroundColor: theme === 'dark' ? '#262626' : "white",
     height: height,
   },
@@ -165,8 +164,7 @@ const getStyles = (theme) => StyleSheet.create({
     color: theme === 'dark' ? 'white' : 'black',
   },
   addButton: {
-    color: "#5da8af",
-    color: "#5da8af",
+    color: "#b0655e",
     fontSize: 16,
     padding: 16,
     fontWeight: "700",
@@ -211,7 +209,7 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: "bold",
   },
 
-  //----- I DONT THINK THESE ARE USED ANYWHERE - KAYLY ------//
+  //----- I DONT THINK THESE ARE USED ANYWHERE ------//
   
   header: {
     fontSize: 18,

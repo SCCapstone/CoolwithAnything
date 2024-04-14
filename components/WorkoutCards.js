@@ -7,6 +7,7 @@ import {
   ScrollView,
   Pressable,
   Alert,
+  FlatList,
 } from "react-native";
 import getStyles from "../styles/WorkoutStyles.js";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +16,7 @@ import { useTheme } from "../services/ThemeContext.js";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useWorkouts } from "../services/WorkoutsContext";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const WorkoutCards = ({
   apiData,
@@ -74,39 +76,51 @@ const WorkoutCards = ({
 
   return (
     <View style={styles.screen}>
-      <ScrollView>
-        <View style={styles.background}>
-          {apiData.map((exercise, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.cardContainer}
-              onPress={() => handleCardPress(exercise)}
-            >
-              <View style={styles.cardContent}>
-                <Text style={styles.modal}>
-                  <Text style={styles.modalName}>Name:</Text> {exercise.name}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+      <FlatList
+        data={apiData}
+        keyExtractor={(exercise, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.cardContainer}
+            onPress={() => handleCardPress(item)}
+          >
+            <MaterialCommunityIcons
+              name={"dumbbell"}
+              size={150}
+              color={"#5da8af"}
+            />
+            <View style={styles.cardContent}>
+              {/* Make sure styles.cardContent is defined */}
+              <Text style={styles.modal}>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        numColumns={2}
+        columnWrapperStyle={{
+          justifyContent: "space-between",
+          paddingHorizontal: "2.5%", // Adjust horizontal padding for two-column layout
+        }}
+        showsVerticalScrollIndicator={false}
+      />
 
-        {/* Modal for detailed information */}
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={selectedExercise !== ""}
-          onRequestClose={closeModal}
-        >
+      {/* Modal for detailed information */}
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={selectedExercise !== ""}
+        onRequestClose={closeModal}
+      >
+        <SafeAreaView>
+          <View style={styles.workoutCardsTextContainer}>
+            <Pressable onPress={handleCloseModal}>
+              <Text style={styles.backButton}>←</Text>
+            </Pressable>
+            <Text style={styles.workoutText}>Workouts</Text>
+            <View style={{ width: 24 }} />
+          </View>
+
           <ScrollView>
             <View style={styles.modalContainer}>
-              <View style={styles.workoutCardsTextContainer}>
-                <Pressable onPress={handleCloseModal}>
-                  <Text style={styles.backButton}>←</Text>
-                </Pressable>
-                <Text style={styles.workoutText}>Workouts</Text>
-                <View style={{ width: 24 }} />
-              </View>
               <View style={styles.iconContainer}>
                 <MaterialCommunityIcons
                   name={"dumbbell"}
@@ -157,8 +171,8 @@ const WorkoutCards = ({
               </TouchableOpacity>
             </View>
           </ScrollView>
-        </Modal>
-      </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 };

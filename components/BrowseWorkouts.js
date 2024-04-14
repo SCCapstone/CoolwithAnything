@@ -123,7 +123,7 @@ const BrowseWorkouts = ({props}) => {
             <View style={{ width: 24 }} />
           </View>
           {/* Render WorkoutApi component with the selected query */}
-          {selectedExercise && <WorkoutApi query={selectedExercise} route={userID}/>}
+          {selectedExercise && <WorkoutApi query={selectedExercise}/>}
         </View>
       </Modal>
     </View>
