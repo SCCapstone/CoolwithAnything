@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonText: {
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
 
