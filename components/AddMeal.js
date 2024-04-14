@@ -6,12 +6,10 @@ import {
   Pressable,
   TouchableOpacity,
   Alert,
+  TextInput,
 } from "react-native";
 import MealHeader from "./MealHeader";
-import InputField from "./InputField";
-import DirectionsBox from "./DirectionsBox";
 import CreateButton from "./CreateButton"; // Reused from previous examples
-import CommentBox from "./CommentBox";
 import { useMeals } from "../services/MealsContext";
 import { useNavigation } from "@react-navigation/native";
 import { addMealData } from "../services/AuthAPI";
@@ -86,22 +84,35 @@ const AddMeal = ({ route }) => {
       </View>
       <ScrollView style={styles.container}>
         <MealHeader onClose={() => handleclose()} />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={mealName}
           placeholder="Meal Name"
+          placeholderTextColor="grey"
           onChangeText={setMealName}
         />
-        <DirectionsBox
+        <TextInput
+          style={[styles.input, styles.tallInput]}
           value={mealIngredients}
+          placeholder="Add ingredients..."
+          placeholderTextColor="grey"
+          multiline
           onChangeText={setMealIngredients}
         />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={mealServing}
           placeholder="Servings"
+          placeholderTextColor="grey"
+          keyboardType="numeric"
           onChangeText={setMealServings}
         />
-        <CommentBox
+        <TextInput
+          style={[styles.input, styles.tallInput]}
           value={mealInstructions}
+          placeholder="Add instructions..."
+          placeholderTextColor="grey"
+          multiline
           onChangeText={setMealInstructions}
         />
         <CreateButton onPress={() => handleAdd()} label={"Create Meal"} />

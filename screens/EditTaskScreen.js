@@ -6,12 +6,11 @@ import {
   Text,
   View,
   Switch,
+  TextInput
 } from "react-native";
 import Header from "../components/Header";
-import InputField from "../components/InputField";
 import DateTimePicker from "../components/DateTimePicker";
 import TypeSelector from "../components/TypeSelector";
-import CommentBox from "../components/CommentBox";
 import CreateButton from "../components/CreateButton";
 import { updateTaskForUser } from "../services/AuthAPI";
 import eventEmitter from "../components/EventEmitter";
@@ -70,7 +69,8 @@ const EditTaskScreen = ({ route, navigation }) => {
         <Header onClose={() => navigation.goBack()} />
       </View>
       <View>
-        <InputField
+        <TextInput
+          style={styles.input}
           placeholder="Name"
           value={taskName}
           onChangeText={setTaskName}
@@ -80,7 +80,8 @@ const EditTaskScreen = ({ route, navigation }) => {
         <DateTimePicker initialDate={date} onConfirm={setDate} />
       </View>
       <View>
-        <InputField
+        <TextInput
+          style={styles.input}
           placeholder="Location"
           value={location}
           onChangeText={setLocation}
@@ -90,7 +91,7 @@ const EditTaskScreen = ({ route, navigation }) => {
         <TypeSelector selectedType={taskType} onSelect={setTaskType} />
       </View>
       <View>
-        <CommentBox text={comment} onChangeText={setComment} />
+        <TextInput style={styles.input} text={comment} onChangeText={setComment} />
       </View>
       <View style={{flex:1, flexDirection:"row", justifyContent:"space-between"}}>
         <Text style={styles.priorityText}>Priority</Text>
@@ -116,50 +117,5 @@ const EditTaskScreen = ({ route, navigation }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  switchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 20,
-  },
-  switchLabel: {
-    fontSize: 16,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#E0E0FF", // Light blue background
-    padding: 20,
-  },
-  inputField: {
-    backgroundColor: "#FFFFFF", // White for contrast and clarity
-    color: "#333333", // Dark text for readability
-    marginBottom: 20,
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#B0B0FF", // Light purple border for a slight contrast
-  },
-  button: {
-    backgroundColor: "#A0A0FF", // Soft purple for the button
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "#FFFFFF", // White text for visibility
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  header: {
-    color: "#5C5CFF", // Darker blue for header text
-    fontSize: 24,
-    marginBottom: 20,
-    fontWeight: "bold",
-  },
-});
 
 export default EditTaskScreen;

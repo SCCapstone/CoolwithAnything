@@ -28,7 +28,10 @@ const getStyles = (theme) => StyleSheet.create({
       textAlignVertical: 'top',
       color: theme === 'dark' ? 'white' : 'black',
       borderRadius: 5,
-      width: '80%',
+      width: '90%',
+    },
+    tallInput: {
+      height: 100,
     },
     totalCalories: {
       flexDirection: "row",

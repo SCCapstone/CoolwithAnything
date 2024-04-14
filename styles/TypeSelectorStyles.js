@@ -14,8 +14,8 @@ const getStyles = (theme) => StyleSheet.create({
         backgroundColor: 'white',
       },
       selectedTypeButton: {
-        backgroundColor: '#007bff', // Background color for the selected type
-        borderColor: '#0056b3', // Optional: change border color for the selected type
+        backgroundColor: '#5da8af',
+        borderColor: '#8dc2c7', 
       },
       typeText: {
         color: '#000', // Text color for the type button

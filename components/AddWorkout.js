@@ -17,7 +17,6 @@ import { useNavigation } from "@react-navigation/native";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/AddStyles";
-import CommentBox from "./CommentBox";
 
 const AddWorkout = ({ route }) => {
   const navigation = useNavigation();
@@ -102,34 +101,47 @@ const AddWorkout = ({ route }) => {
       </View>
       <ScrollView style={styles.container}>
         <WorkoutHeader onClose={() => handleClose()} />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={workoutName}
           placeholder="Workout Name"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutName}
         />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={workoutType}
           placeholder="Type"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutType}
         />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={workoutMuscle}
           placeholder="Muscle"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutMuscle}
         />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={workoutEquipment}
           placeholder="Equipment"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutEquipment}
         />
-        <InputField
+        <TextInput
+          style={styles.input}
           value={workoutDifficulty}
           placeholder="Difficulty"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutDifficulty}
         />
-        <CommentBox
+        <TextInput
+          style={[styles.input, styles.tallInput]}
           value={workoutInstructions}
-          placeholder="Instructions"
+          placeholder="Add instructions..."
+          placeholderTextColor="grey"
+          multiline
           onChangeText={setWorkoutInstructions}
         />
         <CreateButton onPress={() => handleAdd()} label={"Create Workout"} />
