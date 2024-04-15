@@ -65,6 +65,48 @@ export const getUserData = async (userId) => {
   }
 };
 
+
+export const countTasksForUser = async (userId) => {
+  try {
+    const tasksRef = collection(db, "users", userId, "tasks");
+    const querySnapshot = await getDocs(tasksRef);
+    const tasksCount = querySnapshot.size;
+
+    console.log(`Total tasks for user ${userId}: ${tasksCount}`);
+    return tasksCount;
+  } catch (error) {
+    console.error("Error fetching task count: ", error);
+    throw error;
+  }
+};
+
+export const countTasksByAttributeForUser = async (userId, attribute) => {
+  try {
+    const userTasksRef = collection(db, "users", userId, "tasks");
+    const querySnapshot = await getDocs(userTasksRef);
+    const countsByAttribute = {};
+
+    querySnapshot.forEach((doc) => {
+      const task = doc.data();
+      const attributeValue = task[attribute]; // Dynamically access the attribute
+      if (attributeValue) {
+        if (!countsByAttribute[attributeValue]) {
+          countsByAttribute[attributeValue] = 1;
+        } else {
+          countsByAttribute[attributeValue] += 1;
+        }
+      }
+    });
+
+    console.log(`Counts by ${attribute}:`, countsByAttribute);
+    return countsByAttribute;
+  } catch (error) {
+    console.error(`Error fetching tasks by ${attribute}: `, error);
+    throw error;
+  }
+};
+
+
 // Authentication and Firestore functions
 export const loginUser = async (email, password) => {
   try {
@@ -151,7 +193,7 @@ export const resetPassword = async (email) => {
 
 export const deleteTask = async (userId, taskId) => {
   try {
-    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
+    const taskDocRef = doc(db, "users", userId, "tasks", id);
     await deleteDoc(taskDocRef);
     console.log("Task deleted successfully");
   } catch (error) {

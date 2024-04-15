@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import LoginScreen from "../screens/LoginScreen";
 import TabNavigator from "./TabNavigation";
 import RegisterScreen from "../screens/RegisterScreen";
@@ -16,22 +15,69 @@ import QRScreen from "../screens/QRScreen";
 import PaymentMethodsScreen from "../screens/PaymentMethodsScreen";
 import AddPaymentMethodsScreen from "../screens/AddPaymentMethodsScreen";
 import EditPaymentMethodsScreen from "../screens/EditPaymentMethodsScreen";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ActivityIndicator } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
-function MainNavigator() {
+function MainNavigator({ isLoggedIn }) {
+  const [initialRouteName, setInitialRouteName] = useState(null);
+  const userIDRef = useRef(null);
+  const navigationRef = useRef(null);
+
+  // Check if user is logged in
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // If user is logged in, navigate to Home screen
+        setInitialRouteName("Home");
+        console.log("User logged in: ", !!user);
+        console.log("User ID: ", user.uid);
+        userIDRef.current = user.uid;
+      } else {
+        // If user is not logged in, navigate to Login screen
+        setInitialRouteName("Login");
+        console.log("No user ID found!");
+        userIDRef.current = null;
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
+  // Show loading indicator while checking auth state
+  if (initialRouteName === null || initialRouteName === "Login") {
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#0000ff"
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      />
+    );
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-         <Stack.Screen
+    <NavigationContainer ref={navigationRef} onReady={() => {
+      // Navigate to the appropriate screen based on auth state
+      if (userIDRef.current !== null) {
+        navigationRef.current?.navigate("Home", { userID: userIDRef.current });
+      } else {
+        navigationRef.current?.navigate("Login");
+      }
+    }}>
+      <Stack.Navigator initialRouteName="initialRouteName">
+        {/* Need loading screen*/}
+        <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="EditTaskScreen"
-          component={EditTaskScreen}
-          options={{ title: 'Edit Task' }}
+          name="Home"
+          component={TabNavigator}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Register"
@@ -54,9 +100,9 @@ function MainNavigator() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={TabNavigator}
-          options={{ headerShown: false }}
+          name="EditTaskScreen"
+          component={EditTaskScreen}
+          options={{ title: "Edit Task" }}
         />
         <Stack.Screen
           name="Settings"

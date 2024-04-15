@@ -135,6 +135,17 @@ function SelectAccount() {
   const navigation = useNavigation();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+
+  const handleLogout = () => {
+    auth.signOut().then(() => {
+      console.log('User signed out!');
+      navigation.navigate('Login');
+    }).catch((error) => {
+      // An error happened.
+      console.error("Logout Error", error);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigation.goBack()}>
@@ -159,7 +170,7 @@ function SelectAccount() {
           <Text style={styles.accountText}>QR Code</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.editButton} onPress={() => navigation.navigate('Login')}>
+      <Pressable style={styles.editButton} onPress={handleLogout}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </Pressable>
     </View>
