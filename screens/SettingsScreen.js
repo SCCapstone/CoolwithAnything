@@ -344,7 +344,7 @@ function SelectOthers() {
           <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
             <Text style={styles.accountText}>Support</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.5')}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.9')}>
             <Text style={styles.accountText}>Version</Text>
           </TouchableOpacity>
         </View>
