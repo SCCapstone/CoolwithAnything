@@ -8,9 +8,10 @@ import {
   Modal,
   Text,
 } from "react-native";
-import styles from "../styles/SearchBarStyle.js";
-import WorkoutStyles from "../styles/WorkoutStyles.js"
+import Styles from "../styles/WorkoutStyles.js"
 import WorkoutApi from "../APIs/WorkoutAPI.js";
+import { useTheme } from '../services/ThemeContext';
+import getStyles from "../styles/SearchBarStyle.js";
 
 const SearchWorkout = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
@@ -18,6 +19,9 @@ const SearchWorkout = ({ setSearchTerm }) => {
   const [loading, setLoading] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
+  const workoutStyles = Styles(theme);
 
   const handleSearch = () => {
     setLoading(true);
@@ -78,6 +82,7 @@ const SearchWorkout = ({ setSearchTerm }) => {
             value={input}
             onChangeText={(text) => setInput(text)}
             placeholder="What are you looking for?"
+            placeholderTextColor="grey"
           />
         </View>
 
@@ -101,13 +106,16 @@ const SearchWorkout = ({ setSearchTerm }) => {
         visible={modalVisible}
         onRequestClose={closeModal}
       >
-        <View>
-          <Text style={WorkoutStyles.modalHeader}>Workouts</Text>
-          <TouchableOpacity onPress={closeModal}>
-            <Text style={WorkoutStyles.closeButton2}>Close</Text>
-          </TouchableOpacity>
+        <View style={workoutStyles.listContainer}>
+          <View style={workoutStyles.browseHeaderContainer}>
+            <TouchableOpacity onPress={closeModal}>
+              <Text style={workoutStyles.backButton1}>←</Text>
+            </TouchableOpacity>
+            <Text style={[workoutStyles.modalHeader, {marginLeft: -23}]}>Workouts</Text>  
+            <View style={{ width: 24 }} />
+          </View>
           {/* Render WorkoutApi component with the selected query */}
-          {selectedExercise && <WorkoutApi query={selectedExercise} />}
+          {selectedExercise && <WorkoutApi query={selectedExercise}/>}
         </View>
       </Modal>
     </View>

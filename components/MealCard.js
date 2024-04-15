@@ -8,43 +8,23 @@ import {
   Share,
 } from "react-native";
 
-const mealStyles = StyleSheet.create({
-  card: {
-    backgroundColor: "white",
-    borderColor: "black",
-    padding: 16,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  text: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  button: {
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 5,
-    backgroundColor: "#ededed",
-    alignItems: "center",
-  },
-  buttonText: {
-    fontWeight: "bold",
-  },
-});
+import getStyles from "../styles/CookbookStyle";
+import { useTheme } from "../services/ThemeContext";
 
 const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   const [cardMeal, setCardMeal] = useState(meal);
-
   const [editMode, setEditMode] = useState(false);
   const [editableMeal, setEditableMeal] = useState({ ...meal });
   const [mealName, setMealName] = useState(meal.mealName);
   const [mealIngredients, setMealIngredients] = useState(meal.mealIngredients);
   const [mealServing, setMealServing] = useState(meal.mealServing);
+  const [nameInputHeight, setNameInputHeight] = useState(20); 
+  const [ingredientsInputHeight, setIngredientsInputHeight] = useState(20);
+  const [servingInputHeight, setServingInputHeight] = useState(20);
+  const [instructionsInputHeight, setInstructionsInputHeight] = useState(20);
+
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const [mealInstructions, setMealInstructions] = useState(
     meal.mealInstructions
   );
@@ -67,6 +47,48 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
       console.log(error.message);
     }
   };
+
+  const handleTextChange = (text, field) => {
+    const prefix = `${field}: `;
+    let newValue = text.startsWith(prefix) ? text.slice(prefix.length) : text;
+    if (text.trim() === prefix.trim()) {
+      newValue = '';
+    }
+  
+    switch (field) {
+      case "Name":
+        setMealName(newValue);
+        break;
+      case "Ingredients":
+        setMealIngredients(newValue);
+        break;
+      case "Serving Size":
+        setMealServing(newValue);
+        break;
+      case "Instructions":
+        setMealInstructions(newValue);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNameSizeChange = (event) => {
+    setNameInputHeight(event.nativeEvent.contentSize.height + 4);
+  };
+  
+  const handleIngredientsSizeChange = (event) => {
+    setIngredientsInputHeight(event.nativeEvent.contentSize.height + 4);
+  };
+  
+  const handleServingSizeChange = (event) => {
+    setServingInputHeight(event.nativeEvent.contentSize.height + 4);
+  };
+  
+  const handleInstructionsSizeChange = (event) => {
+    setInstructionsInputHeight(event.nativeEvent.contentSize.height + 4);
+  };
+  
   // Function to handle canceling the edit operation
   const onCancel = () => {
     setEditableMeal({ ...meal });
@@ -80,6 +102,7 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
       mealIngredients,
       mealServing,
       mealInstructions,
+      id: meal.id,
     };
 
     setCardMeal(newMeal);
@@ -88,36 +111,44 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
   };
 
   return (
-    <View style={mealStyles.card}>
+    <View style={styles.savedCard}>
       {editMode ? (
         // Edit mode UI with TextInputs for meal properties
         <View>
           <TextInput
-            value={mealName}
-            onChangeText={setMealName}
-            style={mealStyles.text}
-          />
-          <TextInput
-            value={String(mealIngredients)}
-            onChangeText={setMealIngredients}
-            style={mealStyles.text}
-          />
-          <TextInput
-            value={mealServing}
-            onChangeText={setMealServing}
-            style={mealStyles.text}
-          />
-          <TextInput
-            value={mealInstructions}
-            onChangeText={setMealInstructions}
-            style={mealStyles.text}
-          />
+    value={`Name: ${mealName}`}
+    onChangeText={(text) => handleTextChange(text, "Name")}
+    style={[styles.savedText, { height: nameInputHeight }]}
+    multiline
+    onContentSizeChange={handleNameSizeChange}
+  />
+  <TextInput
+    value={`Ingredients: ${mealIngredients}`}
+    onChangeText={(text) => handleTextChange(text, "Ingredients")}
+    style={[styles.savedText, { height: ingredientsInputHeight }]}
+    multiline
+    onContentSizeChange={handleIngredientsSizeChange}
+  />
+  <TextInput
+    value={`Serving Size: ${mealServing}`}
+    onChangeText={(text) => handleTextChange(text, "Serving Size")}
+    style={[styles.savedText, { height: servingInputHeight }]}
+    multiline
+    onContentSizeChange={handleServingSizeChange}
+  />
+  <TextInput
+    value={`Instructions: ${mealInstructions}`}
+    onChangeText={(text) => handleTextChange(text, "Instructions")}
+    style={[styles.savedText, { height: instructionsInputHeight }]}
+    multiline
+    onContentSizeChange={handleInstructionsSizeChange}
+  />
           {/* ... other TextInputs for editing meal properties */}
           <View>
-            <Pressable style={mealStyles.button} onPress={onCancel}>
+            <Pressable style={styles.buttonOptions} onPress={onCancel}>
               <Text>Cancel</Text>
             </Pressable>
-            <Pressable style={mealStyles.button} onPress={onSave}>
+            <Pressable style={styles.buttonOptions} onPress={onSave}>
               <Text>Save</Text>
             </Pressable>
           </View>
@@ -125,35 +156,36 @@ const MealCard = ({ meal, index, deleteMeal, editMeal }) => {
       ) : (
         // Display mode UI with Text for meal properties
         <View>
-          <Text style={mealStyles.text}>Name: {meal.mealName}</Text>
-          <Text style={mealStyles.text}>
+          <Text style={styles.savedText}>Name: {meal.mealName}</Text>
+          <Text style={styles.savedText}>
             Ingredients: {meal.mealIngredients}
           </Text>
-          <Text style={mealStyles.text}>Serving size: {meal.mealServing}</Text>
-          <Text style={mealStyles.text}>
+          <Text style={styles.savedText}>Serving size: {meal.mealServing}</Text>
+          <Text style={styles.savedText}>
             Instructions: {meal.mealInstructions}
           </Text>
 
           <View>
             <Pressable
-              style={mealStyles.button}
+              style={styles.buttonOptions}
               onPress={() => setEditMode(true)}
             >
-              <Text>Edit</Text>
+              <Text style={styles.optionText}>Edit</Text>
             </Pressable>
             <Pressable
-              style={mealStyles.button}
+              style={styles.buttonOptions}
               onPress={() => deleteMeal(index)}
             >
-              <Text>Delete</Text>
+              <Text style={styles.optionText}>Delete</Text>
             </Pressable>
-            <Pressable style={mealStyles.button} onPress={myShare}>
-              <Text style={mealStyles.buttonText}>Share</Text>
+            <Pressable style={styles.buttonOptions} onPress={myShare}>
+              <Text style={styles.optionText}>Share</Text>
             </Pressable>
+            </View>
           </View>
-        </View>
-      )}
-    </View>
+        )}
+      </View>
+    
   );
 };
 

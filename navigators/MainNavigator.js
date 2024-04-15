@@ -15,13 +15,16 @@ import QRScreen from "../screens/QRScreen";
 import PaymentMethodsScreen from "../screens/PaymentMethodsScreen";
 import AddPaymentMethodsScreen from "../screens/AddPaymentMethodsScreen";
 import EditPaymentMethodsScreen from "../screens/EditPaymentMethodsScreen";
+import TaskDetailScreen from "../screens/TaskDetailScreen";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ActivityIndicator } from "react-native";
+import LoadingScreen from "../screens/LoadingScreen";
 
 const Stack = createNativeStackNavigator();
 
 function MainNavigator({ isLoggedIn }) {
   const [initialRouteName, setInitialRouteName] = useState(null);
+  const [loading, setLoading] = useState(true);
   const userIDRef = useRef(null);
   const navigationRef = useRef(null);
 
@@ -47,14 +50,17 @@ function MainNavigator({ isLoggedIn }) {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+
   // Show loading indicator while checking auth state
-  if (initialRouteName === null || initialRouteName === "Login") {
+  if ( loading || initialRouteName === null) {
     return (
-      <ActivityIndicator
-        size="large"
-        color="#0000ff"
-        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      />
+      <LoadingScreen />
     );
   }
 
@@ -63,12 +69,18 @@ function MainNavigator({ isLoggedIn }) {
       // Navigate to the appropriate screen based on auth state
       if (userIDRef.current !== null) {
         navigationRef.current?.navigate("Home", { userID: userIDRef.current });
+        console.log("Navigating to Home screen");
+        console.log("User ID (in navigation): ", userIDRef.current);
       } else {
         navigationRef.current?.navigate("Login");
       }
     }}>
       <Stack.Navigator initialRouteName="initialRouteName">
-        {/* Need loading screen*/}
+        <Stack.Screen
+          name="Loading"
+          component={LoadingScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -77,6 +89,16 @@ function MainNavigator({ isLoggedIn }) {
         <Stack.Screen
           name="Home"
           component={TabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditTaskScreen"
+          component={EditTaskScreen}
+          options={{ title: 'Edit Task' }}
+        />
+        <Stack.Screen 
+          name="TaskDetailScreen" 
+          component={TaskDetailScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -98,11 +120,6 @@ function MainNavigator({ isLoggedIn }) {
           name="Confirmation"
           component={ConfirmationScreen}
           options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="EditTaskScreen"
-          component={EditTaskScreen}
-          options={{ title: "Edit Task" }}
         />
         <Stack.Screen
           name="Settings"

@@ -8,9 +8,10 @@ import {
   Modal,
   Text,
 } from "react-native";
-import styles from "../styles/SearchBarStyle.js";
-import CookbookStyle from "../styles/CookbookStyle.js";
+import Styles from "../styles/CookbookStyle.js";
 import CookbookAPI from "../APIs/CookbookAPI.js";
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/SearchBarStyle.js";
 
 const SearchMeal = ({ setSearchTerm }) => {
   const [input, setInput] = useState("");
@@ -18,6 +19,10 @@ const SearchMeal = ({ setSearchTerm }) => {
   const [loading, setLoading] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
+  const CookbookStyle = Styles(theme);
 
   const handleSearch = () => {
     setLoading(true);
@@ -76,10 +81,14 @@ const SearchMeal = ({ setSearchTerm }) => {
             value={input}
             onChangeText={(text) => setInput(text)}
             placeholder="What are you looking for?"
+            placeholderTextColor="grey"
           />
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleQueryButtonClick(input)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleQueryButtonClick(input)}
+        >
           <Image
             source={require("../assets/search.png")}
             resizeMode="contain"
@@ -97,15 +106,18 @@ const SearchMeal = ({ setSearchTerm }) => {
         visible={modalVisible}
         onRequestClose={closeModal}
       >
-        <View>
-          <Text style={CookbookStyle.modalHeader}>Recipes</Text>
-          <TouchableOpacity onPress={closeModal}>
-            <Text style={CookbookStyle.closeButton2}>Close</Text>
-          </TouchableOpacity>
-
-         
-            {/* // Render CookbookAPI component with the selected query */}
-            {selectedRecipe && <CookbookAPI query={selectedRecipe} />}
+        <View style={CookbookStyle.listContainer}>
+          <View style={CookbookStyle.browseHeaderContainer}>
+            <TouchableOpacity onPress={closeModal}>
+              <Text style={CookbookStyle.backButton1}>←</Text>
+            </TouchableOpacity>
+            <Text style={[CookbookStyle.modalHeader, { marginLeft: -23 }]}>
+              Recipes
+            </Text>
+            <View style={{ width: 24 }} />
+          </View>
+          {/* Render CookbookApi component with the selected query */}
+          {selectedRecipe && <CookbookAPI query={selectedRecipe} />}
         </View>
       </Modal>
     </View>

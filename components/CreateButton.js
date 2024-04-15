@@ -11,15 +11,16 @@ const CreateButton = ({ onPress, label }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "pink",
+    backgroundColor: '#5da8af',
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
     marginVertical: 10,
   },
   buttonText: {
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
 

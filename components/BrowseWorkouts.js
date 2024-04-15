@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,19 @@ import {
   ScrollView,
 } from "react-native";
 import WorkoutApi from "../APIs/WorkoutAPI";
-import styles from "../styles/WorkoutStyles";
 import SearchBar from "./SearchWorkout";
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/WorkoutStyles";
+import { getUserID } from "../services/AuthAPI";
 
-const BrowseWorkouts = () => {
+
+const BrowseWorkouts = ({props}) => {
   const [selectedExercise, setSelectedExercise] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+ // const { user } = props.params;
+  const [userID, setUserID] = useState({userID: ""})
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const handleQueryButtonClick = (exercise) => {
     setSelectedExercise(exercise);
     setModalVisible(true);
@@ -21,6 +28,22 @@ const BrowseWorkouts = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+{/*  useEffect(() => {
+    const fetchData = async () => {
+      try {
+          const fetchedUserID = await getUserID(props.userID);
+          setUserID(fetchedUserID);
+          console.log("UserID: ", fetchedUserID);
+      } catch (error) {
+        console.error("Error fetching user id: ", error);
+      }
+    }
+    if (user) {
+      fetchData(); // Always fetch data when component mounts
+    }
+   
+  }, [user]); // Dependency only on route.userID*/}
 
   return (
     <View>
@@ -30,7 +53,7 @@ const BrowseWorkouts = () => {
 
       <ScrollView>
         {/* Different Buttons for the different types of exercises */}
-        <View style={styles.container}>
+        <View style={styles.typeContainer}>
           <TouchableOpacity
             onPress={() => handleQueryButtonClick("biceps")}
             style={styles.wrapper}
@@ -91,13 +114,16 @@ const BrowseWorkouts = () => {
         visible={modalVisible}
         onRequestClose={closeModal}
       >
-        <View>
-          <Text style={styles.modalHeader}>Workouts</Text>
-          <TouchableOpacity onPress={closeModal}>
-            <Text style={styles.closeButton2}>Close</Text>
-          </TouchableOpacity>
+        <View style={styles.listContainer}>
+          <View style={styles.browseHeaderContainer}>
+            <TouchableOpacity onPress={closeModal}>
+              <Text style={styles.backButton1}>←</Text>
+            </TouchableOpacity>
+            <Text style={[styles.modalHeader, {marginLeft: -23}]}>Workouts</Text>  
+            <View style={{ width: 24 }} />
+          </View>
           {/* Render WorkoutApi component with the selected query */}
-          {selectedExercise && <WorkoutApi query={selectedExercise} />}
+          {selectedExercise && <WorkoutApi query={selectedExercise} route={userID}/>}
         </View>
       </Modal>
     </View>

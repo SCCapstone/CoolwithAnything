@@ -2,16 +2,13 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     button: {
-      margin: 5,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      borderRadius: 5,
-      borderWidth: 1,
-      borderColor: 'gray',
     },
     selected: {
-      backgroundColor: 'blue',
-      borderColor: 'blue',
+      backgroundColor: '#57BCBE',
+      borderColor: '#57BCBE',
+      borderRadius: 25,
     },
     buttonText: {
       color: 'black',

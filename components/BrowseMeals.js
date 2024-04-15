@@ -7,13 +7,16 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
-import styles from "../styles/CookbookStyle";
 import CookbookApi from "../APIs/CookbookAPI";
-import SearchMeal from "./SearchMeal";
+import SearchBar from "./SearchMeal";
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/CookbookStyle.js";
 
-const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
+const BrowseMeals = ({ route }) => {
   const [selectedQuery, setSelectedQuery] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const handleQueryButtonClick = (query) => {
     setSelectedQuery(query);
     setModalVisible(true);
@@ -25,12 +28,12 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
   return (
     <View>
       <View>
-        <SearchMeal />
+        <SearchBar />
       </View>
 
       <ScrollView>
         {/* Different Buttons for the different types of meals */}
-        <View style={styles.container}>
+        <View style={styles.typeContainer}>
           <TouchableOpacity
             onPress={() => handleQueryButtonClick("meat")}
             style={styles.wrapper}
@@ -67,38 +70,41 @@ const BrowseMeals = ({ searchTerm, setSearchTerm }) => {
                 style={styles.imageVeg}
               />
             }
-            <Text style={styles.buttonText}>Veggitarian</Text>
+            <Text style={styles.buttonText}>Vegetarian</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => handleQueryButtonClick("healthy")}
             style={styles.wrapper}
           >
-           <ImageBackground
+           { <ImageBackground
               source={require("../images/healthy.png")}
               style={styles.imageHealthy}
-            /> 
+            />}
             <Text style={styles.buttonText}>Healthy</Text>
           </TouchableOpacity>
-
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={modalVisible}
-            onRequestClose={closeModal}
-          >
-            <View>
-              <Text style={styles.modalHeader}>Recipes</Text>
-              <TouchableOpacity onPress={closeModal}>
-                <Text style={styles.closeButton2}>Close</Text>
-              </TouchableOpacity>
-              {/* Render WorkoutApi component with the selected query */}
-              {selectedQuery && <CookbookApi query={selectedQuery} />}
-            </View>
-          </Modal>
         </View>
       </ScrollView>
-    </View>
+
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={modalVisible}
+          onRequestClose={closeModal}
+        >
+        <View style={styles.listContainer}>
+          <View style={styles.browseHeaderContainer}>
+            <TouchableOpacity onPress={closeModal}>
+              <Text style={styles.backButton1}>←</Text>
+            </TouchableOpacity>
+            <Text style={[styles.modalHeader, {marginLeft: -23}]}>Recipes</Text>  
+            <View style={{ width: 24 }} />
+          </View>
+          {/* Render CookbookApi component with the selected query */}
+          {selectedQuery && <CookbookApi query={selectedQuery} route={route}/>}
+        </View>
+        </Modal>
+  </View>
   );
 };
 

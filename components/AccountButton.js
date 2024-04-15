@@ -1,35 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import getStyles from '../styles/HomeScreenStyles';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTheme } from "../services/ThemeContext";
 
-const AccountButton = ({navigation}) => {
+const AccountButton = ({ navigation }) => {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const onAccountPress = () => {
     navigation.navigate("Settings");
   };
 
   return (
-    <View style={styles.dateTrackerContainer}>
-      <TouchableOpacity onPress={onAccountPress} style={styles.accountButton}>
-        <Text style={styles.accountButtonText} fontSize={30}>👤</Text>
+    <View style={styles.accountContainer}>
+      <TouchableOpacity onPress={onAccountPress}>
+        <MaterialIcons name="settings" size={24} color={'white'} />
       </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  dateTrackerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  },
-  monthYearText: {
-    fontSize: 24,
-  },
-  accountButton: {
-    
-  },
-  accountButtonText: {
-    
-  },
-});
 export default AccountButton;

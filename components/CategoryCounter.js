@@ -1,17 +1,22 @@
-// CategoryCounter.js
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../styles/CategoryCounterStyle';
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/HomeScreenStyles";
 
 const CategoryCounter = ({ count, label, color }) => {
-  return (
-    <View style={styles.container}>
-      <View style={[styles.counter, { backgroundColor: color }]}>
-        <Text style={styles.countText}>{count}</Text>
-      </View>
-      <Text style={styles.label}>{label}</Text>
-    </View>
-  );
+
+//  const { theme } = useTheme();
+//  const styles = getStyles(theme);
+  
+//  return (
+//    <View style={styles.circleContainer}>
+//      <View style={[styles.counter, { backgroundColor: color }]}>
+//        <Text style={styles.countText}>{count}</Text>
+//       </View>
+//       <Text style={styles.categoryLabel}>{label}</Text>
+//     </View>
+//  );
 };
 
 export default CategoryCounter;

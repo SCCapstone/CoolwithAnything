@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
@@ -23,11 +23,15 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     paddingHorizontal: 16,
+    backgroundColor: theme === 'dark' ? '#262626' : "white",
+    borderWidth: 1,
+    borderColor: '#ddd',
+    color: theme === 'dark' ? 'white' : "black",
   },
   button: {
     width: 50,
     height: "100%",
-    backgroundColor: "#FF7754",
+    backgroundColor: "#63D4D5",
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
@@ -39,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default getStyles;
