@@ -10,10 +10,10 @@
         <div class="header">
             <div class="spacer"></div> <!-- Dummy element for balancing -->
             <div class="header-title">
-                <p class="title-text">SchedulerX</p>
+                <img class="logo" src="website_content/logo.png" title="SchedulerX">
             </div>
             <div class="header-about">
-                <p onclick="location.href='about.html';">About</p>
+                <!--<p class="header-about-text" onclick="location.href='about.html';">About</p>-->
             </div>
         </div>
         <div class="container">
@@ -32,12 +32,23 @@
                         <source src="website_content/test_demo.mp4" type="video/mp4">
                         Video not supported
                     </video>
-                    <p style="font-style: italic; margin-top: 10px;">This is a placeholder video</p>
+                    <p style="font-style: italic; margin-top: 10px;">This is a placeholder video*</p>
                 </div>   
             </div>
             <div class="scrollable-content">
                 <h1>The SchedulerX App</h1>
-                <p>Hello World</p>
+                <p>SchedulerX is an Android application aimed at helping users manage their schedules and fitness and nutrition goals. The app features:</p>
+                <ul class="list">
+                    <li> Create and manage tasks on your personal calendar  </li>
+                    <li> Track task and fitness progress </li>
+                    <li> Browse a selection of workouts and meals <span class="list-note">— Powered by <a href="https://api-ninjas.com/" target="_blank" rel="noopener noreferrer" title="API Ninjas Website">API Ninjas</a></span> </li>
+                    <li> Personalize and share your own workouts and meals </li>
+                    <li> Dark and Light Mode Themes </li>
+                    <li> Personal information safely secured in Firebase storage </li>
+                </ul>
+                <p>
+                    The app is written in JavaScript using the React Native framework and uses Firebase for cloud storage and user authentication.
+                </p>
             </div>
         </div>
     </body>
