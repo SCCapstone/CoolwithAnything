@@ -1,26 +1,27 @@
+/* Responsive Design */
 @media (max-width: 800px) {
     .static-content {
-        width: 100%; /* Takes full width on smaller screens */
-        position: static; /* Normal flow, not fixed */
+        width: 100%;
+        position: static;
     }
 
     .scrollable-content {
-        width: 100%; /* Full width for better readability */
-        margin-left: 0; /* No side margin */
+        width: 100%;
+        margin-left: 0;
     }
 
     .responsive-video {
-        width: 100%; /* Ensures the video is not wider than the screen */
+        width: 100%;
     }
 
     .action-bar {
-        flex-direction: column; /* Stacks items vertically on smaller screens */
-        padding: 5px; /* Reduces padding */
+        flex-direction: column;
+        padding: 5px;
     }
 
     .action-bar-item {
-        width: 100%; /* Full width for each item */
-        margin-bottom: 10px; /* Adds space between stacked items */
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
 
