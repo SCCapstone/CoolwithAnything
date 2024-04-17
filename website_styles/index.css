@@ -1,3 +1,29 @@
+@media (max-width: 800px) {
+    .static-content {
+        width: 100%; /* Takes full width on smaller screens */
+        position: static; /* Normal flow, not fixed */
+    }
+
+    .scrollable-content {
+        width: 100%; /* Full width for better readability */
+        margin-left: 0; /* No side margin */
+    }
+
+    .responsive-video {
+        width: 100%; /* Ensures the video is not wider than the screen */
+    }
+
+    .action-bar {
+        flex-direction: column; /* Stacks items vertically on smaller screens */
+        padding: 5px; /* Reduces padding */
+    }
+
+    .action-bar-item {
+        width: 100%; /* Full width for each item */
+        margin-bottom: 10px; /* Adds space between stacked items */
+    }
+}
+
 /*General CSS*/
 * {
     margin: 0;
@@ -70,21 +96,25 @@ body, html {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100%;
-    justify-content: space-around;
+    width: 80%;
+    justify-content: center;
     margin-bottom: 30px;
     border-radius: 10px;
     overflow: hidden;
+    padding: 10px 0;
 }
 
 .action-bar-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
+    margin-right: 10px;
     flex-grow: 1;
     transition: background-color 0.3s;
     background-color: #3e5e60;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .action-bar-item:hover {
@@ -102,10 +132,15 @@ body, html {
 
 /*Static Content*/
 .static-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 50%; /* Takes up half of the viewport width */
-    height: 100%; /* Full viewport height */
+    height: 100%;
     padding: 20px;
     position: fixed;
+    overflow: hidden;
 }
 
 .demo-video {
@@ -115,13 +150,20 @@ body, html {
     height: 100%; 
 }
 
+.responsive-video {
+    width: 100%;
+    height: auto; 
+    margin-top: 20px;
+}
+
+
 /*Scrollable Content*/
 .scrollable-content {
-    width: 50%;
+    width: 50%; /* Takes up othre half of viewport width*/
     height: 100%;
     overflow-y: auto;
     margin-top: 20px;
-    margin-left: 50%;
+    margin-left: 50%; /* Position on second half of viewport */
     background: #262626;
     color: #333;
     padding-bottom: 50px;
