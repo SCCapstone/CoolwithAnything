@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <link rel="stylesheet" href="website-styles/index.css">
+        <meta charset="UTF-8">
+        <title>SchedulerX</title>
+        <script defer src="website_behavior.js"></script>
+        <link rel="stylesheet" href="website_styles/index.css">
     </head>
     <body>
         <div class="header">
-            <p class="header-title">Scheduler X</p>
+            <div class="spacer"></div> <!-- Dummy element for balancing -->
+            <div class="header-title">
+                <p class="title-text">SchedulerX</p>
+            </div>
+            <div class="header-about">
+                <p onclick="location.href='about.html';">About</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="static-content">
+                <div class="action-bar">
+                    <div class="action-bar-item" data-href="website_content/schedulerx.zip" data-filename="schedulerx.zip">
+                        <p>Download ZIP</p>
+                    </div>
+                    <div class="action-bar-item" data-href="website_content/schedulerx.apk" data-filename="schedulerx_app.apk">
+                        <p>Download APK</p>
+                    </div>
+                    <div class="action-bar-item" data-href="https://github.com/SCCapstone/CoolwithAnything">
+                        <p>GitHub Repo</p>
+                    </div>
+                </div>                
+                <div class="demo-video">
+                    <h1>Demo</h1>
+                    <video width="480" height="300" controls>
+                        <source src="website_content/test_demo.mp4" type="video/mp4">
+                        Video not supported
+                    </video>
+                    <p style="font-style: italic; margin-top: 10px;">This is a placeholder video</p>
+                </div>   
+            </div>
+            <div class="scrollable-content">
+                <h1>The SchedulerX App</h1>
+                <p>Hello World</p>
+            </div>
         </div>
     </body>
 </html>
