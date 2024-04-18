@@ -193,10 +193,10 @@ body, html {
 }
 
 li {
-    /*color: rgb(100,255,218); */
     color: #cbcbcb;
     font-weight: 400;
     line-height: 2.5;
+    font-size: 18px;
 }
 
 .code-block {
