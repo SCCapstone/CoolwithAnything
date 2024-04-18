@@ -216,7 +216,7 @@ li {
 
 /* Code block text */
 .scrollable-content .code-block .code-block-text {
-    font-size: 14px;
+    font-size: 13px;
     color: #5da8af;
     font-family: 'Roboto Mono', monospace;
 }
