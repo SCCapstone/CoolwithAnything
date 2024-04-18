@@ -3,26 +3,50 @@
     <head>
         <meta charset="UTF-8">
         <title>SchedulerX</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
         <script defer src="website_behavior.js"></script>
+        <!--Copy button code-->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            var copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(function(btn) {
+            btn.addEventListener('click', function () {
+            var text = btn.parentNode.querySelector('.code-block-text').textContent;
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Copied to clipboard!');
+        });
+    });
+});
+
+        </script>
+            
         <link rel="stylesheet" href="website_styles/index.css">
     </head>
     <body>
         <div class="header">
             <div class="spacer"></div> <!-- Dummy element for balancing -->
             <div class="header-title">
-                <img class="logo" src="website_content/logo.png" title="SchedulerX">
+                <a href="index.html">
+                    <img class="logo" src="website_content/logo.png" title="SchedulerX">
+                </a>
             </div>
             <div class="header-about">
-                <!--<p class="header-about-text" onclick="location.href='about.html';">About</p>-->
+                <p class="header-about-text" onclick="location.href='about.html';" title="Gallery">Gallery</p>
             </div>
         </div>
         <div class="container">
+        <!--Static Content-->
             <div class="static-content">
                 <div class="action-bar">
-                    <div class="action-bar-item" data-href="website_content/schedulerx.apk" data-filename="schedulerx_app.apk">
+                    <div class="action-bar-item" data-href="website_content/schedulerx.apk" data-filename="schedulerx_app.apk" title="Download APK">
                         <p>Download APK</p>
                     </div>
-                    <div class="action-bar-item" data-href="https://github.com/SCCapstone/CoolwithAnything">
+                    <div class="action-bar-item" data-href="https://github.com/SCCapstone/CoolwithAnything" title="GitHub Repo">
                         <p>GitHub Repo</p>
                     </div>
                 </div>                
@@ -35,8 +59,9 @@
                     <p style="font-style: italic; margin-top: 10px;">This is a placeholder video*</p>
                 </div>   
             </div>
+        <!--Scrollable Content-->
             <div class="scrollable-content">
-                <h1 style="margin-bottom: 30px;">The SchedulerX App</h1>
+                <h1 style="margin-bottom: 30px; color: #5da8af;">The SchedulerX App</h1>
                 <p>SchedulerX is an Android application aimed at helping users manage their schedules and fitness and nutrition goals.</p>
                 <p>The app features the ability to:</p>
                 <ul class="list">
@@ -50,6 +75,69 @@
                 <p>
                     The app is written in JavaScript using the React Native framework and uses Firebase for cloud storage and user authentication.
                 </p>
+            <!--Why use SchedulerX?-->
+                <h2 style="margin-top: 45px; color: #5da8af;">
+                    Why use SchedulerX?
+                </h2>
+                <p>Unlock your potential with SchedulerX — your all-in-one solution for mastering time management and enhancing your lifestyle. With SchedulerX, effortlessly organize your daily tasks, dive into personalized workouts, and explore nutritious meal plans tailored just for you. Whether you're planning your day or paving your path to wellness, SchedulerX adapts to your pace and preferences. Start creating, sharing, and thriving today with SchedulerX, where your goals are just a tap away. Why just manage when you can excel?</p>
+            <!--How to Run the App-->
+                <h2 style="margin-top: 45px; color: #5da8af;">
+                    How to Run the App
+                </h2>
+                <h3 style="margin-top: 30px;">1. Install using APK</h3>
+                <p>Simply download our APK on the left and install on your device or emulator and you're ready to go!</p>
+                <h3 style="margin-top: 30px;">2. Clone the Repository</h3>
+                <p>First clone the repository:</p>
+                <div class="code-block">
+                    <p class="code-block-text">
+                        https://github.com/SCCapstone/CoolwithAnything.git
+                    </p>
+                    <img class="copy-btn" src="website_content/copy.png" title="Copy">
+                </div>
+                <p>Install Expo CLI:</p>
+                <div class="code-block">
+                    <p class="code-block-text">
+                        npm install -g expo-cli ```
+                    </p>
+                    <img class="copy-btn" src="website_content/copy.png" title="Copy">
+                </div>
+                <p>Install any required packages:</p>
+                <div class="code-block">
+                    <p class="code-block-text">
+                        npm install
+                    </p>
+                    <img class="copy-btn" src="website_content/copy.png" title="Copy">
+                </div>
+                <p>Run the app:</p>
+                <div class="code-block">
+                    <p class="code-block-text">
+                        npx expo start
+                    </p>
+                    <img class="copy-btn" src="website_content/copy.png" title="Copy">
+                </div>
+                <p>Wait for the Metro Bundler to finish running and choose how you would like to start the app.</p>
+
+            <!--Authors-->
+                <h2 style="margin-top: 45px;">
+                    Authors:
+                </h2>
+                <div class="authors">
+                    <p>
+                        Vu Nguyen
+                    </p>
+                    <p>
+                        Ali Omer
+                    </p>
+                    <p>
+                        Deep Patel
+                    </p>
+                    <p>
+                        Nick Rubino
+                    </p>
+                    <p>
+                        Kayly Tran
+                    </p>
+                </div>
             </div>
         </div>
     </body>
