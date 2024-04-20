@@ -181,7 +181,7 @@ const HomeScreen = ({ route }) => {
             <Text style={styles.homeText}>Today</Text>
           </View>
           <View style={{ flex: 1, alignItems: "flex-end" }}>
-            <AccountButton navigation={navigation} />
+            <AccountButton navigation={navigation} testID="settings-button"/>
           </View>
         </View>
         <View style={{ width: 24 }} />

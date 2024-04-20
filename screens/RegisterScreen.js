@@ -151,7 +151,7 @@ const RegisterScreen = ({ navigation }) => {
               },
             ]}
           />
-          <Text style={styles.title}>Welcome</Text>
+          <Text style={styles.title} testID="register-screen-id">Welcome</Text>
           <Text style={styles.subtittle}>Sign up to continue</Text>
         </View>
         <ScrollView contentContainerStyle={styles.scrollView}>

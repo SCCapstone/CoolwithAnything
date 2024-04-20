@@ -12,6 +12,7 @@
     "detox-test": "detox test --configuration android.debug"
   },
   "dependencies": {
+    "@expo/config-plugins": "^7.9.1",
     "@expo/react-native-action-sheet": "^4.0.1",
     "@firebase/firestore": "^4.4.2",
     "@mdi/js": "^7.4.47",
@@ -30,7 +31,6 @@
     "expo": "~50.0.17",
     "expo-font": "^11.10.3",
     "expo-status-bar": "~1.11.1",
-    "expo-updates": "~0.24.12",
     "firebase": "^10.8.0",
     "react": "18.2.0",
     "react-native": "^0.73.6",

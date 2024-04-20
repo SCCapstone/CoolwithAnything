@@ -33,13 +33,13 @@ module.exports = {
       type: 'android.apk',
       build:
         'cd android && gradlew :app:assembleDebug :app:assembleAndroidTest -DtestBuildType=debug && cd ..',
-      binaryPath: 'android/app/build/app-debug.apk',
+      binaryPath: 'android/app/build/outputs/apk/debug/app-debug.apk',
     },
     'android.release': {
       type: 'android.apk',
       build:
         'cd android && gradlew :app:assembleRelease :app:assembleAndroidTest -DtestBuildType=release && cd ..',
-      binaryPath: 'android/app/build/app-release.apk',
+      binaryPath: 'android/app/build/outputs/apk/release/app-release.apk',
     },
   },
   devices: {
