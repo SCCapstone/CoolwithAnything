@@ -18,7 +18,50 @@ import { useWorkouts } from "../services/WorkoutsContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const imageMapping = {
-  "Incline Hammer Curls": require("../images/workout/incline_hammer.png"),
+  "Incline Hammer Curls": require("../images/workouts/incline_hammer.png"),
+  "Wide-grip barbell curl": require("../images/workouts/wide_grip_bb_curl.png"),
+  "EZ-bar spider curl": require("../images/workouts/ez_bar_spider.png"),
+  "Hammer Curls": require("../images/workouts/hammer.png"),
+  "EZ-Bar Curl": require("../images/workouts/ez_bar.png"),
+  "Zottman Curl": require("../images/workouts/zottman.png"),
+  "Biceps curl to shoulder press": require("../images/workouts/bi_to_shoulder.png"),
+  "Barbell Curl": require("../images/workouts/barbell.png"),
+  "Concentration curl": require("../images/workouts/concentration.png"),
+  "Flexor Incline Dumbbell Curls": require("../images/workouts/flex_incline_db.png"),
+
+  "Barbell glute bridge": require("../images/workouts/bb_glute_bridge.png"),
+  "Barbell Hip Thrust": require("../images/workouts/bb_hip_thrust.png"),
+  "Single-leg cable hip extension": require("../images/workouts/single_leg_extenstion.png"),
+  "Glute bridge": require("../images/workouts/glute_bridge.png"),
+  "Single-leg glute bridge": require("../images/workouts/single_glute.png"),
+  "Step-up with knee raise": require("../images/workouts/step_up_knee.png"),
+  "Kettlebell thruster": require("../images/workouts/kettlebell_thruster.png"),
+  "Kneeling Squat": require("../images/workouts/kneeling_squat.png"),
+  "Flutter Kicks": require("../images/workouts/flutter_kicks.png"),
+  "Glute Kickback": require("../images/workouts/glute_kickback.png"),
+
+  "Landmine twist": require("../images/workouts/landmine_twist.png"),
+  "Elbow plank": require("../images/workouts/elbow_plank.png"),
+  "Bottoms Up": require("../images/workouts/bottoms_up.png"),
+  "Suspended ab fall-out": require("../images/workouts/suspended_ab.png"),
+  "Dumbbell V-Sit Cross Jab": require("../images/workouts/cross_jab.png"),
+  "Standing cable low-to-high twist": require("../images/workouts/low_to_high.png"),
+  "Dumbbell spell caster": require("../images/workouts/spell_caster.png"),
+  "Decline reverse crunch": require("../images/workouts/decline_rev_cruch.png"),
+  "Spider crawl": require("../images/workouts/spider_crawl.png"),
+  "Cocoons": require("../images/workouts/cocoons.png"),
+
+  "Single-Leg Press": require("../images/workouts/single_leg_press.png"),
+  "Clean from Blocks": require("../images/workouts/clean_from_blocks.png"),
+  "Barbell Full Squat": require("../images/workouts/full_squat.png"),
+  "Tire flip": require("../images/workouts/tire_flips.png"),
+  "Barbell back squat to box": require("../images/workouts/squat_to_box.png"),
+  "Push-press": require("../images/workouts/push_press.png"),
+  "Power snatch-": require("../images/workouts/power_snatch.png"),
+  "Hang Clean": require("../images/workouts/hang_clean.png"),
+  "Reverse Band Box Squat": require("../images/workouts/r_box_squat.png"),
+  "Jumping rope": require("../images/workouts/jump_rope.png"),
+
 }
 
 const WorkoutCards = ({
@@ -93,11 +136,7 @@ const WorkoutCards = ({
             </View>
           </TouchableOpacity>
         )}
-        numColumns={2}
-        columnWrapperStyle={{
-          justifyContent: "space-between",
-          paddingHorizontal: "2.5%", // Adjust horizontal padding for two-column layout
-        }}
+        
         showsVerticalScrollIndicator={false}
       />
 
@@ -129,8 +168,7 @@ const WorkoutCards = ({
               {selectedExercise && (
                 <View style={styles.modalContent}>
                   <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Name:</Text>{" "}
-                    <Text style={styles.apiText}>{selectedExercise.name}</Text>
+                    <Text style={styles.label}>{selectedExercise.name}</Text>
                   </Text>
                   <Text style={styles.textContainer}>
                     <Text style={styles.label}>Type:</Text>{" "}

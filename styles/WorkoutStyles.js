@@ -127,7 +127,7 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 8,
     paddingVertical: 26,
-    width: "45%", // Adjust width for two-column layout
+    width: "100%", // Adjust width for two-column layout
   },
   cardContent: {
     padding: 20,
@@ -176,13 +176,13 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: '700',
   },
   iconContainer: {
-    width: 150,
-    height: 150,
+    width: '90%',
+    height: 250,
     borderRadius: 8,
   },
   imageDetails: {
     width: width,
-    height: 150,
+    height: 240,
   },
 
   //----- WorkoutCard.js (under saved) -----//
