@@ -8,6 +8,10 @@ node_modules/
 dist/
 web-build/
 
+#pre-build folders
+android
+ios
+
 # Native
 *.orig.*
 *.jks

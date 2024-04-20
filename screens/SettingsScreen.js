@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Modal, Alert, Pressable, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/core';
 import { updateUserProfile } from '../services/AuthAPI';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -121,7 +122,7 @@ function SelectProfile() {
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={{ width: 125, alignItems: 'flex-start' }}>
-            <Text style={styles.label}>Height (in):</Text>
+            <Text style={styles.label}>Height (ft):</Text>
           </View>
           <Text style={styles.labelText}>{height}</Text>
         </View>
@@ -133,7 +134,7 @@ function SelectProfile() {
           <Text style={styles.labelText}>{weight}</Text>
         </View>
 
-        <TouchableOpacity style={styles.editButton} onPress={openModal}>
+        <TouchableOpacity style={styles.editButton} onPress={openModal} testID="edit-button">
           <Text style={styles.buttonText}>Edit</Text>
         </TouchableOpacity>
 
@@ -144,45 +145,53 @@ function SelectProfile() {
               <TextInput
                 style={{ ...styles.modalInput, flex: 1, marginRight: 10 }}
                 placeholder={firstName ? firstName : 'John'}
-                placeholderTextColor={'#cdcbca'}
+                placeholderTextColor={'#999897'}
                 onChangeText={(text) => setEditedFirstName(text)}
               />
               <TextInput
                 style={{ ...styles.modalInput, flex: 1 }}
                 placeholder={lastName ? lastName : 'Doe'}
-                placeholderTextColor={'#cdcbca'}
+                placeholderTextColor={'#999897'}
                 onChangeText={(text) => setEditedLastName(text)}
               />
             </View>
             <TextInput
               style={styles.modalInput}
-              placeholder={mobile ? mobile : '(123) 456-7890'}
-              placeholderTextColor={'#cdcbca'}
+              placeholder={mobile ? String(mobile) : '(123) 456-7890'}
+              placeholderTextColor={'#999897'}
               onChangeText={(text) => setEditedMobile(text)}
+              keyboardType={"number-pad"}
             />
+            <Picker
+              selectedValue={editedFitnessGoal}
+              style={styles.modalInput}
+              onValueChange={(itemValue, itemIndex) => setEditedFitnessGoal(itemValue)}
+            >
+              <Picker.Item label="Lose Weight" value="Lose Weight" />
+              <Picker.Item label="Build Muscle" value="Build Muscle" />
+            </Picker>
+            <Picker
+              selectedValue={editedFitnessLevel}
+              style={styles.modalInput}
+              onValueChange={(itemValue, itemIndex) => setEditedFitnessLevel(itemValue)}
+            >
+              <Picker.Item label="Beginner" value="Beginner" />
+              <Picker.Item label="Intermediate" value="Intermediate" />
+              <Picker.Item label="Advanced" value="Advanced" />
+            </Picker>
             <TextInput
               style={styles.modalInput}
-              placeholder={fitnessGoal ? fitnessGoal : 'Fitness Goal'}
-              placeholderTextColor={'#cdcbca'}
-              onChangeText={(text) => setEditedFitnessGoal(text)}
-            />
-            <TextInput
-              style={styles.modalInput}
-              placeholder={fitnessLevel ? fitnessLevel : 'Fitness Level'}
-              placeholderTextColor={'#cdcbca'}
-              onChangeText={(text) => setEditedFitnessLevel(text)}
-            />
-            <TextInput
-              style={styles.modalInput}
-              placeholder={height ? height : 'Height (in)'}
-              placeholderTextColor={'#cdcbca'}
+              placeholder={height ? `${height}` : 'Height (ft)'}
+              placeholderTextColor={'#999897'}
               onChangeText={(text) => setEditedHeight(text)}
+              keyboardType={"number-pad"}
             />
             <TextInput
               style={styles.modalInput}
-              placeholder={weight ? weight : 'Weight (lbs)'}
-              placeholderTextColor={'#cdcbca'}
+              placeholder={weight ? `${weight}` : 'Weight (lbs)'}
+              placeholderTextColor={'#999897'}
               onChangeText={(text) => setEditedWeight(text)}
+              keyboardType={"number-pad"}
             />
             <View style={styles.modalButtonContainer}>
             <TouchableOpacity style={styles.modalSaveButton} onPress={handleSaveChanges} >
@@ -253,7 +262,7 @@ function SelectAccount() {
           <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('TransactionHistory')} >
             <Text style={styles.accountText}>Transaction History</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => navigation.navigate('PaymentMethods')} testID="to-payment-methods">
             <Text style={styles.accountText}>Payment Methods</Text>
           </TouchableOpacity>
         </View>
@@ -363,6 +372,7 @@ const TabBar = ({ activeTab, setActiveTab, styles }) => (
           styles.tab,
           activeTab === tab && styles.activeTab,
         ]}
+        testID={`tab-${tab.toLowerCase()}`}
       >
         <Text
           style={[

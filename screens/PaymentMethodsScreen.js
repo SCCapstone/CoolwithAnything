@@ -65,7 +65,7 @@ const PaymentMethodsScreen = () => {
         contentContainerStyle={{ alignItems: 'center' }}
         ListFooterComponent={
           <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')} style={{ marginVertical: 20 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')}>
+            <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')} testID="add-payment-button">
               <View style={styles.addPaymentContainer}>
               <Text style={styles.addPayment}>
                 Add a payment method
@@ -81,7 +81,7 @@ const PaymentMethodsScreen = () => {
             <Text style={styles.noPaymentText}>
               You have no payment methods.
             </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')}>
+          <TouchableOpacity onPress={() => navigation.navigate('AddPaymentMethods')} testID="add-payment-button">
             <View style={styles.addPaymentContainer}>
               <Text style={styles.addPayment}>
                 Add a payment method

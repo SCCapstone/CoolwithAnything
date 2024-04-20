@@ -138,6 +138,7 @@ const AddPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>Nickname:</Text>
               <TextInput style={styles.input} 
+              testID='input-nickname'
               onChangeText={setNickname} 
               value={nickname} 
               placeholder="My Card"
@@ -149,6 +150,7 @@ const AddPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>Credit Card:</Text>
               <TextInput style={[styles.input, {width: '43%'}]} 
+              testID='input-credit-card'
               onChangeText={handleCreditCardChange} 
               value={creditCard} 
               placeholder="1234567890123456"
@@ -160,6 +162,7 @@ const AddPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>CVC:</Text>
               <TextInput style={[styles.input, {width: '13%'}]} 
+              testID='input-cvc'
               onChangeText={handleCVCChange} 
               value={CVC} 
               placeholder="123"
@@ -172,6 +175,7 @@ const AddPaymentMethodsScreen = () => {
               <View>
                 <Text style={styles.label}>EXP Month:</Text>
                 <TextInput 
+                  testID='input-exp-month'
                   style={[styles.input, {width: '50%'}]}
                   onChangeText={handleMonthChange}
                   value={expMonth}
@@ -185,6 +189,7 @@ const AddPaymentMethodsScreen = () => {
                 <Text style={styles.label}>EXP Year:</Text>
                 <TextInput 
                   style={[styles.input, {width: '75%'}]}
+                  testID='input-exp-year'
                   onChangeText={handleYearChange}
                   value={expYear}
                   placeholder="YYYY"
@@ -198,6 +203,7 @@ const AddPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>Name on card:</Text>
               <TextInput style={styles.input} 
+              testID='input-name'
               onChangeText={setName} 
               value={name} 
               placeholder="John Appleseed"
@@ -209,6 +215,7 @@ const AddPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>ZIP:</Text>
               <TextInput style={[styles.input, {width: '17%'}]} 
+              testID='input-zip'
               onChangeText={handleZipChange} 
               value={ZIP} 
               placeholder="12345"
@@ -225,7 +232,8 @@ const AddPaymentMethodsScreen = () => {
         <View style={styles.saveButtonContainer}>
           <TouchableOpacity 
             onPress={handleSavePaymentMethod}
-            style={styles.saveButton}>
+            style={styles.saveButton}
+            testID='button-save-payment-method'>
             <Text style={styles.saveButtonText}>Save Payment Method</Text>
           </TouchableOpacity>
         </View>

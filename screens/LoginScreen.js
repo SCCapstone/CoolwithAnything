@@ -116,17 +116,18 @@ const LoginScreen = ({ navigation }) => {
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.passwordBox}>
-            <PasswordInput value={password} onChangeText={setPassword} />
+            <PasswordInput value={password} onChangeText={setPassword} testID="login-password-input"/>
           </View>
           <View style={styles.emailBox}>
             <EmailInput
               style={styles.emailBox}
               value={email}
               onChangeText={setEmail}
+              testID="login-username-input"
             />
           </View>
           <View style={styles.buttonBox}>
-            <LoginButton onPress={handleLogin} />
+            <LoginButton onPress={handleLogin} testID="login-submit-button"/>
           </View>
         </View>
         <View style={styles.textContainer}>
