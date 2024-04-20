@@ -19,6 +19,7 @@ import TaskDetailScreen from "../screens/TaskDetailScreen";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ActivityIndicator } from "react-native";
 import LoadingScreen from "../screens/LoadingScreen";
+import AdminPanel from "../screens/AdminPanel";
 
 const Stack = createNativeStackNavigator();
 
@@ -155,6 +156,11 @@ function MainNavigator({ isLoggedIn }) {
           name="EditPaymentMethods"
           component={EditPaymentMethodsScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name = "AdminPanel"
+          component = {AdminPanel}
+          options = {{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

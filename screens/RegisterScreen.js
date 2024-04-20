@@ -77,7 +77,6 @@ const RegisterScreen = ({ navigation }) => {
         });
       }
     } catch (error) {
-      console.error(error);
       Alert.alert(
         "Signup Failed",
         error.message || "An error occurred during signup"

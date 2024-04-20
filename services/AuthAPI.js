@@ -159,29 +159,38 @@ export const registerUser = async (
     await storeData("userToken", userCredential.user.refreshToken);
     return user;
   } catch (error) {
-    console.error("Something wrong", error);
-    throw error;
+    if (error.code === "auth/email-already-in-use") {
+      throw new Error("The email address is already in use by another account.");
+    }
   }
 };
 
 export const updateBiometrics = async (
   userId,
-  height,
+  feet,
+  inches,
   weight,
   fitnessLevel,
   fitnessGoal
 ) => {
   try {
+    // Convert feet and inches to total inches
+    const numericHeight = parseInt(feet) * 12 + parseInt(inches);  // Ensure height is converted to number
+    const numericWeight = parseFloat(weight);  // Ensure weight is converted to number
+
+    console.log(`Height: ${numericHeight}, Type: ${typeof numericHeight}`);
+    console.log(`Weight: ${numericWeight}, Type: ${typeof numericWeight}`);
+
     const userDocRef = doc(db, "users", userId);
     await updateDoc(userDocRef, {
-      height,
-      weight,
+      height: numericHeight,
+      weight: numericWeight,
       fitnessLevel,
       fitnessGoal,
     });
     await storeData("userBiometrics", {
-      height,
-      weight,
+      height: numericHeight,
+      weight: numericWeight,
       fitnessLevel,
       fitnessGoal,
     });
@@ -191,6 +200,7 @@ export const updateBiometrics = async (
     throw error;
   }
 };
+
 
 export const resetPassword = async (email) => {
   try {
@@ -538,6 +548,37 @@ export const deletePaymentMethodForUser = async (userId, paymentMethodId) => {
     console.error("Error deleting payment method document: ", error);
     throw error;
   }
+};
+
+// Clean up user data by converting height and weight to numbers
+export const cleanUserData = async () => {
+  const usersRef = collection(db, "users");
+  const snapshot = await getDocs(usersRef);
+
+  snapshot.forEach(async (doc) => {
+    const userData = doc.data();
+
+    let { height, weight } = userData;
+
+    // Convert height and weight only if they are stored as strings
+    const isHeightString = typeof height === 'string';
+    const isWeightString = typeof weight === 'string';
+
+    if (isHeightString || isWeightString) {
+      // Convert string to numbers
+      height = isHeightString ? parseFloat(height) : height;
+      weight = isWeightString ? parseFloat(weight) : weight;
+
+      // Update the document with corrected types
+      await updateDoc(doc.ref, {
+        ...userData,
+        height: height,
+        weight: weight
+      });
+
+      console.log(`Updated user ${doc.id} with height: ${height} and weight: ${weight}`);
+    }
+  });
 };
 
 // Export the AsyncStorage getData function if needed elsewhere

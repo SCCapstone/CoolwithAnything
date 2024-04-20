@@ -42,8 +42,8 @@ function SelectProfile() {
         setFitnessLevel(userData.fitnessLevel || '');
         setFirstName(userData.firstName || '');
         setLastName(userData.lastName || '');
-        setHeight(userData.height || '');
-        setWeight(userData.weight || '');
+        setHeight(userData.height.toString() || '');
+        setWeight(userData.weight.toString() || '');
       } else {
         console.log("No user data found in Firestore");
       }
@@ -60,8 +60,8 @@ function SelectProfile() {
         phone_number: editedMobile || mobile,
         fitnessGoal: editedFitnessGoal || fitnessGoal,
         fitnessLevel: editedFitnessLevel || fitnessLevel,
-        height: editedHeight || height,
-        weight: editedWeight || weight,
+        height: editedHeight ? parseInt(editedHeight, 10) : height,
+        weight: editedWeight ? parseInt(editedWeight, 10) : weight,
       };
 
       await updateUserProfile(userId, updatedData);
@@ -72,8 +72,8 @@ function SelectProfile() {
       setMobile(updatedData.phone_number);
       setFitnessGoal(updatedData.fitnessGoal);
       setFitnessLevel(updatedData.fitnessLevel);
-      setHeight(updatedData.height);
-      setWeight(updatedData.weight);
+      setHeight(updatedData.height.toString());
+      setWeight(updatedData.weight.toString());
 
       closeModal();
     } catch (error) {

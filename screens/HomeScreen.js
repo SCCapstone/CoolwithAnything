@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Pressable, BackHandler, ScrollView } from "react-native";
+import { View, Text, Pressable, BackHandler, ScrollView, Button } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -81,8 +81,6 @@ const HomeScreen = ({ route }) => {
       fetchAndCountTasksByAttribute();
     }
   }, [userID]);
-
-
 
 
   useEffect(() => {
@@ -212,6 +210,10 @@ const HomeScreen = ({ route }) => {
           birthday={userData.birthday}
           userName={userData.name}
         />
+        {/* Admin Panel Button */}
+        {/* <View style={styles.indicatorContainer}>
+        <Button title="Clean User Data" onPress={() => navigation.navigate("AdminPanel")} />
+        </View> */}
       </ScrollView>
     </View>
   );
