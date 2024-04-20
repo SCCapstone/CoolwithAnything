@@ -126,8 +126,12 @@ export const loginUser = async (email, password) => {
     await storeData("userToken", userCredential.user.refreshToken);
     return userCredential.user;
   } catch (error) {
-    console.error(error);
-    throw error;
+    if (error.code === "auth/invalid-credential") {
+      throw new Error("Either the email or password is incorrect. Please try again.");
+    }
+    if (error.code === "auth/invalid-email") {
+      throw new Error("Invalid email format. Please try again.");
+    }
   }
 };
 

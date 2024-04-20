@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from "react-native";
-import BirthdayCelebration from "../components/BDCelebration";
 const { width, height } = Dimensions.get("window");
 
 const getStyles = (theme) =>
@@ -124,8 +123,15 @@ const getStyles = (theme) =>
     },
     birthdayDay: {
       borderColor: "red",
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 20,
+    },
+    BirthdayIndicator: {
+      width: 6,
+      height: 6,
+      borderRadius: 50,
+      color: "red",
+      marginHorizontal: 1,
     },
     dayText: {
       fontSize: 16,
@@ -150,7 +156,9 @@ const getStyles = (theme) =>
     },
     typeIndicatorText:{
       color: theme === "dark" ? "white" : "black",
+      alignSelf: "center",
     },
+    // Little dot in the calendar
     taskIndicator: {
       width: 6,
       height: 6,

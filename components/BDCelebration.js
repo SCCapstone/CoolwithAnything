@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import { format, parse } from 'date-fns'; // Import parse along with format
 import getStyles from '../styles/HomeScreenStyles';
 import { useTheme } from '../services/ThemeContext';
 import CakeIcon from '../assets/cake-icon.png';
