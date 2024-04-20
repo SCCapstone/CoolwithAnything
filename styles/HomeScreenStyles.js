@@ -132,17 +132,22 @@ const getStyles = (theme) =>
     },
     indicatorContainer: {
       flexDirection: "row",
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       marginTop: 4,
+    },
+    typeIndicatorCount: {
+      color: theme === "dark" ? "white" : "black",
+      alignSelf: "center",
+      paddingTop: "30%",
     },
     typeIndicatorText:{
       color: theme === "dark" ? "white" : "black",
     },
     taskIndicator: {
-      width: 6,
-      height: 6,
-      borderRadius: 3,
+      width: 50,
+      height: 50,
+      borderRadius: 50,
       marginHorizontal: 1, 
     },
     calendarContainer: {
@@ -211,11 +216,13 @@ const getStyles = (theme) =>
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 10,
+      textAlign: 'center',
     },
     icon: {
       width: 50,
       height: 50,
       marginBottom: 10,
+      alignSelf: 'center',
     },
     message: {
       fontSize: 16,

@@ -110,7 +110,7 @@ const BiometricScreen = ({ navigation, route }) => {
             ]}
           />
           <Text style={styles.title}>Welcome</Text>
-          <Text style={styles.subtittle}>Sign up to continue</Text>
+          <Text style={styles.subtittle}>Let us know more about you</Text>
           <Text style={styles.subtittle2}>Biometric</Text>
         </View>
         <ScrollView contentContainerStyle={styles.scrollView}>

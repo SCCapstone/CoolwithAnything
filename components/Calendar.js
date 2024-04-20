@@ -33,7 +33,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-const Calendar = ({ userID, navigation, birthday }) => {
+const Calendar = ({ userID, navigation, birthday, userName }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
@@ -288,10 +288,10 @@ const Calendar = ({ userID, navigation, birthday }) => {
   return (
     <View style={styles.calendarContainer}>
       {/* Fixed Task Type Indicators View */}
-      <View style={styles.typeIndicatorsContainer}>
+      <View style={styles.indicatorContainer}>
         {Object.entries(taskTypeColors).map(([type, color]) => (
           <View key={type} style={styles.typeIndicatorWrapper}>
-            <View style={[styles.typeIndicator, { backgroundColor: color }]}>
+            <View style={[styles.taskIndicator, { backgroundColor: color }]}>
               <Text style={styles.typeIndicatorCount}>{taskCounts[type]}</Text>
             </View>
             <Text style={styles.typeIndicatorText}>{type}</Text>
@@ -337,6 +337,7 @@ const Calendar = ({ userID, navigation, birthday }) => {
         selectedDate={selectedDate}
         navigation={navigation}
         isBirthday={isBirthday(selectedDate)}
+        userName={userName}
       />
 
       {/* Task Details and Actions Modal */}

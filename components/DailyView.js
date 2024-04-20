@@ -11,10 +11,11 @@ import { format, parseISO, startOfDay, endOfDay } from "date-fns";
 import { deleteTask, fetchTasksForUser } from "../services/AuthAPI";
 import eventEmitter from "./EventEmitter";
 import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useTheme } from '../services/ThemeContext';
+import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/DailyViewStyles";
+import BirthdayCelebration from "./BDCelebration";
 
-const DailyView = ({ userID, selectedDate, navigation, isBirthday }) => {
+const DailyView = ({ userID, selectedDate, navigation, isBirthday, userName }) => {
   const [tasks, setTasks] = useState([]);
   const { theme } = useTheme();
   const styles = getStyles(theme);
@@ -86,9 +87,13 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday }) => {
       </Text>
       {isBirthday && (
         <Text style={{ fontSize: 30, alignSelf: "center" }}>
-          🎉 Happy Birthday! 🎉
+          🎉 Your Birthday! 🎉
         </Text>
       )}
+      <BirthdayCelebration
+        userName={userName}
+        isBirthday={isBirthday}
+      />
       <FlatList
         data={tasks}
         keyExtractor={(item) => item.id}
@@ -99,7 +104,7 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday }) => {
             </TouchableOpacity>
             {/* {item.showOptions && (
               <> */}
-                {/* <TouchableOpacity
+            {/* <TouchableOpacity
                   onPress={() => toggleCheckmark(item.id)}
                   style={[styles.checkmarkButton, { marginLeft: "58%" }]}
                 >
@@ -117,13 +122,13 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday }) => {
                     />
                   )}
                 </TouchableOpacity> */}
-                <TouchableOpacity
-                  style={styles.deleteButton}
-                  onPress={() => onTaskDelete(item.id)}
-                >
-                  <Text style={styles.deleteButtonText}>Delete</Text>
-                </TouchableOpacity>
-              {/* </>
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => onTaskDelete(item.id)}
+            >
+              <Text style={styles.deleteButtonText}>Delete</Text>
+            </TouchableOpacity>
+            {/* </>
             )} */}
             {/* <TouchableOpacity onPress={() => toggleDisplayOptions(item.id)} style={{}}>
               <MaterialCommunityIcons

@@ -5,7 +5,7 @@ import styles from '../styles/RegisterButtonStyle';
 const SubmitButton = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>Add Bio</Text>
+      <Text style={styles.buttonText}>Submit</Text>
     </TouchableOpacity>
   );
 };

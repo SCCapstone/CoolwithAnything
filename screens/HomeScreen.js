@@ -125,7 +125,7 @@ const HomeScreen = ({ route }) => {
         const user = await getUserData(userID);
         if (user) {
           setUserData({
-            name: user.name,
+            name: user.firstName,
             birthday: user.date_of_birth,
           });
         }
@@ -155,7 +155,6 @@ const HomeScreen = ({ route }) => {
       fetchData();
     }
   }, [userID]);
-  console.log("Birthday (HS): ", userData.birthday);
 
   // Handle the hardware back button on Android devices
   useEffect(() => {
@@ -211,10 +210,7 @@ const HomeScreen = ({ route }) => {
           userID={userID}
           navigation={navigation}
           birthday={userData.birthday}
-        />
-        <BirthdayCelebration
           userName={userData.name}
-          birthday={userData.birthday}
         />
       </ScrollView>
     </View>
