@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import BirthdayCelebration from "../components/BDCelebration";
 const { width, height } = Dimensions.get("window");
 
 const getStyles = (theme) =>
@@ -134,19 +135,25 @@ const getStyles = (theme) =>
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      marginTop: 4,
+    },
+    typeIndicator: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      width: 50,
+      height: 50,
+      borderRadius: 50,
     },
     typeIndicatorCount: {
       color: theme === "dark" ? "white" : "black",
       alignSelf: "center",
-      paddingTop: "30%",
     },
     typeIndicatorText:{
       color: theme === "dark" ? "white" : "black",
     },
     taskIndicator: {
-      width: 50,
-      height: 50,
+      width: 6,
+      height: 6,
       borderRadius: 50,
       marginHorizontal: 1, 
     },
@@ -217,6 +224,7 @@ const getStyles = (theme) =>
       fontWeight: 'bold',
       marginBottom: 10,
       textAlign: 'center',
+      color: theme === "dark" ? "white" : "black",
     },
     icon: {
       width: 50,
@@ -228,6 +236,7 @@ const getStyles = (theme) =>
       fontSize: 16,
       textAlign: 'center',
       marginTop: 10,
+      color: theme === "dark" ? "white" : "black",
     },
 
     

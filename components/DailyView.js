@@ -86,7 +86,7 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday, userName }) =
         Daily Tasks for {format(selectedDate, "PPP")}
       </Text>
       {isBirthday && (
-        <Text style={{ fontSize: 30, alignSelf: "center" }}>
+        <Text style={styles.BirthdayCelebration}>
           🎉 Your Birthday! 🎉
         </Text>
       )}

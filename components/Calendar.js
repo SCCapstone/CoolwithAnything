@@ -291,7 +291,7 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
       <View style={styles.indicatorContainer}>
         {Object.entries(taskTypeColors).map(([type, color]) => (
           <View key={type} style={styles.typeIndicatorWrapper}>
-            <View style={[styles.taskIndicator, { backgroundColor: color }]}>
+            <View style={[styles.typeIndicator, { backgroundColor: color }]}>
               <Text style={styles.typeIndicatorCount}>{taskCounts[type]}</Text>
             </View>
             <Text style={styles.typeIndicatorText}>{type}</Text>
