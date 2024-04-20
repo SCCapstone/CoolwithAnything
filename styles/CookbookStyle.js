@@ -147,7 +147,7 @@ const getStyles = (theme) => StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 8,
     paddingVertical: 26,
-    width: "45%", // Adjust width for two-column layout
+    width: "47%", // Adjust width for two-column layout
   },
   cardContent: {
     padding: 20,
@@ -162,7 +162,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: theme === 'dark' ? '#262626' : "white",
-    height: height,
+    height: height * 1.5,
   },
   cardModalHeader: {
     fontSize: 20,

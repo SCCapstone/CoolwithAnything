@@ -176,7 +176,13 @@ const getStyles = (theme) => StyleSheet.create({
     fontWeight: '700',
   },
   iconContainer: {
-    alignItems: "center",
+    width: 150,
+    height: 150,
+    borderRadius: 8,
+  },
+  imageDetails: {
+    width: width,
+    height: 150,
   },
 
   //----- WorkoutCard.js (under saved) -----//

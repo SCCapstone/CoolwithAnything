@@ -8,15 +8,18 @@ import {
   Pressable,
   Alert,
   FlatList,
+  Image,
 } from "react-native";
 import getStyles from "../styles/WorkoutStyles.js";
-import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import { useTheme } from "../services/ThemeContext.js";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useWorkouts } from "../services/WorkoutsContext";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const imageMapping = {
+  "Incline Hammer Curls": require("../images/workout/incline_hammer.png"),
+}
 
 const WorkoutCards = ({
   apiData,
@@ -81,10 +84,9 @@ const WorkoutCards = ({
             style={styles.cardContainer}
             onPress={() => handleCardPress(item)}
           >
-            <MaterialCommunityIcons
-              name={"dumbbell"}
-              size={150}
-              color={"#5da8af"}
+            <Image
+              source={imageMapping[item.name]}
+              style={styles.iconContainer}
             />
             <View style={styles.cardContent}>
               <Text style={styles.modal}>{item.name}</Text>
@@ -118,10 +120,9 @@ const WorkoutCards = ({
           <ScrollView>
             <View style={styles.modalContainer}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons
-                  name={"dumbbell"}
-                  size={150}
-                  color={"#5da8af"}
+              <Image
+                  source={imageMapping[selectedExercise.name]}
+                  style={styles.imageDetails}
                 />
               </View>
               <Text style={styles.cardModalHeader}>Exercise Details</Text>

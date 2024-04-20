@@ -60,7 +60,6 @@ const imageMapping = {
   "Low-Fat Healthy Chili in Crockpot": require("../images/cookbook/chili.png"),
   "Green Chile Stew-Healthy Mexican Cookbook": require("../images/cookbook/mexican_stew.png"),
   "Healthy Alfredo-Style Noodles": require("../images/cookbook/alfredo.png"),
-
 };
 
 const MealCards = ({
@@ -162,8 +161,7 @@ const MealCards = ({
               {selectedRecipe && (
                 <View style={styles.modalContent}>
                   <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Name:</Text>{" "}
-                    <Text style={styles.apiText}>{selectedRecipe.title}</Text>
+                    <Text style={styles.label}>{selectedRecipe.title}</Text>
                   </Text>
                   <Text style={styles.textContainer}>
                     <Text style={styles.label}>Ingredients:</Text>{" "}
@@ -183,17 +181,17 @@ const MealCards = ({
                       {selectedRecipe.instructions}
                     </Text>
                   </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      console.log("meal added");
+                      handleAddMeal();
+                    }}
+                  >
+                    <Text style={styles.addButton}>+ Add Recipe to Saved</Text>
+                  </TouchableOpacity>
                 </View>
               )}
               {/* Add button */}
-              <TouchableOpacity
-                onPress={() => {
-                  console.log("meal added");
-                  handleAddMeal();
-                }}
-              >
-                <Text style={styles.addButton}>+ Add Recipe to Saved</Text>
-              </TouchableOpacity>
             </View>
           </ScrollView>
         </SafeAreaView>
