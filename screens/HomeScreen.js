@@ -18,6 +18,7 @@ import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/HomeScreenStyles";
 import eventEmitter from "../components/EventEmitter";
 import { set } from "date-fns";
+import { LogBox } from 'react-native';
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -33,6 +34,7 @@ const HomeScreen = ({ route }) => {
   const [work, setWork] = useState(0);  
   const [gym, setGym] = useState(0);  
   const [personal, setPersonal] = useState(0);
+  LogBox.ignoreAllLogs();
 
   // Function to fetch tasks and calculate progress
   const fetchAndCalculateTasks = async () => {
@@ -173,7 +175,7 @@ const HomeScreen = ({ route }) => {
     return () => backHandler.remove();
   }, []);
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }} testID='home-screen'>
       <View style={styles.homeTextContainer}>
         <View style={styles.headerContainer}>
           <View style={{ flex: 1 }}>{/* Empty View as Spacer */}</View>
@@ -181,7 +183,7 @@ const HomeScreen = ({ route }) => {
             <Text style={styles.homeText}>Today</Text>
           </View>
           <View style={{ flex: 1, alignItems: "flex-end" }}>
-            <AccountButton navigation={navigation} testID="settings-button"/>
+            <AccountButton navigation={navigation} testID='settings-button'/>
           </View>
         </View>
         <View style={{ width: 24 }} />

@@ -148,7 +148,7 @@ const AddPaymentMethodsScreen = () => {
             </View> 
             
             <View>
-              <Text style={styles.label}>Credit Card:</Text>
+              <Text style={styles.label} testID='safe-area'>Credit Card:</Text>
               <TextInput style={[styles.input, {width: '43%'}]} 
               testID='input-credit-card'
               onChangeText={handleCreditCardChange} 

@@ -1,4 +1,4 @@
-describe('Login Screen Tests', () => {
+describe('Register Test', () => {
     beforeEach(async () => {
         await device.launchApp({newInstance: true});
     });
