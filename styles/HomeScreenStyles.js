@@ -123,8 +123,15 @@ const getStyles = (theme) =>
     },
     birthdayDay: {
       borderColor: "red",
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 20,
+    },
+    BirthdayIndicator: {
+      width: 6,
+      height: 6,
+      borderRadius: 50,
+      color: "red",
+      marginHorizontal: 1,
     },
     dayText: {
       fontSize: 16,
@@ -132,17 +139,30 @@ const getStyles = (theme) =>
     },
     indicatorContainer: {
       flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    typeIndicator: {
+      flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      marginTop: 4,
+      width: 50,
+      height: 50,
+      borderRadius: 50,
+    },
+    typeIndicatorCount: {
+      color: theme === "dark" ? "white" : "black",
+      alignSelf: "center",
     },
     typeIndicatorText:{
       color: theme === "dark" ? "white" : "black",
+      alignSelf: "center",
     },
+    // Little dot in the calendar
     taskIndicator: {
       width: 6,
       height: 6,
-      borderRadius: 3,
+      borderRadius: 50,
       marginHorizontal: 1, 
     },
     calendarContainer: {
@@ -211,16 +231,20 @@ const getStyles = (theme) =>
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 10,
+      textAlign: 'center',
+      color: theme === "dark" ? "white" : "black",
     },
     icon: {
       width: 50,
       height: 50,
       marginBottom: 10,
+      alignSelf: 'center',
     },
     message: {
       fontSize: 16,
       textAlign: 'center',
       marginTop: 10,
+      color: theme === "dark" ? "white" : "black",
     },
 
     

@@ -21,55 +21,53 @@ const fitnessLevels = ["Beginner", "Intermediate", "Advanced"];
 const fitnessGoals = ["Lose Weight", "Build Muscle"];
 
 // Get screen dimensions
-const { width, height } = Dimensions.get("window");
+const { width, height: screenHeight } = Dimensions.get("window");
 
 const bubbleSize = width * 0.7;
-const bubblePosition = { top: -height * 0.175, left: width * 0.1 };
+const bubblePosition = { top: -screenHeight * 0.175, left: width * 0.1 };
 
 const BiometricScreen = ({ navigation, route }) => {
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
+  const [feet, setFeet] = useState(0);
+  const [inches, setInches] = useState(0);
+  const [weight, setWeight] = useState(0);
   const [fitnessLevel, setFitnessLevel] = useState(null);
   const [fitnessGoal, setFitnessGoal] = useState(null);
-
-  // Function to handle fitness level selection
-  const handleFitnessLevelSelect = (level) => {
-    setFitnessLevel(level);
-  };
-
-  // Function to handle fitness goal selection
-  const handleFitnessGoalSelect = (goal) => {
-    setFitnessGoal(goal);
-  };
 
   const { userId } = route.params;
 
   const handleBio = async () => {
+    if (!feet || !inches || !weight || !fitnessLevel || !fitnessGoal) {
+      Alert.alert(
+        "Missing Fields",
+        "Please fill in all fields or select Skip Bio",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+
     try {
       const response = await updateBiometrics(
         userId,
-        height,
+        feet,
+        inches,
         weight,
         fitnessLevel,
         fitnessGoal
       );
 
       if (response.status === "success") {
-        // Update successful
         Alert.alert(
           "Update Successful",
           "Your biometrics have been updated successfully."
         );
         navigation.navigate("Confirmation");
       } else {
-        // Handle any other cases
         Alert.alert(
           "Update Unsuccessful",
           "Could not update biometrics. Please try again."
         );
       }
     } catch (error) {
-      // Handle errors from Firebase
       console.error(error);
       Alert.alert(
         "Update Failed",
@@ -78,26 +76,16 @@ const BiometricScreen = ({ navigation, route }) => {
     }
   };
 
-    // Handle the hardware back button on Android devices
-    useEffect(() => {
-      const backAction = () => {
-        return true;
-      };
-  
-      // Add the back press event listener
-      const backHandler = BackHandler.addEventListener(
-        "hardwareBackPress",
-        backAction
-      );
-  
-      // Remove the event listener when the component is unmounted or no longer focused
-      return () => backHandler.remove();
-    }, []);
+  useEffect(() => {
+    const backAction = () => true;
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <View style={styles.topBubble}>
+        <View style={{ paddingBottom: 20 }}>
           <View
             style={[
               styles.bubble,
@@ -110,34 +98,44 @@ const BiometricScreen = ({ navigation, route }) => {
             ]}
           />
           <Text style={styles.title}>Welcome</Text>
-          <Text style={styles.subtittle}>Sign up to continue</Text>
+          <Text style={styles.subtittle}>Let us know more about you</Text>
           <Text style={styles.subtittle2}>Biometric</Text>
         </View>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <View style={styles.inputFields}>
+          <View style={styles.heightAndWeightContainer}>
+            <Text style={styles.inputFieldsCaption}>Height:</Text>
             <NumberInput
-              value={height}
+              value={feet}
+              style={styles.heightInput}
               keyboardType="numeric"
-              onChangeText={setHeight}
-              placeholder="Height (ft)"
+              onChangeText={setFeet}
+              placeholder="feet (ft)"
+            />
+            <NumberInput
+              value={inches}
+              style={styles.heightInput}
+              keyboardType="numeric"
+              onChangeText={setInches}
+              placeholder="inch (in)"
             />
           </View>
-          <View style={styles.inputFields}>
+          <View style={styles.heightAndWeightContainer}>
+            <Text style={styles.inputFieldsCaption}>Weight:</Text>
             <NumberInput
               value={weight}
               keyboardType="numeric"
+              style={styles.weightInput}
               onChangeText={setWeight}
-              placeholder="Weight (lbs)"
+              placeholder="pounds (lbs)"
             />
           </View>
           <Text style={styles.inputFieldsCaption}>Fitness Level</Text>
           {fitnessLevels.map((level) => (
             <View key={level} style={styles.inputFields}>
               <SelectionButton
-                key={level}
                 title={level}
                 selected={fitnessLevel === level}
-                onPress={() => handleFitnessLevelSelect(level)}
+                onPress={() => setFitnessLevel(level)}
               />
             </View>
           ))}
@@ -145,10 +143,9 @@ const BiometricScreen = ({ navigation, route }) => {
           {fitnessGoals.map((goal) => (
             <View key={goal} style={styles.inputFields}>
               <SelectionButton
-                key={goal}
                 title={goal}
                 selected={fitnessGoal === goal}
-                onPress={() => handleFitnessGoalSelect(goal)}
+                onPress={() => setFitnessGoal(goal)}
               />
             </View>
           ))}
@@ -156,9 +153,7 @@ const BiometricScreen = ({ navigation, route }) => {
             <SubmitButton title="Submit" onPress={handleBio} />
           </View>
           <View style={{ padding: 10 }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Confirmation")}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Confirmation")}>
               <Text style={styles.buttonText}>Skip Bio</Text>
             </TouchableOpacity>
           </View>
