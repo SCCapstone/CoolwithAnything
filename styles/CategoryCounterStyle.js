@@ -1,21 +1,25 @@
-import { StyleSheet } from "react-native";
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    margin: 5,
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  circleContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 10,
   },
   counter: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
   },
   countText: {
-    color: "white",
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  label: {
-    marginTop: 5,
+  categoryLabel: {
+    fontSize: 14,
   },
 });
-export default styles;

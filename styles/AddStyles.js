@@ -59,6 +59,12 @@ const getStyles = (theme) => StyleSheet.create({
       marginTop: 30, 
       color: 'white',
     },
+    switchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: 10,
+    },
     priorityText: {
       color: theme === "dark" ? "white" : "black",
       fontSize: 16,

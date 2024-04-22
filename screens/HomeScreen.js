@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { View, Text, Pressable, BackHandler, ScrollView, Button } from "react-native";
 import ProgressBar from "../components/ProgressBar";
-import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
 import Calendar from "../components/Calendar";
 import BirthdayCelebration from "../components/BDCelebration";
@@ -18,6 +17,8 @@ import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/HomeScreenStyles";
 import eventEmitter from "../components/EventEmitter";
 import { set } from "date-fns";
+import ActiveTasks from '../components/ActiveTasks';
+
 import { LogBox } from 'react-native';  // Hide warnings
 
 const HomeScreen = ({ route }) => {
@@ -186,37 +187,17 @@ const HomeScreen = ({ route }) => {
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
-        <View style={styles.topContainer}>
-          <View style={styles.indicatorContainer}>
-            <Text style={styles.title}>Your Progress</Text>
-          </View>
-        </View>
-        <View style={styles.container}>
-          <ProgressBar
-            completedTasks={completedTasks}
-            totalTasks={totalTasks}
-          />
-          {/* Render other components */}
-        </View>
-        {/* <Text style={styles.title}>Total Tasks</Text> */}
-        <View style={styles.categoryContainer}>
-          <CategoryCounter count={school} label="School" color="#57BCBE" />
-          <CategoryCounter count={personal} label="Personal" color="#4BA4A6" />
-          <CategoryCounter count={work} label="Work" color="#408D8E" />
-          <CategoryCounter count={gym} label="Gym" color="#347576" />
-        </View>
-        <Text style={styles.title}>Active Tasks</Text>
-        <Calendar
-          userID={userID}
-          navigation={navigation}
-          birthday={userData.birthday}
-          userName={userData.name}
-        />
-        {/* Admin Panel Button */}
-        {/* <View style={styles.indicatorContainer}>
-        <Button title="Clean User Data" onPress={() => navigation.navigate("AdminPanel")} />
-        </View> */}
-      </ScrollView>
+                <View style={styles.topContainer}>
+                    <View style={styles.indicatorContainer}>
+                        <Text style={styles.title}>Your Progress</Text>
+                    </View>
+                </View>
+                <ProgressBar completedTasks={completedTasks} totalTasks={totalTasks} />
+                <Text style={styles.title}>Active Tasks</Text>
+                <ActiveTasks userID={userID} />
+                <Calendar userID={userID} navigation={navigation} birthday={userData.birthday} />
+                <BirthdayCelebration userName={userData.name} birthday={userData.birthday} />
+            </ScrollView>
     </View>
   );
 };

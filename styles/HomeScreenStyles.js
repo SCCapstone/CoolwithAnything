@@ -34,7 +34,8 @@ const getStyles = (theme) =>
       fontWeight: "700",
       fontSize: 24,
       paddingLeft: 20,
-      marginTop: 20,
+      marginTop: 10, 
+      marginBottom: 10,
     },
 
     //-----DateTracker.js-----//
@@ -88,24 +89,29 @@ const getStyles = (theme) =>
       flexDirection: "row",
       justifyContent: "space-around",
       padding: 10,
+      flexWrap: 'wrap',
+      marginTop: 0,
     },
     circleContainer: {
-      alignItems: "center",
-      margin: 5,
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: 10,
     },
     counter: {
       width: 50,
       height: 50,
       borderRadius: 25,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 5,
     },
     countText: {
-      color: "white",
+      color: 'white',
+      fontSize: 16,
+      fontWeight: 'bold',
     },
     categoryLabel: {
-      paddingTop: 10,
-      color: theme === "dark" ? "white" : "black",
+      fontSize: 14,
     },
 
     //-----Calendar.js-----//

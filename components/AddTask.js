@@ -1,11 +1,9 @@
-// CreateTaskScreen.js
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ScrollView, Alert, Pressable, Text, View, TextInput } from "react-native";
 import Header from "./Header";
 import DateTimePicker from "./DateTimePicker";
 import TypeSelector from "./TypeSelector";
-import CreateButton from "./CreateButton";
+import Button from "./CreateButton";
 import { saveTaskForUser } from "../services/AuthAPI";
 import eventEmitter from "./EventEmitter";
 import { Picker } from "@react-native-picker/picker";
@@ -25,15 +23,11 @@ const CreateTaskScreen = ({ route }) => {
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
-  const handleclose = () => {
-    setTaskName("");
-    setLocation("");
-    setComment("");
-    setPriority("medium");
-    navigation.navigate("Today");
-  };
   const handleCreateTask = async () => {
-    const user = userID;
+    if (!taskName.trim() || !location.trim() || !comment.trim() || !date) {
+      Alert.alert("Validation Error", "Please ensure all fields are filled.");
+      return;
+    }
 
     const taskData = {
       name: taskName,
@@ -42,84 +36,60 @@ const CreateTaskScreen = ({ route }) => {
       type: taskType,
       comment: comment,
       completed: false,
-      priority: priority, // default priority
+      priority: priority,
     };
 
     try {
-      await saveTaskForUser(user, taskData);
-      Alert.alert("Task Created", "Your task has been successfully created!");
-      // Reset task creation form or navigate the user away
+      await saveTaskForUser(userID, taskData);
+      Alert.alert("Success", "Task created successfully!");
+      eventEmitter.emit("taskCreated");
+      navigation.goBack();
     } catch (error) {
-      Alert.alert(
-        "Error",
-        "There was an error creating your task. Please try again."
-      );
-      console.error(error);
+      Alert.alert("Error", "There was an error creating your task. Please try again.");
+      console.error("Error creating task:", error);
     }
-    eventEmitter.emit("taskCreated");
-    setTaskName("");
-    setLocation("");
-    setComment("");
-    setPriority("medium");
-    navigation.navigate("Today");
   };
+
   return (
-    <View style={styles.screen} testID="add-task-test">
-      <View style={styles.createTextContainer}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </Pressable>
-        <Text style={styles.createText} testID="add-task-safe">Create Task</Text>
-        <View style={{ width: 24 }} />
-      </View>
-      <ScrollView style={styles.container}>
-        <Header onClose={() => handleclose()} />
-        <TextInput
-          testID="task-name"
-          style={styles.input}
-          value={taskName}
-          placeholder="Name"
-          placeholderTextColor="grey"
-          onChangeText={setTaskName}
-        />
-        <DateTimePicker onConfirm={setDate} />
-        <TextInput
-          testID="task-location"
-          style={styles.input}
-          value={location}
-          placeholder="Location"
-          placeholderTextColor="grey"
-          onChangeText={setLocation}
-        />
-        <TypeSelector
-          selectedType={taskType}
-          onSelect={(type) => setTaskType(type)}
-          testID="task-type"
-        />
-        <TextInput
-          testID="task-notes"
-          style={[styles.input, styles.tallInput]}
-          value={comment}
-          placeholder="Add notes..."
-          placeholderTextColor="grey"
-          multiline
-          onChangeText={setComment}
-        />
-        <Text style={styles.priorityText}>Priority</Text>
-        <View style={styles.priorityPicker}>
-          <Picker
-            selectedValue={priority}
-            onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
-            style={{ height: 50, width: 150 }}
-          >
-            <Picker.Item label="Low" value="low" />
-            <Picker.Item label="Medium" value="medium" />
-            <Picker.Item label="High" value="high" />
-          </Picker>
-        </View>
-        <CreateButton onPress={handleCreateTask} label={"Create Task"} testID="submit-task"/>
-      </ScrollView>
-    </View>
+    <ScrollView style={styles.screen}>
+      <Header onClose={() => navigation.goBack()} />
+      <TextInput
+        style={styles.input}
+        value={taskName}
+        placeholder="Name"
+        onChangeText={setTaskName}
+      />
+      <DateTimePicker initialDate={date} onConfirm={setDate} />
+      <TextInput
+        style={styles.input}
+        value={location}
+        placeholder="Location"
+        onChangeText={setLocation}
+      />
+      <TypeSelector selectedType={taskType} onSelect={setTaskType} />
+      <TextInput
+        style={[styles.input, styles.tallInput]}
+        value={comment}
+        placeholder="Comments"
+        multiline
+        onChangeText={setComment}
+      />
+      <Text style={styles.priorityText}>Priority:</Text>
+      <Picker
+        selectedValue={priority}
+        onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+        style={styles.priorityPicker}
+      >
+        <Picker.Item label="Low" value="low" />
+        <Picker.Item label="Medium" value="medium" />
+        <Picker.Item label="High" value="high" />
+      </Picker>
+      <CreateButton
+        onPress={handleCreateTask}
+        label="Create Task"
+        disabled={!taskName.trim()}
+      />
+    </ScrollView>
   );
 };
 

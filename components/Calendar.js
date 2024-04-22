@@ -56,12 +56,8 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
       try {
         const start = startOfMonth(currentMonth);
         const end = endOfMonth(currentMonth);
-
-        // console logs here to debug the values
-        console.log("Current Month:", currentMonth);
-        console.log("Start Date:", start);
-        console.log("End Date:", end);
-        console.log("Birthday (calendar):", birthday);
+        const tasks = await fetchTasksForUser(userID, start.toISOString(), end.toISOString());
+        setTasks(tasks);
 
         // Safeguard: Ensure 'start' and 'end' are Date objects before calling toISOString
         if (start && end && start instanceof Date && end instanceof Date) {
@@ -127,10 +123,12 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
 
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
+    eventEmitter.emit('monthChanged');
   };
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
+    eventEmitter.emit('monthChanged');
   };
 
   const onDateSelect = (day) => {
@@ -274,16 +272,7 @@ const renderDays = () => {
   return (
     <View style={styles.calendarContainer}>
       {/* Fixed Task Type Indicators View */}
-      <View style={styles.indicatorContainer}>
-        {Object.entries(taskTypeColors).map(([type, color]) => (
-          <View key={type} style={styles.typeIndicatorWrapper}>
-            <View style={[styles.typeIndicator, { backgroundColor: color }]}>
-              <Text style={styles.typeIndicatorCount}>{taskCounts[type]}</Text>
-            </View>
-            <Text style={styles.typeIndicatorText}>{type}</Text>
-          </View>
-        ))}
-      </View>
+
       {/* Calendar Header */}
       <View style={styles.calendarHeader}>
         <TouchableOpacity onPress={prevMonth}>

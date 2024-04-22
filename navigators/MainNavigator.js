@@ -19,6 +19,7 @@ import TaskDetailScreen from "../screens/TaskDetailScreen";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ActivityIndicator } from "react-native";
 import LoadingScreen from "../screens/LoadingScreen";
+import CategoryTasksView from '../screens/CategoryTasksView';
 import AdminPanel from "../screens/AdminPanel";
 
 const Stack = createNativeStackNavigator();
@@ -97,6 +98,10 @@ function MainNavigator({ isLoggedIn }) {
           component={EditTaskScreen}
           options={{ title: 'Edit Task' }}
         />
+        <Stack.Screen
+          name="CategoryTasksView"
+          component={CategoryTasksView}
+      />
         <Stack.Screen 
           name="TaskDetailScreen" 
           component={TaskDetailScreen}

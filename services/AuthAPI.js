@@ -215,12 +215,12 @@ export const resetPassword = async (email) => {
 
 export const deleteTask = async (userId, taskId) => {
   try {
-    const taskDocRef = doc(db, "users", userId, "tasks", id);
+    const taskDocRef = doc(db, "users", userId, "tasks", taskId);
     await deleteDoc(taskDocRef);
     console.log("Task deleted successfully");
   } catch (error) {
     console.error("Error deleting task: ", error);
-    throw error;
+    throw new Error("Failed to delete task");
   }
 };
 

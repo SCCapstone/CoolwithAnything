@@ -25,11 +25,22 @@ const getStyles = (theme) =>
     taskItemText: {
       fontSize: 16,
     },
-    deleteButton: {
-      padding: 6,
-      backgroundColor: "red",
-      borderRadius: 4,
-    },
+    taskActions: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+      },
+      editButton: {
+        marginRight: 10,
+        backgroundColor: 'blue',
+        padding: 8,
+        borderRadius: 5,
+      },
+      deleteButton: {
+        backgroundColor: 'red',
+        padding: 8,
+        borderRadius: 5,
+      },
     deleteButtonText: {
       color: "#fff",
       fontSize: 14,
