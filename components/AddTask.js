@@ -3,7 +3,7 @@ import { ScrollView, Alert, Pressable, Text, View, TextInput } from "react-nativ
 import Header from "./Header";
 import DateTimePicker from "./DateTimePicker";
 import TypeSelector from "./TypeSelector";
-import Button from "./CreateButton";
+import CreateButton from "./CreateButton";
 import { saveTaskForUser } from "../services/AuthAPI";
 import eventEmitter from "./EventEmitter";
 import { Picker } from "@react-native-picker/picker";

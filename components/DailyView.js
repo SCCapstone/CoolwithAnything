@@ -65,9 +65,8 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday, userName }) =
       </Text>
       {isBirthday && (
         <Text style={styles.BirthdayCelebration}>
-          🎉 Your Birthday! 🎉
+          🎉 Happy Birthday! 🎉
         </Text>
-        <Text style={{ fontSize: 30, alignSelf: "center" }}>🎉 Happy Birthday! 🎉</Text>
       )}
       <BirthdayCelebration
         userName={userName}
@@ -75,47 +74,9 @@ const DailyView = ({ userID, selectedDate, navigation, isBirthday, userName }) =
       />
       <FlatList
         data={tasks}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.taskItem}>
-            <TouchableOpacity onPress={() => onTaskSelect(item)}>
-              <Text style={styles.taskItemText}>{item.name}</Text>
-            </TouchableOpacity>
-            {/* {item.showOptions && (
-              <> */}
-            {/* <TouchableOpacity
-                  onPress={() => toggleCheckmark(item.id)}
-                  style={[styles.checkmarkButton, { marginLeft: "58%" }]}
-                >
-                  {item.isChecked ? (
-                    <Fontisto
-                      name="checkbox-active"
-                      size={30}
-                      color="#57BCBE"
-                    />
-                  ) : (
-                    <Fontisto
-                      name="checkbox-passive"
-                      size={30}
-                      color="#57BCBE"
-                    />
-                  )}
-                </TouchableOpacity> */}
-            <TouchableOpacity
-              style={styles.deleteButton}
-              onPress={() => onTaskDelete(item.id)}
-            >
-              <Text style={styles.deleteButtonText}>Delete</Text>
-            </TouchableOpacity>
-            {/* </>
-            )} */}
-            {/* <TouchableOpacity onPress={() => toggleDisplayOptions(item.id)} style={{}}>
-              <MaterialCommunityIcons
-                name="dots-vertical"
-                size={30}
-                color="#57BCBE"
-              /> 
-            </TouchableOpacity>*/}
             <Text style={styles.taskItemText}>{item.name}</Text>
             <View style={styles.taskActions}>
               <TouchableOpacity
