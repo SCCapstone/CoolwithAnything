@@ -78,6 +78,7 @@ const SearchWorkout = ({ setSearchTerm }) => {
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <TextInput
+            testID="search-workout"
             style={styles.input}
             value={input}
             onChangeText={(text) => setInput(text)}
@@ -86,7 +87,7 @@ const SearchWorkout = ({ setSearchTerm }) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleQueryButtonClick(input)}>
+        <TouchableOpacity testID='search-workout-button' style={styles.button} onPress={() => handleQueryButtonClick(input)}>
           <Image
             source={require("../assets/search.png")}
             resizeMode="contain"

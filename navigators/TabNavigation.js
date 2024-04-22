@@ -119,7 +119,7 @@ const TabNavigator = ({ route }) => {
         initialParams={{
           userID: userID , // Keep only serializable parameters
         }}
-        options={{ headerShown: false, tabBarTestID: 'workouts-test' }}
+        options={{ headerShown: false, tabBarTestID: 'workout-test' }}
       />
 
       <Tab.Screen

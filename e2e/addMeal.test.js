@@ -16,6 +16,11 @@ describe('Add meal test', () => {
       await device.launchApp({newInstance: true});
   });
 
+  afterEach(async () => {
+    //await detox.cleanup();
+    await device.terminateApp();
+  });
+
   it('should add meal', async () => {
       await loginUser();
       console.log("Logged in");
@@ -33,12 +38,12 @@ describe('Add meal test', () => {
       await waitFor(element(by.id('add-meal-test'))).toBeVisible().withTimeout(TIMEOUT);
       console.log('Add meal screen open');
       //await element(by.id('meal-name')).tap();
-      await element(by.id('meal-name')).typeText('Tacos');
-      await element(by.id('meal-ingredients')).typeText('Tortilla, Beef, Cheese');
+      await tapVisibleText('meal-name', 'Tacos');
+      await tapVisibleText('meal-ingredients', 'Tortillas, Beef, Cheese');
       await tapVisibleText('meal-servings', '4');
       await tapVisibleText('meal-instructions', 'Assemble and eat');
       await device.pressBack();
       await tapVisibleButton('submit-meal');
       await element(by.text("CREATE")).tap();
-  });
+    });
 });

@@ -3,6 +3,11 @@ describe('Register Test', () => {
         await device.launchApp({newInstance: true});
     });
 
+    afterEach(async () => {
+        //await detox.cleanup();
+        await device.terminateApp();
+      });
+
     it('should click register button and show register screen', async () => {
         await waitFor(element(by.id('register-button')))
             .toBeVisible()

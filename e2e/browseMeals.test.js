@@ -11,6 +11,11 @@ describe('Add payment test', () => {
       await device.launchApp({newInstance: true});
   });
 
+  afterEach(async () => {
+    //await detox.cleanup();
+    await device.terminateApp();
+  });
+
   it('should go to cookbook and click meat', async () => {
       await loginUser();
       console.log("Logged in");

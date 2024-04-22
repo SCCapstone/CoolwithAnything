@@ -16,6 +16,11 @@ describe('Add meal task', () => {
       await device.launchApp({newInstance: true});
   });
 
+  afterEach(async () => {
+    //await detox.cleanup();
+    await device.terminateApp();
+  });
+
   it('should add task', async () => {
       await loginUser();
       console.log("Logged in");

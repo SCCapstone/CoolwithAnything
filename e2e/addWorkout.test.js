@@ -16,6 +16,11 @@ describe('Add workout test', () => {
       await device.launchApp({newInstance: true});
   });
 
+  afterEach(async () => {
+    //await detox.cleanup();
+    await device.terminateApp();
+  });
+
   it('should add workout', async () => {
       await loginUser();
       console.log("Logged in");

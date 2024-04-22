@@ -11,6 +11,11 @@ describe('Add payment test', () => {
       await device.launchApp({newInstance: true});
   });
 
+  afterEach(async () => {
+    //await detox.cleanup();
+    await device.terminateApp();
+  });
+
   it('should go to workouts and click biceps', async () => {
       await loginUser();
       console.log("Logged in");
@@ -21,7 +26,7 @@ describe('Add payment test', () => {
             console.error("Failed to find home screen within timeout: ", e);
       });
 
-      await tapVisibleButton('workouts-test');
+      await tapVisibleButton('workout-test');
       await tapVisibleButton('browse-workouts-test');
       await tapVisibleButton('browse-workouts-biceps-test');
   });

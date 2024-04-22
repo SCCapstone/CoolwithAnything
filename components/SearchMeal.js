@@ -77,6 +77,7 @@ const SearchMeal = ({ setSearchTerm }) => {
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <TextInput
+            testID="search-meal"
             style={styles.input}
             value={input}
             onChangeText={(text) => setInput(text)}
@@ -86,6 +87,7 @@ const SearchMeal = ({ setSearchTerm }) => {
         </View>
 
         <TouchableOpacity
+          testID="search-meal-button"
           style={styles.button}
           onPress={() => handleQueryButtonClick(input)}
         >

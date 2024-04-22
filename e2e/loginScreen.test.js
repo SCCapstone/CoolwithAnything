@@ -5,7 +5,12 @@ describe('Login Screen Tests', () => {
         await device.launchApp({newInstance: true});
     });
 
+    afterEach(async () => {
+        //await detox.cleanup();
+        await device.terminateApp();
+      });
+
     it('should fill email and password inputs and log the user in', async () => {
-        loginUser();
+        await loginUser();
     });
 });
