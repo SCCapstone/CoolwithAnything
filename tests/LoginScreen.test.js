@@ -1,15 +1,15 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 import LoginScreen from '../screens/LoginScreen';
 import * as AuthAPI from '../services/AuthAPI';
-import { waitFor } from '@testing-library/react-native';
 
-// Mock the navigation prop
+// Setup for the navigation mock
 const mockNavigation = {
   navigate: jest.fn(),
 };
 
+// Mocking React Native's Alert module to check alert calls
 jest.mock('react-native', () => {
   const actualRN = jest.requireActual('react-native');
   return {
@@ -18,55 +18,52 @@ jest.mock('react-native', () => {
   };
 });
 
-// Mock loginUser Function for Success and Failure Cases
+// Mocking the loginUser function to simulate both success and failure cases
 jest.mock('../services/AuthAPI', () => ({
   loginUser: jest.fn(),
 }));
 
-// Test rendering of the LoginScreen component
-test('renders correctly', () => {
-  const { getByPlaceholderText } = render(<LoginScreen navigation={mockNavigation} />);
-  expect(getByPlaceholderText('Email')).toBeTruthy();
-  expect(getByPlaceholderText('Password')).toBeTruthy();
-});
+describe('LoginScreen', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-// Test that the login button shows an alert when pressed with empty fields
-test('shows alert on empty fields', () => {
-  const { getByText } = render(<LoginScreen navigation={mockNavigation} />);
-  fireEvent.press(getByText('Login'));
-  expect(Alert.alert).toHaveBeenCalledWith('Missing Fields', expect.anything(), expect.anything());
-});
+  test('renders email and password inputs correctly', () => {
+    const { getByTestId } = render(<LoginScreen navigation={mockNavigation} />);
+    expect(getByTestId('login-username-input')).toBeTruthy();
+    expect(getByTestId('login-password-input')).toBeTruthy();
+  });
 
-// Test successful login
-test('navigates on successful login', async () => {
-  AuthAPI.loginUser.mockResolvedValueOnce({ uid: '123' });
-  
-  const { getByPlaceholderText, getByText } = render(<LoginScreen navigation={mockNavigation} />);
-  
-  fireEvent.changeText(getByPlaceholderText('Email'), 'test@example.com');
-  fireEvent.changeText(getByPlaceholderText('Password'), 'password');
-  fireEvent.press(getByText('Login'));
+  test('displays alert when login button is pressed with empty fields', () => {
+    const { getByTestId } = render(<LoginScreen navigation={mockNavigation} />);
+    fireEvent.press(getByTestId('login-submit-button'));
+    expect(Alert.alert).toHaveBeenCalledWith('Missing Fields', 'Please enter both email and password.', expect.anything());
+  });
 
-  await waitFor(() => {
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('Home', { userID: '123' });
+  test('navigates to the Home screen on successful login', async () => {
+    AuthAPI.loginUser.mockResolvedValueOnce({ uid: '123' });
+    const { getByTestId } = render(<LoginScreen navigation={mockNavigation} />);
+
+    fireEvent.changeText(getByTestId('login-username-input'), 'test@example.com');
+    fireEvent.changeText(getByTestId('login-password-input'), 'password');
+    fireEvent.press(getByTestId('login-submit-button'));
+
+    await waitFor(() => {
+      expect(mockNavigation.navigate).toHaveBeenCalledWith('Home', { userID: '123' });
+    });
+  });
+
+  test('displays an error alert on login failure', async () => {
+    const errorMessage = 'Login failed';
+    AuthAPI.loginUser.mockRejectedValueOnce(new Error(errorMessage));
+    const { getByTestId } = render(<LoginScreen navigation={mockNavigation} />);
+
+    fireEvent.changeText(getByTestId('login-username-input'), 'test@example.com');
+    fireEvent.changeText(getByTestId('login-password-input'), 'password');
+    fireEvent.press(getByTestId('login-submit-button'));
+
+    await waitFor(() => {
+      expect(Alert.alert).toHaveBeenCalledWith('Login Error', errorMessage);
+    });
   });
 });
-
-
-// Test failed login
-test('shows error on login failure', async () => {
-  const errorMessage = 'Login failed';
-  AuthAPI.loginUser.mockRejectedValueOnce(new Error(errorMessage));
-
-  const { getByPlaceholderText, getByText } = render(<LoginScreen navigation={mockNavigation} />);
-
-  fireEvent.changeText(getByPlaceholderText('Email'), 'test@example.com');
-  fireEvent.changeText(getByPlaceholderText('Password'), 'password');
-  fireEvent.press(getByText('Login'));
-
-  await waitFor(() => {
-    expect(Alert.alert).toHaveBeenCalledWith('Login Error', errorMessage);
-  });
-});
-
-

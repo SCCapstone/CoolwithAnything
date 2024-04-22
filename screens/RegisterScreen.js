@@ -55,7 +55,13 @@ const RegisterScreen = ({ navigation }) => {
       ]);
       return;
     }
-
+    if (!isValidDate(dateOfBirth)) {
+      Alert.alert(
+        "Invalid Birthday",
+        "Please enter a valid birthday in MM-DD-YYYY format."
+      );
+      return;
+    }
     try {
       const user = await registerUser(
         email,
@@ -77,7 +83,6 @@ const RegisterScreen = ({ navigation }) => {
         });
       }
     } catch (error) {
-      console.error(error);
       Alert.alert(
         "Signup Failed",
         error.message || "An error occurred during signup"
@@ -110,16 +115,6 @@ const RegisterScreen = ({ navigation }) => {
     return true; // The date is valid
   };
 
-  const validateAndSubmit = async () => {
-    if (!isValidDate(dateOfBirth)) {
-      Alert.alert(
-        "Invalid Birthday",
-        "Please enter a valid birthday in MM-DD-YYYY format."
-      );
-      return;
-    }
-    handleRegister();
-  };
   // Handle the hardware back button on Android devices
   useEffect(() => {
     const backAction = () => {
@@ -195,7 +190,7 @@ const RegisterScreen = ({ navigation }) => {
               onChangeText={setConfirmPassword}
             />
           </View>
-          <RegisterButton onPress={validateAndSubmit} />
+          <RegisterButton onPress={handleRegister} />
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={styles.backToLogin}>Back To Login</Text>
           </TouchableOpacity>

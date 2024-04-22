@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Pressable, BackHandler, ScrollView } from "react-native";
+import { View, Text, Pressable, BackHandler, ScrollView, Button } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -85,8 +85,6 @@ const HomeScreen = ({ route }) => {
   }, [userID]);
 
 
-
-
   useEffect(() => {
     const userID = route.params.userID; // Assuming userID is passed correctly
     const fetchAndCalculateTasks = async () => {
@@ -127,7 +125,7 @@ const HomeScreen = ({ route }) => {
         const user = await getUserData(userID);
         if (user) {
           setUserData({
-            name: user.name,
+            name: user.firstName,
             birthday: user.date_of_birth,
           });
         }
@@ -157,7 +155,6 @@ const HomeScreen = ({ route }) => {
       fetchData();
     }
   }, [userID]);
-  console.log("Birthday (HS): ", userData.birthday);
 
   // Handle the hardware back button on Android devices
   useEffect(() => {
@@ -213,11 +210,12 @@ const HomeScreen = ({ route }) => {
           userID={userID}
           navigation={navigation}
           birthday={userData.birthday}
-        />
-        <BirthdayCelebration
           userName={userData.name}
-          birthday={userData.birthday}
         />
+        {/* Admin Panel Button */}
+        {/* <View style={styles.indicatorContainer}>
+        <Button title="Clean User Data" onPress={() => navigation.navigate("AdminPanel")} />
+        </View> */}
       </ScrollView>
     </View>
   );

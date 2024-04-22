@@ -68,5 +68,32 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#57BCBE",
   },
+
+  // ---Box Styles--- //
+  input: {
+    height: 40,
+    padding: 10,
+  },
+  heightAndWeightContainer: {
+    height: "wrap-content",
+    width: "100%",
+    paddingBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  heightInput: {
+    height: 40,
+    width: "35%",
+    borderRadius: 20,
+    elevation: 5,
+    backgroundColor: "#F3F0F0",
+  },
+  weightInput: {
+    height: 40,
+    width: "78%",
+    borderRadius: 20,
+    elevation: 5,
+    backgroundColor: "#F3F0F0",
+  },
 });
 export default styles;
