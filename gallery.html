@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="website_content/favicon.png">
+    <title>SchedulerX</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+      }
+      body,
+      html {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #262626;
+      }
+      .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0 0 20px 0px; /* Adjusted top and bottom padding */
+      }
+      .header-title {
+        flex: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        font-weight: 600;
+      }
+      .logo {
+        height: 70px;
+
+        cursor: pointer;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        height: calc(100vh - 80px);
+        overflow: auto;
+      }
+      .screenshot-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+      .screenshot {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        width: calc(25% - 40px);
+        text-align: center;
+      }
+      .screenshot img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+      }
+      .name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .description {
+        font-size: 16px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="header-title">
+          <a href="index.html">
+            <img
+              class="logo"
+              src="website_content/logo.png"
+              title="SchedulerX"
+            />
+          </a>
+        </div>
+      </div>
+      <h1 style="margin-bottom: 30px; color: #5da8af">
+        Gallery
+      </h1>
+      <div class="screenshot-container">
+        <div class="screenshot">
+          <img src="website_content/ss1.png" alt="Screenshot 1" />
+          <div class="name">Login Screen</div>
+          <div class="description">
+            <p>
+              User can enter their username and password to navigate to the
+              "Home" screen by pressing the "Login" button. User can also sign
+              up for an account by pressing the "Sign Up" button which navigates
+              them to the Sign Up screen.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss2.png" alt="Screenshot 2" />
+          <div class="name">Sign Up Screen</div>
+          <div class="description">
+            <p>
+              User enters their information and clicks the "Sign-up" button to
+              register for an account. The user is then taken to the "Home"
+              page. User can also navigate back to login screen with the "Back
+              to Login" button if they already have an existing account.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss3.png" alt="Screenshot 3" />
+          <div class="name">Forgot Password Screen</div>
+          <div class="description">
+            <p>
+              User will enter email and be given a link to reset password.User
+              can also navigate back to login screen with the "Back to Login"
+              button if they already have an existing account.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss4.png" alt="Screenshot 4" />
+          <div class="name">Home Screen</div>
+          <div class="description">
+            <p>
+              Home screen. User can see events they have for the current date.
+              User can click on each event which navigates them to the "Edit
+              Day" page. User can also click the calendar and the Current day is
+              highlighted with a circle. User can also edit and delete and edit
+              task and see how many active tasks are left
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-container">
+        <div class="screenshot">
+          <img src="website_content/ss5.png" alt="Screenshot 5" />
+          <div class="name">Add Screen</div>
+          <div class="description">
+            <p>
+              User is given the option to create either a task, meal, workout,
+              or he can cancel.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss6.png" alt="Screenshot 6" />
+          <div class="name">Create Task Screen</div>
+          <div class="description">
+            <p>
+              User can enter inputs for a task and he can either create or
+              cancel the task
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss7.png" alt="Screenshot 7" />
+          <div class="name">Create Workout Screen</div>
+          <div class="description">
+            <p>
+              User can enter inputs for a Workout and he can either create or
+              cancel the Workout
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss8.png" alt="Screenshot 8" />
+          <div class="name">Create Meal Screen</div>
+          <div class="description">
+            <p>
+              User can enter inputs for a Meal and he can either create or
+              cancel the Meal
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-container">
+        <div class="screenshot">
+          <img src="website_content/ss9.png" alt="Screenshot 9" />
+          <div class="name">Browse Workout (part 1)</div>
+          <div class="description">
+            <p>
+              Users can utilize the screen to browse various workouts and click
+              on them to access more information.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss10.png" alt="Screenshot 10" />
+          <div class="name">Browse Workout (part 2)</div>
+          <div class="description">
+            <p>
+              When the user clicks on a specific workout, they are presented
+              with this screen containing details and the option to save it to
+              their list of saved workouts.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss11.png" alt="Screenshot 11" />
+          <div class="name">Saved Workouts</div>
+          <div class="description">
+            <p>
+              Users can browse through their saved workouts and can either edit,
+              share, or delete them.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss12.png" alt="Screenshot 12" />
+          <div class="name">Browse Cookbook (part 1)</div>
+          <div class="description">
+            <p>
+              Users can utilize the screen to browse various meals and click on
+              them to access more information.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-container">
+        <div class="screenshot">
+          <img src="website_content/ss13.png" alt="Screenshot 13" />
+          <div class="name">Browse Cookbook (part 2)</div>
+          <div class="description">
+            <p>
+              When the user clicks on a specific workout, they are presented
+              with this screen containing details and the option to save it to
+              their list of saved workouts.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss14.png" alt="Screenshot 14" />
+          <div class="name">Saved Cookbook</div>
+          <div class="description">
+            <p>
+              Users can browse through their saved Meals and can either edit,
+              share, or delete them.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss15.png" alt="Screenshot 15" />
+          <div class="name">Settings Screen (part 1)</div>
+          <div class="description">
+            <p>
+              User can view and edit all the personal information entered when
+              creating an account.
+            </p>
+          </div>
+        </div>
+        <div class="screenshot">
+          <img src="website_content/ss16.png" alt="Screenshot 16" />
+          <div class="name">Settings Screen (part 2)</div>
+          <div class="description">
+            <p>
+              user can check payment methods, transaction history, terms of
+              service, QR code, and sign out.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-container">
+        <div class="screenshot">
+          <img src="website_content/ss17.png" alt="Screenshot 17" />
+          <div class="name">Settings Screen (part 3)</div>
+          <div class="description">
+            <p>
+              user can switch to dark mode, change the language, access support,
+              and view the current version they have.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -16,6 +16,7 @@ import { useTheme } from "../services/ThemeContext.js";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useWorkouts } from "../services/WorkoutsContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const imageMapping = {
   "Incline Hammer Curls": require("../images/workouts/incline_hammer.png"),
@@ -71,6 +72,7 @@ const WorkoutCards = ({
   closeModal,
 }) => {
   const auth = getAuth();
+  const navigation = useNavigation();
   const userID = auth.currentUser ? auth.currentUser.uid : null;
   const { setSavedWorkouts } = useWorkouts();
   const [workoutName, setWorkoutName] = useState("");
@@ -115,6 +117,8 @@ const WorkoutCards = ({
     closeModal();
 
     Alert.alert("Workout added to saved");
+
+    navigation.navigate("Your Workouts", { activeTab: "SavedWorkouts" });
   };
 
   return (

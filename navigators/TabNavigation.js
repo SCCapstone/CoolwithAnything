@@ -68,10 +68,9 @@ const TabNavigator = ({ route }) => {
           } else if (route.name === "Your Cookbook") {
             iconName = "food-fork-drink";
           } else if (route.name === "Add") {
-            iconName = "plus-circle"; // Customize as needed
+            iconName = "plus-circle";
           }
 
-          // You can return any component that you like here!
           return (
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );
@@ -111,6 +110,7 @@ const TabNavigator = ({ route }) => {
             />
           ),
           headerShown: false,
+          tabBarTestID: 'add-test'
         }}
       />
       <Tab.Screen
@@ -119,7 +119,7 @@ const TabNavigator = ({ route }) => {
         initialParams={{
           userID: userID , // Keep only serializable parameters
         }}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarTestID: 'workouts-test' }}
       />
 
       <Tab.Screen
@@ -128,7 +128,7 @@ const TabNavigator = ({ route }) => {
         initialParams={{
           userID: userID,
         }}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarTestID: 'cookbook-test' }}
       />
       {/* Hidden screens for action sheet options */}
       <Tab.Screen

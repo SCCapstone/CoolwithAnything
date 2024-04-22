@@ -21,6 +21,7 @@ import {
   isDate,
   parseISO,
   isSameMonth,
+  isToday,
 } from "date-fns";
 import { fetchTasksForUser, deleteTask } from "../services/AuthAPI";
 import getStyles from "../styles/HomeScreenStyles";
@@ -33,7 +34,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-const Calendar = ({ userID, navigation, birthday }) => {
+const Calendar = ({ userID, navigation, birthday, userName }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
@@ -191,65 +192,50 @@ const Calendar = ({ userID, navigation, birthday }) => {
     );
   };
 
-  const renderDays = () => {
-    // Start from the first day of the week that includes the first day of the current month
-    const startDay = startOfWeek(startOfMonth(currentMonth));
+const renderDays = () => {
+  const startDay = startOfWeek(startOfMonth(currentMonth));
+  const endDay = endOfWeek(endOfMonth(currentMonth));
+  const daysArray = eachDayOfInterval({ start: startDay, end: endDay });
 
-    // End at the last day of the week that includes the last day of the current month
-    const endDay = endOfWeek(endOfMonth(currentMonth));
+  return daysArray.map((day, index) => {
+    const formattedDate = format(day, "yyyy-MM-dd");
+    const dayTasks = tasks.filter(task => format(parseISO(task.date), "yyyy-MM-dd") === formattedDate);
+    const uniqueTaskTypes = [...new Set(dayTasks.map(task => task.type))];
 
-    // Generate an array of days to be displayed
-    const daysArray = eachDayOfInterval({ start: startDay, end: endDay });
-
-    return daysArray.map((day, index) => {
-      // Format the day for comparison with task dates
-      const formattedDate = format(day, "yyyy-MM-dd");
-
-      // Filter tasks to find those for the current day
-      const dayTasks = tasks.filter(
-        (task) => format(parseISO(task.date), "yyyy-MM-dd") === formattedDate
-      );
-
-      // Identify unique task types for the day
-      const uniqueTaskTypes = [...new Set(dayTasks.map((task) => task.type))];
-
-      return (
-        // In the component rendering (assuming 'day' is already a Date object)
-        <TouchableOpacity
-          key={index}
+    return (
+      <TouchableOpacity
+        key={index}
+        style={[
+          styles.dayItem,
+          format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy") ? styles.selectedDay :
+          isBirthday(day) ? styles.birthdayDay :
+          isToday(day) ? styles.todayDay : null, // Apply the todayDay style if it's today
+        ]}
+        onPress={() => onDateSelect(day)}
+      >
+        <Text
           style={[
-            styles.dayItem,
-            format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy")
-              ? styles.selectedDay
-              : isBirthday(day)
-              ? styles.birthdayDay
-              : null,
+            styles.dayText,
+            isSameMonth(day, currentMonth) ? {} : { color: "#cccccc" },
           ]}
-          onPress={() => onDateSelect(day)}
         >
-          <Text
-            style={[
-              styles.dayText,
-              isSameMonth(day, currentMonth) ? {} : { color: "#cccccc" }, // Grey out the days that are not in the current month
-            ]}
-          >
-            {format(day, "d")}
-          </Text>
-          <View style={styles.indicatorContainer}>
-            {uniqueTaskTypes.map((type, typeIndex) => (
-              <View
-                key={typeIndex}
-                style={[
-                  styles.taskIndicator,
-                  { backgroundColor: taskTypeColors[type] || "#ccc" },
-                ]}
-              />
-            ))}
-          </View>
-        </TouchableOpacity>
-      );
-    });
-  };
+          {format(day, "d")}
+        </Text>
+        <View style={styles.indicatorContainer}>
+          {uniqueTaskTypes.map((type, typeIndex) => (
+            <View
+              key={typeIndex}
+              style={[
+                styles.taskIndicator,
+                { backgroundColor: taskTypeColors[type] || "#ccc" },
+              ]}
+            />
+          ))}
+        </View>
+      </TouchableOpacity>
+    );
+  });
+};
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -288,7 +274,7 @@ const Calendar = ({ userID, navigation, birthday }) => {
   return (
     <View style={styles.calendarContainer}>
       {/* Fixed Task Type Indicators View */}
-      <View style={styles.typeIndicatorsContainer}>
+      <View style={styles.indicatorContainer}>
         {Object.entries(taskTypeColors).map(([type, color]) => (
           <View key={type} style={styles.typeIndicatorWrapper}>
             <View style={[styles.typeIndicator, { backgroundColor: color }]}>
@@ -337,6 +323,7 @@ const Calendar = ({ userID, navigation, birthday }) => {
         selectedDate={selectedDate}
         navigation={navigation}
         isBirthday={isBirthday(selectedDate)}
+        userName={userName}
       />
 
       {/* Task Details and Actions Modal */}

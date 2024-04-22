@@ -1,12 +1,10 @@
 // CreateTaskScreen.js
 import React from "react";
 import { useState } from "react";
-import { ScrollView, Alert, Pressable, Text, View } from "react-native";
+import { ScrollView, Alert, Pressable, Text, View, TextInput } from "react-native";
 import Header from "./Header";
-import InputField from "./InputField";
 import DateTimePicker from "./DateTimePicker";
 import TypeSelector from "./TypeSelector";
-import CommentBox from "./CommentBox";
 import CreateButton from "./CreateButton";
 import { saveTaskForUser } from "../services/AuthAPI";
 import eventEmitter from "./EventEmitter";
@@ -66,36 +64,49 @@ const CreateTaskScreen = ({ route }) => {
     navigation.navigate("Today");
   };
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="add-task-test">
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Text style={styles.createText}>Create Task</Text>
+        <Text style={styles.createText} testID="add-task-safe">Create Task</Text>
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
         <Header onClose={() => handleclose()} />
-        <InputField
+        <TextInput
+          testID="task-name"
+          style={styles.input}
           value={taskName}
           placeholder="Name"
+          placeholderTextColor="grey"
           onChangeText={setTaskName}
         />
         <DateTimePicker onConfirm={setDate} />
-        <InputField
+        <TextInput
+          testID="task-location"
+          style={styles.input}
           value={location}
           placeholder="Location"
+          placeholderTextColor="grey"
           onChangeText={setLocation}
         />
         <TypeSelector
           selectedType={taskType}
           onSelect={(type) => setTaskType(type)}
+          testID="task-type"
         />
-        <CommentBox value={comment} onChangeText={setComment} />
+        <TextInput
+          testID="task-notes"
+          style={[styles.input, styles.tallInput]}
+          value={comment}
+          placeholder="Add notes..."
+          placeholderTextColor="grey"
+          multiline
+          onChangeText={setComment}
+        />
         <Text style={styles.priorityText}>Priority</Text>
-        <View
-          style={styles.priorityPicker}
-        >
+        <View style={styles.priorityPicker}>
           <Picker
             selectedValue={priority}
             onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
@@ -106,7 +117,7 @@ const CreateTaskScreen = ({ route }) => {
             <Picker.Item label="High" value="high" />
           </Picker>
         </View>
-        <CreateButton onPress={handleCreateTask} label={"Create Task"} />
+        <CreateButton onPress={handleCreateTask} label={"Create Task"} testID="submit-task"/>
       </ScrollView>
     </View>
   );

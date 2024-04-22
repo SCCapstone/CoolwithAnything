@@ -10,6 +10,15 @@
     "preview": {
       "distribution": "internal"
     },
+    "test": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease :app:assembleAndroidTest -DtestBuildType=release",
+        "withoutCredentials": true
+      },
+      "ios": {
+        "simulator": true
+      }
+    },
     "production": {}
   },
   "submit": {

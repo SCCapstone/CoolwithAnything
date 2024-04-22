@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { useTheme } from '../services/ThemeContext';
@@ -11,7 +11,8 @@ const AddPaymentMethodsScreen = () => {
   const [nickname, setNickname] = useState('');
   const [creditCard, setCreditCard] = useState('');
   const [CVC, setCVC] = useState('');
-  const [expDate, setExpDate] = useState('');
+  const [expMonth, setExpMonth] = useState('');
+  const [expYear, setExpYear] = useState('');
   const [name, setName] = useState('');
   const [ZIP, setZIP] = useState('');
   const auth = getAuth();
@@ -19,30 +20,106 @@ const AddPaymentMethodsScreen = () => {
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
+  // Functions to accept only valid inputs
+  const handleCreditCardChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 16) {
+      setCreditCard(numericInput);
+    }
+  };
+
+  const handleCVCChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 3) {
+      setCVC(numericInput);
+    }
+  };
+
+  const handleMonthChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 2) {
+      setExpMonth(numericInput);
+    }
+  };
+
+  const handleYearChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 4) {
+      setExpYear(numericInput);
+    }
+  };
+
+  const handleZipChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 5) {
+      setZIP(numericInput);
+    }
+  };
+
   const handleSavePaymentMethod = async () => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    const monthNum = parseInt(expMonth, 10);
+    const yearNum = parseInt(expYear, 10);
+  
+    if (!nickname || nickname.trim() === '') {
+      Alert.alert("Nickname is empty");
+      return;
+    }
+    if (creditCard.length !== 16) {
+      Alert.alert("Invalid credit card");
+      return;
+    }
+    if (CVC.length !== 3) {
+      Alert.alert("Invalid CVC number");
+      return;
+    }
+    if (yearNum < currentYear || yearNum > 2099 || (yearNum === currentYear && monthNum < currentMonth) || monthNum < 1 || monthNum > 12) {
+      Alert.alert("Invalid Expiration Date");
+      return;
+    }
+    if (!name || name.trim() === '') {
+      Alert.alert("Name on card is empty");
+      return;
+    }
+    if (ZIP.length !== 5) {
+      Alert.alert("Invalid ZIP code");
+      return;
+    }
+  
+    // Fetch existing payment methods and check for duplicates
     try {
-      await savePaymentMethodForUser(userId, { nickname, creditCard, CVC, expDate, name, ZIP });
-      console.log("Payment method saved successfully");
-      Alert.alert(
-        "Success", // Alert Title
-        "Your payment method was saved successfully!", // Alert Message
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate('PaymentMethods'),
-          },
-        ]
+      const paymentMethods = await fetchAllPaymentMethodsForUser(userId);
+      const isDuplicate = paymentMethods.some(method => 
+        method.creditCard === creditCard &&
+        method.CVC === CVC &&
+        method.expMonth === expMonth &&
+        method.expYear === expYear &&
+        method.name === name &&
+        method.ZIP === ZIP
       );
-      
-      // Fetch all payment methods for the user after adding a new one
+  
+      if (isDuplicate) {
+        Alert.alert("Duplicate Error", "A payment method with these details has already been added.");
+        return;
+      }
+  
+      await savePaymentMethodForUser(userId, { nickname, creditCard, CVC, expMonth, expYear, name, ZIP });
+      Alert.alert(
+        "Success", 
+        "Your payment method was saved successfully!", 
+        [{ text: "OK", onPress: () => navigation.navigate('PaymentMethods') }]
+      );
+  
       const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
-      
-      // Navigate back to the PaymentMethodsScreen with the updated list
       navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
     } catch (error) {
       console.error("Failed to save payment method", error);
+      Alert.alert("Error", "Failed to save payment method.");
     }
   };
+  
+  
 
   return (
     <View style={{ flex: 1 }}>
@@ -60,6 +137,7 @@ const AddPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>Nickname:</Text>
               <TextInput style={styles.input} 
+              testID='input-nickname'
               onChangeText={setNickname} 
               value={nickname} 
               placeholder="My Card"
@@ -69,41 +147,62 @@ const AddPaymentMethodsScreen = () => {
             </View> 
             
             <View>
-              <Text style={styles.label}>Credit Card:</Text>
-              <TextInput style={[styles.input, {width: '13%'}]} 
-              onChangeText={setCreditCard} 
+              <Text style={styles.label} testID='safe-area'>Credit Card:</Text>
+              <TextInput style={[styles.input, {width: '43%'}]} 
+              testID='input-credit-card'
+              onChangeText={handleCreditCardChange} 
               value={creditCard} 
-              placeholder="123"
+              placeholder="1234567890123456"
               placeholderTextColor={'grey'}
-              keyboardType="default"
+              keyboardType="number-pad"
               secureTextEntry={false}/>
             </View> 
 
             <View>
               <Text style={styles.label}>CVC:</Text>
               <TextInput style={[styles.input, {width: '13%'}]} 
-              onChangeText={setCVC} 
+              testID='input-cvc'
+              onChangeText={handleCVCChange} 
               value={CVC} 
               placeholder="123"
               placeholderTextColor={'grey'}
-              keyboardType="default"
+              keyboardType="number-pad"
               secureTextEntry={false}/>
             </View> 
 
-            <View>
-              <Text style={styles.label}>EXP Date:</Text>
-              <TextInput style={[styles.input, {width: '16%'}]}
-              onChangeText={setExpDate} 
-              value={expDate} 
-              placeholder="01/23"
-              placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={styles.label}>EXP Month:</Text>
+                <TextInput 
+                  testID='input-exp-month'
+                  style={[styles.input, {width: '50%'}]}
+                  onChangeText={handleMonthChange}
+                  value={expMonth}
+                  placeholder="MM"
+                  placeholderTextColor={'grey'}
+                  keyboardType="number-pad"
+                  maxLength={2}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>EXP Year:</Text>
+                <TextInput 
+                  style={[styles.input, {width: '75%'}]}
+                  testID='input-exp-year'
+                  onChangeText={handleYearChange}
+                  value={expYear}
+                  placeholder="YYYY"
+                  placeholderTextColor={'grey'}
+                  keyboardType="number-pad"
+                  maxLength={4}
+                />
+              </View>
             </View>
 
             <View>
               <Text style={styles.label}>Name on card:</Text>
               <TextInput style={styles.input} 
+              testID='input-name'
               onChangeText={setName} 
               value={name} 
               placeholder="John Appleseed"
@@ -114,12 +213,13 @@ const AddPaymentMethodsScreen = () => {
 
             <View>
               <Text style={styles.label}>ZIP:</Text>
-              <TextInput style={[styles.input, {width: '16%'}]} 
-              onChangeText={setZIP} 
+              <TextInput style={[styles.input, {width: '17%'}]} 
+              testID='input-zip'
+              onChangeText={handleZipChange} 
               value={ZIP} 
               placeholder="12345"
               placeholderTextColor={'grey'}
-              keyboardType="default"
+              keyboardType="number-pad"
               secureTextEntry={false}/>
             </View> 
 
@@ -131,7 +231,8 @@ const AddPaymentMethodsScreen = () => {
         <View style={styles.saveButtonContainer}>
           <TouchableOpacity 
             onPress={handleSavePaymentMethod}
-            style={styles.saveButton}>
+            style={styles.saveButton}
+            testID='button-save-payment-method'>
             <Text style={styles.saveButtonText}>Save Payment Method</Text>
           </TouchableOpacity>
         </View>

@@ -1,0 +1,370 @@
+INFO    | Android emulator version 33.1.24.0 (build_id 11237101) (CL:N/A)
+DEBUG   | Current emulator version 33.1.24 is the same as the required version 33.1.24.
+INFO    | Found systemPath C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\
+I0421 19:12:45.216626   13456 HealthMonitor.cpp:279] HealthMonitor disabled.
+added library vulkan-1.dll
+initialize: Supports id properties, got a vulkan device UUID
+I0421 19:12:45.991691   13456 VkCommonOperations.cpp:1225] Initializing VkEmulation features:
+I0421 19:12:45.991785   13456 VkCommonOperations.cpp:1226]     glInteropSupported: true
+I0421 19:12:45.992025   13456 VkCommonOperations.cpp:1227]     useDeferredCommands: true
+I0421 19:12:45.992049   13456 VkCommonOperations.cpp:1229]     createResourceWithRequirements: true
+I0421 19:12:45.992068   13456 VkCommonOperations.cpp:1230]     useVulkanComposition: false
+I0421 19:12:45.992085   13456 VkCommonOperations.cpp:1231]     useVulkanNativeSwapchain: false
+I0421 19:12:45.992102   13456 VkCommonOperations.cpp:1232]     enable guestRenderDoc: false
+I0421 19:12:45.992119   13456 VkCommonOperations.cpp:1233]     ASTC LDR emulation mode: 2
+I0421 19:12:45.992137   13456 VkCommonOperations.cpp:1234]     enable ETC2 emulation: true
+I0421 19:12:45.992154   13456 VkCommonOperations.cpp:1235]     enable Ycbcr emulation: false
+I0421 19:12:45.992171   13456 VkCommonOperations.cpp:1236]     guestUsesAngle: false
+I0421 19:12:45.992188   13456 VkCommonOperations.cpp:1237]     useDedicatedAllocations: false
+I0421 19:12:45.993569   13456 FrameBuffer.cpp:486] Graphics Adapter Vendor Google (ATI Technologies Inc.)
+I0421 19:12:45.993605   13456 FrameBuffer.cpp:487] Graphics Adapter Android Emulator OpenGL ES Translator (AMD Radeon(TM) Graphics)
+I0421 19:12:45.993622   13456 FrameBuffer.cpp:488] Graphics API Version OpenGL ES 3.0 (4.5.0 Core Profile Context 22.20.12.220707)
+I0421 19:12:45.993634   13456 FrameBuffer.cpp:489] Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_packed_depth_stencil GL_OES_vertex_half_float GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 GL_EXT_texture_buffer GL_EXT_draw_buffers_indexed 
+I0421 19:12:45.993653   13456 FrameBuffer.cpp:490] Graphics Device Extensions N/A
+INFO    | Storing crashdata in: , detection is enabled for process: 5916
+INFO    | Duplicate loglines will be removed, if you wish to see each individual line launch with the -log-nofilter flag.
+DEBUG   | autoconfig: -skin pixel_7
+DEBUG   | autoconfig: -skindir C:\Users\deepk\AppData\Local\Android\Sdk\skins\
+DEBUG   | querying file version info API...
+DEBUG   | found kernelbase.dll
+DEBUG   | GetFileVersionInfoSizeW found. On Windows 10?
+DEBUG   | GetFileVersionInfoW found. On Windows 10?
+DEBUG   | VerQueryValueW found. Can query file versions
+DEBUG   | queryFileVersionInfo: path not found: amdvlk64.dll
+DEBUG   | querying file version info API...
+DEBUG   | queryFileVersionInfo: path not found: amdvlk32.dll
+DEBUG   | querying file version info API...
+DEBUG   | autoconfig: -kernel C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\kernel-ranchu
+DEBUG   | Target arch = 'x86_64'
+DEBUG   | Auto-detect: Kernel image requires new device naming scheme.
+DEBUG   | Auto-detect: Kernel does not support YAFFS2 partitions.
+DEBUG   | autoconfig: -ramdisk C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\ramdisk.img
+DEBUG   | Using initial system image: C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\system.img
+DEBUG   | Using initial vendor image: C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\vendor.img
+DEBUG   | autoconfig: -data C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\userdata-qemu.img
+DEBUG   | autoconfig: -initdata C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\userdata.img
+DEBUG   | autoconfig: -cache C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\cache.img
+DEBUG   | autoconfig: -sdcard C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\sdcard.img
+DEBUG   | Physical RAM size: 2048MB
+DEBUG   | VM heap size 256MB is below hardware specified minimum of 512MB,setting it to that value
+DEBUG   | System image is read only
+INFO    | IPv4 server found: 
+INFO    | Ignore IPv6 address: 506f:7798:d001:0:506f:7798:d001:0
+INFO    | Ignore IPv6 address: 506f:7798:d001:0:506f:7798:d001:0 (2x)
+INFO    | Ignore IPv6 address: 6875:7798:d001:0:506f:7798:d001:0
+INFO    | Ignore IPv6 address: 6875:7798:d001:0:506f:7798:d001:0 (2x)
+DEBUG   | IPv6 DNS server found: 807b:7798:d001:0:506f:7798:d001:0
+INFO    | Ignore IPv6 address: c888:7798:d001:0:506f:7798:d001:0
+INFO    | Ignore IPv6 address: c888:7798:d001:0:506f:7798:d001:0 (2x)
+INFO    | Ignore IPv6 address: e88e:7798:d001:0:506f:7798:d001:0
+INFO    | Ignore IPv6 address: e88e:7798:d001:0:506f:7798:d001:0 (2x)
+DEBUG   | Found 2 DNS servers:
+DEBUG   | 	192.168.1.1
+DEBUG   | 	2603:6080:4df0:ae40::1
+DEBUG   | Starting hostapd main loop.
+DEBUG   | trying to load skin file 'C:\Users\deepk\AppData\Local\Android\Sdk\skins\\pixel_7\layout'
+DEBUG   | Requested console port 15390: Inferring adb port 15391.
+DEBUG   | Checking whether Windows Hypervisor Platform (WHPX) is available.
+DEBUG   | WinHvPlatform.dll found. Looking for WHvGetCapability...
+DEBUG   | WHvGetCapability found. Querying WHPX capabilities...
+DEBUG   | WHPX (10.0.22631) is installed and usable.
+DEBUG   | CPU Acceleration: working
+DEBUG   | CPU Acceleration status: Please disable Hyper-V before using the Android Emulator.  Start a command prompt as Administrator, run 'bcdedit /set hypervisorlaunchtype off', reboot.WHPX (10.0.22631) is installed and usable.
+DEBUG   | handleCpuAcceleration: feature check for hvf
+DEBUG   | Bluetooth requested by guest
+DEBUG   | started modem simulator host server at port: 51276
+library_mode host gpu mode host
+DEBUG   | GPU emulation enabled using 'host' mode
+DEBUG   | Initializing hardware OpenGLES emulation support
+DEBUG   | create display 0
+DEBUG   | setDisplayPose 0 x 0 y 0 w 1080 h 2400 dpi 0
+createGlobalVkEmulation:963 Selecting Vulkan device: AMD Radeon(TM) Graphics
+INFO    | Setting vsync to 60 hz
+INFO    | Sending adb public key [QAAAAP0OBMarAZdgE8vWf7dX0L0yAcdsgP1JK8/VjPJlJ5KAOm2AHLV2CZv00wBJi1z93x4ILIysRPz1UM3Wgd2phHSE7/GZU0vTdWjbOPYL45kV/Tj+iYv8Uuj5ElFtXIpIOr4JVrrLlPtbaadt/dG3qwd3CCQ4tnB4dasibBm4usasRoR6yDAjuheakgUubyOLepPoSFY41/vxV5q3qbzjYF5yu2MgYPD0+XGSh0wqoLlJsi8BmtfBWiSn3oP6/9yLTD3JO9xGJMILH2A4bD0CnAYPUg9N9chMwiIfuEMyuLqWvDfompdkmIWM/rRAVIqFV+55D+hZJGhjwAld69LN9ROKO0DGUF7MQNUJtvORNMeRkJAW49JJAOWSDEIffgknr0Gt82TJnehL+d95rEIhTw++f6TWMA+AB10F3J63i6NVWQct7FI+5fkggmneCBwrhO/zjqAEzsOK+YCC4uP/Tut2K2njD2U8Dp877YuJ3RIG4dCGhebeCXViwbayH7k5+7ZG/hqxPq7JMjbNfP8i8nOpPI7J/Ej7w7gikKyhCYTIGTndZSzQMZ0Wje/3ma0AMoD7ERglX0KFw363etdLMnuao6yEv0mHVpoNVZXPW5Q21O8y7H/+NZC01B6qLnME3o3PMe9LA5pnJQWuO7ea6hxYMHB1tdMTNT1oCQn2Kk4fkSnMvgEAAQA= @unknown]
+DEBUG   | Found 2 DNS servers:
+DEBUG   | 	192.168.1.1
+DEBUG   | 	2603:6080:4df0:ae40::1
+INFO    | Content of hardware configuration file:
+INFO    | 	hw.cpu.arch = x86_64
+INFO    | 	hw.cpu.ncore = 4
+INFO    | 	hw.ramSize = 2048
+INFO    | 	hw.screen = multi-touch
+INFO    | 	hw.mainKeys = false
+INFO    | 	hw.trackBall = false
+INFO    | 	hw.keyboard = true
+INFO    | 	hw.keyboard.lid = false
+INFO    | 	hw.keyboard.charmap = qwerty2
+INFO    | 	hw.dPad = false
+INFO    | 	hw.rotaryInput = false
+INFO    | 	hw.gsmModem = true
+INFO    | 	hw.gps = true
+INFO    | 	hw.battery = true
+INFO    | 	hw.accelerometer = true
+INFO    | 	hw.accelerometer_uncalibrated = true
+INFO    | 	hw.gyroscope = true
+INFO    | 	hw.audioInput = true
+INFO    | 	hw.audioOutput = true
+INFO    | 	hw.sdCard = true
+INFO    | 	hw.sdCard.path = C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\sdcard.img
+INFO    | 	disk.cachePartition = true
+INFO    | 	disk.cachePartition.path = C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\cache.img
+INFO    | 	disk.cachePartition.size = 66m
+INFO    | 	test.quitAfterBootTimeOut = -1
+INFO    | 	test.delayAdbTillBootComplete = 0
+INFO    | 	test.monitorAdb = 0
+INFO    | 	hw.lcd.width = 1080
+INFO    | 	hw.lcd.height = 2400
+INFO    | 	hw.lcd.depth = 16
+INFO    | 	hw.lcd.circular = false
+INFO    | 	hw.lcd.density = 420
+INFO    | 	hw.lcd.backlight = true
+INFO    | 	hw.lcd.vsync = 60
+INFO    | 	hw.gltransport = pipe
+INFO    | 	hw.gltransport.asg.writeBufferSize = 1048576
+INFO    | 	hw.gltransport.asg.writeStepSize = 4096
+INFO    | 	hw.gltransport.asg.dataRingSize = 32768
+INFO    | 	hw.gltransport.drawFlushInterval = 800
+INFO    | 	hw.displayRegion.0.1.xOffset = -1
+INFO    | 	hw.displayRegion.0.1.yOffset = -1
+INFO    | 	hw.displayRegion.0.1.width = 0
+INFO    | 	hw.displayRegion.0.1.height = 0
+INFO    | 	hw.displayRegion.0.2.xOffset = -1
+INFO    | 	hw.displayRegion.0.2.yOffset = -1
+INFO    | 	hw.displayRegion.0.2.width = 0
+INFO    | 	hw.displayRegion.0.2.height = 0
+INFO    | 	hw.displayRegion.0.3.xOffset = -1
+INFO    | 	hw.displayRegion.0.3.yOffset = -1
+INFO    | 	hw.displayRegion.0.3.width = 0
+INFO    | 	hw.displayRegion.0.3.height = 0
+INFO    | 	hw.display1.width = 0
+INFO    | 	hw.display1.height = 0
+INFO    | 	hw.display1.density = 0
+INFO    | 	hw.display1.xOffset = -1
+INFO    | 	hw.display1.yOffset = -1
+INFO    | 	hw.display1.flag = 0
+INFO    | 	hw.display2.width = 0
+INFO    | 	hw.display2.height = 0
+INFO    | 	hw.display2.density = 0
+INFO    | 	hw.display2.xOffset = -1
+INFO    | 	hw.display2.yOffset = -1
+INFO    | 	hw.display2.flag = 0
+INFO    | 	hw.display3.width = 0
+INFO    | 	hw.display3.height = 0
+INFO    | 	hw.display3.density = 0
+INFO    | 	hw.display3.xOffset = -1
+INFO    | 	hw.display3.yOffset = -1
+INFO    | 	hw.display3.flag = 0
+INFO    | 	hw.multi_display_window = false
+INFO    | 	hw.hotplug_multi_display = false
+INFO    | 	hw.gpu.enabled = true
+INFO    | 	hw.gpu.mode = host
+INFO    | 	hw.initialOrientation = Portrait
+INFO    | 	hw.camera.back = virtualscene
+INFO    | 	hw.camera.front = emulated
+INFO    | 	vm.heapSize = 512
+INFO    | 	hw.sensors.light = true
+INFO    | 	hw.sensors.pressure = true
+INFO    | 	hw.sensors.humidity = true
+INFO    | 	hw.sensors.proximity = true
+INFO    | 	hw.sensors.magnetic_field = true
+INFO    | 	hw.sensors.magnetic_field_uncalibrated = true
+INFO    | 	hw.sensors.gyroscope_uncalibrated = true
+INFO    | 	hw.sensors.orientation = true
+INFO    | 	hw.sensors.temperature = true
+INFO    | 	hw.sensors.rgbclight = false
+INFO    | 	hw.sensor.hinge = false
+INFO    | 	hw.sensor.hinge.count = 0
+INFO    | 	hw.sensor.hinge.type = 0
+INFO    | 	hw.sensor.hinge.sub_type = 0
+INFO    | 	hw.sensor.hinge.resizable.config = 1
+INFO    | 	hw.sensor.hinge.fold_to_displayRegion.0.1_at_posture = 1
+INFO    | 	hw.sensor.roll = false
+INFO    | 	hw.sensor.roll.count = 0
+INFO    | 	hw.sensor.roll.resize_to_displayRegion.0.1_at_posture = 6
+INFO    | 	hw.sensor.roll.resize_to_displayRegion.0.2_at_posture = 6
+INFO    | 	hw.sensor.roll.resize_to_displayRegion.0.3_at_posture = 6
+INFO    | 	hw.sensors.heart_rate = false
+INFO    | 	hw.sensors.wrist_tilt = false
+INFO    | 	hw.useext4 = true
+INFO    | 	hw.arc = false
+INFO    | 	hw.arc.autologin = false
+INFO    | 	hw.device.name = pixel_7
+INFO    | 	kernel.path = C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\kernel-ranchu
+INFO    | 	kernel.newDeviceNaming = yes
+INFO    | 	kernel.supportsYaffs2 = no
+INFO    | 	disk.ramdisk.path = C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\ramdisk.img
+INFO    | 	disk.systemPartition.initPath = C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\system.img
+INFO    | 	disk.systemPartition.size = 2786m
+INFO    | 	disk.vendorPartition.initPath = C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\vendor.img
+INFO    | 	disk.vendorPartition.size = 800m
+INFO    | 	disk.dataPartition.path = C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\userdata-qemu.img
+INFO    | 	disk.dataPartition.size = 6g
+INFO    | 	disk.encryptionKeyPartition.path = C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\encryptionkey.img
+INFO    | 	PlayStore.enabled = true
+INFO    | 	avd.name = Pixel_7_API_33
+INFO    | 	avd.id = Pixel_7_API_33
+INFO    | 	fastboot.forceColdBoot = false
+INFO    | 	userdata.useQcow2 = true
+INFO    | 	firstboot.bootFromDownloadableSnapshot = true
+INFO    | 	firstboot.bootFromLocalSnapshot = true
+INFO    | 	firstboot.saveToLocalSnapshot = true
+INFO    | 	android.sdk.root = C:\Users\deepk\AppData\Local\Android\Sdk
+INFO    | 	android.avd.home = C:\Users\deepk\.android\avd
+INFO    | .
+INFO    | QEMU options list:
+INFO    | 	 argv[00] = "C:\Users\deepk\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe"
+INFO    | 	 argv[01] = "-read-only"
+INFO    | 	 argv[02] = "-dns-server"
+INFO    | 	 argv[03] = "192.168.1.1,2603:6080:4df0:ae40::1"
+INFO    | 	 argv[04] = "-no-audio"
+INFO    | 	 argv[05] = "-mem-path"
+INFO    | 	 argv[06] = "C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\snapshots\default_boot\ram.img"
+INFO    | 	 argv[07] = "-serial"
+INFO    | 	 argv[08] = "null"
+INFO    | 	 argv[09] = "-android-ports"
+INFO    | 	 argv[10] = "15390,15391"
+INFO    | 	 argv[11] = "-device"
+INFO    | 	 argv[12] = "goldfish_pstore,addr=0xff018000,size=0x10000,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\data\misc\pstore\pstore.bin"
+INFO    | 	 argv[13] = "-cpu"
+INFO    | 	 argv[14] = "android64-xts"
+INFO    | 	 argv[15] = "-enable-whpx"
+INFO    | 	 argv[16] = "-smp"
+INFO    | 	 argv[17] = "cores=4"
+INFO    | 	 argv[18] = "-m"
+INFO    | 	 argv[19] = "2048"
+INFO    | 	 argv[20] = "-lcd-density"
+INFO    | 	 argv[21] = "420"
+INFO    | 	 argv[22] = "-nodefaults"
+INFO    | 	 argv[23] = "-kernel"
+INFO    | 	 argv[24] = "C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\kernel-ranchu"
+INFO    | 	 argv[25] = "-initrd"
+INFO    | 	 argv[26] = "C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\initrd"
+INFO    | 	 argv[27] = "-drive"
+INFO    | 	 argv[28] = "if=none,index=0,id=system,if=none,file=C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\system.img,read-only"
+INFO    | 	 argv[29] = "-device"
+INFO    | 	 argv[30] = "virtio-blk-pci,drive=system,modern-pio-notify"
+INFO    | 	 argv[31] = "-drive"
+INFO    | 	 argv[32] = "if=none,index=1,id=cache,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\cache.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576"
+INFO    | 	 argv[33] = "-device"
+INFO    | 	 argv[34] = "virtio-blk-pci,drive=cache,modern-pio-notify"
+INFO    | 	 argv[35] = "-drive"
+INFO    | 	 argv[36] = "if=none,index=2,id=userdata,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\userdata-qemu.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576"
+INFO    | 	 argv[37] = "-device"
+INFO    | 	 argv[38] = "virtio-blk-pci,drive=userdata,modern-pio-notify"
+INFO    | 	 argv[39] = "-drive"
+INFO    | 	 argv[40] = "if=none,index=3,id=encrypt,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\encryptionkey.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576"
+INFO    | 	 argv[41] = "-device"
+INFO    | 	 argv[42] = "virtio-blk-pci,drive=encrypt,modern-pio-notify"
+INFO    | 	 argv[43] = "-drive"
+INFO    | 	 argv[44] = "if=none,index=4,id=vendor,if=none,file=C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\vendor.img,read-only"
+INFO    | 	 argv[45] = "-device"
+INFO    | 	 argv[46] = "virtio-blk-pci,drive=vendor,modern-pio-notify"
+INFO    | 	 argv[47] = "-drive"
+INFO    | 	 argv[48] = "if=none,index=5,id=sdcard,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\sdcard.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576"
+INFO    | 	 argv[49] = "-device"
+INFO    | 	 argv[50] = "virtio-blk-pci,drive=sdcard,modern-pio-notify"
+INFO    | 	 argv[51] = "-netdev"
+INFO    | 	 argv[52] = "user,id=mynet"
+INFO    | 	 argv[53] = "-device"
+INFO    | 	 argv[54] = "virtio-net-pci,netdev=mynet"
+INFO    | 	 argv[55] = "-chardev"
+INFO    | 	 argv[56] = "null,id=forhvc0"
+INFO    | 	 argv[57] = "-chardev"
+INFO    | 	 argv[58] = "null,id=forhvc1"
+INFO    | 	 argv[59] = "-device"
+INFO    | 	 argv[60] = "virtio-serial-pci,ioeventfd=off"
+INFO    | 	 argv[61] = "-device"
+INFO    | 	 argv[62] = "virtconsole,chardev=forhvc0"
+INFO    | 	 argv[63] = "-device"
+INFO    | 	 argv[64] = "virtconsole,chardev=forhvc1"
+INFO    | 	 argv[65] = "-chardev"
+INFO    | 	 argv[66] = "netsim,id=bluetooth"
+INFO    | 	 argv[67] = "-device"
+INFO    | 	 argv[68] = "virtserialport,chardev=bluetooth,name=bluetooth"
+INFO    | 	 argv[69] = "-device"
+INFO    | 	 argv[70] = "virtio-serial,ioeventfd=off"
+INFO    | 	 argv[71] = "-chardev"
+INFO    | 	 argv[72] = "socket,port=51272,host=::1,nowait,nodelay,reconnect=10,ipv6,id=modem"
+INFO    | 	 argv[73] = "-device"
+INFO    | 	 argv[74] = "virtserialport,chardev=modem,name=modem"
+INFO    | 	 argv[75] = "-device"
+INFO    | 	 argv[76] = "virtio-rng-pci"
+INFO    | 	 argv[77] = "-show-cursor"
+INFO    | 	 argv[78] = "-device"
+INFO    | 	 argv[79] = "virtio_input_multi_touch_pci_1"
+INFO    | 	 argv[80] = "-device"
+INFO    | 	 argv[81] = "virtio_input_multi_touch_pci_2"
+INFO    | 	 argv[82] = "-device"
+INFO    | 	 argv[83] = "virtio_input_multi_touch_pci_3"
+INFO    | 	 argv[84] = "-device"
+INFO    | 	 argv[85] = "virtio_input_multi_touch_pci_4"
+INFO    | 	 argv[86] = "-device"
+INFO    | 	 argv[87] = "virtio_input_multi_touch_pci_5"
+INFO    | 	 argv[88] = "-device"
+INFO    | 	 argv[89] = "virtio_input_multi_touch_pci_6"
+INFO    | 	 argv[90] = "-device"
+INFO    | 	 argv[91] = "virtio_input_multi_touch_pci_7"
+INFO    | 	 argv[92] = "-device"
+INFO    | 	 argv[93] = "virtio_input_multi_touch_pci_8"
+INFO    | 	 argv[94] = "-device"
+INFO    | 	 argv[95] = "virtio_input_multi_touch_pci_9"
+INFO    | 	 argv[96] = "-device"
+INFO    | 	 argv[97] = "virtio_input_multi_touch_pci_10"
+INFO    | 	 argv[98] = "-device"
+INFO    | 	 argv[99] = "virtio_input_multi_touch_pci_11"
+INFO    | 	 argv[100] = "-device"
+INFO    | 	 argv[101] = "virtio-keyboard-pci"
+INFO    | 	 argv[102] = "-netdev"
+INFO    | 	 argv[103] = "user,id=virtio-wifi,dhcpstart=10.0.2.16"
+INFO    | 	 argv[104] = "-device"
+INFO    | 	 argv[105] = "virtio-wifi-pci,netdev=virtio-wifi"
+INFO    | 	 argv[106] = "-device"
+INFO    | 	 argv[107] = "virtio-vsock-pci,guest-cid=77"
+INFO    | 	 argv[108] = "-L"
+INFO    | 	 argv[109] = "C:\Users\deepk\AppData\Local\Android\Sdk\emulator/lib/pc-bios"
+INFO    | 	 argv[110] = "-soundhw"
+INFO    | 	 argv[111] = "virtio-snd-pci"
+INFO    | 	 argv[112] = "-vga"
+INFO    | 	 argv[113] = "none"
+INFO    | 	 argv[114] = "-append"
+INFO    | 	 argv[115] = "no_timer_check 8250.nr_uarts=1 clocksource=pit console=0 cma=296M@0-4G ndns=2 loop.max_part=7 ramoops.mem_address=0xff018000 ramoops.mem_size=0x10000 memmap=0x10000$0xff018000 printk.devkmsg=on bootconfig"
+INFO    | 	 argv[116] = "-android-hw"
+INFO    | 	 argv[117] = "C:\Users\deepk\AppData\Local\Temp\\AndroidEmulator\TMP224C.tmp"
+INFO    | Concatenated QEMU options: C:\Users\deepk\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe -read-only -dns-server 192.168.1.1,2603:6080:4df0:ae40::1 -no-audio -mem-path C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\snapshots\default_boot\ram.img -serial null -android-ports 15390,15391 -device goldfish_pstore,addr=0xff018000,size=0x10000,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\data\misc\pstore\pstore.bin -cpu android64-xts -enable-whpx -smp cores=4 -m 2048 -lcd-density 420 -nodefaults -kernel C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\kernel-ranchu -initrd C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\initrd -drive if=none,index=0,id=system,if=none,file=C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\system.img,read-only -device virtio-blk-pci,drive=system,modern-pio-notify -drive if=none,index=1,id=cache,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\cache.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576 -device virtio-blk-pci,drive=cache,modern-pio-notify -drive if=none,index=2,id=userdata,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\userdata-qemu.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576 -device virtio-blk-pci,drive=userdata,modern-pio-notify -drive if=none,index=3,id=encrypt,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\encryptionkey.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=1048576 -device virtio-blk-pci,drive=encrypt,modern-pio-notify -drive if=none,index=4,id=vendor,if=none,file=C:\Users\deepk\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\\vendor.img,read-only -device virtio-blk-pci,drive=vendor,modern-pio-notify -drive if=none,index=5,id=sdcard,if=none,file=C:\Users\deepk\.android\avd\..\avd\Pixel_7_API_33_1.avd\sdcard.img.qcow2,overlap-check=none,cache=unsafe,l2-cache-size=10
+DEBUG   | Android qemu version 33.1.24.0 (build_id 11237101) (CL:N/A)
+DEBUG   | Starting QEMU main loop
+DEBUG   | android_fopen: Failed to open /qemu.conf, err: 2
+DEBUG   | registered 'boot-properties' qemud service
+DEBUG   | Adding boot property: 'ro.opengles.version' = '196608'
+DEBUG   | Adding boot property: 'qemu.sf.fake_camera' = 'front'
+DEBUG   | Adding boot property: 'qemu.adb.secure' = '1'
+DEBUG   | Adding boot property: 'dalvik.vm.heapsize' = '512m'
+DEBUG   | Adding boot property: 'qemu.hw.mainkeys' = '0'
+DEBUG   | Adding boot property: 'qemu.sf.lcd_density' = '420'
+WHPX on Windows 10.0.22631 detected.
+Windows Hypervisor Platform accelerator is operational
+DEBUG   | goldfish_events.have-dpad: false
+DEBUG   | goldfish_events.have-trackball: false
+DEBUG   | goldfish_events.have-camera: true
+DEBUG   | goldfish_events.have-keyboard: false
+DEBUG   | goldfish_events.have-lidswitch: false
+DEBUG   | goldfish_events.have-tabletmode: false
+DEBUG   | goldfish_events.have-touch: false
+DEBUG   | goldfish_events.have-multitouch: false
+DEBUG   | Adding boot property: 'net.wifi_mac_prefix' = '15390'
+WARNING | Requested adb port (15391) is outside the recommended range [5555,5586]. ADB may not function properly for the emulator. See -help-port for details.
+DEBUG   | Not using any http proxy
+DEBUG   | Adding boot property: 'qemu.timezone' = 'America/New_York'
+DEBUG   | android_hw_fingerprint_init: fingerprint qemud listen service initialized
+DEBUG   | Successfully initialized Wi-Fi
+DEBUG   | emulator_window_fb_rotate
+I0421 19:12:47.654891   21664 FrameBuffer.cpp:3682] setDisplayConfigs w 1080 h 2400 dpiX 420 dpiY 420
+DEBUG   | setDisplayPose 0 x 0 y 0 w 1080 h 2400 dpi 0
+I0421 19:12:47.655250   21664 FrameBuffer.cpp:3695] setDisplayActiveConfig 0
+WARNING | Unable to connect to packet streamer, no bluetooth emulation available
+ERROR   | detected a hanging thread 'QEMU2 main loop'. No response for 15000 ms
+ERROR   | detected a hanging thread 'QEMU2 CPU0 thread'. No response for 15000 ms
+ERROR   | detected a hanging thread 'QEMU2 CPU1 thread'. No response for 15000 ms
+ERROR   | detected a hanging thread 'QEMU2 CPU2 thread'. No response for 15000 ms
+ERROR   | detected a hanging thread 'QEMU2 CPU3 thread'. No response for 15000 ms
+ERROR   | detected a hanging thread 'QEMU2 main loop'. No response for 15000 ms

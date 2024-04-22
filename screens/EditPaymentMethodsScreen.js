@@ -17,34 +17,109 @@ const EditPaymentMethodsScreen = () => {
   const [nickname, setNickname] = useState(params?.nickname || '');
   const [creditCard, setCreditCard] = useState(params?.creditCard || '');
   const [CVC, setCVC] = useState(params?.CVC || '');
-  const [expDate, setExpDate] = useState(params?.expDate || '');
+  const [expMonth, setExpMonth] = useState(params?.expMonth || '');
+  const [expYear, setExpYear] = useState(params?.expYear || '');
   const [name, setName] = useState(params?.name || '');
   const [ZIP, setZIP] = useState(params?.ZIP || '');
 
+  const handleCreditCardChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 16) {
+      setCreditCard(numericInput);
+    }
+  };
+
+  const handleCVCChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 3) {
+      setCVC(numericInput);
+    }
+  };
+
+  const handleMonthChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 2) {
+      setExpMonth(numericInput);
+    }
+  };
+
+  const handleYearChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 4) {
+      setExpYear(numericInput);
+    }
+  };
+
+  const handleZipChange = (text) => {
+    const numericInput = text.replace(/[^0-9]/g, '');
+    if (numericInput.length <= 5) {
+      setZIP(numericInput);
+    }
+  };
+
   const handleUpdatePaymentMethod = async () => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    const monthNum = parseInt(expMonth, 10);
+    const yearNum = parseInt(expYear, 10);
+  
+    if (!nickname || nickname.trim() === '') {
+      Alert.alert("Nickname is empty");
+      return;
+    }
+    if (creditCard.length !== 16) {
+      Alert.alert("Invalid credit card");
+      return;
+    }
+    if (CVC.length !== 3) {
+      Alert.alert("Invalid CVC number");
+      return;
+    }
+    if (yearNum < currentYear || yearNum > 2099 || (yearNum === currentYear && monthNum < currentMonth)) {
+      Alert.alert("Invalid Expiration Date");
+      return;
+    }
+    if (!name || name.trim() === '') {
+      Alert.alert("Name on card is empty");
+      return;
+    }
+    if (ZIP.length !== 5) {
+      Alert.alert("Invalid ZIP code");
+      return;
+    }
+  
+    // Fetch existing payment methods and check for duplicates
     try {
-      // Ensure params?.id is correctly passed when navigating to this screen
-      await updatePaymentMethodForUser(userId, params?.id, {
-        nickname, creditCard, CVC, expDate, name, ZIP
-      });
-      console.log("Payment method updated successfully");
-      Alert.alert(
-        "Success", // Alert Title
-        "Your payment method was updated successfully!", // Alert Message
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate('PaymentMethods'),
-          },
-        ]
+      const paymentMethods = await fetchAllPaymentMethodsForUser(userId);
+      const isDuplicate = paymentMethods.some(method => 
+        method.creditCard === creditCard &&
+        method.CVC === CVC &&
+        method.expMonth === expMonth &&
+        method.expYear === expYear &&
+        method.name === name &&
+        method.ZIP === ZIP
       );
-      //Fetch existing payment methods and go back to payments list
+  
+      if (isDuplicate) {
+        Alert.alert("Duplicate Error", "A payment method with these details has already been added.");
+        return;
+      }
+  
+      await updatePaymentMethodForUser(userId, { nickname, creditCard, CVC, expMonth, expYear, name, ZIP });
+      Alert.alert(
+        "Success", 
+        "Your payment method was saved successfully!", 
+        [{ text: "OK", onPress: () => navigation.navigate('PaymentMethods') }]
+      );
+  
       const updatedPaymentMethods = await fetchAllPaymentMethodsForUser(userId);
       navigation.navigate('PaymentMethods', { paymentMethods: updatedPaymentMethods });
     } catch (error) {
-      console.error("Failed to update payment method", error);
+      console.error("Failed to save payment method", error);
+      Alert.alert("Error", "Failed to save payment method.");
     }
   };
+  
 
   const handleDeletePaymentMethod = () => {
     // Use Alert to confirm deletion
@@ -117,34 +192,50 @@ const EditPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>Credit Card:</Text>
               <TextInput style={[styles.input, {width: '43%'}]}
-              onChangeText={setCreditCard} 
+              onChangeText={handleCreditCardChange} 
               value={creditCard}
-              placeholder={creditCard ? creditCard : "1234 5678 9012 3456"}
+              placeholder={creditCard ? creditCard : "1234567890123456"}
               placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+              keyboardType="number-pad"
+              secureTextEntry={true}/>
             </View> 
 
             <View>
               <Text style={styles.label}>CVC:</Text>
               <TextInput style={[styles.input, {width: '13%'}]} 
-              onChangeText={setCVC} 
+              onChangeText={handleCVCChange} 
               value={CVC} 
-              placeholder="123"
+              placeholder={CVC ? CVC : '123'}
               placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+              keyboardType="number-pad"
+              secureTextEntry={true}/>
             </View> 
 
-            <View>
-              <Text style={styles.label}>EXP Date:</Text>
-              <TextInput style={[styles.input, {width: '16%'}]}
-              onChangeText={setExpDate} 
-              value={expDate} 
-              placeholder="01/23"
-              placeholderTextColor={'grey'}
-              keyboardType="default"
-              secureTextEntry={false}/>
+            <View style={{ flexDirection: 'row' }}>
+              <View>
+                <Text style={styles.label}>EXP Month:</Text>
+                <TextInput 
+                  style={[styles.input, {width: '50%'}]}
+                  onChangeText={handleMonthChange}
+                  value={expMonth}
+                  placeholder={expMonth ? expMonth : 'MM'}
+                  placeholderTextColor={'grey'}
+                  keyboardType="number-pad"
+                  maxLength={2}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>EXP Year:</Text>
+                <TextInput 
+                  style={[styles.input, {width: '75%'}]}
+                  onChangeText={handleYearChange}
+                  value={expYear}
+                  placeholder={expYear ? expYear : 'YYYY'}
+                  placeholderTextColor={'grey'}
+                  keyboardType="number-pad"
+                  maxLength={4}
+                />
+              </View>
             </View>
 
             <View>
@@ -152,7 +243,7 @@ const EditPaymentMethodsScreen = () => {
               <TextInput style={styles.input} 
               onChangeText={setName} 
               value={name} 
-              placeholder="John Appleseed"
+              placeholder={name ? name : 'John Appleseed'}
               placeholderTextColor={'grey'}
               keyboardType="default"
               secureTextEntry={false}/>
@@ -161,11 +252,11 @@ const EditPaymentMethodsScreen = () => {
             <View>
               <Text style={styles.label}>ZIP:</Text>
               <TextInput style={[styles.input, {width: '17%'}]} 
-              onChangeText={setZIP} 
+              onChangeText={handleZipChange} 
               value={ZIP} 
-              placeholder="12345"
+              placeholder={ZIP ? ZIP : '12345'}
               placeholderTextColor={'grey'}
-              keyboardType="default"
+              keyboardType="number-pad"
               secureTextEntry={false}/>
             </View> 
 

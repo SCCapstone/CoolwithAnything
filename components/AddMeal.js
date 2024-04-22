@@ -6,12 +6,10 @@ import {
   Pressable,
   TouchableOpacity,
   Alert,
+  TextInput,
 } from "react-native";
 import MealHeader from "./MealHeader";
-import InputField from "./InputField";
-import DirectionsBox from "./DirectionsBox";
 import CreateButton from "./CreateButton"; // Reused from previous examples
-import CommentBox from "./CommentBox";
 import { useMeals } from "../services/MealsContext";
 import { useNavigation } from "@react-navigation/native";
 import { addMealData } from "../services/AuthAPI";
@@ -69,42 +67,59 @@ const AddMeal = ({ route }) => {
           setMealServings("");
           setMealInstructions("");
           setShowConfirmation(true); // Show the confirmation alert
-          navigation.navigate("Today");
+          navigation.navigate("Your Cookbook", { activeTab: "SavedMeals" });
         },
       },
     ]);
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="add-meal-test">
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Text style={styles.createText}>Create Meal</Text>
+        <Text style={styles.createText} testID="add-meal-safe">Create Meal</Text>
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
         <MealHeader onClose={() => handleclose()} />
-        <InputField
+        <TextInput
+          testID="meal-name"
+          style={styles.input}
           value={mealName}
           placeholder="Meal Name"
+          placeholderTextColor="grey"
           onChangeText={setMealName}
         />
-        <DirectionsBox
+        <TextInput
+          testID="meal-ingredients"
+          style={[styles.input, styles.tallInput]}
           value={mealIngredients}
+          placeholder="Add ingredients..."
+          placeholderTextColor="grey"
+          multiline
           onChangeText={setMealIngredients}
         />
-        <InputField
+        <TextInput
+          testID="meal-servings"
+          style={styles.input}
           value={mealServing}
           placeholder="Servings"
+          placeholderTextColor="grey"
+          keyboardType="numeric"
           onChangeText={setMealServings}
         />
-        <CommentBox
+        <TextInput
+          testID="meal-instructions"
+          style={[styles.input, styles.tallInput]}
           value={mealInstructions}
+          placeholder="Add instructions..."
+          placeholderTextColor="grey"
+          multiline
           onChangeText={setMealInstructions}
         />
-        <CreateButton onPress={() => handleAdd()} label={"Create Meal"} />
+        <CreateButton onPress={() => handleAdd()} label={"Create Meal"} testID="submit-meal"/>
 
         {/* Confirmation Alert */}
         {showConfirmation &&

@@ -17,7 +17,6 @@ import { useNavigation } from "@react-navigation/native";
 import { addWorkoutData } from "../services/AuthAPI";
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/AddStyles";
-import CommentBox from "./CommentBox";
 
 const AddWorkout = ({ route }) => {
   const navigation = useNavigation();
@@ -85,54 +84,73 @@ const AddWorkout = ({ route }) => {
           setWorkoutDifficulty("");
           setWorkoutInstructions("");
           setShowConfirmation(true); // Show the confirmation alert
-          navigation.navigate("Today");
+          navigation.navigate("Your Workouts", { activeTab: "SavedWorkouts" });
         },
       },
     ]);
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="add-workout-test">
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Text style={styles.createText}>Create Workout</Text>
+        <Text style={styles.createText} testID="add-workout-safe">Create Workout</Text>
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
         <WorkoutHeader onClose={() => handleClose()} />
-        <InputField
+        <TextInput
+          testID="workout-name"
+          style={styles.input}
           value={workoutName}
           placeholder="Workout Name"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutName}
         />
-        <InputField
+        <TextInput
+        testID="workout-type"
+          style={styles.input}
           value={workoutType}
           placeholder="Type"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutType}
         />
-        <InputField
+        <TextInput
+        testID="workout-muscle"
+          style={styles.input}
           value={workoutMuscle}
           placeholder="Muscle"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutMuscle}
         />
-        <InputField
+        <TextInput
+          testID="workout-equipment"
+          style={styles.input}
           value={workoutEquipment}
           placeholder="Equipment"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutEquipment}
         />
-        <InputField
+        <TextInput
+          testID="workout-difficulty"
+          style={styles.input}
           value={workoutDifficulty}
           placeholder="Difficulty"
+          placeholderTextColor="grey"
           onChangeText={setWorkoutDifficulty}
         />
-        <CommentBox
+        <TextInput
+          testID="workout-instructions"
+          style={[styles.input, styles.tallInput]}
           value={workoutInstructions}
-          placeholder="Instructions"
+          placeholder="Add instructions..."
+          placeholderTextColor="grey"
+          multiline
           onChangeText={setWorkoutInstructions}
         />
-        <CreateButton onPress={() => handleAdd()} label={"Create Workout"} />
+        <CreateButton onPress={() => handleAdd()} label={"Create Workout"} testID="submit-workout"/>
 
         {/* Confirmation Alert */}
         {showConfirmation &&

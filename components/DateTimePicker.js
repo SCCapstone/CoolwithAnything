@@ -1,6 +1,6 @@
 // components/DateTimePicker.js
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, Platform } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const DateTimePicker = ({ onConfirm, onCancel }) => {
@@ -21,8 +21,11 @@ const DateTimePicker = ({ onConfirm, onCancel }) => {
 
   return (
     <View style={styles.container}>
-      <Button title="Show Date Picker" onPress={showDatePicker} />
+      <TouchableOpacity style={styles.buttonContainer} title="Show Date Picker" onPress={showDatePicker}>
+        <Text style={styles.buttonText}>Show Date Picker</Text>
+      </TouchableOpacity>
       <DateTimePickerModal
+      style={styles.container}
         isVisible={isPickerVisible}
         mode="datetime"
         onConfirm={handleConfirm}
@@ -34,8 +37,24 @@ const DateTimePicker = ({ onConfirm, onCancel }) => {
 
 const styles = StyleSheet.create({
   container: {
+    borderRadius: 5,
+    alignItems: "center",
     marginVertical: 10,
   },
+  buttonContainer: {
+    backgroundColor: '#5da8af',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    width: '80%',
+    height: 40,
+  },
+  buttonText: {
+    marginTop: 2,
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '700',
+  }
 });
 
 export default DateTimePicker;

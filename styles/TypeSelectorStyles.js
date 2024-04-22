@@ -7,18 +7,19 @@ const getStyles = (theme) => StyleSheet.create({
         padding: 10,
       },
       typeButton: {
-        padding: 8,
-        borderRadius: 20,
+        padding: 13,
+        borderRadius: 40,
         borderWidth: 1,
-        borderColor: '#ccc', // Normal border color
-        backgroundColor: 'white',
+        borderColor: '#647e87', // Normal border color
+        backgroundColor: '#3e5e60',
       },
       selectedTypeButton: {
-        backgroundColor: '#007bff', // Background color for the selected type
-        borderColor: '#0056b3', // Optional: change border color for the selected type
+        backgroundColor: '#5da8af',
+        borderColor: '#8dc2c7', 
       },
       typeText: {
-        color: '#000', // Text color for the type button
+        color: 'white', // Text color for the type button
+        fontWeight: '700',
       },
     });
 export default getStyles;

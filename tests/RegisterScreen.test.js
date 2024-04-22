@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import RegisterScreen from '../screens/RegisterScreen';
-import { Alert } from 'react-native';
+import { Alert, BackHandler } from 'react-native';
 import * as AuthAPI from '../services/AuthAPI';
 
-// Mock modules
 jest.mock('react-native', () => {
   const actualRN = jest.requireActual('react-native');
   return {
     ...actualRN,
     Alert: { alert: jest.fn() },
+    BackHandler: { addEventListener: jest.fn(), removeEventListener: jest.fn() },
   };
 });
 
@@ -20,9 +20,9 @@ jest.mock('../services/AuthAPI', () => ({
 describe('RegisterScreen', () => {
   const mockNavigation = {
     navigate: jest.fn(),
+    reset: jest.fn(),
   };
 
-  // Mock data for successful registration
   const mockUserData = {
     email: 'test@example.com',
     firstName: 'John',
@@ -33,7 +33,6 @@ describe('RegisterScreen', () => {
     confirmPassword: 'password123'
   };
 
-  // Helper function to fill in form fields
   const fillForm = (queryByPlaceholderText) => {
     fireEvent.changeText(queryByPlaceholderText('Email'), mockUserData.email);
     fireEvent.changeText(queryByPlaceholderText('First Name'), mockUserData.firstName);
@@ -65,8 +64,8 @@ describe('RegisterScreen', () => {
 
   it('shows alert on password mismatch', () => {
     const { queryByPlaceholderText, queryByText } = render(<RegisterScreen navigation={mockNavigation} />);
-  
-    // Fill in all fields, but with mismatching passwords
+    
+    // Fill in all fields first
     fireEvent.changeText(queryByPlaceholderText('Email'), 'test@example.com');
     fireEvent.changeText(queryByPlaceholderText('First Name'), 'John');
     fireEvent.changeText(queryByPlaceholderText('Last Name'), 'Doe');
@@ -74,37 +73,40 @@ describe('RegisterScreen', () => {
     fireEvent.changeText(queryByPlaceholderText('Date of Birth (MM-DD-YYYY)'), '01-01-1990');
     fireEvent.changeText(queryByPlaceholderText('Password'), 'password123');
     fireEvent.changeText(queryByPlaceholderText('Confirm Password'), 'differentPassword');
-  
+    
     fireEvent.press(queryByText('Sign Up'));
-  
+    
     expect(Alert.alert).toHaveBeenCalledWith('Passwords do not match', expect.anything(), expect.anything());
   });
   
 
   it('navigates on successful registration', async () => {
     AuthAPI.registerUser.mockResolvedValueOnce({ uid: '123' });
-  
     const { queryByPlaceholderText, queryByText } = render(<RegisterScreen navigation={mockNavigation} />);
-  
     fillForm(queryByPlaceholderText);
     fireEvent.press(queryByText('Sign Up'));
-  
     await waitFor(() => {
-      expect(mockNavigation.navigate).toHaveBeenCalledWith('Biometric', { userId: '123' });
+      expect(mockNavigation.reset).toHaveBeenCalledWith({
+        index: 0,
+        routes: [{ name: 'Biometric', params: { userId: '123' } }],
+      });
     });
   });
 
   it('shows error on registration failure', async () => {
     const errorMessage = 'Registration failed';
     AuthAPI.registerUser.mockRejectedValueOnce(new Error(errorMessage));
-  
     const { queryByPlaceholderText, queryByText } = render(<RegisterScreen navigation={mockNavigation} />);
-  
     fillForm(queryByPlaceholderText);
     fireEvent.press(queryByText('Sign Up'));
-  
     await waitFor(() => {
       expect(Alert.alert).toHaveBeenCalledWith('Signup Failed', errorMessage);
     });
+  });
+
+  it('handles Android back button press', () => {
+    render(<RegisterScreen navigation={mockNavigation} />);
+    const backHandler = BackHandler.addEventListener.mock.calls.find(call => call[0] === 'hardwareBackPress')[1];
+    expect(backHandler()).toBe(true);
   });
 });

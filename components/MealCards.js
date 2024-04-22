@@ -16,6 +16,7 @@ import { useTheme } from "../services/ThemeContext.js";
 import { addMealData } from "../services/AuthAPI";
 import { useMeals } from "../services/MealsContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const imageMapping = {
   "Elegant Crabmeat Balls": require("../images/cookbook/crabballs.png"),
@@ -69,6 +70,7 @@ const MealCards = ({
   closeModal,
 }) => {
   const auth = getAuth();
+  const navigation = useNavigation();
   const userID = auth.currentUser ? auth.currentUser.uid : null;
   const { setSavedMeals } = useMeals();
   const [mealName, setMealName] = useState("");
@@ -104,6 +106,8 @@ const MealCards = ({
     closeModal();
 
     Alert.alert("Recipe added to saved");
+
+    navigation.navigate("Your Cookbook", { activeTab: "SavedMeals" });
   };
 
   return (

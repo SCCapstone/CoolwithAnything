@@ -18,6 +18,21 @@ const getStyles = (theme) => StyleSheet.create({
       fontSize: 18,
       color: "blue",
     },
+    input: {
+      height: 50,
+      margin: 12,
+      marginBottom: 20,
+      borderWidth: 1,
+      borderColor: 'grey',
+      padding: 10,
+      textAlignVertical: 'top',
+      color: theme === 'dark' ? 'white' : 'black',
+      borderRadius: 5,
+      width: '90%',
+    },
+    tallInput: {
+      height: 100,
+    },
     totalCalories: {
       flexDirection: "row",
       justifyContent: "space-between",

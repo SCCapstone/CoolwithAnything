@@ -38,6 +38,7 @@ const BrowseWorkouts = ({props}) => {
           <TouchableOpacity
             onPress={() => handleQueryButtonClick("biceps")}
             style={styles.wrapper}
+            testID="browse-workouts-biceps-test"
           >
             {
               <ImageBackground

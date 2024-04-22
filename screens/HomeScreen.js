@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Pressable, BackHandler, ScrollView } from "react-native";
+import { View, Text, Pressable, BackHandler, ScrollView, Button } from "react-native";
 import ProgressBar from "../components/ProgressBar";
 import CategoryCounter from "../components/CategoryCounter";
 import DateTracker from "../components/DateTracker";
@@ -18,6 +18,7 @@ import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/HomeScreenStyles";
 import eventEmitter from "../components/EventEmitter";
 import { set } from "date-fns";
+import { LogBox } from 'react-native';  // Hide warnings
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -33,6 +34,7 @@ const HomeScreen = ({ route }) => {
   const [work, setWork] = useState(0);  
   const [gym, setGym] = useState(0);  
   const [personal, setPersonal] = useState(0);
+  LogBox.ignoreAllLogs();  // Hide warnings
 
   // Function to fetch tasks and calculate progress
   const fetchAndCalculateTasks = async () => {
@@ -83,8 +85,6 @@ const HomeScreen = ({ route }) => {
   }, [userID]);
 
 
-
-
   useEffect(() => {
     const userID = route.params.userID; // Assuming userID is passed correctly
     const fetchAndCalculateTasks = async () => {
@@ -125,7 +125,7 @@ const HomeScreen = ({ route }) => {
         const user = await getUserData(userID);
         if (user) {
           setUserData({
-            name: user.name,
+            name: user.firstName,
             birthday: user.date_of_birth,
           });
         }
@@ -155,7 +155,6 @@ const HomeScreen = ({ route }) => {
       fetchData();
     }
   }, [userID]);
-  console.log("Birthday (HS): ", userData.birthday);
 
   // Handle the hardware back button on Android devices
   useEffect(() => {
@@ -173,7 +172,7 @@ const HomeScreen = ({ route }) => {
     return () => backHandler.remove();
   }, []);
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }} testID='home-screen'>
       <View style={styles.homeTextContainer}>
         <View style={styles.headerContainer}>
           <View style={{ flex: 1 }}>{/* Empty View as Spacer */}</View>
@@ -181,7 +180,7 @@ const HomeScreen = ({ route }) => {
             <Text style={styles.homeText}>Today</Text>
           </View>
           <View style={{ flex: 1, alignItems: "flex-end" }}>
-            <AccountButton navigation={navigation} />
+            <AccountButton navigation={navigation} testID='settings-button'/>
           </View>
         </View>
         <View style={{ width: 24 }} />
@@ -211,11 +210,12 @@ const HomeScreen = ({ route }) => {
           userID={userID}
           navigation={navigation}
           birthday={userData.birthday}
-        />
-        <BirthdayCelebration
           userName={userData.name}
-          birthday={userData.birthday}
         />
+        {/* Admin Panel Button */}
+        {/* <View style={styles.indicatorContainer}>
+        <Button title="Clean User Data" onPress={() => navigation.navigate("AdminPanel")} />
+        </View> */}
       </ScrollView>
     </View>
   );

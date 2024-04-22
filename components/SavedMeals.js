@@ -9,22 +9,22 @@ import {
   updateMealData,
 } from "../services/AuthAPI";
 
-const SavedMeals = (props) => {
-  //const { savedMeals, setSavedMeals } = useMeals();
-  const [savedMeals, setSavedMeals] = useState();
+const SavedMeals = ({ userID }) => {
+  const { savedMeals, setSavedMeals } = useMeals();
+  //const [savedMeals, setSavedMeals] = useMeals();
   useEffect(() => {
     getMeals(); // Code to run when meals change, if necessary
-  }, []);
+  }, [userID, setSavedMeals]);
 
   const getMeals = async () => {
-    let meals = await getMealData(props.userID);
+    let meals = await getMealData(userID);
     setSavedMeals(meals);
   };
   // Function to delete a meal from the list
   const deleteMeal = async (index) => {
     const newMeals = [...savedMeals];
     let mealDelete = newMeals[index];
-    await deleteMealData(props.userID, mealDelete.id);
+    await deleteMealData(userID, mealDelete.id);
     newMeals.splice(index, 1);
     setSavedMeals(newMeals);
   };
@@ -33,7 +33,7 @@ const SavedMeals = (props) => {
   const editMeal = async (cardMeal, index) => {
     const newMeals = [...savedMeals];
     newMeals[index] = cardMeal;
-    await updateMealData(props.userID, cardMeal.id, cardMeal);
+    await updateMealData(userID, cardMeal.id, cardMeal);
     setSavedMeals(newMeals);
   };
 
