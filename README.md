@@ -105,6 +105,7 @@ npx detox test -c android.debug
 
 ### Running Unit Tests
 Unit test files located in the `./tests` directory
+
 To run the unit tests, execute:
 
 ```
