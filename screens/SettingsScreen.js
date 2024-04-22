@@ -147,12 +147,14 @@ function SelectProfile() {
                 placeholder={firstName ? firstName : 'John'}
                 placeholderTextColor={'#999897'}
                 onChangeText={(text) => setEditedFirstName(text)}
+                testID='first-name-input'
               />
               <TextInput
                 style={{ ...styles.modalInput, flex: 1 }}
                 placeholder={lastName ? lastName : 'Doe'}
                 placeholderTextColor={'#999897'}
                 onChangeText={(text) => setEditedLastName(text)}
+                testID='last-name-input'
               />
             </View>
             <TextInput
@@ -194,7 +196,7 @@ function SelectProfile() {
               keyboardType={"number-pad"}
             />
             <View style={styles.modalButtonContainer}>
-            <TouchableOpacity style={styles.modalSaveButton} onPress={handleSaveChanges} >
+            <TouchableOpacity style={styles.modalSaveButton} onPress={handleSaveChanges} testID='save-button'>
               <Text style={styles.modalText}>Save</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalCancelButton} onPress={closeModal} testID='cancel-button' >

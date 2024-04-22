@@ -79,6 +79,7 @@ const CreateTaskScreen = ({ route }) => {
         selectedValue={priority}
         onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
         style={styles.priorityPicker}
+        testID="priority-selector"
       >
         <Picker.Item label="Low" value="low" />
         <Picker.Item label="Medium" value="medium" />
@@ -88,6 +89,7 @@ const CreateTaskScreen = ({ route }) => {
         onPress={handleCreateTask}
         label="Create Task"
         disabled={!taskName.trim()}
+        testID="create-task-button"
       />
     </ScrollView>
   );
