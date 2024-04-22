@@ -3,11 +3,14 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { fetchTasksForUser } from '../services/AuthAPI';
 import { format } from 'date-fns';
 import eventEmitter from '../components/EventEmitter';
-import styles from '../styles/CategoryTasksViewStyle'; // Ensure this path matches the location of your styles
+import { useTheme } from '../services/ThemeContext';
+import getStyles from '../styles/CategoryTasksViewStyle';
 
 const CategoryTasksView = ({ route, navigation }) => {
     const { category, userID } = route.params;
     const [tasks, setTasks] = useState([]);
+    const { theme } = useTheme();
+    const styles = getStyles(theme);
 
     useEffect(() => {
         const fetchCategoryTasks = async () => {

@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#f0f0f0', // Light grey background
+        backgroundColor: theme === 'dark' ? '#262626' : "white",
     },
     title: {
         fontSize: 24,
@@ -36,3 +36,5 @@ export default StyleSheet.create({
         borderRadius: 10, // Ensures the ripple effect stays within the rounded borders
     },
 });
+
+export default getStyles;
