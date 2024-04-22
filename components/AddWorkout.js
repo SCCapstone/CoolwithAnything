@@ -18,7 +18,7 @@ import { addWorkoutData } from "../services/AuthAPI";
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/AddStyles";
 
-const AddWorkout = ({ route }) => {
+const AddWorkout = ({ route, testID }) => {
   const navigation = useNavigation();
   const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const { userID } = route.params;
@@ -91,17 +91,18 @@ const AddWorkout = ({ route }) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="add-workout-test">
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Text style={styles.createText}>Create Workout</Text>
+        <Text style={styles.createText} testID="add-workout-safe">Create Workout</Text>
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
         <WorkoutHeader onClose={() => handleClose()} />
         <TextInput
+          testID="workout-name"
           style={styles.input}
           value={workoutName}
           placeholder="Workout Name"
@@ -109,6 +110,7 @@ const AddWorkout = ({ route }) => {
           onChangeText={setWorkoutName}
         />
         <TextInput
+        testID="workout-type"
           style={styles.input}
           value={workoutType}
           placeholder="Type"
@@ -116,6 +118,7 @@ const AddWorkout = ({ route }) => {
           onChangeText={setWorkoutType}
         />
         <TextInput
+        testID="workout-muscle"
           style={styles.input}
           value={workoutMuscle}
           placeholder="Muscle"
@@ -123,6 +126,7 @@ const AddWorkout = ({ route }) => {
           onChangeText={setWorkoutMuscle}
         />
         <TextInput
+          testID="workout-equipment"
           style={styles.input}
           value={workoutEquipment}
           placeholder="Equipment"
@@ -130,6 +134,7 @@ const AddWorkout = ({ route }) => {
           onChangeText={setWorkoutEquipment}
         />
         <TextInput
+          testID="workout-difficulty"
           style={styles.input}
           value={workoutDifficulty}
           placeholder="Difficulty"
@@ -137,6 +142,7 @@ const AddWorkout = ({ route }) => {
           onChangeText={setWorkoutDifficulty}
         />
         <TextInput
+          testID="workout-instructions"
           style={[styles.input, styles.tallInput]}
           value={workoutInstructions}
           placeholder="Add instructions..."
@@ -144,7 +150,7 @@ const AddWorkout = ({ route }) => {
           multiline
           onChangeText={setWorkoutInstructions}
         />
-        <CreateButton onPress={() => handleAdd()} label={"Create Workout"} />
+        <CreateButton onPress={() => handleAdd()} label={"Create Workout"} testID="submit-workout"/>
 
         {/* Confirmation Alert */}
         {showConfirmation &&

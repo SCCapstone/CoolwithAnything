@@ -18,7 +18,7 @@ import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/HomeScreenStyles";
 import eventEmitter from "../components/EventEmitter";
 import { set } from "date-fns";
-import { LogBox } from 'react-native';
+import { LogBox } from 'react-native';  // Hide warnings
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ const HomeScreen = ({ route }) => {
   const [work, setWork] = useState(0);  
   const [gym, setGym] = useState(0);  
   const [personal, setPersonal] = useState(0);
-  LogBox.ignoreAllLogs();
+  LogBox.ignoreAllLogs();  // Hide warnings
 
   // Function to fetch tasks and calculate progress
   const fetchAndCalculateTasks = async () => {

@@ -42,6 +42,7 @@ const CookbookScreen = ({ route }) => {
               styles.tabItem,
               activeTab === "BrowseMeals" && styles.activeTab,
             ]}
+            testID='browse-cookbook-test'
             onPress={() => setActiveTab("BrowseMeals")}
           >
             <Text style={styles.tabText}>Browse</Text>

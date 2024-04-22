@@ -37,6 +37,7 @@ const BrowseMeals = ({ route }) => {
           <TouchableOpacity
             onPress={() => handleQueryButtonClick("meat")}
             style={styles.wrapper}
+            testID="browse-cookbook-meat-test"
           >
             {
               <ImageBackground

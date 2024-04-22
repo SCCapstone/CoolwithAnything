@@ -21,7 +21,7 @@ const WorkoutScreen = ({ route }) => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "BrowseWorkouts":
-        return <BrowseWorkouts userID={userID} />;
+        return <BrowseWorkouts userID={userID}/>;
       case "SavedWorkouts":
         return <SavedWorkouts userID={userID} />; // No props passed here
       default:
@@ -42,6 +42,7 @@ const WorkoutScreen = ({ route }) => {
               styles.tabItem,
               activeTab === "BrowseWorkouts" && styles.activeTab,
             ]}
+            testID='browse-workouts-test'
             onPress={() => setActiveTab("BrowseWorkouts")}
           >
             <Text style={styles.tabText}>Browse</Text>
