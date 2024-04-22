@@ -64,17 +64,18 @@ const CreateTaskScreen = ({ route }) => {
     navigation.navigate("Today");
   };
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="add-task-test">
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Text style={styles.createText}>Create Task</Text>
+        <Text style={styles.createText} testID="add-task-safe">Create Task</Text>
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
         <Header onClose={() => handleclose()} />
         <TextInput
+          testID="task-name"
           style={styles.input}
           value={taskName}
           placeholder="Name"
@@ -83,6 +84,7 @@ const CreateTaskScreen = ({ route }) => {
         />
         <DateTimePicker onConfirm={setDate} />
         <TextInput
+          testID="task-location"
           style={styles.input}
           value={location}
           placeholder="Location"
@@ -92,8 +94,10 @@ const CreateTaskScreen = ({ route }) => {
         <TypeSelector
           selectedType={taskType}
           onSelect={(type) => setTaskType(type)}
+          testID="task-type"
         />
-          <TextInput
+        <TextInput
+          testID="task-notes"
           style={[styles.input, styles.tallInput]}
           value={comment}
           placeholder="Add notes..."
@@ -113,7 +117,7 @@ const CreateTaskScreen = ({ route }) => {
             <Picker.Item label="High" value="high" />
           </Picker>
         </View>
-        <CreateButton onPress={handleCreateTask} label={"Create Task"} />
+        <CreateButton onPress={handleCreateTask} label={"Create Task"} testID="submit-task"/>
       </ScrollView>
     </View>
   );

@@ -5,7 +5,7 @@ import getStyles from "../styles/TypeSelectorStyles.js";
 
 const types = ['School', 'Work', 'Personal', 'Gym'];
 
-const TypeSelector = ({ selectedType, onSelect }) => {
+const TypeSelector = ({ selectedType, onSelect, testID }) => {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   return (
@@ -13,6 +13,7 @@ const TypeSelector = ({ selectedType, onSelect }) => {
       {types.map((type) => (
         <TouchableOpacity
           key={type}
+          testID={`${testID}-${type}`}
           style={[
             styles.typeButton,
             selectedType === type && styles.selectedTypeButton // Apply the selected style if this type is selected
