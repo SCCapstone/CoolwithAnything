@@ -43,6 +43,5 @@ describe('Add payment test', () => {
 
       await tapVisibleButton('button-save-payment-method');
       await element(by.text('OK')).tap();
-      //await expect(element(by.text('Your payment method was saved successfully!'))).toBeVisible().withTimeout(TIMEOUT);
   });
 });

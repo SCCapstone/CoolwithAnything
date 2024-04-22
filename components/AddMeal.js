@@ -74,17 +74,18 @@ const AddMeal = ({ route }) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen} testID="add-meal-test">
       <View style={styles.createTextContainer}>
         <Pressable onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </Pressable>
-        <Text style={styles.createText}>Create Meal</Text>
+        <Text style={styles.createText} testID="add-meal-safe">Create Meal</Text>
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
         <MealHeader onClose={() => handleclose()} />
         <TextInput
+          testID="meal-name"
           style={styles.input}
           value={mealName}
           placeholder="Meal Name"
@@ -92,6 +93,7 @@ const AddMeal = ({ route }) => {
           onChangeText={setMealName}
         />
         <TextInput
+          testID="meal-ingredients"
           style={[styles.input, styles.tallInput]}
           value={mealIngredients}
           placeholder="Add ingredients..."
@@ -100,6 +102,7 @@ const AddMeal = ({ route }) => {
           onChangeText={setMealIngredients}
         />
         <TextInput
+          testID="meal-servings"
           style={styles.input}
           value={mealServing}
           placeholder="Servings"
@@ -108,6 +111,7 @@ const AddMeal = ({ route }) => {
           onChangeText={setMealServings}
         />
         <TextInput
+          testID="meal-instructions"
           style={[styles.input, styles.tallInput]}
           value={mealInstructions}
           placeholder="Add instructions..."
@@ -115,7 +119,7 @@ const AddMeal = ({ route }) => {
           multiline
           onChangeText={setMealInstructions}
         />
-        <CreateButton onPress={() => handleAdd()} label={"Create Meal"} />
+        <CreateButton onPress={() => handleAdd()} label={"Create Meal"} testID="submit-meal"/>
 
         {/* Confirmation Alert */}
         {showConfirmation &&

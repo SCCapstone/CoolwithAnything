@@ -18,7 +18,7 @@ import { addWorkoutData } from "../services/AuthAPI";
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/AddStyles";
 
-const AddWorkout = ({ route, testID }) => {
+const AddWorkout = ({ route }) => {
   const navigation = useNavigation();
   const { savedWorkouts, setSavedWorkouts } = useWorkouts();
   const { userID } = route.params;

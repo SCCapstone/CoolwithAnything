@@ -28,7 +28,7 @@ const AddScreenTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Create Workouttttt"
+        name="Create Workout"
         component={AddWorkout}
         options={{
           tabBarButton: (props) => <TouchableOpacity {...props} testID="add-workout"/>,
