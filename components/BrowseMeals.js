@@ -102,7 +102,7 @@ const BrowseMeals = ({ route }) => {
             <View style={{ width: 24 }} />
           </View>
           {/* Render CookbookApi component with the selected query */}
-          {selectedQuery && <CookbookApi query={selectedQuery} route={route}/>}
+          {selectedQuery && <CookbookApi query={selectedQuery}/>}
         </View>
         </Modal>
   </View>
