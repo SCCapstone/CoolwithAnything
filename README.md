@@ -79,21 +79,29 @@ We follow the styling conventions enforced by [Prettier](https://prettier.io/). 
 
 ### Testing Technology
 
-We will be using Jest and Detoxfor automated testing.
+We will be using Jest and Detox for automated testing.
 
 ### Running Behavioral Tests
 
 To run the behavioral tests using Detox:
 
 First run:
+
+```
 npx detox build -c android.debug
+```
 
 Start the emulator via the terminal
+
+```
 npx expo start
+```
 
 Open another terminal and run:
-npx detox test -c android.debug
 
+```
+npx detox test -c android.debug
+```
 
 ### Running Unit Tests
 
