@@ -162,7 +162,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: theme === 'dark' ? '#262626' : "white",
-    height: height * 1.5,
+    height: height * 2.1,
   },
   cardModalHeader: {
     fontSize: 20,

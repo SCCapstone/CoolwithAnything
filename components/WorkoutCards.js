@@ -193,16 +193,16 @@ const WorkoutCards = ({
                     </Text>
                   </Text>
                   <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Instruction:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedExercise.instructions}
-                    </Text>
-                  </Text>
-                  <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Need Help?</Text>{" "}
-                    <Text style={styles.apiText}>
-                      Link
-                    </Text>
+                    <Text style={styles.label}>Instructions: {"\n"}</Text>
+                    {selectedExercise.instructions
+                      .split(".")
+                      .map((step) => step.trim()) // Trim whitespace from each step
+                      .filter((step) => step.length > 0) // Filter out any empty strings
+                      .map((step, index) => (
+                        <Text key={index} style={styles.apiText}>
+                          {"\n" + (index + 1)}. {step}
+                        </Text>
+                      ))}
                   </Text>
                 </View>
               )}

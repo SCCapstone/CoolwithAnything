@@ -164,10 +164,14 @@ const MealCards = ({
                     <Text style={styles.label}>{selectedRecipe.title}</Text>
                   </Text>
                   <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Ingredients:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedRecipe.ingredients}
-                    </Text>
+                    <Text style={styles.label}>Ingredients: {"\n"}</Text>
+                    {selectedRecipe.ingredients
+                      .split("|")
+                      .map((ingredient, index) => (
+                        <Text key={index} style={styles.apiText}>
+                          {"\n•"} {ingredient.trim()}
+                        </Text>
+                      ))}
                   </Text>
                   <Text style={styles.textContainer}>
                     <Text style={styles.label}>Servings:</Text>{" "}
@@ -176,10 +180,16 @@ const MealCards = ({
                     </Text>
                   </Text>
                   <Text style={styles.textContainer}>
-                    <Text style={styles.label}>Instructions:</Text>{" "}
-                    <Text style={styles.apiText}>
-                      {selectedRecipe.instructions}
-                    </Text>
+                    <Text style={styles.label}>Instructions: {"\n"}</Text>
+                    {selectedRecipe.instructions
+                      .split(".")
+                      .map((step) => step.trim()) // Trim whitespace from each step
+                      .filter((step) => step.length > 0) // Filter out any empty strings
+                      .map((step, index) => (
+                        <Text key={index} style={styles.apiText}>
+                          {"\n" + (index + 1)}. {step}
+                        </Text>
+                      ))}
                   </Text>
                   <TouchableOpacity
                     onPress={() => {
