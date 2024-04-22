@@ -197,7 +197,7 @@ function SelectProfile() {
             <TouchableOpacity style={styles.modalSaveButton} onPress={handleSaveChanges} >
               <Text style={styles.modalText}>Save</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalCancelButton} onPress={closeModal} >
+            <TouchableOpacity style={styles.modalCancelButton} onPress={closeModal} testID='cancel-button' >
               <Text style={styles.modalText}>Cancel</Text>
             </TouchableOpacity>
             </View>
@@ -275,6 +275,7 @@ function SelectAccount() {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
+          testID='sign-out-button'
           style={styles.editButton}
           onPress={() => {
             Alert.alert(

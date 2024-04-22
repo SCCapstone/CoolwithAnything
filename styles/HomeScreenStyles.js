@@ -3,15 +3,14 @@ const { width, height } = Dimensions.get("window");
 
 const getStyles = (theme) =>
   StyleSheet.create({
-
     //-----HomeScreen.js-----//
     container: {
       flex: 1,
       backgroundColor: theme === "dark" ? "#262626" : "white",
     },
     headerContainer: {
-      flexDirection: 'row', 
-      alignItems: 'center',
+      flexDirection: "row",
+      alignItems: "center",
       marginTop: 36,
       paddingHorizontal: 10,
     },
@@ -32,12 +31,11 @@ const getStyles = (theme) =>
     },
     title: {
       color: theme === "dark" ? "white" : "black",
-      fontWeight: '700',
+      fontWeight: "700",
       fontSize: 24,
       paddingLeft: 20,
       marginTop: 20,
     },
-
 
     //-----DateTracker.js-----//
     dateTrackerContainer: {
@@ -53,9 +51,9 @@ const getStyles = (theme) =>
 
     //-----AccountButton.js-----//
     accountContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
       padding: 10,
     },
     accountButton: {
@@ -117,6 +115,14 @@ const getStyles = (theme) =>
       marginVertical: 2,
       color: theme === "dark" ? "white" : "black",
     },
+    // In your HomeScreenStyles.js or wherever you define styles
+    todayDay: {
+      backgroundColor: "white", // Or any color that stands out
+      borderRadius: 50,
+      color: "white",
+      borderColor: "black",
+      borderWidth: 1,
+    },
     selectedDay: {
       backgroundColor: "#63D4D5",
       borderRadius: 20,
@@ -154,7 +160,7 @@ const getStyles = (theme) =>
       color: theme === "dark" ? "white" : "black",
       alignSelf: "center",
     },
-    typeIndicatorText:{
+    typeIndicatorText: {
       color: theme === "dark" ? "white" : "black",
       alignSelf: "center",
     },
@@ -163,7 +169,7 @@ const getStyles = (theme) =>
       width: 6,
       height: 6,
       borderRadius: 50,
-      marginHorizontal: 1, 
+      marginHorizontal: 1,
     },
     calendarContainer: {
       backgroundColor: theme === "dark" ? "#262626" : "white",
@@ -223,31 +229,30 @@ const getStyles = (theme) =>
 
     //----- BDCelebration.js -----//
     bdayContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
       padding: 20,
     },
     greeting: {
       fontSize: 24,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       marginBottom: 10,
-      textAlign: 'center',
+      textAlign: "center",
       color: theme === "dark" ? "white" : "black",
     },
     icon: {
       width: 50,
       height: 50,
       marginBottom: 10,
-      alignSelf: 'center',
+      alignSelf: "center",
     },
     message: {
       fontSize: 16,
-      textAlign: 'center',
+      textAlign: "center",
       marginTop: 10,
       color: theme === "dark" ? "white" : "black",
     },
 
-    
     //----- I DONT THINK THESE ARE USED ANYWHERE TBH - Kayly -----//
     taskIndicatorText: {
       color: "#FFFFFF",

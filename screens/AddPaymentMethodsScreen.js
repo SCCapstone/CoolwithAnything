@@ -5,7 +5,6 @@ import { useTheme } from '../services/ThemeContext';
 import { savePaymentMethodForUser, fetchAllPaymentMethodsForUser } from "../services/AuthAPI";
 import { getAuth } from 'firebase/auth';
 import getStyles from "../styles/AddPaymentMethodsStyle";
-import { numberOfLines } from 'deprecated-react-native-prop-types/DeprecatedTextPropTypes';
 
 const AddPaymentMethodsScreen = () => {
   const navigation = useNavigation();
@@ -75,7 +74,7 @@ const AddPaymentMethodsScreen = () => {
       Alert.alert("Invalid CVC number");
       return;
     }
-    if (yearNum < currentYear || yearNum > 2099 || (yearNum === currentYear && monthNum < currentMonth)) {
+    if (yearNum < currentYear || yearNum > 2099 || (yearNum === currentYear && monthNum < currentMonth) || monthNum < 1 || monthNum > 12) {
       Alert.alert("Invalid Expiration Date");
       return;
     }

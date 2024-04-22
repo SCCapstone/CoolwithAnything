@@ -36,7 +36,7 @@ const BiometricScreen = ({ navigation, route }) => {
   const { userId } = route.params;
 
   const handleBio = async () => {
-    if (!feet || !inches || !weight || !fitnessLevel || !fitnessGoal) {
+    if (!feet && !inches && !weight && !fitnessLevel && !fitnessGoal) {
       Alert.alert(
         "Missing Fields",
         "Please fill in all fields or select Skip Bio",
