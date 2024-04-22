@@ -83,6 +83,8 @@ We will be using Jest and Detox for automated testing.
 
 ### Running Behavioral Tests
 
+Behavioral tests can be found in the `./e2e` directory
+
 To run the behavioral tests using Detox:
 
 First run:
