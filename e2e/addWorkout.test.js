@@ -17,7 +17,6 @@ describe('Add workout test', () => {
   });
 
   afterEach(async () => {
-    //await detox.cleanup();
     await device.terminateApp();
   });
 
@@ -37,7 +36,6 @@ describe('Add workout test', () => {
       console.log('add workout pressed');
       await waitFor(element(by.id('add-workout-test'))).toBeVisible().withTimeout(TIMEOUT);
       console.log('Add workout screen open');
-      await element(by.id('workout-name')).tap();
       await element(by.id('workout-name')).typeText('Bicep Curls');
       await element(by.id('workout-type')).typeText('Biceps');
       await tapVisibleText('workout-muscle', 'Biceps');

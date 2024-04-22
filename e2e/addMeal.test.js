@@ -32,7 +32,7 @@ describe('Add meal test', () => {
       console.log('add meal pressed');
       await waitFor(element(by.id('add-meal-test'))).toBeVisible().withTimeout(TIMEOUT);
       console.log('Add meal screen open');
-      //await element(by.id('meal-name')).tap();
+      await element(by.id('meal-name')).tap();
       await element(by.id('meal-name')).typeText('Tacos');
       await element(by.id('meal-ingredients')).typeText('Tortilla, Beef, Cheese');
       await tapVisibleText('meal-servings', '4');

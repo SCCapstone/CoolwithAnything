@@ -6,7 +6,7 @@ async function tapVisibleButton(buttonId) {
     await element(by.id(buttonId)).tap();
 }
 
-describe('Add payment test', () => {
+describe('Browse workout test', () => {
   beforeEach(async () => {
       await device.launchApp({newInstance: true});
   });

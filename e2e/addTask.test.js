@@ -11,7 +11,7 @@ async function tapVisibleText(buttonId, text) {
     await element(by.id(buttonId)).typeText(text);
 }
 
-describe('Add meal task', () => {
+describe('Add task', () => {
   beforeEach(async () => {
       await device.launchApp({newInstance: true});
   });
