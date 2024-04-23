@@ -14,6 +14,8 @@ import eventEmitter from "./EventEmitter";
 import { useTheme } from "../services/ThemeContext";
 import getStyles from "../styles/DailyViewStyles";
 import BirthdayCelebration from "./BDCelebration";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Fontisto';
 
 const DailyView = ({
   userID,
@@ -136,23 +138,38 @@ const DailyView = ({
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.taskItem}>
-            <Text style={styles.taskItemText}>
-              {item.name} {item.completed ? "✓" : ""}
+            <Text style={styles.taskItemText} numberOfLines={1} ellipsizeMode='tail'>
+            {item.completed ? <Icon name="check-circle" size={20} color="green" /> : ""} {item.name} 
             </Text>
             <TouchableOpacity
               style={styles.moreButton}
               onPress={() => setVisibleTaskActions(prev => ({
                 ...prev,
-                [item.id]: !prev[item.id]  // Toggle visibility of action buttons
+                [item.id]: !prev[item.id]
               }))}
             >
-              <Text>☰</Text>
+              <Icon name="bars" size={20} color="#000" />
             </TouchableOpacity>
             {visibleTaskActions[item.id] && (
               <View style={styles.taskActions}>
-                <Button title="Completion" onPress={() => toggleCompletion(item)} />
-                <Button title="Edit" onPress={() => navigation.navigate("EditTaskScreen", { task: item, userId: userID })} />
-                <Button title="Delete" onPress={() => onTaskDelete(item.id)} />
+                <TouchableOpacity
+                  style={[styles.actionButton, styles.completeButton]}
+                  onPress={() => toggleCompletion(item)}
+                >
+                  <Icon2 name={item.completed ? "checkbox-active" : "checkbox-passive"} size={15} color={"white"} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.actionButton, styles.editButton]}
+                  onPress={() => navigation.navigate("EditTaskScreen", { task: item, userId: userID })}
+                >
+                  <Icon name="pencil" size={15} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.actionButton, styles.deleteButton]}
+                  onPress={() => onTaskDelete(item.id)}
+                >
+                  <Icon name="trash" size={20} color="white" />
+                </TouchableOpacity>
               </View>
             )}
           </View>

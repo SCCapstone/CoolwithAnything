@@ -24,6 +24,9 @@ const getStyles = (theme) =>
     },
     taskItemText: {
       fontSize: 16,
+      maxWidth: '50%',  // Set the maxWidth to a value that works with your layout
+      marginRight: 10, // Add some margin to the right of the text
+      minWidth: '50%', // Set the minWidth to a value that works with your layout
     },
     taskActions: {
         flexDirection: 'row',
@@ -49,6 +52,35 @@ const getStyles = (theme) =>
       fontSize: 30,
       alignSelf: "center",
       color: theme === "dark" ? "white" : "black",
+    },
+    taskItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: 10,
+    },
+    moreButton: {
+      padding: 10,
+    },
+    taskActions: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    actionButton: {
+      marginHorizontal: 5,
+      borderRadius: 15,
+      padding: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    completeButton: {
+      backgroundColor: '#20B2AA',
+    },
+    editButton: {
+      backgroundColor: '#778899',
+    },
+    deleteButton: {
+      backgroundColor: '#FFA07A',
     },
   });
 
