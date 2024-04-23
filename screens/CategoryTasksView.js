@@ -27,9 +27,15 @@ const CategoryTasksView = ({ route, navigation }) => {
         return () => unsubscribe();
     }, [category, userID]);
 
+        // Set navigation options dynamically
+        useEffect(() => {
+            navigation.setOptions({
+                headerTitle: `${category} Active Tasks`
+            });
+        }, [category, navigation]);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{`${category} Active Tasks`}</Text>
             <FlatList
                 data={tasks}
                 keyExtractor={item => item.id.toString()}
