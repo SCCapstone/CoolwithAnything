@@ -160,8 +160,9 @@ body, html {
 }
 
 .responsive-video {
-    width: 100%;
-    height: auto; 
+    width: 480px;
+    height: 300px;
+    aspect-ratio: 1440 / 900;
     margin-top: 20px;
 }
 
