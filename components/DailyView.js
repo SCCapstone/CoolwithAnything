@@ -79,17 +79,34 @@ const DailyView = ({
   }, [selectedDate, userID]);
 
   const onTaskDelete = async (taskId) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) {
+      Alert.alert("Error", "Task not found.");
+      return;
+    }
+  
     try {
+      // Ensure the task is marked as incomplete before deletion if it's currently completed
+      if (task.completed) {
+        await updateTaskForUser(userID, taskId, { completed: false });
+      }
+  
+      // Proceed to delete the task
       await deleteTask(userID, taskId);
-      eventEmitter.emit("taskDeleted", taskId);
+
       Alert.alert("Success", "Task deleted successfully.");
-      setVisibleTaskActions(prev => ({ ...prev, [taskId]: false }));  // Hide buttons
+  
+      // Update UI by removing the task from the list and hiding the action buttons
+      setVisibleTaskActions(prev => ({ ...prev, [taskId]: false }));
       setTasks(prevTasks => prevTasks.filter(t => t.id !== taskId));
+      eventEmitter.emit("taskDeleted", taskId);
+      eventEmitter.emit("taskUpdated", taskId);
     } catch (error) {
       console.error("Error deleting task: ", error);
       Alert.alert("Error", "Failed to delete task.");
     }
   };
+  
 
   const toggleCompletion = async (task) => {
     const updatedStatus = !task.completed;
@@ -111,7 +128,7 @@ const DailyView = ({
         Daily Tasks for {format(selectedDate, "PPP")}
       </Text>
       {isBirthday && (
-        <Text style={styles.BirthdayCelebration}>🎉 Happy Birthday! 🎉</Text>
+        <Text style={styles.BirthdayCelebration}>🎉 Your Birthday! 🎉</Text>
       )}
       <BirthdayCelebration userName={userName} isBirthday={isBirthday} />
       <FlatList
