@@ -83,7 +83,6 @@ const AddMeal = ({ route }) => {
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
-        <MealHeader onClose={() => handleclose()} />
         <TextInput
           testID="meal-name"
           style={styles.input}

@@ -124,16 +124,6 @@ const EditTaskScreen = ({ route, navigation }) => {
             <Picker.Item label="High" value="high" />
           </Picker>
         </View>
-        <View style={styles.switchContainer}>
-          <Text style={styles.priorityText}>Task Completed:</Text>
-          <Switch
-            value={isCompleted}
-            onValueChange={(newVal) => {
-              setIsCompleted(newVal);
-              if (newVal) handleCompleteAndDeleteTask();
-            }}
-          />
-        </View>
         <CreateButton
           onPress={handleUpdateTask}
           label="Update Task"

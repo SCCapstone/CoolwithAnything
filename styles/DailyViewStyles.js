@@ -27,7 +27,7 @@ const getStyles = (theme) =>
       fontSize: 16,
       maxWidth: '50%',  // Set the maxWidth to a value that works with your layout
       marginRight: 10, // Add some margin to the right of the text
-      minWidth: '50%', // Set the minWidth to a value that works with your layout
+      minWidth: '50%',  // Set the minWidth to a value that works with your layout
     },
     taskActions: {
         flexDirection: 'row',
@@ -77,13 +77,13 @@ const getStyles = (theme) =>
       alignItems: 'center',
     },
     completeButton: {
-      backgroundColor: '#20B2AA',
+      backgroundColor: 'green',
     },
     editButton: {
-      backgroundColor: '#778899',
+      backgroundColor: 'blue',
     },
     deleteButton: {
-      backgroundColor: '#FFA07A',
+      backgroundColor: 'red',
     },
   });
 

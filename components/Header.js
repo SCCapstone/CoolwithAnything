@@ -9,7 +9,7 @@ const Header = ({ onClose }) => {
   const styles = getStyles(theme);
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>Name</Text>
+      <Text style={styles.headerText}> </Text>
       <TouchableOpacity onPress={onClose}>
         <Text style={styles.closeButton}>×</Text>
       </TouchableOpacity>

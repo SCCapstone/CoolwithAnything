@@ -9,7 +9,7 @@ const MealHeader = ({ onClose }) => {
   const styles = getStyles(theme);
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>Create Meal</Text>
+      <Text style={styles.title}> </Text>
       <TouchableOpacity onPress={onClose}>
         <Text style={styles.closeButton}>×</Text>
       </TouchableOpacity>

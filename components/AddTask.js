@@ -83,7 +83,6 @@ const CreateTaskScreen = ({ route }) => {
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
-        <Header onClose={() => navigation.goBack()} />
         <TextInput
           style={styles.input}
           value={taskName}

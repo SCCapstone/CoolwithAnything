@@ -100,7 +100,6 @@ const AddWorkout = ({ route }) => {
         <View style={{ width: 24 }} />
       </View>
       <ScrollView style={styles.container}>
-        <WorkoutHeader onClose={() => handleClose()} />
         <TextInput
           testID="workout-name"
           style={styles.input}
