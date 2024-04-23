@@ -88,12 +88,12 @@ const EditPaymentMethodsScreen = () => {
       return;
     }
   
-    // Fetch existing payment methods and check for duplicates
     try {
       const paymentMethods = await fetchAllPaymentMethodsForUser(userId);
-      const isDuplicate = paymentMethods.some(method => 
+      const isDuplicate = paymentMethods.some(method =>
         method.creditCard === creditCard &&
         method.CVC === CVC &&
+        method.nickname === nickname &&
         method.expMonth === expMonth &&
         method.expYear === expYear &&
         method.name === name &&
@@ -105,10 +105,12 @@ const EditPaymentMethodsScreen = () => {
         return;
       }
   
-      await updatePaymentMethodForUser(userId, { nickname, creditCard, CVC, expMonth, expYear, name, ZIP });
+      // Assuming params?.id is the correct identifier for the payment method
+      const paymentMethodId = params?.id;
+      await updatePaymentMethodForUser(userId, paymentMethodId, { nickname, creditCard, CVC, expMonth, expYear, name, ZIP });
       Alert.alert(
-        "Success", 
-        "Your payment method was saved successfully!", 
+        "Success",
+        "Your payment method was saved successfully!",
         [{ text: "OK", onPress: () => navigation.navigate('PaymentMethods') }]
       );
   
@@ -118,8 +120,7 @@ const EditPaymentMethodsScreen = () => {
       console.error("Failed to save payment method", error);
       Alert.alert("Error", "Failed to save payment method.");
     }
-  };
-  
+  };  
 
   const handleDeletePaymentMethod = () => {
     // Use Alert to confirm deletion

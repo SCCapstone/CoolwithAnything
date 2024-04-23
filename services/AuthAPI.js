@@ -501,14 +501,17 @@ export const fetchAllPaymentMethodsForUser = async (userId) => {
     throw error;
   }
 };
-
 export const updatePaymentMethodForUser = async (
   userId,
   paymentMethodId,
   paymentMethodData
 ) => {
   try {
-    // Reference to a specific payment method document for the user
+    if (!paymentMethodData) {
+      console.error("Payment method data is undefined");
+      throw new Error("Payment method data is undefined");
+    }
+    
     const paymentMethodDocRef = doc(
       db,
       "users",
@@ -517,13 +520,12 @@ export const updatePaymentMethodForUser = async (
       paymentMethodId
     );
 
-    // Update the payment method document with new data
     await updateDoc(paymentMethodDocRef, paymentMethodData);
 
-    console.log("Payment method document updated with ID: ", paymentMethodId);
+    console.log("Payment method document updated with ID:", paymentMethodId);
     return { status: "success", docId: paymentMethodId };
   } catch (error) {
-    console.error("Error updating payment method document: ", error);
+    console.error("Error updating payment method document:", error);
     throw error;
   }
 };
