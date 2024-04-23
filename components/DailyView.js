@@ -108,7 +108,6 @@ const DailyView = ({
       Alert.alert("Error", "Failed to delete task.");
     }
   };
-  
 
   const toggleCompletion = async (task) => {
     const updatedStatus = !task.completed;
