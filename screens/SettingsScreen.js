@@ -122,7 +122,7 @@ function SelectProfile() {
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={{ width: 125, alignItems: 'flex-start' }}>
-            <Text style={styles.label}>Height (ft):</Text>
+            <Text style={styles.label}>Height (in):</Text>
           </View>
           <Text style={styles.labelText}>{height}</Text>
         </View>
@@ -356,7 +356,7 @@ function SelectOthers() {
           <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('For support, contact us at schedulerx@schedx.com')}>
             <Text style={styles.accountText}>Support</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('App Version: v0.9')}>
+          <TouchableOpacity style={styles.pageButton} onPress={() => Alert.alert('App Version: v1.0')}>
             <Text style={styles.accountText}>Version</Text>
           </TouchableOpacity>
         </View>

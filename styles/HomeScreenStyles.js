@@ -123,7 +123,7 @@ const getStyles = (theme) =>
     },
     // In your HomeScreenStyles.js or wherever you define styles
     todayDay: {
-      backgroundColor: "white", // Or any color that stands out
+      backgroundColor: "gray",
       borderRadius: 50,
       color: "white",
       borderColor: "black",
