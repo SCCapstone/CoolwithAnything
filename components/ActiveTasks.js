@@ -16,7 +16,7 @@ const ActiveTasks = ({ userID }) => {
         { label: 'School', color: '#FFA07A' },
         { label: 'Work', color: '#20B2AA' },
         { label: 'Personal', color: '#778899' },
-        { label: 'Gym', color: '#FFD700' },
+        { label: 'Gym', color: '#ccac02' },
     ]);
     const [currentMonthOnly, setCurrentMonthOnly] = useState(false);
     const { theme } = useTheme();

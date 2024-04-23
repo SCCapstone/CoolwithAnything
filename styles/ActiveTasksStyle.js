@@ -26,6 +26,8 @@ const getStyles = (theme) => StyleSheet.create({
     },
     labelText: {
         color: 'white',
+        fontWeight: '800',
+        fontSize: 16,
     },
     title: {
         color: theme === 'dark' ? 'white' : 'black',
