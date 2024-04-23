@@ -3,12 +3,34 @@ import { StyleSheet } from 'react-native';
 const getStyles = (theme) => StyleSheet.create({
     screen: {
       flex: 1,
+      padding: 20,
       backgroundColor: theme === 'dark' ? '#262626' : "white",
     },
     container: {
       flex: 1,
       backgroundColor: theme === 'dark' ? '#262626' : "white",
       padding: 10,
+    },
+    header: {
+      flexDirection: 'row',
+      height: 80,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#3e5e60',
+      paddingHorizontal: 20,
+    },
+    backText: {
+      marginTop: 30,
+      fontSize: 24,
+      fontWeight: '700',
+      color: 'white',
+    },
+    title: {
+      marginTop: 30,
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'bold',
+      alignItems: 'center',
     },
     addButton: {
       alignItems: "center",

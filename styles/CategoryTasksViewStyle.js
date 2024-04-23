@@ -6,14 +6,28 @@ const getStyles = (theme) => StyleSheet.create({
         padding: 20,
         backgroundColor: theme === 'dark' ? '#262626' : "white",
     },
+      header: {
+        flexDirection: 'row',
+        height: 80,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#3e5e60',
+        paddingHorizontal: 20,
+      },
+      backText: {
+        marginTop: 30,
+        fontSize: 24,
+        fontWeight: '700',
+        color: 'white',
+      },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#333', // Dark grey text for better readability
-        marginBottom: 20,
+        color: 'white', // Dark grey text for better readability
+        marginTop: 35,
     },
     taskItem: {
-        backgroundColor: 'white', // White background for task items
+        backgroundColor: theme === 'dark' ? '#262626' : "white",
         borderRadius: 10, // Rounded corners
         padding: 15,
         marginBottom: 10,
@@ -22,10 +36,18 @@ const getStyles = (theme) => StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 6,
         elevation: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+    },
+    taskName: {
+        fontSize: 18,
+        color: theme === 'dark' ? 'white' : 'black',
+        fontWeight: '900',
     },
     taskDetail: {
         fontSize: 16,
-        color: '#666', // Medium grey for text
+        color: theme === 'dark' ? 'white' : 'black',
         marginBottom: 5,
     },
     taskPriority: {

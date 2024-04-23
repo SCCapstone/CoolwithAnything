@@ -96,11 +96,12 @@ function MainNavigator({ isLoggedIn }) {
         <Stack.Screen
           name="EditTaskScreen"
           component={EditTaskScreen}
-          options={{ title: 'Edit Task' }}
+          options={{ title: 'Edit Task', headerShown: false }}
         />
         <Stack.Screen
           name="CategoryTasksView"
           component={CategoryTasksView}
+          options={{ headerShown: false }}
       />
         <Stack.Screen 
           name="TaskDetailScreen" 

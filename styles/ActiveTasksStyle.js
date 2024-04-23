@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window'); // Get the window width
 const circleSize = width / 4 - 10; // Calculate size to fit 4 across with padding
 
-export default StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -48,4 +48,9 @@ export default StyleSheet.create({
     lightText: {
         color: '#000000', // Dark text for light backgrounds
     },
+    taskText: {
+        color: theme === 'dark' ? 'white' : 'black', 
+    },
 });
+
+export default getStyles;

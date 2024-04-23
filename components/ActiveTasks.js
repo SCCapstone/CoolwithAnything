@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Switch } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { format, startOfMonth, endOfMonth, parseISO, isSameMonth } from 'date-fns';
-import styles from '../styles/ActiveTasksStyle';
 import { fetchTasksForUser } from '../services/AuthAPI';
 import eventEmitter from '../components/EventEmitter';
 import { useCurrentMonth } from './CurrentMonthContext';
+import { useTheme } from "../services/ThemeContext";
+import getStyles from "../styles/ActiveTasksStyle";
 
 
 const ActiveTasks = ({ userID }) => {
@@ -18,6 +19,8 @@ const ActiveTasks = ({ userID }) => {
         { label: 'Gym', color: '#FFD700' },
     ]);
     const [currentMonthOnly, setCurrentMonthOnly] = useState(false);
+    const { theme } = useTheme();
+    const styles = getStyles(theme);
 
     useEffect(() => {
         const fetchAndCountTasks = async () => {
@@ -54,7 +57,7 @@ const ActiveTasks = ({ userID }) => {
     return (
         <View style={styles.container}>
             <View style={styles.switchContainer}>
-                <Text>Showing: {currentMonthOnly ? "This Month's Tasks" : "All Time Tasks"}</Text>
+                <Text style={styles.taskText}>Showing: {currentMonthOnly ? "This Month's Tasks" : "All Time Tasks"}</Text>
                 <Switch
                     value={currentMonthOnly}
                     onValueChange={setCurrentMonthOnly}
@@ -64,7 +67,10 @@ const ActiveTasks = ({ userID }) => {
                 <TouchableOpacity
                     key={index}
                     style={[styles.circle, { backgroundColor: category.color }]}
-                    onPress={() => navigation.navigate('CategoryTasksView', { category: category.label, userID })}
+                    onPress={() => navigation.navigate('CategoryTasksView', { 
+                        category: category.label, 
+                        userID: userID,
+                    })}
                 >
                     <Text style={styles.countText}>{category.count}</Text>
                     <Text style={styles.labelText}>{category.label}</Text>

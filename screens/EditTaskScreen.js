@@ -5,7 +5,8 @@ import {
   Text,
   View,
   Switch,
-  TextInput
+  TextInput,
+  Pressable
 } from "react-native";
 import Header from "../components/Header";
 import DateTimePicker from "../components/DateTimePicker";
@@ -77,57 +78,70 @@ const EditTaskScreen = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.screen}>
-      <Header onClose={() => navigation.goBack()} />
-      <TextInput
-        style={styles.input}
-        placeholder="Task Name"
-        value={taskName}
-        onChangeText={setTaskName}
-      />
-      <DateTimePicker date={date} onConfirm={setDate} />
-      <TextInput
-        style={styles.input}
-        placeholder="Location"
-        value={location}
-        onChangeText={setLocation}
-      />
-      <TypeSelector selectedType={taskType} onSelect={setTaskType} />
-      <TextInput
-        style={styles.input}
-        placeholder="Comments"
-        value={comment}
-        onChangeText={setComment}
-        multiline
-      />
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <Text style={styles.priorityText}>Priority:</Text>
-        <Picker
-          selectedValue={priority}
-          onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
-          style={styles.priorityPicker}
-        >
-          <Picker.Item label="Low" value="low" />
-          <Picker.Item label="Medium" value="medium" />
-          <Picker.Item label="High" value="high" />
-        </Picker>
+    <View style={{ flex: 1}}>
+      <View style={styles.header}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backText}>←</Text>
+        </Pressable>
+        <Text style={styles.title}>Edit Task</Text>
+        <View style={{width: 24}}/>
       </View>
-      <View style={styles.switchContainer}>
-        <Text style={styles.priorityText}>Task Completed:</Text>
-        <Switch
-          value={isCompleted}
-          onValueChange={(newVal) => {
-            setIsCompleted(newVal);
-            if (newVal) handleCompleteAndDeleteTask();
-          }}
+
+      <ScrollView style={styles.screen}>
+        <TextInput
+          style={styles.input}
+          placeholder="Task Name"
+          placeholderTextColor='gray'
+          value={taskName}
+          onChangeText={setTaskName}
         />
-      </View>
-      <CreateButton
-        onPress={handleUpdateTask}
-        label="Update Task"
-        disabled={!taskName.trim()}
-      />
-    </ScrollView>
+        <DateTimePicker date={date} onConfirm={setDate} />
+        <TextInput
+          style={styles.input}
+          placeholder="Location"
+          placeholderTextColor='gray'
+          value={location}
+          onChangeText={setLocation}
+        />
+        <TypeSelector selectedType={taskType} onSelect={setTaskType} />
+        <TextInput
+          style={styles.input}
+          placeholder="Comments"
+          placeholderTextColor='gray'
+          value={comment}
+          onChangeText={setComment}
+          multiline
+        />
+        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <Text style={styles.priorityText}>Priority:</Text>
+          <Picker
+            selectedValue={priority}
+            onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+            style={styles.priorityPicker}
+          >
+            <Picker.Item label="Low" value="low" />
+            <Picker.Item label="Medium" value="medium" />
+            <Picker.Item label="High" value="high" />
+          </Picker>
+        </View>
+        <View style={styles.switchContainer}>
+          <Text style={styles.priorityText}>Task Completed:</Text>
+          <Switch
+            value={isCompleted}
+            onValueChange={(newVal) => {
+              setIsCompleted(newVal);
+              if (newVal) handleCompleteAndDeleteTask();
+            }}
+          />
+        </View>
+        <CreateButton
+          onPress={handleUpdateTask}
+          label="Update Task"
+          disabled={!taskName.trim()}
+        />
+      </ScrollView>
+    </View>
+    
   );
 };
 

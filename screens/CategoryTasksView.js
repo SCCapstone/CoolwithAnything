@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Pressable } from 'react-native';
 import { fetchTasksForUser } from '../services/AuthAPI';
 import { format } from 'date-fns';
 import eventEmitter from '../components/EventEmitter';
@@ -11,6 +11,7 @@ const CategoryTasksView = ({ route, navigation }) => {
     const [tasks, setTasks] = useState([]);
     const { theme } = useTheme();
     const styles = getStyles(theme);
+
 
     useEffect(() => {
         const fetchCategoryTasks = async () => {
@@ -28,8 +29,15 @@ const CategoryTasksView = ({ route, navigation }) => {
     }, [category, userID]);
 
     return (
-        <View style={styles.container}>
+    <View style={{ flex: 1}}>
+        <View style={styles.header}>
+            <Pressable onPress={() => navigation.goBack()}>
+            <Text style={styles.backText}>←</Text>
+            </Pressable>
             <Text style={styles.title}>{`${category} Active Tasks`}</Text>
+            <View style={{width: 24}}/>
+        </View>
+        <View style={styles.container}> 
             <FlatList
                 data={tasks}
                 keyExtractor={item => item.id.toString()}
@@ -48,6 +56,8 @@ const CategoryTasksView = ({ route, navigation }) => {
                 )}
             />
         </View>
+    </View>
+        
     );
 };
 
