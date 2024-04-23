@@ -148,7 +148,7 @@ const DailyView = ({
                 [item.id]: !prev[item.id]
               }))}
             >
-              <Icon name="bars" size={20} color="#000" />
+              <Icon name="bars" size={20} style={{color: theme === "dark" ? "white" : "black"}} />
             </TouchableOpacity>
             {visibleTaskActions[item.id] && (
               <View style={styles.taskActions}>

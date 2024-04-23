@@ -23,6 +23,7 @@ const getStyles = (theme) =>
       borderRadius: 5,
     },
     taskItemText: {
+      color: theme === "dark" ? "white" : "black",
       fontSize: 16,
       maxWidth: '50%',  // Set the maxWidth to a value that works with your layout
       marginRight: 10, // Add some margin to the right of the text
@@ -60,9 +61,11 @@ const getStyles = (theme) =>
       padding: 10,
     },
     moreButton: {
+      color: theme === "dark" ? "white" : "black",
       padding: 10,
     },
     taskActions: {
+      color: theme === "dark" ? "white" : "black",
       flexDirection: 'row',
       alignItems: 'center',
     },

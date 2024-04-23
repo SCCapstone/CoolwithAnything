@@ -88,6 +88,7 @@ const CreateTaskScreen = ({ route }) => {
           style={styles.input}
           value={taskName}
           placeholder="Name"
+          placeholderTextColor={"grey"}
           onChangeText={setTaskName}
         />
         <DateTimePicker initialDate={date} onConfirm={setDate} />
@@ -95,6 +96,7 @@ const CreateTaskScreen = ({ route }) => {
           style={styles.input}
           value={location}
           placeholder="Location"
+          placeholderTextColor={"grey"}
           onChangeText={setLocation}
         />
         <TypeSelector selectedType={taskType} onSelect={setTaskType} />
@@ -102,6 +104,7 @@ const CreateTaskScreen = ({ route }) => {
           style={[styles.input, styles.tallInput]}
           value={comment}
           placeholder="Comments"
+          placeholderTextColor={"grey"}
           multiline
           onChangeText={setComment}
         />
