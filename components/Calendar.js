@@ -56,7 +56,11 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
       try {
         const start = startOfMonth(currentMonth);
         const end = endOfMonth(currentMonth);
-        const tasks = await fetchTasksForUser(userID, start.toISOString(), end.toISOString());
+        const tasks = await fetchTasksForUser(
+          userID,
+          start.toISOString(),
+          end.toISOString()
+        );
         setTasks(tasks);
 
         // Safeguard: Ensure 'start' and 'end' are Date objects before calling toISOString
@@ -92,11 +96,23 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
     fetchTasks();
 
     // Subscribe to the taskCreated event
-    const unsubscribe = eventEmitter.subscribe("taskCreated", fetchTasks);
+    const unsubscribeTaskAdded = eventEmitter.subscribe(
+      "taskAdded",
+      fetchTasks
+    );
+    const unsubscribeTaskDeleted = eventEmitter.subscribe(
+      "taskDeleted",
+      fetchTasks
+    );
+    const unsubscribeTaskUpdated = eventEmitter.subscribe(
+      "taskUpdated",
+      fetchTasks
+    );
 
     // Unsubscribe from the event when the component unmounts
     return () => {
-      unsubscribe();
+      unsubscribeTaskAdded();
+      unsubscribeTaskDeleted();
     };
   }, [currentMonth, userID]);
 
@@ -123,12 +139,12 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
 
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
-    eventEmitter.emit('monthChanged');
+    eventEmitter.emit("monthChanged");
   };
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
-    eventEmitter.emit('monthChanged');
+    eventEmitter.emit("monthChanged");
   };
 
   const onDateSelect = (day) => {
@@ -190,50 +206,56 @@ const Calendar = ({ userID, navigation, birthday, userName }) => {
     );
   };
 
-const renderDays = () => {
-  const startDay = startOfWeek(startOfMonth(currentMonth));
-  const endDay = endOfWeek(endOfMonth(currentMonth));
-  const daysArray = eachDayOfInterval({ start: startDay, end: endDay });
+  const renderDays = () => {
+    const startDay = startOfWeek(startOfMonth(currentMonth));
+    const endDay = endOfWeek(endOfMonth(currentMonth));
+    const daysArray = eachDayOfInterval({ start: startDay, end: endDay });
 
-  return daysArray.map((day, index) => {
-    const formattedDate = format(day, "yyyy-MM-dd");
-    const dayTasks = tasks.filter(task => format(parseISO(task.date), "yyyy-MM-dd") === formattedDate);
-    const uniqueTaskTypes = [...new Set(dayTasks.map(task => task.type))];
+    return daysArray.map((day, index) => {
+      const formattedDate = format(day, "yyyy-MM-dd");
+      const dayTasks = tasks.filter(
+        (task) => format(parseISO(task.date), "yyyy-MM-dd") === formattedDate
+      );
+      const uniqueTaskTypes = [...new Set(dayTasks.map((task) => task.type))];
 
-    return (
-      <TouchableOpacity
-        key={index}
-        style={[
-          styles.dayItem,
-          format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy") ? styles.selectedDay :
-          isBirthday(day) ? styles.birthdayDay :
-          isToday(day) ? styles.todayDay : null, // Apply the todayDay style if it's today
-        ]}
-        onPress={() => onDateSelect(day)}
-      >
-        <Text
+      return (
+        <TouchableOpacity
+          key={index}
           style={[
-            styles.dayText,
-            isSameMonth(day, currentMonth) ? {} : { color: "#cccccc" },
+            styles.dayItem,
+            format(day, "MM-dd-yyyy") === format(selectedDate, "MM-dd-yyyy")
+              ? styles.selectedDay
+              : isBirthday(day)
+              ? styles.birthdayDay
+              : isToday(day)
+              ? styles.todayDay
+              : null, // Apply the todayDay style if it's today
           ]}
+          onPress={() => onDateSelect(day)}
         >
-          {format(day, "d")}
-        </Text>
-        <View style={styles.indicatorContainer}>
-          {uniqueTaskTypes.map((type, typeIndex) => (
-            <View
-              key={typeIndex}
-              style={[
-                styles.taskIndicator,
-                { backgroundColor: taskTypeColors[type] || "#ccc" },
-              ]}
-            />
-          ))}
-        </View>
-      </TouchableOpacity>
-    );
-  });
-};
+          <Text
+            style={[
+              styles.dayText,
+              isSameMonth(day, currentMonth) ? {} : { color: "#cccccc" },
+            ]}
+          >
+            {format(day, "d")}
+          </Text>
+          <View style={styles.indicatorContainer}>
+            {uniqueTaskTypes.map((type, typeIndex) => (
+              <View
+                key={typeIndex}
+                style={[
+                  styles.taskIndicator,
+                  { backgroundColor: taskTypeColors[type] || "#ccc" },
+                ]}
+              />
+            ))}
+          </View>
+        </TouchableOpacity>
+      );
+    });
+  };
   useEffect(() => {
     const fetchTasks = async () => {
       try {

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { ScrollView, Alert, Pressable, Text, View, TextInput } from "react-native";
+import {
+  ScrollView,
+  Alert,
+  Pressable,
+  Text,
+  View,
+  TextInput,
+} from "react-native";
 import Header from "./Header";
 import DateTimePicker from "./DateTimePicker";
 import TypeSelector from "./TypeSelector";
@@ -42,56 +49,81 @@ const CreateTaskScreen = ({ route }) => {
     try {
       await saveTaskForUser(userID, taskData);
       Alert.alert("Success", "Task created successfully!");
-      eventEmitter.emit("taskCreated");
+      eventEmitter.emit("taskAdded");
+      eventEmitter.emit("taskUpdated");
+      eventEmitter.emit("monthChanged");
+      eventEmitter.emit("completedTasks");
       navigation.goBack();
+
+      // Clear all input fields after successful task creation
+      setTaskName("");
+      setLocation("");
+      setTaskType("");
+      setComment("");
+      setDate(new Date());
+      setPriority("medium");
     } catch (error) {
-      Alert.alert("Error", "There was an error creating your task. Please try again.");
+      Alert.alert(
+        "Error",
+        "There was an error creating your task. Please try again."
+      );
       console.error("Error creating task:", error);
     }
   };
 
   return (
-    <ScrollView style={styles.screen}>
-      <Header onClose={() => navigation.goBack()} />
-      <TextInput
-        style={styles.input}
-        value={taskName}
-        placeholder="Name"
-        onChangeText={setTaskName}
-      />
-      <DateTimePicker initialDate={date} onConfirm={setDate} />
-      <TextInput
-        style={styles.input}
-        value={location}
-        placeholder="Location"
-        onChangeText={setLocation}
-      />
-      <TypeSelector selectedType={taskType} onSelect={setTaskType} />
-      <TextInput
-        style={[styles.input, styles.tallInput]}
-        value={comment}
-        placeholder="Comments"
-        multiline
-        onChangeText={setComment}
-      />
-      <Text style={styles.priorityText}>Priority:</Text>
-      <Picker
-        selectedValue={priority}
-        onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
-        style={styles.priorityPicker}
-        testID="priority-selector"
-      >
-        <Picker.Item label="Low" value="low" />
-        <Picker.Item label="Medium" value="medium" />
-        <Picker.Item label="High" value="high" />
-      </Picker>
-      <CreateButton
-        onPress={handleCreateTask}
-        label="Create Task"
-        disabled={!taskName.trim()}
-        testID="create-task-button"
-      />
-    </ScrollView>
+    <View style={styles.screen} testID="add-meal-test">
+      <View style={styles.createTextContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </Pressable>
+        <Text style={styles.createText} testID="add-meal-safe">
+          Create Task
+        </Text>
+        <View style={{ width: 24 }} />
+      </View>
+      <ScrollView style={styles.container}>
+        <Header onClose={() => navigation.goBack()} />
+        <TextInput
+          style={styles.input}
+          value={taskName}
+          placeholder="Name"
+          onChangeText={setTaskName}
+        />
+        <DateTimePicker initialDate={date} onConfirm={setDate} />
+        <TextInput
+          style={styles.input}
+          value={location}
+          placeholder="Location"
+          onChangeText={setLocation}
+        />
+        <TypeSelector selectedType={taskType} onSelect={setTaskType} />
+        <TextInput
+          style={[styles.input, styles.tallInput]}
+          value={comment}
+          placeholder="Comments"
+          multiline
+          onChangeText={setComment}
+        />
+        <Text style={styles.priorityText}>Priority:</Text>
+        <Picker
+          selectedValue={priority}
+          onValueChange={(itemValue, itemIndex) => setPriority(itemValue)}
+          style={styles.priorityPicker}
+          testID="priority-selector"
+        >
+          <Picker.Item label="Low" value="low" />
+          <Picker.Item label="Medium" value="medium" />
+          <Picker.Item label="High" value="high" />
+        </Picker>
+        <CreateButton
+          onPress={handleCreateTask}
+          label="Create Task"
+          disabled={!taskName.trim()}
+          testID="create-task-button"
+        />
+      </ScrollView>
+    </View>
   );
 };
 
