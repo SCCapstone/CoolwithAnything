@@ -28,6 +28,7 @@ const getStyles = (theme) => StyleSheet.create({
         color: 'white',
     },
     title: {
+        color: theme === 'dark' ? 'white' : 'black',
         fontWeight: 'bold',
         fontSize: 18,
         marginRight: 10,

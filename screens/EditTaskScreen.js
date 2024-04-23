@@ -87,7 +87,7 @@ const EditTaskScreen = ({ route, navigation }) => {
         <View style={{width: 24}}/>
       </View>
 
-      <ScrollView style={styles.screen}>
+      <ScrollView style={styles.container}>
         <TextInput
           style={styles.input}
           placeholder="Task Name"

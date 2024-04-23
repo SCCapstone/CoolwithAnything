@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const getStyles = (theme) => StyleSheet.create({
     screen: {
       flex: 1,
-      padding: 20,
       backgroundColor: theme === 'dark' ? '#262626' : "white",
     },
     container: {

@@ -79,7 +79,7 @@ const ActiveTasks = ({ userID }) => {
   return (
     <View style={styles.container}>
       <View style={styles.switchContainer}>
-        <Text>
+        <Text style={styles.title}>
           Showing: {currentMonthOnly ? "This Month's Tasks" : "All Time Tasks"}
         </Text>
         <Switch value={currentMonthOnly} onValueChange={setCurrentMonthOnly} />
